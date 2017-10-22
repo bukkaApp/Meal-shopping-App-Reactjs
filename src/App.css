@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css?family=Varela+Round");
+#board{
+  height:100%;
+}
+.myheader{
+  padding:20px;
+  background-color: white;
+  height:350px;
+  position:fixed ;
+  box-shadow: 0 1px 20px #888888;
+  width:100%;
+  transition-delay: 2s;
+}
+#logo{
+  width:200px;
+}
+.header-top-button{
+position: absolute;
+top:20px;
+right:30px;
+display: flex;
+justify-content: space-between;
+width:300px;
+}
+
+
+
+.myheader button{
+width:110px;
+height: 40px;
+background-color: white;
+border:1px solid grey;
+border-radius: 5px;
+}
+
+.btn-red{
+  background-color: #9c1c26 !important;
+  border:1px solid #9c1c26 !important;
+}
+.btn-sml{
+  width:75px !important;
+}
+
+.search-box{
+  display: flex;
+  justify-content: space-between;
+  width: 450px;
+  position: absolute;
+  top:70%;
+}
+
+.search-box > input{
+  width:350px;
+  height: 35px;
+  border:1px solid grey;
+  border-radius: 5px;
+
+}
+
+#search-text{
+  font-family: 'Varela Round', sans-serif !important;
+  position: absolute;
+  top:25%;
+  font-size: 2em;
+  width: 500px;
+  line-height: 1.2em;
+}
+.header-min{
+  max-height: 80px !important;
+}
+.search-box-min{
+  left: 20%;
+  top: 30% !important;
+}
+
+.header-top-button-min{
+  top: 30% !important;
+}
+.shopping-cart{
+  color: #9c1c26;
+  font-size: 2.5em;
+  margin-top: 5px;
+}
+button:hover,.shopping-cart:hover{
+  cursor: pointer;
+}

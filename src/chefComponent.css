@@ -1,0 +1,22 @@
+.chef-position{
+	position: relative;
+	height: inherit;
+	z-index: -2;
+}
+.chef-Holder{
+	background-color: white;
+	position: absolute;
+	bottom: 340px;
+	width:100%;
+	height:420px;
+}
+.chef-Holder img{
+	position: absolute;
+	bottom:0;
+	left:0;
+    max-height: 550px;
+    -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+}

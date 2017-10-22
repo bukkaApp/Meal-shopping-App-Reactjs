@@ -1,0 +1,11 @@
+.map-holder{
+height: inherit;
+position: absolute;
+width:100%;
+z-index: -999;
+}
+.leaflet-container {
+  height:inherit;
+  width:100%;
+   border-bottom:1px solid grey;
+}
