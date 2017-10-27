@@ -10,11 +10,40 @@ import ScrollLogic from './ScrollLogic';
 import ChefComponent from './chefComponent';
 import MobileAppComponent from './mobileAppComponent';
 import SummaryComponent from './summaryComponent';
+import MenuPage from './menuPage'
+import MenuItems from './menuItems'
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state={
+			address:'',
+			searchResult:null,
+			cart:'no items in the cart'
+		}
+	}
+	searchResultForParent=(result)=>{
+		this.setState({searchResult:result});
+		console.log(result);
+	}
+	addressForParent=(adr)=>{
+		this.setState({address:adr});
+		console.log(adr);
+	}
+	updateCart=(cart)=>{
+		this.setState({cart:cart})
+		console.log(cart);
+	}
+	
   render() {
-    return (<div className="dev"><ScrollLogic/><PageBackground/><SummaryComponent/><MobileAppComponent/><ChefComponent/><Footer/></div>);
+    return (
+    	(this.state.address=='')? <div className="dev"><ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} /><PageBackground /><SummaryComponent/><MobileAppComponent/><ChefComponent/><Footer/></div>:
+    								<div className="dev"><ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} /><MenuPage/><MenuItems updateCart={this.updateCart} /><Footer/></div>
+    	);
   }
+  /*render() {
+    return (<div className="dev"><ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} /></div>)
+	}*/
 }
 
 export default App;

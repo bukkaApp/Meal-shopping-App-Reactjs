@@ -11,23 +11,33 @@ export default class PageBackground extends Component{
 
 	constructor(props) {
 		super(props);
-		this.getLocation=this.getLocation.bind(this);
 		this.state={
 			position:[2,2]
 		};
 		}
-	getLocation () {
-		
-		fetch('http://ip-api.com/json')
-		 .then((res)=>res.json())
-		 .then((objec)=>{this.setState({position:[objec.lat,objec.lon]});console.log(this.state.position)})
-		 .catch((err)=>{console.log("didn't connect to App",err);this.setState({position:[6.5243793,3.3792057]});})
-	}
+	 /*async getLocation () {
+	 	try{
+	 			var response= await fetch('http://ip-api.com/json');
+	 			var json=await response.json();
+	 			this.setState({position:[json.lat,json.lon]});
+	 			console.log(this.state.position);
+	 		}
+	 		catch(e){
+	 			this.setState({position:[6.4531,3.3958]})
+	 			console.log("we are using a default Location,")
+	 		}
+	}*/
 	componentDidMount() {
-		this.getLocation();
-	}
-	componentWillUnmount() {
-		this.getLocation();
+					(async()=>{try{
+		            			 			var response= await fetch('http://ip-api.com/json');
+		            			 			var json=await response.json();
+		            			 			this.setState({position:[json.lat,json.lon]});
+		            			 			console.log(this.state.position);
+		            			 		}
+		            			 		catch(e){
+		            			 			this.setState({position:[6.4531,3.3958]})
+		            			 			console.log("we are using a default Location,")
+		            			 		}})()
 	}
 							   
 	render(){
@@ -37,8 +47,6 @@ export default class PageBackground extends Component{
         <TileLayer
           attribution=''
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
-        	<Marker position={this.state.position}>
-    		</Marker>
         </Map>
         </div>
         );

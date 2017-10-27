@@ -53,8 +53,8 @@ export default class Footer extends Component{
 					</div>					
 				</div>
 				<div className="img-holder">
-					<img src="http://res.cloudinary.com/www-mybukka-com/image/upload/q_100/v1508342712/appstore_bkvsi2.png" class="img-responsive" alt="Play Store logo"/>
-					<img src="http://res.cloudinary.com/www-mybukka-com/image/upload/q_100/v1508504845/c4c51cdd9a95bdb0c488ff0a013c865c_smq7g5.png" class="img-responsive" alt="Play Store logo"/>
+					<img src="http://res.cloudinary.com/www-mybukka-com/image/upload/q_100/v1508342712/appstore_bkvsi2.png" className="img-responsive" alt="Play Store logo"/>
+					<img src="http://res.cloudinary.com/www-mybukka-com/image/upload/q_100/v1508504845/c4c51cdd9a95bdb0c488ff0a013c865c_smq7g5.png" className="img-responsive" alt="Play Store logo"/>
 				</div>
 				<div className="foot-finale-holder">
 					<div className="foot-finale">

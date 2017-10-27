@@ -1,7 +1,7 @@
 .chef-position{
 	position: relative;
 	height: inherit;
-	z-index: -2;
+	z-index: 2;
 }
 .chef-Holder{
 	background-color: white;

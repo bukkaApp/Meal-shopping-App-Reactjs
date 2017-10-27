@@ -1,0 +1,79 @@
+.MenuList{
+	width: 100%;
+    padding: 80px;
+   	position: absolute;
+   	top:485px;
+}
+.eachMenuHolder{
+	margin-top: 10px;
+}
+.menuRow{
+	width:100%;
+	margin: 0;
+}
+.menuCol{
+	border:1px solid rgba(0,0,0,0.2);
+	height:150px;
+	width:48%;
+	margin-bottom: 20px;
+	padding-left: 20px;
+}
+.menuCol:nth-child(even) {
+ margin-left: 2.65em;
+}
+.food-logo{
+	width:30%;
+	position: absolute;
+	right:0;
+	height: 100%;
+
+}
+.menuCol h3,.menuCol h6{
+	width:65%;
+}
+.price{
+	position: absolute;
+	bottom: 0;
+	left:20px;
+}
+.foodName{
+	line-height: 1.6em;
+}
+.cartBtn{
+	position: absolute;
+	display: flex;
+	justify-content: space-between;
+	width:220px;
+	left:25%;
+	bottom:0;
+}
+.cartBtn a {
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.2);
+    font-size: 1.5em;
+    padding: 1px 9px;
+    color: black;
+    width: 1.5em;
+    height: 1.5em;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.cartBtn p{
+	font-size: 1.3em;
+	margin-top: 5px;
+}
+.cartBtn button{
+	    height: 2.5em;
+}
+.cartBtn button:hover,.cartBtn a:hover{
+	text-decoration: none;
+	cursor:pointer;
+	box-shadow:  0 1px 20px #888888;
+}
+.cartBtn button:active,.cartBtn a:active{
+	box-shadow:  0 0px 40px #888888;
+}
+.minusButton{
+	margin-right: 20px;
+}
