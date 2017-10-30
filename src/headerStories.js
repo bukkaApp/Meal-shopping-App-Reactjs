@@ -4,6 +4,7 @@ import './App.css';
 import './headerStories.css';
 import MdShoppingCart from 'react-icons/lib/md/shopping-cart';
 import SimpleForm from './autoComplete';
+import ShoppingCart from './shoppingCart';
 
 
 export default class headerStories extends Component{
@@ -40,7 +41,8 @@ export default class headerStories extends Component{
 						<li><a href="">Small Combination Pizzas</a></li>
 						<li><a href="">Medium Combination Pizzas</a></li>
 						<li><a href="">Large Combination Pizzas</a></li>
-					</ul>
+				</ul>
+				<ShoppingCart cart={this.props.cart}/>
 			</div>
 				)
 	}

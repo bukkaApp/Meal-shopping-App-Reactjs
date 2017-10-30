@@ -8,11 +8,12 @@ export default class menuItems extends Component{
 		this.state={
 			cart:{
 				rice:{
-					price:'',
-					quantity:'',
-					totalCost:''
+					price:10.99,
+					quantity:1,
+					totalCost:10.99
 				}
-			}
+			},
+			total:10.99
 
 		}
 		this.addToCart=this.addToCart.bind(this);
@@ -20,6 +21,7 @@ export default class menuItems extends Component{
 
 	increaseNumberOfItem(){
 		document.getElementById('numberOfItems').innerHTML=parseInt(document.getElementById('numberOfItems').innerHTML,10)+1;
+
 	}
 	reduceNumberOfItem(){
 		(parseInt(document.getElementById('numberOfItems').innerHTML,10)>1)? document.getElementById('numberOfItems').innerHTML=parseInt(document.getElementById('numberOfItems').innerHTML,10)-1:
@@ -43,7 +45,10 @@ export default class menuItems extends Component{
 					...this.state.cart,
 					...cartUpdate
 					}})
-				this.props.updateCart(this.state.cart);
+				var total=Object.keys(this.state.cart).map((key,i)=>this.state.cart[key].totalCost).reduce((sum,value)=>sum+value,0.00).toFixed(2);
+				await this.setState({total:total});
+				this.props.updateCart(this.state);
+				console.log("total",this.state.total);
 			}
 
 			if(!this.state.cart.hasOwnProperty(name)){
@@ -57,7 +62,10 @@ export default class menuItems extends Component{
 					...this.state.cart,
 					...newCart
 					}})
-				this.props.updateCart(this.state.cart);
+				var total= await Object.keys(this.state.cart).map((key,i)=>this.state.cart[key].totalCost).reduce((sum,value)=>sum+value,0).toFixed(2);
+				await this.setState({total:total});
+				this.props.updateCart(this.state);
+				console.log("total",this.state.total);
 			}
 			
 	}
@@ -73,7 +81,7 @@ export default class menuItems extends Component{
 						<img src="http://www.ahlanlive.com/sites/default/files/images/2012/05/08/MAHEC-dish1_0.jpg" alt="food-logo" className="food-logo"/>
 						<h3 className="foodName" id="nameOfFoodItem">Food Name</h3>
 						<h6>Marinara sauce, mushrooms, bell peppers, and bell peppers. Served with garlic bread.</h6>
-						<h4 className="price" id="priceId">$13.99</h4>
+						<h4 className="price" id="priceId">₦13.99</h4>
 						<div className="cartBtn">
 						<a onClick={this.increaseNumberOfItem}>+</a>
 						<p id="numberOfItems">1</p>

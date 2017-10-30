@@ -5,7 +5,8 @@ import './scrollLogic.css';
 import HeaderMax from './HeaderMax';
 import HeaderMin from './HeaderMin';
 import PropTypes from 'prop-types';
-import HeaderStories from './headerStories'
+import HeaderStories from './headerStories';
+import ShoppingCart from './shoppingCart';
 
 export default class scrollLogic extends Component{
 	constructor(props) {
@@ -45,7 +46,7 @@ render() {
         return (
         	(this.state.address=='')?
             ((this.state.scroll)? <HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>:<HeaderMax searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address} />):
-            (this.state.scroll)? <HeaderStories searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>:<HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>
+            (this.state.scroll)? <HeaderStories searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address} cart={this.props.cart}/>:<HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>
 )
 }
 }

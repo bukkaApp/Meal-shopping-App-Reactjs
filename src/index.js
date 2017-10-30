@@ -22,7 +22,6 @@ ReactDOM.render(<BrowserRouter>
 	<Switch>
 		<Route exact path="/" component={App}/>
 		<Route exact path="/M" component={MenuItems}/>
-		<Route exact path="/n" component={ShoppingCart} />
 	</Switch>
 </BrowserRouter>, document.getElementById('board'));
 

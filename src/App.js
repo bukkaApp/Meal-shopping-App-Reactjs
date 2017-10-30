@@ -19,7 +19,16 @@ class App extends Component {
 		this.state={
 			address:'',
 			searchResult:null,
-			cart:'no items in the cart'
+			cart:{
+				cart:{
+							rice:{
+								price:10.99,
+								quantity:1,
+								totalCost:10.99
+							}
+						},
+						total:10.99
+					}
 		}
 	}
 	searchResultForParent=(result)=>{
@@ -38,7 +47,7 @@ class App extends Component {
   render() {
     return (
     	(this.state.address=='')? <div className="dev"><ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} /><PageBackground /><SummaryComponent/><MobileAppComponent/><ChefComponent/><Footer/></div>:
-    								<div className="dev"><ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} /><MenuPage/><MenuItems updateCart={this.updateCart} /><Footer/></div>
+    								<div className="dev"><ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} cart={this.state.cart}/><MenuPage/><MenuItems updateCart={this.updateCart} /><Footer/></div>
     	);
   }
   /*render() {
