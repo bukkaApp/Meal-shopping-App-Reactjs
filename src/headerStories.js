@@ -42,7 +42,7 @@ export default class headerStories extends Component{
 						<li><a href="">Medium Combination Pizzas</a></li>
 						<li><a href="">Large Combination Pizzas</a></li>
 				</ul>
-				<ShoppingCart cart={this.props.cart}/>
+				<ShoppingCart cart={this.props.cart} deleteCart={this.props.deleteCart} quantityUpdate={this.props.quantityUpdate} checkOut={this.props.checkOut} />
 			</div>
 				)
 	}

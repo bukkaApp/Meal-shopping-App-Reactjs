@@ -14,7 +14,6 @@ export default class menuItems extends Component{
 				}
 			},
 			total:10.99
-
 		}
 		this.addToCart=this.addToCart.bind(this);
 	}
@@ -48,7 +47,6 @@ export default class menuItems extends Component{
 				var total=Object.keys(this.state.cart).map((key,i)=>this.state.cart[key].totalCost).reduce((sum,value)=>sum+value,0.00).toFixed(2);
 				await this.setState({total:total});
 				this.props.updateCart(this.state);
-				console.log("total",this.state.total);
 			}
 
 			if(!this.state.cart.hasOwnProperty(name)){
@@ -65,7 +63,6 @@ export default class menuItems extends Component{
 				var total= await Object.keys(this.state.cart).map((key,i)=>this.state.cart[key].totalCost).reduce((sum,value)=>sum+value,0).toFixed(2);
 				await this.setState({total:total});
 				this.props.updateCart(this.state);
-				console.log("total",this.state.total);
 			}
 			
 	}

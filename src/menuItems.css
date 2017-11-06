@@ -3,6 +3,7 @@
     padding: 80px;
    	position: absolute;
    	top:485px;
+   	z-index: 1;
 }
 .eachMenuHolder{
 	margin-top: 10px;

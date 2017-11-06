@@ -1,0 +1,44 @@
+#deliveryInformation{
+	width:350px;
+	padding:15px;
+	position: absolute;
+	z-index:1;
+	top:0;
+	background-color: white;
+	left:12px;
+	padding-top: 20px;
+}
+#deliveryInformation h2{
+	color:black;
+	line-height: 2em;
+}
+.infoholder{
+	width:100%;
+	position: relative;
+	margin-top: 30px;
+	font-size: 1.5em;
+	color:grey;
+}
+.inputs{
+	width:100%;
+	padding-left: 50px;
+	height: 40px;
+	font-size: 0.7em;
+	border:none;
+	border-radius: 5px;
+}
+.icon{
+	position: absolute;
+	top:2px;
+	left:10px;
+}
+
+.infoholder:nth-child(2){
+	color:black !important;
+	border:1px solid rgba(0,0,0,0.2);
+	border-radius: 5px;
+	font-size: 1.7em;
+}
+.inputs:focus{
+	border:1px solid #9c1c26;
+}

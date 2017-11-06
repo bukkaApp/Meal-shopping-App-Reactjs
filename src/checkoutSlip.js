@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './shoppingCart.css'
-import './App.css'
+import './checkoutSlip.css';
 
-export default class shoppingCart extends Component{
+export default class checkoutSlip extends Component{
 	constructor(props) {
 		super(props);
 		this.state={
@@ -30,15 +29,15 @@ export default class shoppingCart extends Component{
 		null
 	}
 
-
 	render(){
 		return(
-			<div className="ShoppingCartHolder">
+			<div id="checkoutSlip">
+			<button className="btn-red order-btn">Place Order</button>
 			{Object.keys(this.state.cart.cart).map((key,i)=>{
 				return(
 								<div className="item" key={i}>
 									<div className="carti">
-										<input type="number" onChange={this.quantityUpdate} data-key={key} value={this.state.cart.cart[key].quantity} min="1"/>
+										<input type="number" onChange={this.newValue} data-key={key} value={this.state.cart.cart[key].quantity} min="1"/>
 										<h4 className="generalDescription">{key}</h4>
 										<h4 className="cost">₦{Math.round(this.state.cart.cart[key].totalCost*100)/100}</h4>
 									</div>
@@ -46,14 +45,23 @@ export default class shoppingCart extends Component{
 								</div>)
 
 			})}
-				
-				<div className="lastcost">
-					<div className="Totalcost">
-						<h4>Subtotal</h4>
-						<h4>₦{this.state.cart.total}</h4>
-					</div>
-					<button className="btn btn-red btn-big" onClick={this.props.checkOut}>checkout</button>
+			<input class="add-info" placeholder="Add Chef instructions"/>
+			<div>
+				<div class="Totalbreakdown">
+					<h4>Subtotal</h4><h4>₦10.00</h4>
 				</div>
+				<div class="Totalbreakdown">
+					<h4>Delivery Fee</h4><h4>₦10.00</h4>
+				</div>
+				<div class="Totalbreakdown">
+					<h4>Tax</h4><h4>₦10.00</h4>
+				</div>
+				
+				<div class="Totalbreakdown">
+					<h2>Total</h2><h2>₦10.00</h2>
+				</div>
+				<h6>Promo can only be applied after signing in</h6>
+			</div>
 			</div>
 			)
 	}

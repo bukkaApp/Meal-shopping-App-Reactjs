@@ -13,7 +13,7 @@ export default class scrollLogic extends Component{
 		super(props);
 		this.state={
 			scroll:false,
-			address:'',
+			address:this.props.address,
 			searchResult:''
 		};
 		this.scrollDetector=this.scrollDetector.bind(this)
@@ -38,7 +38,6 @@ export default class scrollLogic extends Component{
 	}
 	addressForParent=(adr)=>{
 		this.props.addressForParent(adr);
-		this.setState({address:adr});
 	}
 
 
@@ -46,7 +45,7 @@ render() {
         return (
         	(this.state.address=='')?
             ((this.state.scroll)? <HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>:<HeaderMax searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address} />):
-            (this.state.scroll)? <HeaderStories searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address} cart={this.props.cart}/>:<HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>
+            (this.state.scroll)? <HeaderStories searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}  cart={this.props.cart} quantityUpdate={this.props.quantityUpdate} deleteCart={this.props.deleteCart} checkOut={this.props.checkOut} />:<HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>
 )
 }
 }

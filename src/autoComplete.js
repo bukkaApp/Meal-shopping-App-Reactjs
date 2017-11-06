@@ -36,8 +36,6 @@ class SimpleForm extends React.Component {
     .then(results => getLatLng(results[0]))
       .then(latLng => {console.log('Success', latLng); this.getChefs(latLng.lat,latLng.lng);latLng})
       .catch(error => console.error('Error', error))
-
-  // You can do other things with address string or placeId. For example, geocode :)
 }
  async getChefs (lat,lon){
  	try{
@@ -46,7 +44,7 @@ class SimpleForm extends React.Component {
  		var json = await response.json();
  		this.props.searchResultForParent(json);}
  	catch(e){
- 			console.log("No Chefs found for your location");
+ 			console.log("No Chefs found for your location",e);
  		}
 }
    render() {

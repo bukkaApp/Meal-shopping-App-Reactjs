@@ -15,13 +15,15 @@ import SimpleForm from './autoComplete';
 import HeaderStories from './headerStories';
 import MenuPage from './menuPage';
 import MenuItems from './menuItems';
-import ShoppingCart from './shoppingCart'
+import ShoppingCart from './shoppingCart';
+import CheckoutPage from './checkoutPage';
 
 
 ReactDOM.render(<BrowserRouter>
 	<Switch>
 		<Route exact path="/" component={App}/>
 		<Route exact path="/M" component={MenuItems}/>
+		<Route exact path="/k" component={CheckoutPage} />
 	</Switch>
 </BrowserRouter>, document.getElementById('board'));
 

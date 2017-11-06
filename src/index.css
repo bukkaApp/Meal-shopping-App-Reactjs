@@ -9,6 +9,9 @@ html,body{
 	height:200%;
 }
 .dev{
-	height:inherit !important;
+	height:inherit;
 	position: relative;
+}
+.devi{
+	height: inherit;
 }

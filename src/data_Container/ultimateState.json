@@ -1,0 +1,13 @@
+{
+	'address':{'address':'',
+			   'latitude':'',
+			   'longitude':'',
+			   },
+	'chefSearchResult':{'chefs':{},
+						'Located':boolean},
+	'cart':{
+		'cart':{},
+		'total':0.00
+	},
+	'checkout':false
+}

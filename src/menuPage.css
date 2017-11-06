@@ -17,9 +17,11 @@
 	color:#9c1c26;
 }
 .menuCont{
+	position: absolute;
+	top:0;
 	height:inherit;
 	width:100%;
-	z-index: 2;
+	z-index: 1;
 }
 .imageHolder{
 	width:100%;

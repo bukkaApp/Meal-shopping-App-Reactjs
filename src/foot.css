@@ -6,7 +6,7 @@
   background-color: grey;
   margin: 0;
   border-bottom:1px solid #9A9797;
-  z-index: 2;
+  z-index: 200;
 }
 .roww{
   display: flex;
