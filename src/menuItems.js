@@ -7,29 +7,27 @@ export default class menuItems extends Component{
 		super(props);
 		this.state={
 			cart:{
-				rice:{
-					price:10.99,
-					quantity:1,
-					totalCost:10.99
-				}
+			
 			},
-			total:10.99
+			total:0.00,
+			chefInUse:null,
+			categ:null
 		}
 		this.addToCart=this.addToCart.bind(this);
 	}
 
-	increaseNumberOfItem(){
-		document.getElementById('numberOfItems').innerHTML=parseInt(document.getElementById('numberOfItems').innerHTML,10)+1;
+	increaseNumberOfItem(e){
+		document.getElementById(e.target.dataset.id).innerHTML=parseInt(document.getElementById(e.target.dataset.id).innerHTML,10)+1;
 
 	}
-	reduceNumberOfItem(){
-		(parseInt(document.getElementById('numberOfItems').innerHTML,10)>1)? document.getElementById('numberOfItems').innerHTML=parseInt(document.getElementById('numberOfItems').innerHTML,10)-1:
+	reduceNumberOfItem(e){
+		(parseInt(document.getElementById(e.target.dataset.id).innerHTML,10)>1)? document.getElementById(e.target.dataset.id).innerHTML=parseInt(document.getElementById(e.target.dataset.id).innerHTML,10)-1:
 		null
 	}
-	async addToCart(){
-		var name=document.getElementById('nameOfFoodItem').innerHTML;
-		var price=parseFloat(document.getElementById('priceId').innerHTML.substring(1));
-		var quantity=parseInt(document.getElementById('numberOfItems').innerHTML,10);
+	async addToCart(e){
+		var name=document.getElementById(e.target.dataset.foodname).innerHTML;
+		var price=document.getElementById(e.target.dataset.price).innerHTML;
+		var quantity=parseInt(document.getElementById(e.target.dataset.quantity).innerHTML,10);
 		var totalCost=price*quantity;
 			if(this.state.cart.hasOwnProperty(name)){
 				var newQuantity=this.state.cart[name].quantity+quantity
@@ -67,28 +65,34 @@ export default class menuItems extends Component{
 			
 	}
 	componentDidMount() {
+		
+			}
+	componentWillReceiveProps(nextProps){
+		(nextProps.chef != null)?
+		this.setState({categ: nextProps.chef.filter((chef)=>chef.role==="Super Chef")[0].menu, chefInUse:nextProps.chefInUse}) : null
 	}
 	render(){
 		return(
-			<div className="MenuList">
-			<div className="eachMenuHolder">
-				<h1>Pizzas</h1>
-				<div className="row menuRow">
-					<div className="col-md-6 menuCol">
-						<img src="http://www.ahlanlive.com/sites/default/files/images/2012/05/08/MAHEC-dish1_0.jpg" alt="food-logo" className="food-logo"/>
-						<h3 className="foodName" id="nameOfFoodItem">Food Name</h3>
-						<h6>Marinara sauce, mushrooms, bell peppers, and bell peppers. Served with garlic bread.</h6>
-						<h4 className="price" id="priceId">₦13.99</h4>
-						<div className="cartBtn">
-						<a onClick={this.increaseNumberOfItem}>+</a>
-						<p id="numberOfItems">1</p>
-						<a className="minusButton" onClick={this.reduceNumberOfItem}>-</a>
-						<button className="btn btn-red" onClick={this.addToCart}>Add to Cart</button>
+					<div className="MenuList">
+					{(this.state.categ!=null)? this.state.categ.map((menu,key)=> {return(
+						<div className="eachMenuHolder" key={key}>
+							<div className="row menuRow">
+								<div className="col-md-6 menuCol">
+								<img src={menu.image} alt="food-logo" className="food-logo"/>
+								<h3 className="foodName" id={menu.menu.split(' ').join('')}>{menu.menu}</h3>
+								<h6>{menu.desc}</h6>
+								<h4 className="price" id={key+"priceId"}>{menu.price}</h4>
+								<div className="cartBtn">
+									<a onClick={this.increaseNumberOfItem} data-id={key+"numberOfItems"}>+</a>
+									<p id={key+"numberOfItems"} >1</p>
+									<a className="minusButton" onClick={this.reduceNumberOfItem} data-id={key+"numberOfItems"}>-</a>
+									<button className="btn btn-red" onClick={this.addToCart} data-foodname={menu.menu.split(' ').join('')} data-quantity={key+"numberOfItems"} data-price={key+"priceId"}>Add to Cart</button>
+								</div>
+								</div>
+							</div>
 						</div>
+						)}):null}
 					</div>
-				 </div>
-				</div>
-			</div>
 			)
 	}
 }

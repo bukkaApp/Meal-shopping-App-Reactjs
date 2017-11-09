@@ -8,6 +8,17 @@
 	left:12px;
 	padding-top: 20px;
 }
+.btn-Holder{
+	padding-left:10px;
+	padding-right:10px;
+}
+.btn-Holder button{
+width:100%;
+height: 40px;
+background-color: white;
+border:1px solid grey;
+margin-bottom:10px;
+}
 #deliveryInformation h2{
 	color:black;
 	line-height: 2em;

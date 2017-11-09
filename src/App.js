@@ -20,26 +20,24 @@ class App extends Component {
 		super(props);
 		this.state={
 			address:'',
-			searchResult:null,
+			chef:null,
+			chefInUse:null,
 			cart:{
 				cart:{
-							rice:{
-								price:10.99,
-								quantity:1,
-								totalCost:10.99
-							}
 						},
-						total:10.99
+						total:0.00
 					},
+			user:null,
 			checkout:false
 		}
 		this.deleteCart=this.deleteCart.bind(this);
 		this.quantityUpdate=this.quantityUpdate.bind(this);
 		this.checkOut=this.checkOut.bind(this);
+		this.newUser=this.newUser.bind(this);
 	}
 	searchResultForParent=(result)=>{
-		this.setState({searchResult:result});
-		console.log(result);
+		this.setState({chef:result,chefInUse:result.filter((chef)=>chef.role==="Super Chef")[0]});
+		console.log(this.state.chefInUse);
 	}
 	addressForParent=async (adr)=>{
 		await this.setState({address:adr});
@@ -47,6 +45,10 @@ class App extends Component {
 	updateCart=(cart)=>{
 		this.setState({cart:cart})
 		console.log(cart);
+	}
+	async newUser(e){
+		await this.setState({user:e})
+		console.log(this.state.user)
 	}
 	deleteCart=(food)=>{
 		var newCart=this.state.cart.cart,cart={},total;
@@ -71,9 +73,9 @@ class App extends Component {
 	
   render() {
     return (
-    	(this.state.checkout==true)? <div className="devi"><PageBackground/> <CheckoutPage/><CheckoutSlip cart={this.state.cart}/></div>:
-    	(this.state.address=='')? <div className="dev"><ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} checkOut={this.checkOut} /><PageBackground /><SummaryComponent/><MobileAppComponent/><ChefComponent/><Footer/></div>:
-    	<div className="dev"> <ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} cart={this.state.cart} deleteCart={this.deleteCart} quantityUpdate={this.quantityUpdate} checkOut={this.checkOut} /><MenuPage/><MenuItems updateCart={this.updateCart} /><Footer/></div>
+    	(this.state.checkout==true)? <div className="devi"><PageBackground/> <CheckoutPage newUser={this.newUser} user={this.state.user} /> <CheckoutSlip cart={this.state.cart} user={this.state.user} address={this.state.address} deleteCart={this.deleteCart} quantityUpdate={this.quantityUpdate} user={this.state.user} chefInUse={this.state.chefInUse} /></div>:
+    	(this.state.address=='')? <div className="dev"><ScrollLogic address={this.state.address} chef={this.state.chef} searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} checkOut={this.checkOut} /><PageBackground /><SummaryComponent/><MobileAppComponent/><ChefComponent/><Footer/></div>:
+    	<div className="dev"> <ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} chef={this.state.chef} addressForParent={this.addressForParent} cart={this.state.cart} deleteCart={this.deleteCart} quantityUpdate={this.quantityUpdate} checkOut={this.checkOut} /><MenuPage/><MenuItems updateCart={this.updateCart} chef={this.state.chef} chefInUse={this.state.chefInUse} /><Footer/></div>
     	);
   }
   /*render() {

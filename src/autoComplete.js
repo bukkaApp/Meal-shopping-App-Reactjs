@@ -39,7 +39,7 @@ class SimpleForm extends React.Component {
 }
  async getChefs (lat,lon){
  	try{
- 		const url=`http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/chefs/` + lat+`/`+lon;
+ 		const url=`http://chef.mybukka.com/api/v1/bukka/chefs/` + lat+`/`+lon;
  		var response=await fetch(url);
  		var json = await response.json();
  		this.props.searchResultForParent(json);}

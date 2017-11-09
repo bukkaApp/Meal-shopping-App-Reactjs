@@ -1,0 +1,75 @@
+.signInPopup{
+	position: fixed;
+	left:0;
+	right: 0;
+	top:0;
+	bottom: 0;
+	height:100%;
+	width:100%;
+	margin: auto;
+  	background-color: rgba(0,0,0, 0.5);
+}
+.popupHolder{
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  top: 20%;
+  bottom: 20%;
+  margin: auto;
+  background: white;
+}
+.SignUpPopupHolder{
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  top: 5%;
+  bottom: 5%;
+  margin: auto;
+  background: white;
+}
+.formField{
+	padding-left:80px;
+	padding-right: 80px;
+
+}
+.formField input{
+	display:block;
+	width:100%;
+	margin-bottom: 20px;
+	height: 40px;
+	padding-left: 20px;
+}
+.formField button{
+	width:100%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	height: 40px;
+}
+.formField p{
+	text-align: center;
+}
+#topPart{
+	top:0;
+	left:0;
+	right:0;
+	position: relative;
+	height:80px;
+}
+#topPart>p{
+	width:20%;
+	border-bottom: 2px solid red;
+	left:40%;
+	top:0;
+	text-align: center;
+	font-size: 2em;
+	position: absolute;
+}
+#topPart>a{
+	position: absolute;
+	right:20px;
+	top:10px;
+	color:red;
+}
+#sign-btn{
+	margin-left: 5px;
+}

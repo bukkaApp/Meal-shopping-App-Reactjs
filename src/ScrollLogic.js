@@ -23,7 +23,7 @@ export default class scrollLogic extends Component{
 		const scrollmax=(Math.max( document.body.scrollHeight, document.body.offsetHeight, 
                    document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight ))-(Math.min( document.body.scrollHeight, document.body.offsetHeight, 
                    document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight ));
-        ((window.scrollY/scrollmax)*100>18)? this.setState({ scroll:true }):this.setState({ scroll:false })
+        ((window.scrollY/scrollmax)*100>3.508283447027704)? this.setState({ scroll:true }):this.setState({ scroll:false })
                 console.log((window.scrollY/scrollmax)*100);
     }
     componentDidMount() {
@@ -45,7 +45,7 @@ render() {
         return (
         	(this.state.address=='')?
             ((this.state.scroll)? <HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>:<HeaderMax searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address} />):
-            (this.state.scroll)? <HeaderStories searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}  cart={this.props.cart} quantityUpdate={this.props.quantityUpdate} deleteCart={this.props.deleteCart} checkOut={this.props.checkOut} />:<HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>
+            (this.state.scroll)? <HeaderStories searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address} chef={this.props.chef} cart={this.props.cart} quantityUpdate={this.props.quantityUpdate} deleteCart={this.props.deleteCart} checkOut={this.props.checkOut} />:<HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>
 )
 }
 }

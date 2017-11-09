@@ -11,14 +11,26 @@ export default class headerStories extends Component{
 	constructor(props) {
 		super(props);
 		this.state={
+			categ:null,
 			address:this.props.address
 		}
+		this.getCategories=this.getCategories.bind(this);
 	}
 	searchResultForParent=(result)=>{
 		this.props.searchResultForParent(result);
 	}
 	addressForParent=(adr)=>{
 		this.props.addressForParent(adr);
+	}
+	async getCategories(){
+		var categor=Array.from(new Set(this.props.chef.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category)));
+		console.log(categor);
+	}
+	componentDidMount() {
+		this.getCategories();
+	}
+	componentWillReceiveProps(nextProps){
+		
 	}
 	render(){
 		return(
@@ -34,13 +46,11 @@ export default class headerStories extends Component{
 				</div>
 				<div className="divider"></div>
 				<ul className="menuHolder">
-						<li><a href="">Appitizers</a></li>
-						<li><a href="">salads</a></li>
-						<li><a href="">Wing Zone</a></li>
-						<li><a href="">Pizza</a></li>
-						<li><a href="">Small Combination Pizzas</a></li>
-						<li><a href="">Medium Combination Pizzas</a></li>
-						<li><a href="">Large Combination Pizzas</a></li>
+							{	
+								(this.props.chef != null)? Array.from(new Set(this.props.chef.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category))).map((cate,key)=>{
+									return(<li key={key}><a>{cate}</a></li>)}) : 
+								null
+							}
 				</ul>
 				<ShoppingCart cart={this.props.cart} deleteCart={this.props.deleteCart} quantityUpdate={this.props.quantityUpdate} checkOut={this.props.checkOut} />
 			</div>
