@@ -8,6 +8,28 @@
 	left:12px;
 	padding-top: 20px;
 }
+#addCard:hover{
+cursor: pointer;
+}
+.carddetails{
+	margin-top: 30px;
+	font-size: 1em;
+	color: black;
+	padding-left: 10px;
+	padding-right: 5px;
+	margin-bottom: 10px;
+}
+.carddetailsheader{
+	margin-left: -10px;
+}
+#card-logo{
+	display:inline-block;
+	font-size: 2em;
+}
+#card-number{
+	display:inline-block;
+	margin-left: 10px;
+}
 .btn-Holder{
 	padding-left:10px;
 	padding-right:10px;

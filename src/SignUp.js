@@ -3,9 +3,10 @@ import logo from './logo.svg';
 import './signIn.css';
 import fetch from 'isomorphic-fetch';
 
-export default class extends Component{
+export default class SignUp extends Component{
 	constructor(props){
 		super(props);
+		this.userSignup=this.userSignup.bind(this);
 	}
 
 	async userSignup(){
@@ -14,6 +15,7 @@ export default class extends Component{
 		}
 		else{
 		try{
+			//signing user up
 		var email=document.getElementById("email").value,firstname=document.getElementById("FirstName").value,lastname=document.getElementById("LastName").value,password=document.getElementById("Password").value,mobile=document.getElementById("MobileNumber").value,url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/register",isCustomer=true;
 		var fetchurl= await fetch(url,{
 			method:'post',
@@ -24,6 +26,25 @@ export default class extends Component{
 		});
 		var response= await fetchurl.json();
 		console.log(response);
+		//signing user in after successful signup
+		try{
+		var email=document.getElementById("email").value,password=document.getElementById("Password").value,url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login";
+		var fetchedurl= await fetch(url,{
+			method:'post',
+			headers: {
+    					'Accept': 'application/json',
+    					'Content-Type': 'application/json'
+  					},
+			body:JSON.stringify({email,password})
+		});
+		var response2= await fetchedurl.json();
+		console.log(response2);
+		this.props.newUser(response);
+  		this.props.toggleSignUp();
+  	}
+  	catch(error){
+  		console.log(error);
+  	}
   		}
   		catch(error){
   			console.log("Sorry!!",error);

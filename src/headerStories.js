@@ -27,7 +27,7 @@ export default class headerStories extends Component{
 		console.log(categor);
 	}
 	componentDidMount() {
-		this.getCategories();
+		(this.props.checkchef)? this.getCategories():null
 	}
 	componentWillReceiveProps(nextProps){
 		
@@ -47,12 +47,14 @@ export default class headerStories extends Component{
 				<div className="divider"></div>
 				<ul className="menuHolder">
 							{	
-								(this.props.chef != null)? Array.from(new Set(this.props.chef.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category))).map((cate,key)=>{
+								(this.props.checkchef)? Array.from(new Set(this.props.chef.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category))).map((cate,key)=>{
 									return(<li key={key}><a>{cate}</a></li>)}) : 
 								null
 							}
 				</ul>
-				<ShoppingCart cart={this.props.cart} deleteCart={this.props.deleteCart} quantityUpdate={this.props.quantityUpdate} checkOut={this.props.checkOut} />
+				{
+					(this.props.checkchef)? <ShoppingCart cart={this.props.cart} deleteCart={this.props.deleteCart} quantityUpdate={this.props.quantityUpdate} checkOut={this.props.checkOut} />:null
+				}
 			</div>
 				)
 	}

@@ -22,6 +22,7 @@ class App extends Component {
 			address:'',
 			chef:null,
 			chefInUse:null,
+			chefInUseReady:false,
 			cart:{
 				cart:{
 						},
@@ -36,7 +37,7 @@ class App extends Component {
 		this.newUser=this.newUser.bind(this);
 	}
 	searchResultForParent=(result)=>{
-		this.setState({chef:result,chefInUse:result.filter((chef)=>chef.role==="Super Chef")[0]});
+		this.setState({chef:result,chefInUse:result.filter((chef)=>chef.role==="Super Chef")[0],chefInUseReady:true});
 		console.log(this.state.chefInUse);
 	}
 	addressForParent=async (adr)=>{
@@ -46,9 +47,9 @@ class App extends Component {
 		this.setState({cart:cart})
 		console.log(cart);
 	}
-	async newUser(e){
-		await this.setState({user:e})
-		console.log(this.state.user)
+	async newUser(e,lastCardDigits){
+		await this.setState({user:{...e,lastCardDigits}})
+		console.log({...e,lastCardDigits})
 	}
 	deleteCart=(food)=>{
 		var newCart=this.state.cart.cart,cart={},total;
@@ -75,7 +76,7 @@ class App extends Component {
     return (
     	(this.state.checkout==true)? <div className="devi"><PageBackground/> <CheckoutPage newUser={this.newUser} user={this.state.user} /> <CheckoutSlip cart={this.state.cart} user={this.state.user} address={this.state.address} deleteCart={this.deleteCart} quantityUpdate={this.quantityUpdate} user={this.state.user} chefInUse={this.state.chefInUse} /></div>:
     	(this.state.address=='')? <div className="dev"><ScrollLogic address={this.state.address} chef={this.state.chef} searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} checkOut={this.checkOut} /><PageBackground /><SummaryComponent/><MobileAppComponent/><ChefComponent/><Footer/></div>:
-    	<div className="dev"> <ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} chef={this.state.chef} addressForParent={this.addressForParent} cart={this.state.cart} deleteCart={this.deleteCart} quantityUpdate={this.quantityUpdate} checkOut={this.checkOut} /><MenuPage/><MenuItems updateCart={this.updateCart} chef={this.state.chef} chefInUse={this.state.chefInUse} /><Footer/></div>
+    	<div className="dev"> <ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} chef={this.state.chef} addressForParent={this.addressForParent} cart={this.state.cart} deleteCart={this.deleteCart} quantityUpdate={this.quantityUpdate} checkOut={this.checkOut} checkchef={this.state.chefInUseReady}/><MenuPage/><MenuItems updateCart={this.updateCart} chef={this.state.chef} chefInUse={this.state.chefInUse} /><Footer/></div>
     	);
   }
   /*render() {

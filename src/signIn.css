@@ -9,6 +9,49 @@
 	margin: auto;
   	background-color: rgba(0,0,0, 0.5);
 }
+#headingHolder{
+display: flex;
+justify-content: space-between;
+}
+#headingHolder p{
+	margin-top: 16px;
+}
+#cardNumberHolder p{
+text-align: left;
+}
+#CVVNumber{
+	width:50%;
+	margin-right: 0;
+}
+#imageHolder img{
+	width:51px;
+	height:32px;
+	margin-left: 5px;
+}
+#info,.otherinfoHolder,.YearDate{
+	display: flex;
+	justify-content: space-between;
+
+}
+.cvvinfo{
+	position: relative;
+	width: 50%;
+}
+#CVVNumber{
+	width:20%;
+	position: absolute;
+	right: 0;
+	top:0;
+	align-self: right;
+}
+#MonthNumber{
+	margin-right: 10px;
+	padding: 2px;
+	width:70%;
+}
+.YearDate input{
+	padding-left:20px;
+}
 .popupHolder{
   position: absolute;
   left: 30%;
@@ -22,6 +65,15 @@
   position: absolute;
   left: 30%;
   right: 30%;
+  top: 5%;
+  bottom: 5%;
+  margin: auto;
+  background: white;
+}
+.AddcardPopupHolder{
+  position: absolute;
+  left: 10%;
+  right: 10%;
   top: 5%;
   bottom: 5%;
   margin: auto;

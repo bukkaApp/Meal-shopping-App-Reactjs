@@ -44,16 +44,18 @@ export default class checkoutSlip extends Component{
 		if(this.state.user==null){
 			alert("You must Sign in first");
 		}
-		else if (this.state.user!=null && this.state.chefInUse!=null){
+		else if (this.state.user!=null && this.state.chefInUse!=null) {
 					var chefUid=this.state.chefInUse.uid,customerUid=this.state.user.data.uid,description="",customerName=this.state.user.data.first_name+" "+this.state.user.data.last_name,customerEmail=this.state.user.data.email,customerImage=this.state.user.data.profile_photo,coupon_used=false;
-					var chefName=this.props.chefInUse.first_name+" "+this.props.chefInUse.last_name,chefEmail=this.props.chefInUse.email,customerAddress=this.state.address,chefImage=this.props.chefInUse.profile_photo,customerPhoneNumber=this.state.user.data.email,payment_option="cash",additionalInfo=document.getElementById("chefInfo").value,charge_customer=false,url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/transaction/incoming";
-					var items=Object.keys(this.state.cart.cart);
+					var chefName=this.props.chefInUse.first_name+" "+this.props.chefInUse.last_name,chefEmail=this.props.chefInUse.email,customerAddress=this.state.address,chefImage=this.props.chefInUse.profile_photo,customerPhoneNumber=this.state.user.data.mobile,payment_option="cash",additionalInfo=" ",charge_customer=false,url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/transaction/incoming";
+					
 					Object.keys(this.state.cart.cart).map((menu,key)=>{
+						var items=Object.keys(this.state.cart.cart);
 						var item=items[key];
-						console.log("menu: "+menu+" cart: "+this.state.cart.cart.items[key]);
-						var quantity=this.state.cart.cart.menu.quantity;
-						var originalAmt=this.state.cart.cart.menu.totalCost;
-						console.log({chefUid,customerUid,description,quantity,customerName,customerEmail,customerImage,chefName,chefEmail,customerAddress,chefImage,customerPhoneNumber,payment_option,additionalInfo,coupon_used,charge_customer});
+						console.log(`${item}`);
+						console.log(this.state.cart.cart[`${item}`]);
+						var quantity=this.state.cart.cart[`${item}`].quantity;
+						var originalAmt=this.state.cart.cart[`${item}`].totalCost;
+						console.log({customerUid,chefUid,description,quantity,customerName,customerEmail,customerImage,chefName,chefEmail,customerAddress,chefImage,customerPhoneNumber,payment_option,additionalInfo,coupon_used,charge_customer});
 						fetch(url,{
 						method:'post',
 						headers:{	

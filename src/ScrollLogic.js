@@ -45,7 +45,7 @@ render() {
         return (
         	(this.state.address=='')?
             ((this.state.scroll)? <HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>:<HeaderMax searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address} />):
-            (this.state.scroll)? <HeaderStories searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address} chef={this.props.chef} cart={this.props.cart} quantityUpdate={this.props.quantityUpdate} deleteCart={this.props.deleteCart} checkOut={this.props.checkOut} />:<HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>
+            (this.state.scroll)? <HeaderStories searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address} chef={this.props.chef} checkchef={this.props.checkchef} cart={this.props.cart} quantityUpdate={this.props.quantityUpdate} deleteCart={this.props.deleteCart} checkOut={this.props.checkOut} />:<HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>
 )
 }
 }
