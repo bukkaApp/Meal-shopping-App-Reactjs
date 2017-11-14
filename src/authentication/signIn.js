@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './signIn.css';
+import logo from '../logo.svg';
+import '../style/signIn.css';
 import fetch    from 'isomorphic-fetch';
 
 export default class signIn extends Component{

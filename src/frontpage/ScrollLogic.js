@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import ReactDOM from 'react-dom';
-import './scrollLogic.css';
+import '../style/scrollLogic.css';
 import HeaderMax from './HeaderMax';
 import HeaderMin from './HeaderMin';
 import PropTypes from 'prop-types';

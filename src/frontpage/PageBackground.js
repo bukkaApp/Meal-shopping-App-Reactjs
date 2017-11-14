@@ -1,6 +1,6 @@
 import  React, {Component } from 'react';
-import logo from './logo.svg';
-import './PageBackground.css';
+import logo from '../logo.svg';
+import '../style/PageBackground.css';
 import fetch from 'node-fetch';
 import PropTypes from 'prop-types';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';

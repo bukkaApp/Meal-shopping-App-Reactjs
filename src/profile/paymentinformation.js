@@ -1,33 +1,16 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './signIn.css';
-import fetch from 'isomorphic-fetch';
+import logo from '../logo.svg';
+import '../style/signIn.css';
 
-export default class addcard extends Component{
+export default class paymentinformation extends Component{
 	constructor(props){
 		super(props);
-		this.addcard=this.addcard.bind(this);
-	}
-	addcard(){
-		var number=document.getElementById("cardNumber").value;
-		var cvv=document.getElementById("CVVNumber").value;
-		var expiry_month=document.getElementById("MonthNumber").value;
-		var expiry_year=document.getElementById("YearNumber").value;
-		if(number==""||cvv==""||expiry_year==""||expiry_month==""){
-
-		}
-		else{
-			this.props.addCard(number,cvv,expiry_month,expiry_year)
-		}
 	}
 	render(){
 		return(
-			<div className="signInPopup">
-				<div className="AddcardPopupHolder">
-					<div id="topPart">
-						<p>Add Card</p>
-						<a onClick={this.props.toggleshowaddcard}>X</a>
-					</div>
+			<div className="signInPopup white-background m-position-fix">
+				<div className="AddcardPopupHolder m-pad">
+					
 					<div className="formField">
 						<div id="headingHolder">
 							<h3>Card Information</h3>
@@ -56,7 +39,7 @@ export default class addcard extends Component{
 								</div>
 							</div>
 						</div>
-						<button className="btn-red" onClick={this.addcard}>Add Card</button>
+						<button className="btn-red" >Add Card</button>
 					</div>
 
 				</div>

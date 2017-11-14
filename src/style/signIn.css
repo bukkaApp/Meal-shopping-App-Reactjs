@@ -9,6 +9,17 @@
 	margin: auto;
   	background-color: rgba(0,0,0, 0.5);
 }
+.white-background{
+	background-color: white;
+	max-height: 500px;
+}
+.m-position-fix{
+	position: absolute;
+	top:360px;
+}
+.m-pad{
+
+}
 #headingHolder{
 display: flex;
 justify-content: space-between;

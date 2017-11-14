@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import './index.css';
-import HeaderMax from './HeaderMax';
-import HeaderMin from './HeaderMin';
-import PageBackground from './PageBackground';
-import Footer from './Footer';
-import ScrollLogic from './ScrollLogic';
-import ChefComponent from './chefComponent';
-import MobileAppComponent from './mobileAppComponent';
-import SummaryComponent from './summaryComponent';
-import MenuPage from './menuPage';
-import MenuItems from './menuItems';
-import CheckoutPage from './checkoutPage';
-import CheckoutSlip from './checkoutSlip';
+import logo from '../logo.svg';
+import '../style/App.css';
+import '../style/index.css';
+import PageBackground from '../frontpage/PageBackground';
+import Footer from '../frontpage/Footer';
+import ScrollLogic from '../frontpage/ScrollLogic';
+import ChefComponent from '../frontpage/chefComponent';
+import MobileAppComponent from '../frontpage/mobileAppComponent';
+import SummaryComponent from '../frontpage/summaryComponent';
+import MenuPage from '../menu/menuPage';
+import MenuItems from '../menu/menuItems';
+import CheckoutPage from '../checkout/checkoutPage';
+import CheckoutSlip from '../checkout/checkoutSlip';
 
 class App extends Component {
 	constructor(props) {

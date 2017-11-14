@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './checkoutSlip.css';
+import logo from '../logo.svg';
+import '../style/checkoutSlip.css';
 import fetch    from 'isomorphic-fetch';
 
 export default class checkoutSlip extends Component{
@@ -63,6 +63,17 @@ export default class checkoutSlip extends Component{
 						},
 						body:JSON.stringify({chefUid,customerUid,originalAmt,item,description,quantity,customerName,customerEmail,customerImage,chefName,chefEmail,customerAddress,chefImage,customerPhoneNumber,payment_option,additionalInfo,coupon_used,charge_customer
 											})
+						/*var xhr = new XMLHttpRequest();
+						xhr.open("POST", url, true);
+						xhr.setRequestHeader('Content-Type', 'application/json');
+						xhr.send(JSON.stringify({chefUid,customerUid,originalAmt,item,description,quantity,customerName,customerEmail,customerImage,chefName,chefEmail,customerAddress,chefImage,customerPhoneNumber,payment_option,additionalInfo,coupon_used,charge_customer
+											}));
+						xhr.onload = function() {
+						  console.log(this.responseText);
+						  var data = JSON.parse(this.responseText);
+						  console.log(data);
+						}*/
+
 					})
 					.then(res=>res.json())
 					.then(res=>console.log(res))
@@ -70,8 +81,7 @@ export default class checkoutSlip extends Component{
 
 					})
 		}
-	}
-
+}
 	render(){
 		return(
 			<div id="checkoutSlip">

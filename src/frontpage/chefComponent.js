@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './chefComponent.css';
+import logo from '../logo.svg';
+import '../style/chefComponent.css';
 
 export default class chefComponent extends Component{
 	render(){

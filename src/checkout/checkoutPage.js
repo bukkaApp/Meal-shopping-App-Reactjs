@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './checkoutPage.css';
+import logo from '../logo.svg';
+import '../style/checkoutPage.css';
 import FaMapMarker from 'react-icons/lib/fa/map-marker';
 import GoHome from 'react-icons/lib/fa/home';
 import FaStickyNote from 'react-icons/lib/fa/sticky-note';
-import SignIn from './signIn';
-import SignUp from './SignUp';
+import SignIn from '../authentication/signIn';
+import SignUp from '../authentication/SignUp';
 import FaCreditCardAlt from 'react-icons/lib/fa/credit-card-alt';
 import AddCard from './addCard';
+import fetch   from 'isomorphic-fetch';
+import needle from 'needle';
 
 export default class checkoutPage extends Component{
 	constructor(props) {
@@ -23,14 +25,18 @@ export default class checkoutPage extends Component{
 		this.toggleshowaddcard=this.toggleshowaddcard.bind(this);
 		this.addCard=this.addCard.bind(this);
 	}
+
+
 	async addCard(cardNumber,cvv,expirationMonth,expirationYear){
 		try{
-			var uid=this.state.user.data.uid,email=this.state.user.data.email;
-			var url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/cardDetails/" + uid;
-			console.log({email,cardNumber,cvv,expirationMonth,expirationYear})
+			var uid=this.state.user.data.uid,email=this.state.user.data.email,token=this.state.user.data.token;
+			var url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/cardDetails/customuuid:1508515120219olatest"
+			var bod={'email':"test@test.com",cardNumber,cvv,expirationMonth,expirationYear};
+			console.log({'email':"test@test.com",cardNumber,cvv,expirationMonth,expirationYear});
 			var fetchurl=await fetch(url,{
 				method:'post',
 				headers:{
+						'token':token,
 						'Accept': 'application/json',
     					'Content-Type': 'application/json'
 				},

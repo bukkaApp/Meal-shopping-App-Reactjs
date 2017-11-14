@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './menuPage.css'
+import logo from '../logo.svg';
+import '../style/menuPage.css'
 
 export default class menuPage extends Component{
 	render(){

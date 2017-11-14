@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import FaMapMarker from 'react-icons/lib/fa/map-marker';
-import './App.css';
+import '../style/App.css';
 import PropTypes from 'prop-types'
 
 class SimpleForm extends React.Component {

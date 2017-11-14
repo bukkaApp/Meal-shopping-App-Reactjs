@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './shoppingCart.css'
-import './App.css'
+import logo from '../logo.svg';
+import '../style/shoppingCart.css';
+import '../style/App.css';
 
 export default class shoppingCart extends Component{
 	constructor(props) {

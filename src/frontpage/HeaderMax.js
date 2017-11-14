@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from '../logo.svg';
+import '../style/App.css';
 import MdShoppingCart from 'react-icons/lib/md/shopping-cart';
 import SimpleForm from './autoComplete';
 
-export default class HeaderMin extends Component{
+export default class HeaderMax extends Component{
 	constructor(props) {
 		super(props);
 		this.state={
@@ -17,18 +17,18 @@ export default class HeaderMin extends Component{
 	addressForParent=(adr)=>{
 		this.props.addressForParent(adr);
 	}
-
 	render(){
 		return(
-			<div  className="myheader header-min">
+			<div className="myheader">
 				<img src="http://res.cloudinary.com/www-mybukka-com/image/upload/v1505151382/logo_m8ik1x.png" id="logo" alt="logo"/>
-				<div className="search-box search-box-min">
-				<SimpleForm searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.state.address} > </SimpleForm>
-				</div>
-				<div className="header-top-button header-top-button-min">
+				<div className="header-top-button">
 				<button ></button>
 				<button className="btn-red"></button>
 				<MdShoppingCart className="shopping-cart"/>
+				</div>
+				<p id="search-text">Find the food that matches your taste around you</p>
+				<div className="search-box">
+				<SimpleForm searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.state.address} > </SimpleForm>
 				</div>
 			</div>
 			)

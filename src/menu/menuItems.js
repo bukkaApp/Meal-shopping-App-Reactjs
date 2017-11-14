@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './menuItems.css'
+import logo from '../logo.svg';
+import '../style/menuItems.css'
 
 export default class menuItems extends Component{
 	constructor(props) {

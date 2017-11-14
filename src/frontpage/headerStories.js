@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import './headerStories.css';
+import logo from '../logo.svg';
+import '../style/App.css';
+import '../style/headerStories.css';
 import MdShoppingCart from 'react-icons/lib/md/shopping-cart';
 import SimpleForm from './autoComplete';
 import ShoppingCart from './shoppingCart';

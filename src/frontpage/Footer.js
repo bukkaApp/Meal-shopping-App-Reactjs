@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './foot.css';
+import logo from '../logo.svg';
+import '../style/foot.css';
 import fetch from 'node-fetch';
 import PropTypes from 'prop-types';
 import TiSocialFacebook from 'react-icons/lib/ti/social-facebook';
