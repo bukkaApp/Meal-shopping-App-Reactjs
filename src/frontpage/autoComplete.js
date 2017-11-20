@@ -14,6 +14,7 @@ class SimpleForm extends React.Component {
   handleFormSubmit = (event) => {
     event.preventDefault()
     this.props.addressForParent(this.state.address);
+    console.log(this.state.address);
     geocodeByAddress(this.state.address)
       .then(results => getLatLng(results[0]))
       .then(latLng => {console.log('Success', latLng);this.getChefs(latLng.lat,latLng.lng)})
@@ -23,6 +24,7 @@ class SimpleForm extends React.Component {
 
   handleEnter = (address) => {
   	this.props.addressForParent(address);
+    console.log(address);
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
       .then(latLng => {console.log('Success', latLng);})
@@ -30,6 +32,7 @@ class SimpleForm extends React.Component {
 }
 
  handleSelect = (address, placeId) => {
+  console.log(address);
  	this.setState({ address, placeId });
  	this.props.addressForParent(address);
   geocodeByAddress(address)

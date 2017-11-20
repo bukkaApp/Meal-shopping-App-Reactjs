@@ -39,7 +39,7 @@ export default class SignUp extends Component{
 		});
 		var response2= await fetchedurl.json();
 		console.log(response2);
-		this.props.newUser(response);
+		this.props.newUser(response2);
   		this.props.toggleSignUp();
   	}
   	catch(error){

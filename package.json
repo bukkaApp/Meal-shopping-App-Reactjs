@@ -5,6 +5,7 @@
   "dependencies": {
     "cors-anywhere": "^0.4.0",
     "es6-promise": "^4.1.1",
+    "firebase": "^4.6.2",
     "isomorphic-fetch": "^2.2.1",
     "leaflet": "^1.2.0",
     "needle": "^2.0.1",
@@ -16,8 +17,13 @@
     "react-icons": "^2.2.7",
     "react-leaflet": "^1.7.1",
     "react-places-autocomplete": "^5.4.3",
+    "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^5.0.0",
+    "redux-thunk": "^2.2.0",
     "request": "^2.83.0"
   },
   "scripts": {

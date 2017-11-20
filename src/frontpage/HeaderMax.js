@@ -17,6 +17,9 @@ export default class HeaderMax extends Component{
 	addressForParent=(adr)=>{
 		this.props.addressForParent(adr);
 	}
+	componentDidMount(){
+		this.setState({address:this.props.address});
+	}
 	render(){
 		return(
 			<div className="myheader">

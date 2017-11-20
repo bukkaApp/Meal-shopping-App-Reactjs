@@ -29,24 +29,26 @@ export default class checkoutPage extends Component{
 
 	async addCard(cardNumber,cvv,expirationMonth,expirationYear){
 		try{
-			var uid=this.state.user.data.uid,email=this.state.user.data.email,token=this.state.user.data.token;
-			var url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/cardDetails/customuuid:1508515120219olatest"
-			var bod={'email':"test@test.com",cardNumber,cvv,expirationMonth,expirationYear};
-			console.log({'email':"test@test.com",cardNumber,cvv,expirationMonth,expirationYear});
+			console.log(this.props.user);
+			var uid=this.props.user.data.uid,email=this.props.user.data.email,token=this.props.user.data.token;
+			var url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/cardDetails/"+ uid;
+			var ccv=cvv;
+			console.log({token,email,cardNumber,cvv,expirationMonth,expirationYear});
 			var fetchurl=await fetch(url,{
 				method:'post',
 				headers:{
 						'token':token,
+						'uid':uid,
 						'Accept': 'application/json',
     					'Content-Type': 'application/json'
 				},
-				body:JSON.stringify({email,cardNumber,cvv,expirationMonth,expirationYear})
+				body:JSON.stringify({email,cardNumber,ccv,expirationMonth,expirationYear})
 			});
 			var response=await fetchurl.json();
 			console.log(response);
 
 		}catch(e){
-			console.log(e);
+			console.log("error!!",e);
 		}
 	}
 

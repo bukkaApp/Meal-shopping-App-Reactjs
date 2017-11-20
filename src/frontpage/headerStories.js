@@ -11,10 +11,9 @@ export default class headerStories extends Component{
 	constructor(props) {
 		super(props);
 		this.state={
-			categ:null,
+			categ:'',
 			address:this.props.address
 		}
-		this.getCategories=this.getCategories.bind(this);
 	}
 	searchResultForParent=(result)=>{
 		this.props.searchResultForParent(result);
@@ -22,16 +21,17 @@ export default class headerStories extends Component{
 	addressForParent=(adr)=>{
 		this.props.addressForParent(adr);
 	}
-	async getCategories(){
+	componentDidMount(){
+		this.setState({address:this.props.address});
+	}
+	/*async getCategories(){
 		var categor=Array.from(new Set(this.props.chef.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category)));
 		console.log(categor);
 	}
 	componentDidMount() {
 		(this.props.checkchef)? this.getCategories():null
-	}
-	componentWillReceiveProps(nextProps){
-		
-	}
+	}*/
+	
 	render(){
 		return(
 				<div  className="myheader header-min bigMenuHolder">

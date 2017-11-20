@@ -24,7 +24,7 @@ class App extends Component {
 			cart:{
 				cart:{
 						},
-						total:0.00
+				total:0.00
 					},
 			user:null,
 			checkout:false
@@ -33,6 +33,7 @@ class App extends Component {
 		this.quantityUpdate=this.quantityUpdate.bind(this);
 		this.checkOut=this.checkOut.bind(this);
 		this.newUser=this.newUser.bind(this);
+		console.log("the state is",this.state)
 	}
 	searchResultForParent=(result)=>{
 		this.setState({chef:result,chefInUse:result.filter((chef)=>chef.role==="Super Chef")[0],chefInUseReady:true});
@@ -45,8 +46,8 @@ class App extends Component {
 		this.setState({cart:cart})
 		console.log(cart);
 	}
-	async newUser(e,lastCardDigits){
-		await this.setState({user:{...e,lastCardDigits}})
+	newUser(e,lastCardDigits){
+		this.setState({user:{...e,lastCardDigits}})
 		console.log({...e,lastCardDigits})
 	}
 	deleteCart=(food)=>{

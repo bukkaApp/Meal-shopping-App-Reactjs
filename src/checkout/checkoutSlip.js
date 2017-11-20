@@ -47,39 +47,78 @@ export default class checkoutSlip extends Component{
 		else if (this.state.user!=null && this.state.chefInUse!=null) {
 					var chefUid=this.state.chefInUse.uid,customerUid=this.state.user.data.uid,description="",customerName=this.state.user.data.first_name+" "+this.state.user.data.last_name,customerEmail=this.state.user.data.email,customerImage=this.state.user.data.profile_photo,coupon_used=false;
 					var chefName=this.props.chefInUse.first_name+" "+this.props.chefInUse.last_name,chefEmail=this.props.chefInUse.email,customerAddress=this.state.address,chefImage=this.props.chefInUse.profile_photo,customerPhoneNumber=this.state.user.data.mobile,payment_option="cash",additionalInfo=" ",charge_customer=false,url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/transaction/incoming";
-					
-					Object.keys(this.state.cart.cart).map((menu,key)=>{
+					var token=this.state.user.data.token;
+					/*Object.keys(this.state.cart.cart).map((menu,key)=>{
 						var items=Object.keys(this.state.cart.cart);
 						var item=items[key];
-						console.log(`${item}`);
-						console.log(this.state.cart.cart[`${item}`]);
 						var quantity=this.state.cart.cart[`${item}`].quantity;
 						var originalAmt=this.state.cart.cart[`${item}`].totalCost;
-						console.log({customerUid,chefUid,description,quantity,customerName,customerEmail,customerImage,chefName,chefEmail,customerAddress,chefImage,customerPhoneNumber,payment_option,additionalInfo,coupon_used,charge_customer});
-						fetch(url,{
+						var charge_customer=false;
+						var change_amount =0;
+						
+						
+					})*/
+						var item="steamed rice"
+						var quantity=1;
+						var originalAmt=200;
+						var charge_customer=false;
+						var change_amount =0;
+					var t={'transaction':{
+													chefUid,
+													customerUid,
+													originalAmt,
+													item,
+													description,
+													quantity,
+													customerName,
+													customerEmail,
+													customerImage,
+													chefName,
+													chefEmail,
+													chefImage,
+													customerPhoneNumber,
+													payment_option,
+													coupon_used, 
+													additionalInfo,
+													charge_customer,
+													change_amount 
+												}};
+					console.log(t);
+					fetch(url,{
 						method:'post',
 						headers:{	
+							'chefUid':chefUid,
+							'token':token,
+							'Accept': 'application/json',
 			    			'Content-Type': 'application/json'
 						},
-						body:JSON.stringify({chefUid,customerUid,originalAmt,item,description,quantity,customerName,customerEmail,customerImage,chefName,chefEmail,customerAddress,chefImage,customerPhoneNumber,payment_option,additionalInfo,coupon_used,charge_customer
-											})
-						/*var xhr = new XMLHttpRequest();
-						xhr.open("POST", url, true);
-						xhr.setRequestHeader('Content-Type', 'application/json');
-						xhr.send(JSON.stringify({chefUid,customerUid,originalAmt,item,description,quantity,customerName,customerEmail,customerImage,chefName,chefEmail,customerAddress,chefImage,customerPhoneNumber,payment_option,additionalInfo,coupon_used,charge_customer
-											}));
-						xhr.onload = function() {
-						  console.log(this.responseText);
-						  var data = JSON.parse(this.responseText);
-						  console.log(data);
-						}*/
-
+						body:{
+						transaction:{
+													chefUid,
+													customerUid,
+													originalAmt,
+													item,
+													description,
+													quantity,
+													customerName,
+													customerEmail,
+													customerImage,
+													chefName,
+													chefEmail,
+													chefImage,
+													customerPhoneNumber,
+													payment_option,
+													coupon_used, 
+													additionalInfo,
+													charge_customer,
+													change_amount 
+												}
+											}
 					})
-					.then(res=>res.json())
-					.then(res=>console.log(res))
-					.catch(e=>console.log(e))
+					.then(lo=>console.log(lo))
+					.catch(e=>console.log("error",JSON.stringify(e)))
+		
 
-					})
 		}
 }
 	render(){

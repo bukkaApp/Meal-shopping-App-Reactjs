@@ -13,7 +13,7 @@ export default class scrollLogic extends Component{
 		super(props);
 		this.state={
 			scroll:false,
-			address:this.props.address,
+			address:'',
 			searchResult:''
 		};
 		this.scrollDetector=this.scrollDetector.bind(this)
@@ -27,10 +27,8 @@ export default class scrollLogic extends Component{
                 console.log((window.scrollY/scrollmax)*100);
     }
     componentDidMount() {
+        this.setState({address:this.props.address});
         window.addEventListener('scroll', this.scrollDetector);
-    }
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.scrollDetector);
     }
     searchResultForParent=(result)=>{
     	this.props.searchResultForParent(result);

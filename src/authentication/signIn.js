@@ -27,6 +27,7 @@ export default class signIn extends Component{
 		var apiURL="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/card/"+userUID;
 		var getLastDigits=await fetch(apiURL);
 		var getLastDigitsResponse=await getLastDigits.json();
+		console.log(getLastDigitsResponse);
 		if (getLastDigitsResponse.data){
 		var last=getLastDigitsResponse.data.last;
 		this.props.newUser(response,last);
