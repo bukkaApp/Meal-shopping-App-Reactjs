@@ -1,13 +1,13 @@
 import React,{Commponent} from 'react';
 import ReactDOM from 'react-dom';
 import './style/index.css';
-import App from './routes/App';
-import {BrowserRouter , Route, Switch} from 'react-router-dom';
-import Profile from './routes/profile';
+import Root from './root';
+import reducers from './data_Container/reducers/combinedreducers'
+import storage from './data_Container/store'
 
-ReactDOM.render(<BrowserRouter>
-	<Switch>
-		<Route exact path="/" component={App}/>
-		<Route exact path="/profile" component={Profile} />
-	</Switch>
-</BrowserRouter>, document.getElementById('board'));
+
+let store=storage;
+store.subscribe(()=>console.log(store.getState()));
+ReactDOM.render(
+	<Root store={store}  />, 
+	document.getElementById('board'));

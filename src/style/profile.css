@@ -25,7 +25,7 @@
 	cursor: pointer;
 }
 .l-menu-item:active{
-	background-color: red;
+	background-color: #9c1c26;
 	color:white;
 }
 .l-right-padding{
@@ -40,13 +40,15 @@
 	background-color: white;
 }
 .l-space-around{
-	margin: 5% 5% 2% 10%;
+	margin-top: 100px;
+    margin-bottom: 20px;
+    margin-left: 40px;
 }
 .l-height{
 	height: 50px;
 }
 .l-select{
-	background-color: red;
+	background-color: #9c1c26;
 	color:white;
 	pointer-events: none;
 }
@@ -79,7 +81,7 @@
 
 }
 .profile-photo:hover{
-	border:5px solid red;
+	border:5px solid #9c1c26;
 }
 .profile-photo-selector{
 	width: 150px;

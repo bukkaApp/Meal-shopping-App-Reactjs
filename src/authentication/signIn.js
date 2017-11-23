@@ -8,38 +8,9 @@ export default class signIn extends Component{
 		super(props);
 		this.getUser=this.getUser.bind(this);
 	}
-	userdetails(){
-
-	}
-	async getUser(){
-		try{
-		var email=document.getElementById("SignInemail").value,password=document.getElementById("SignInPassword").value,url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login";
-		var fetchedurl= await fetch(url,{
-			method:'post',
-			headers: {
-    					'Accept': 'application/json',
-    					'Content-Type': 'application/json'
-  					},
-			body:JSON.stringify({email,password})
-		});
-		var response= await fetchedurl.json();
-		var userUID=response.data.uid;
-		var apiURL="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/card/"+userUID;
-		var getLastDigits=await fetch(apiURL);
-		var getLastDigitsResponse=await getLastDigits.json();
-		console.log(getLastDigitsResponse);
-		if (getLastDigitsResponse.data){
-		var last=getLastDigitsResponse.data.last;
-		this.props.newUser(response,last);
-		}
-		else{
-			this.props.newUser(response);
-		}
-  		this.props.toggleSignin();
-  	}
-  	catch(error){
-  		console.log(error);
-  	}
+	getUser(){
+  	var email=document.getElementById("SignInemail").value,password=document.getElementById("SignInPassword").value;
+  	this.props.signin(email,password);
 	}
 
 	render(){
@@ -55,7 +26,7 @@ export default class signIn extends Component{
 						<input placeholder="Password" type="password" id="SignInPassword"/>
 						<a>Forgot Password?</a>
 						<button className="btn-red" onClick={this.getUser}>Sign In</button>
-						<p>New User<a id="sign-btn">Sign Up</a></p>
+						<p>New User<a id="sign-btn" onClick={this.props.toggleSignUp}>Sign Up</a></p>
 					</div>
 				</div>
 			</div>

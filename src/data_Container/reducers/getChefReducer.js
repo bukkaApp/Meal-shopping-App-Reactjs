@@ -3,31 +3,55 @@ const initialstate={
 	fetched:false,
 	chefsInYourArea:{},
 	yourChef:{},
+	menuCategoriesKeys:[],
+	menuCategories:[],
 	error:null
 };
 
-export default const getChefs=(state=initialstate,action)=>{
+const getChefs=(state=initialstate,action)=>{
 	switch(action.type){
 		case'GET_CHEFS_PENDING':{
-			return{state,fetching:true};
+			return{
+				...state,
+				fetching:true};
 			break;
 		}
 		case'GET_CHEFS_REJECTED':{
-			return{state,fetching:false,error:action.payload};
+			return{
+				...state,
+				fetching:false,
+				error:action.payload.response.data,
+				chefsInYourArea:{},
+				yourChef:{},
+				menuCategoriesKeys:[],
+				menuCategories:[],
+				};
 			break;
 		}
 		case'GET_CHEFS_FULFILLED':{
 			return{
-				state,
+				...state,
 				fetching:false,
-				fetched:true,
-				chefsInYourArea:action.payload.chefsInYourArea,
-				yourChef:action.payload.yourChef,
+				fetching:true,
+				chefsInYourArea:action.payload.data,
 				error:null
 			}
 			break;
 		}
-		return state
-
+		case 'GET_CHEFS_UPDATE':{
+			return{
+				...state,
+				fetching:false,
+				fetched:true,
+				yourChef:action.payload.yourChef,
+				menuCategoriesKeys:action.payload.categ,
+				menuCategories:action.payload.menu,
+				error:null
+			}
+			break;
+		}
 	}
-}
+	return state
+};
+
+export default getChefs;

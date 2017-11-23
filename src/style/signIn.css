@@ -8,6 +8,7 @@
 	width:100%;
 	margin: auto;
   	background-color: rgba(0,0,0, 0.5);
+  	z-index: 100;
 }
 .white-background{
 	background-color: white;
@@ -15,7 +16,7 @@
 }
 .m-position-fix{
 	position: absolute;
-	top:360px;
+	top:400px;
 }
 .m-pad{
 
@@ -95,13 +96,7 @@ text-align: left;
 	padding-right: 80px;
 
 }
-.formField input{
-	display:block;
-	width:100%;
-	margin-bottom: 20px;
-	height: 40px;
-	padding-left: 20px;
-}
+
 .formField button{
 	width:100%;
 	margin-top: 20px;
@@ -135,4 +130,11 @@ text-align: left;
 }
 #sign-btn{
 	margin-left: 5px;
+}
+.formField input{
+	display:block !important;
+	width:100% !important;
+	margin-bottom: 20px !important ;
+	height: 40px !important;
+	padding-left: 20px !important;
 }

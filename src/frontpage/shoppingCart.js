@@ -34,7 +34,7 @@ export default class shoppingCart extends Component{
 	render(){
 		return(
 			<div className="ShoppingCartHolder">
-			{Object.keys(this.state.cart.cart).map((key,i)=>{
+			{Object.keys(this.props.cart.cart).map((key,i)=>{
 				return(
 								<div className="item" key={i}>
 									<div className="carti">

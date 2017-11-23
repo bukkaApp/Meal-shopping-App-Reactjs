@@ -6,49 +6,21 @@ import fetch from 'isomorphic-fetch';
 export default class SignUp extends Component{
 	constructor(props){
 		super(props);
-		this.userSignup=this.userSignup.bind(this);
+		this.signup=this.signup.bind(this);
 	}
 
-	async userSignup(){
-		if(document.getElementById("Password").value != document.getElementById("ConfirmPassword").value){
-
+	signup(){
+		if(document.getElementById("Passwordi").value !== document.getElementById("ConfirmPasswordi").value){
+			console.log("password is not the same as confirm password!")
 		}
 		else{
-		try{
-			//signing user up
-		var email=document.getElementById("email").value,firstname=document.getElementById("FirstName").value,lastname=document.getElementById("LastName").value,password=document.getElementById("Password").value,mobile=document.getElementById("MobileNumber").value,url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/register",isCustomer=true;
-		var fetchurl= await fetch(url,{
-			method:'post',
-			headers:{
-    					'Content-Type': 'application/json'
-			},
-			body:JSON.stringify({email,firstname,lastname,password,mobile,isCustomer})
-		});
-		var response= await fetchurl.json();
-		console.log(response);
-		//signing user in after successful signup
-		try{
-		var email=document.getElementById("email").value,password=document.getElementById("Password").value,url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login";
-		var fetchedurl= await fetch(url,{
-			method:'post',
-			headers: {
-    					'Accept': 'application/json',
-    					'Content-Type': 'application/json'
-  					},
-			body:JSON.stringify({email,password})
-		});
-		var response2= await fetchedurl.json();
-		console.log(response2);
-		this.props.newUser(response2);
-  		this.props.toggleSignUp();
-  	}
-  	catch(error){
-  		console.log(error);
-  	}
-  		}
-  		catch(error){
-  			console.log("Sorry!!",error);
-  		}
+		var email=document.getElementById("emaili").value;
+		var firstname=document.getElementById("FirstNamei").value
+		var lastname=document.getElementById("LastNamei").value
+		var password=document.getElementById("Passwordi").value
+		var mobile=document.getElementById("MobileNumberi").value
+		var isCustomer=true;
+		this.props.signup(email,firstname,lastname,password,mobile,isCustomer);
 	}
 }
 
@@ -61,14 +33,14 @@ export default class SignUp extends Component{
 						<a onClick={this.props.toggleSignUp}>X</a>
 					</div>
 					<div className="formField">
-						<input placeholder="First Name" type="text" id="FirstName"/>
-						<input placeholder="Last Name" type="text" id="LastName"/>
-						<input placeholder="Mobile Number" type="tel" id="MobileNumber"/>
-						<input placeholder="Email" type="email" id="email"/>
-						<input placeholder="Password" type="password" id="Password"/>
-						<input placeholder="Confirm Password" type="password" id="ConfirmPassword"/>
-						<button className="btn-red" onClick={this.userSignup}>Sign Up</button>
-						<p>Already a User<a id="sign-btn">Sign In</a></p>
+						<input placeholder="First Name" type="text" id="FirstNamei"/>
+						<input placeholder="Last Name" type="text" id="LastNamei"/>
+						<input placeholder="Mobile Number" type="tel" id="MobileNumberi"/>
+						<input placeholder="Email" type="email" id="emaili"/>
+						<input placeholder="Password" type="password" id="Passwordi"/>
+						<input placeholder="Confirm Password" type="password" id="ConfirmPasswordi"/>
+						<button className="btn-red" onClick={this.signup}>Sign Up</button>
+						<p>Already a User<a id="sign-btn" onClick={this.props.toggleSignin}>Sign In</a></p>
 					</div>
 
 				</div>

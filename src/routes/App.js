@@ -12,42 +12,65 @@ import MenuPage from '../menu/menuPage';
 import MenuItems from '../menu/menuItems';
 import CheckoutPage from '../checkout/checkoutPage';
 import CheckoutSlip from '../checkout/checkoutSlip';
+import {connect} from 'react-redux';
+import { fetch_address, fetch_chef, identify_user, get_chef,showsignIn,showsignUp,updating_user_info,signout,signup} from '../data_Container/action/actions';
+import fetch   from 'isomorphic-fetch';
+import SignIn from '../authentication/signIn';
+import SignUp from '../authentication/SignUp';
+import axios from 'axios';
+
+
 
 class App extends Component {
 	constructor(props) {
 		super(props);
-		this.state={
-			address:'',
-			chef:null,
-			chefInUse:null,
-			chefInUseReady:false,
-			cart:{
-				cart:{
-						},
-				total:0.00
-					},
-			user:null,
-			checkout:false
-		}
+		this.state={address:this.props.address,
+					chef:this.props.chef,
+					cart:this.props.cart,
+					user:this.props.user,
+					page:this.props.page
+					};
 		this.deleteCart=this.deleteCart.bind(this);
 		this.quantityUpdate=this.quantityUpdate.bind(this);
 		this.checkOut=this.checkOut.bind(this);
 		this.newUser=this.newUser.bind(this);
-		console.log("the state is",this.state)
+		this.toggleSignin=this.toggleSignin.bind(this);
+		this.toggleSignUp=this.toggleSignUp.bind(this);
+		this.signin=this.signin.bind(this);
+		this.signout=this.signout.bind(this);
+		this.signup=this.signup.bind(this);
+		console.log(this.props);
 	}
-	searchResultForParent=(result)=>{
-		this.setState({chef:result,chefInUse:result.filter((chef)=>chef.role==="Super Chef")[0],chefInUseReady:true});
-		console.log(this.state.chefInUse);
+
+	//togglepages
+	toggleSignin(){
+		this.props.dispatch(showsignIn(this.props.page.showsignIn))
 	}
-	addressForParent=async (adr)=>{
-		await this.setState({address:adr});
+	toggleSignUp(){
+		this.props.dispatch(showsignUp(this.props.page.showsignUp))
+	}
+	//signin and signup
+	signin(email,password){
+		this.props.dispatch(identify_user(axios.post("http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login",{email,password})))
+		.then(()=>{this.props.dispatch(updating_user_info(axios.get("http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
+		.then(()=>this.toggleSignin())
+	}
+
+	signup(email,firstname,lastname,password,mobile,isCustomer){
+		this.props.dispatch(signup(axios.post("http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/register",{email,firstname,lastname,password,mobile,isCustomer})))
+		.then(()=>{this.props.dispatch(identify_user(axios.post("http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login",{email,password})))})
+		.then(()=>{this.props.dispatch(updating_user_info(axios.get("http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
+		.then(()=>this.toggleSignUp())
+	}
+	//signout
+	signout(){
+		this.props.dispatch(signout());
 	}
 	updateCart=(cart)=>{
 		this.setState({cart:cart})
 		console.log(cart);
 	}
 	newUser(e,lastCardDigits){
-		this.setState({user:{...e,lastCardDigits}})
 		console.log({...e,lastCardDigits})
 	}
 	deleteCart=(food)=>{
@@ -70,17 +93,63 @@ class App extends Component {
 	checkOut(){
 		this.setState({checkout:true});
 	}
-	
   render() {
     return (
-    	(this.state.checkout==true)? <div className="devi"><PageBackground/> <CheckoutPage newUser={this.newUser} user={this.state.user} /> <CheckoutSlip cart={this.state.cart} user={this.state.user} address={this.state.address} deleteCart={this.deleteCart} quantityUpdate={this.quantityUpdate} user={this.state.user} chefInUse={this.state.chefInUse} /></div>:
-    	(this.state.address=='')? <div className="dev"><ScrollLogic address={this.state.address} chef={this.state.chef} searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} checkOut={this.checkOut} /><PageBackground /><SummaryComponent/><MobileAppComponent/><ChefComponent/><Footer/></div>:
-    	<div className="dev"> <ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} chef={this.state.chef} addressForParent={this.addressForParent} cart={this.state.cart} deleteCart={this.deleteCart} quantityUpdate={this.quantityUpdate} checkOut={this.checkOut} checkchef={this.state.chefInUseReady}/><MenuPage/><MenuItems updateCart={this.updateCart} chef={this.state.chef} chefInUse={this.state.chefInUse} /><Footer/></div>
+    	(this.state.address.Location=='')? <div className="dev">
+    											<ScrollLogic address={this.props.address.Location} 
+    														 chef={this.props.chef}
+    														 toggleSignin={this.toggleSignin}
+    														 toggleSignUp={this.toggleSignUp}
+    														 user={this.props.user}
+    														 signout={this.signout}
+    														 cart={this.props.cart} />
+    											<PageBackground />
+    											<SummaryComponent/>
+    											<MobileAppComponent/>
+    											<ChefComponent/>
+    											<Footer/>
+    											{(this.props.page.showsignIn)? <SignIn newUser={this.props.newUser} 
+    																				   toggleSignin={this.toggleSignin} 
+    																				   toggleSignUp={this.toggleSignUp}
+    																				   signin={this.signin}/>:null}
+												{(this.props.page.showsignUp)? <SignUp newUser={this.props.newUser} 
+																					   toggleSignUp={this.toggleSignUp} 
+																					   toggleSignin={this.toggleSignin}
+																					   signup={this.signup}/>:null}
+    											</div>:
+    	<div className="dev"> 
+    	<ScrollLogic address={this.props.address.Location} 
+    				 cart={this.state.cart} 
+    				 deleteCart={this.deleteCart} 
+    				 quantityUpdate={this.quantityUpdate} 
+    				 checkchef={this.state.chefInUseReady}
+    				 toggleSignin={this.toggleSignin}
+    				 toggleSignUp={this.toggleSignUp}
+    				 user={this.props.user}
+    				 signout={this.signout}
+    				 cart={this.props.cart}/>
+    	<MenuPage/>
+    	<MenuItems updateCart={this.updateCart} 
+    			   chef={this.state.chef} />
+   		<Footer/>
+   		{(this.props.page.showsignIn)? <SignIn newUser={this.props.newUser}
+   											   toggleSignin={this.toggleSignin}
+   											   toggleSignUp={this.toggleSignUp}
+   											   signin={this.signin}/>:null}
+		{(this.props.page.showsignUp)? <SignUp  newUser={this.props.newUser}
+											    toggleSignUp={this.toggleSignUp}
+											    toggleSignin={this.toggleSignin}
+											    signup={this.signup}/>:null}
+   		</div>
     	);
   }
   /*render() {
     return (<div className="dev"><ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} /></div>)
 	}*/
-}
+};
 
-export default App;
+const mapStateToProps=(state)=>{
+	return state;
+};
+
+export default connect(mapStateToProps)(App);

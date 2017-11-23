@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.17.1",
     "cors-anywhere": "^0.4.0",
     "es6-promise": "^4.1.1",
     "firebase": "^4.6.2",

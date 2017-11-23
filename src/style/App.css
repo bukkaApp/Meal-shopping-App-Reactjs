@@ -110,3 +110,88 @@ button:active,.shopping-cart:active {
   height: 50px !important;
   font-size: 1.5em;
 }
+/*modules*/
+.m-profile-photo-holder{
+  position: absolute;
+top:15px;
+right:100px;
+display: flex;
+justify-content: space-between;
+}
+.m-user-icon-holder:hover,.m-shopping-cart:hover{
+cursor:pointer;
+}
+.m-profile-photo{
+  width:40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 16px;
+  margin-top: -6px;
+}
+.m-user-icon-holder{
+display:block;
+width:160px;
+height: 64px;
+}
+.m-name{
+margin-top: 24px;
+display: inline-block;
+}
+.m-shopping-cart{
+  color: #9c1c26;
+  font-size: 2.5em;
+}
+.m-info{
+  position: absolute;
+  top: 0;
+  right:0;
+  width:30%;
+  min-width: 
+}
+.m-profile-options{
+    height: 60px;
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    top:65px;
+    right: 0px;
+    width: 160px;
+    display:none;
+}
+.m-profile-options .m-options{
+  display: block;
+  color:rgba(255,255,255,0.7);
+  text-decoration: none;
+  padding-left: 16px;
+  margin: 5px;
+}
+.m-profile-options .m-options:hover{
+color:rgba(255,255,255,1);
+cursor: pointer;
+}
+.m-profile-photo-holder:hover .m-profile-options,.m-profile-options:hover{
+  display: inline-block;
+} 
+.m-cart{
+height:50px;
+width: 50px;
+position:absolute;
+right:38px;
+margin-top: 28px;
+margin-left: 20px;
+
+}
+.m-cart-items{
+  display: none;
+  position: absolute;
+  top:45px;
+  right:0;
+}
+.m-cart:hover .m-cart-items,.m-cart-items:hover{
+  display: inline-block;
+}
+
+.m-cart-not-signed-in:hover .m-cart-items,.m-cart-items:hover{
+  display: inline-block;
+
+}

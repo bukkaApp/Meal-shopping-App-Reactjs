@@ -5,6 +5,19 @@ import '../style/signIn.css';
 export default class paymentinformation extends Component{
 	constructor(props){
 		super(props);
+		this.addcard=this.addcard.bind(this);
+	}
+	addcard(){
+		var number=document.getElementById("cardNumber").value;
+		var ccv=document.getElementById("CVVNumber").value;
+		var expiry_month=document.getElementById("MonthNumber").value;
+		var expiry_year=document.getElementById("YearNumber").value;
+		if(number==""||ccv==""||expiry_year==""||expiry_month==""){
+
+		}
+		else{
+			this.props.addcard(number,ccv,expiry_month,expiry_year)
+		}
 	}
 	render(){
 		return(
@@ -39,7 +52,7 @@ export default class paymentinformation extends Component{
 								</div>
 							</div>
 						</div>
-						<button className="btn-red" >Add Card</button>
+						<button className="btn-red" onClick={this.addcard} >Add Card</button>
 					</div>
 
 				</div>

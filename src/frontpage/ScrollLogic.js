@@ -13,7 +13,7 @@ export default class scrollLogic extends Component{
 		super(props);
 		this.state={
 			scroll:false,
-			address:'',
+			address:this.props.address,
 			searchResult:''
 		};
 		this.scrollDetector=this.scrollDetector.bind(this)
@@ -27,23 +27,41 @@ export default class scrollLogic extends Component{
                 console.log((window.scrollY/scrollmax)*100);
     }
     componentDidMount() {
-        this.setState({address:this.props.address});
         window.addEventListener('scroll', this.scrollDetector);
     }
-    searchResultForParent=(result)=>{
-    	this.props.searchResultForParent(result);
-		this.setState({searchResult:result});
-	}
-	addressForParent=(adr)=>{
-		this.props.addressForParent(adr);
-	}
+    componentWillUnmount(){
+        window.removeEventListener('scroll', this.scrollDetector);
+    }
 
 
 render() {
         return (
         	(this.state.address=='')?
-            ((this.state.scroll)? <HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>:<HeaderMax searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address} />):
-            (this.state.scroll)? <HeaderStories searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address} chef={this.props.chef} checkchef={this.props.checkchef} cart={this.props.cart} quantityUpdate={this.props.quantityUpdate} deleteCart={this.props.deleteCart} checkOut={this.props.checkOut} />:<HeaderMin searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.props.address}/>
+            ((this.state.scroll)?   <HeaderMin  toggleSignin={this.props.toggleSignin} 
+                                                toggleSignUp={this.props.toggleSignUp}
+                                                user={this.props.user}
+                                                signout={this.props.signout}
+                                                cart={this.props.cart} />:
+                                    <HeaderMax  toggleSignin={this.props.toggleSignin} 
+                                                toggleSignUp={this.props.toggleSignUp}
+                                                user={this.props.user}
+                                                signout={this.props.signout}
+                                                cart={this.props.cart} />):
+            (this.state.scroll)?    <headerStories  toggleSignin={this.props.toggleSignin} 
+                                                    toggleSignUp={this.props.toggleSignUp} 
+                                                    chef={this.props.chef} 
+                                                    checkchef={this.props.checkchef} 
+                                                    cart={this.props.cart} 
+                                                    quantityUpdate={this.props.quantityUpdate} 
+                                                    deleteCart={this.props.deleteCart} 
+                                                    checkOut={this.props.checkOut}
+                                                    user={this.props.user}
+                                                    signout={this.props.signout} />:
+                                    <HeaderMin  toggleSignin={this.props.toggleSignin} 
+                                                toggleSignUp={this.props.toggleSignUp}
+                                                user={this.props.user}
+                                                signout={this.props.signout}
+                                                cart={this.props.cart}/>
 )
 }
 }

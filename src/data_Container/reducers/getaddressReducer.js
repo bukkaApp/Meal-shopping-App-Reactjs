@@ -1,34 +1,24 @@
 const initialstate={
-			fetching:false,
-			fetched:false,
-			lon:"",
+			lng:"",
 			lat:"",
 			Location:"",
-			error:null
+			error:null,
+			Located:false
 };
 
-export default const getaddress=(state=initialstate,action)=>{
+const getaddress=(state=initialstate,action)=>{
 			switch(action.type){
-				case 'FETCH_ADDRESS_PENDING':{
-					return{state,fetching:true}
-					break;
-				}
-				case 'FETCH_ADDRESS_REJECTED':{
-					return{state,fetching:false,error:action.payload}
-					break;
-				}
-				case 'FETCH_ADDRESS_FULFILLED':{
+				case 'FETCH_ADDRESS':{
 					return{
-						state,
-						fetching:false,
-						fetched:true,
-						lon:action.payload.lng,
+						...state,
+						lng:action.payload.lng,
 						lat:action.payload.lat,
 						Location:action.payload.address,
-						error:null
-						}
-					break;
+						Located:true
+					}
 				}
+				default:{return state}
 			}
-			return state
-}
+};
+
+export default getaddress;

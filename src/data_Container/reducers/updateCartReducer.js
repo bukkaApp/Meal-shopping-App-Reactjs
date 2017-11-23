@@ -3,7 +3,7 @@ const initialstate={
 	total:0.00
 };
 
-export default const updateCart=(state=initialstate,action)=>{
+const updateCart=(state=initialstate,action)=>{
 	switch(action.type){
 		case'UPDATE_CART':{
 			return{state,cart:action.payload.cart,total:action.payload.total};
@@ -11,4 +11,5 @@ export default const updateCart=(state=initialstate,action)=>{
 		}
 	}
 	return state;
-}
+};
+export default updateCart;

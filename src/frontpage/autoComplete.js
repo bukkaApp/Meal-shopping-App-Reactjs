@@ -2,54 +2,66 @@ import React, { Component } from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import FaMapMarker from 'react-icons/lib/fa/map-marker';
 import '../style/App.css';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import { fetch_address, fetch_chef, identify_user, get_chef } from '../data_Container/action/actions';
+import fetch   from 'isomorphic-fetch';
+import axios from 'axios';
 
 class SimpleForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { address: this.props.address }
+    this.state = { address: this.props.address.Location }
     this.onChange = (address) => this.setState({ address })
+    this.chefResult=this.chefResult.bind(this);
   }
 
+  chefResult=(result)=>{
+    var yourChef=result.filter((chef)=>chef.role==="Super Chef")[0];
+    var categ=Array.from(new Set(result.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category)));
+    var categorizedMenu=[];
+    for(var i=0;i<categ.length;i++){
+      var menuPerCategory=[];
+      yourChef.menu.map((items)=>{
+        if(items.category===categ[i]){
+          menuPerCategory.push(items);
+        }
+      }
+      )
+      categorizedMenu.push(menuPerCategory);
+    }
+    return{
+      menu:categorizedMenu,
+      yourChef,
+      categ
+    };
+  }
   handleFormSubmit = (event) => {
     event.preventDefault()
-    this.props.addressForParent(this.state.address);
-    console.log(this.state.address);
     geocodeByAddress(this.state.address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => {console.log('Success', latLng);this.getChefs(latLng.lat,latLng.lng)})
+      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.dispatch(fetch_chef(axios.get("http://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng))).then(()=>{this.props.dispatch(get_chef(this.chefResult(this.props.chef.chefsInYourArea)))});})
       .catch(error => console.error('Error', error))
 
   }
 
   handleEnter = (address) => {
-  	this.props.addressForParent(address);
-    console.log(address);
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
-      .then(latLng => {console.log('Success', latLng);})
+    .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.dispatch(fetch_chef(axios.get("http://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng))).then(()=>{this.props.dispatch(get_chef(this.chefResult(this.props.chef.chefsInYourArea)))});})
+    .catch(error => console.error('Error', error))
+}
+  setaddress(){
+ 
+  }
+ handleSelect = (address, placeId) => {
+ 	this.setState({ address, placeId });
+  geocodeByAddress(address)
+    .then(results => getLatLng(results[0]))
+      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.dispatch(fetch_chef(axios.get("http://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng))).then(()=>{this.props.dispatch(get_chef(this.chefResult(this.props.chef.chefsInYourArea)))});})
       .catch(error => console.error('Error', error))
 }
 
- handleSelect = (address, placeId) => {
-  console.log(address);
- 	this.setState({ address, placeId });
- 	this.props.addressForParent(address);
-  geocodeByAddress(address)
-    .then(results => getLatLng(results[0]))
-      .then(latLng => {console.log('Success', latLng); this.getChefs(latLng.lat,latLng.lng);latLng})
-      .catch(error => console.error('Error', error))
-}
- async getChefs (lat,lon){
- 	try{
- 		const url=`http://chef.mybukka.com/api/v1/bukka/chefs/` + lat+`/`+lon;
- 		var response=await fetch(url);
- 		var json = await response.json();
- 		this.props.searchResultForParent(json);}
- 	catch(e){
- 			console.log("No Chefs found for your location",e);
- 		}
-}
    render() {
     const inputProps = {
       value: this.state.address,
@@ -79,4 +91,7 @@ class SimpleForm extends React.Component {
   }
 }
 
-export default SimpleForm;
+const mapStateToProps=(state)=>{
+  return state;
+};
+export default connect(mapStateToProps)(SimpleForm);
