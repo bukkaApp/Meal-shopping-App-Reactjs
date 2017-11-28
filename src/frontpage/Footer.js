@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../style/foot.css';
-import fetch from 'node-fetch';
-import PropTypes from 'prop-types';
 import TiSocialFacebook from 'react-icons/lib/ti/social-facebook';
 import TiSocialTwitter from 'react-icons/lib/ti/social-twitter';
 import TiSocialLinkedin from 'react-icons/lib/ti/social-linkedin';
 import TiSocialYoutube from 'react-icons/lib/ti/social-youtube'
 
 export default class Footer extends Component{
-	constructor(props) {
-		super(props);
-		
-	}
-	render(){
+render(){
 		return(
 			<div className="foot">
 				<div className="roww">

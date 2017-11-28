@@ -13,7 +13,7 @@ import MenuItems from '../menu/menuItems';
 import CheckoutPage from '../checkout/checkoutPage';
 import CheckoutSlip from '../checkout/checkoutSlip';
 import {connect} from 'react-redux';
-import { fetch_address, fetch_chef, identify_user, get_chef,showsignIn,showsignUp,updating_user_info,signout,signup} from '../data_Container/action/actions';
+import { fetch_address, fetch_chef, identify_user, get_chef,showsignIn,showsignUp,updating_user_info,signout,signup,update_cart} from '../data_Container/action/actions';
 import fetch   from 'isomorphic-fetch';
 import SignIn from '../authentication/signIn';
 import SignUp from '../authentication/SignUp';
@@ -28,18 +28,18 @@ class App extends Component {
 					chef:this.props.chef,
 					cart:this.props.cart,
 					user:this.props.user,
-					page:this.props.page
+					page:this.props.page,
+					signup:this.props.SignUp
 					};
 		this.deleteCart=this.deleteCart.bind(this);
 		this.quantityUpdate=this.quantityUpdate.bind(this);
-		this.checkOut=this.checkOut.bind(this);
-		this.newUser=this.newUser.bind(this);
 		this.toggleSignin=this.toggleSignin.bind(this);
 		this.toggleSignUp=this.toggleSignUp.bind(this);
 		this.signin=this.signin.bind(this);
 		this.signout=this.signout.bind(this);
 		this.signup=this.signup.bind(this);
-		console.log(this.props);
+		this.updateCart=this.updateCart.bind(this);
+		console.log(this.props.SignUp);
 	}
 
 	//togglepages
@@ -66,40 +66,40 @@ class App extends Component {
 	signout(){
 		this.props.dispatch(signout());
 	}
+	//updatecart
 	updateCart=(cart)=>{
-		this.setState({cart:cart})
-		console.log(cart);
+		this.props.dispatch(update_cart(cart));
 	}
-	newUser(e,lastCardDigits){
-		console.log({...e,lastCardDigits})
-	}
+	
+	//deleteCartItem
 	deleteCart=(food)=>{
-		var newCart=this.state.cart.cart,cart={},total;
+		var newCart=this.props.cart.cart;
 		delete newCart[food];
+		var cart={};
 		cart.cart=newCart;
-		total=Object.keys(newCart).map((key,i)=>newCart[key].totalCost).reduce((sum,value)=>sum+value,0).toFixed(2);
+		var total=Object.keys(newCart).map((key,i)=>newCart[key].totalCost).reduce((sum,value)=>sum+value,0).toFixed(2);
 		cart.total=total;
-		this.setState({cart:cart});
+		this.updateCart(cart);
 	}
+	//quantityUpdate
 	quantityUpdate=(Quantity,key)=>{
-		var price=this.state.cart.cart[key].price,totalCost=price*Quantity,newCart=this.state.cart.cart,total,cart={};
+		var price=this.props.cart.cart[key].price,totalCost=price*Quantity,newCart=this.props.cart.cart,cart={};
 		newCart[key].quantity=Quantity;
 		newCart[key].totalCost=totalCost;
-		total=Object.keys(newCart).map((key,i)=>newCart[key].totalCost).reduce((sum,value)=>sum+value,0).toFixed(2);
+		var total=Object.keys(newCart).map((key,i)=>newCart[key].totalCost).reduce((sum,value)=>sum+value,0).toFixed(2);
 		cart.cart=newCart;
 		cart.total=total;
-		this.setState({cart:cart});
-	}
-	checkOut(){
-		this.setState({checkout:true});
+		this.updateCart(cart);
 	}
   render() {
     return (
-    	(this.state.address.Location=='')? <div className="dev">
+    	(!this.props.chef.fetched)? <div className="dev">
     											<ScrollLogic address={this.props.address.Location} 
     														 chef={this.props.chef}
     														 toggleSignin={this.toggleSignin}
     														 toggleSignUp={this.toggleSignUp}
+    														 deleteCart={this.deleteCart} 
+    				 										 quantityUpdate={this.quantityUpdate}
     														 user={this.props.user}
     														 signout={this.signout}
     														 cart={this.props.cart} />
@@ -111,45 +111,46 @@ class App extends Component {
     											{(this.props.page.showsignIn)? <SignIn newUser={this.props.newUser} 
     																				   toggleSignin={this.toggleSignin} 
     																				   toggleSignUp={this.toggleSignUp}
-    																				   signin={this.signin}/>:null}
+    																				   signin={this.signin}
+    																				   user={this.props.user}/>:null}
 												{(this.props.page.showsignUp)? <SignUp newUser={this.props.newUser} 
 																					   toggleSignUp={this.toggleSignUp} 
 																					   toggleSignin={this.toggleSignin}
-																					   signup={this.signup}/>:null}
+																					   signup={this.signup}
+																					   SignUp={this.props.SignUp}
+																					   user={this.props.user}/>:null}
     											</div>:
     	<div className="dev"> 
-    	<ScrollLogic address={this.props.address.Location} 
-    				 cart={this.state.cart} 
+    	<ScrollLogic address={this.props.address.Location}
+    				 Located={this.props.address.Located} 
+    				 chef={this.props.chef} 
     				 deleteCart={this.deleteCart} 
     				 quantityUpdate={this.quantityUpdate} 
-    				 checkchef={this.state.chefInUseReady}
     				 toggleSignin={this.toggleSignin}
     				 toggleSignUp={this.toggleSignUp}
     				 user={this.props.user}
     				 signout={this.signout}
     				 cart={this.props.cart}/>
-    	<MenuPage/>
+    	<MenuPage chef={this.props.chef}/>
     	<MenuItems updateCart={this.updateCart} 
-    			   chef={this.state.chef} />
+    			   chef={this.props.chef} />
    		<Footer/>
-   		{(this.props.page.showsignIn)? <SignIn newUser={this.props.newUser}
-   											   toggleSignin={this.toggleSignin}
+   		{(this.props.page.showsignIn)? <SignIn toggleSignin={this.toggleSignin}
    											   toggleSignUp={this.toggleSignUp}
-   											   signin={this.signin}/>:null}
-		{(this.props.page.showsignUp)? <SignUp  newUser={this.props.newUser}
-											    toggleSignUp={this.toggleSignUp}
+   											   signin={this.signin}
+   											   user={this.props.user} /> :null}
+
+		{(this.props.page.showsignUp)? <SignUp  toggleSignUp={this.toggleSignUp}
 											    toggleSignin={this.toggleSignin}
-											    signup={this.signup}/>:null}
+											    signup={this.signup}
+											    SignUp={this.props.SignUp}
+											    user={this.props.user} />:null}
    		</div>
     	);
   }
-  /*render() {
-    return (<div className="dev"><ScrollLogic address={this.state.address} searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} /></div>)
-	}*/
 };
 
-const mapStateToProps=(state)=>{
+function mapStateToProps(state){
 	return state;
 };
-
 export default connect(mapStateToProps)(App);

@@ -7,7 +7,7 @@ import Notification from '../profile/Notification';
 import Basicinformation from '../profile/BasicInformation'
 import HeaderMin from '../frontpage/HeaderMin';
 import {connect} from 'react-redux';
-import { fetch_address, fetch_chef, identify_user, get_chef,showsignIn,showsignUp,updating_user_info,signout,addcard} from '../data_Container/action/actions';
+import { fetch_address, fetch_chef, identify_user, get_chef,showsignIn,showsignUp,updating_user_info,signout,addcard,orderhistory} from '../data_Container/action/actions';
 import SignIn from '../authentication/signIn';
 import SignUp from '../authentication/SignUp';
 import axios from 'axios';
@@ -32,6 +32,7 @@ import axios from 'axios';
 		this.showpaymentinfo=this.showpaymentinfo.bind(this);
 		this.addcard=this.addcard.bind(this);
 		this.signout=this.signout.bind(this);
+		this.orderhistory=this.orderhistory.bind(this);
 	}
 	showpaymentinfo(e){
 		this.setState({
@@ -106,6 +107,13 @@ import axios from 'axios';
 		this.props.dispatch(addcard(axios({ method: 'post',url: url,headers:{token,uid},data:{email,cardNumber,ccv,expirationMonth,expirationYear}})))
 		.then(()=>this.signout())
 	}
+	//OrderHistory
+	orderhistory(){
+		var uid=this.props.user.user.uid;
+		var token=this.props.user.user.token;
+		var url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/orders/"+ uid;
+		this.props.dispatch(orderhistory(axios({method: 'get',url: url,headers:{token,uid}})));
+	}
 	render(){
 		return(
 			<div className="l-profilepage l-grey-background">
@@ -121,9 +129,11 @@ import axios from 'axios';
 				<li className="l-menu-item" data-key="menuItem-three" id="menuItem-three" onClick={this.showpaymentinfo} >Payment Information</li>
 				<li className="l-menu-item" data-key="menuItem-four" id="menuItem-four" onClick={this.shownotification}>Notification Settings</li>
 			</ul>
-			{(this.state.showpaymentinfo)? <Paymentinfo addcard={this.addcard} />:null}
+			{(this.state.showpaymentinfo)? <Paymentinfo addcard={this.addcard} 
+														user={this.props.user} />:null}
 			{(this.state.showbasicinformation)? <Basicinformation/>:null}
-			{(this.state.showorderhistory)? <Orderhistory/>:null}
+			{(this.state.showorderhistory)? <Orderhistory 	orderhistory={this.orderhistory} 
+															userstore={this.props.user}/>:null}
 			{(this.state.shownotification)? <Notification/>:null}
 			</div>
 			)

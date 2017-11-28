@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../style/signIn.css';
+import Faspinner from 'react-icons/lib/fa/spinner';
 
 export default class paymentinformation extends Component{
 	constructor(props){
@@ -52,7 +52,8 @@ export default class paymentinformation extends Component{
 								</div>
 							</div>
 						</div>
-						<button className="btn-red" onClick={this.addcard} >Add Card</button>
+						{(!this.props.user.fetching_addcard)?<button className="btn-red" onClick={this.addcard}>Add Card</button>:null}
+						{(this.props.user.fetching_addcard)?<button className="btn-red load">Just a Second!<span className="loader"><Faspinner/></span></button>:null}
 					</div>
 
 				</div>

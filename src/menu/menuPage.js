@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../style/menuPage.css'
 
 export default class menuPage extends Component{
@@ -7,19 +6,14 @@ export default class menuPage extends Component{
 		return (
 				<div className="menuCont">
 				<div className="imageHolder">
-				<img src="https://res.cloudinary.com/bukka/image/upload/v1500737722/app/MENU-bg.jpg" id="menuPageLogo"/>
+				<img src="https://res.cloudinary.com/bukka/image/upload/v1500737722/app/MENU-bg.jpg" alt="advert-banner" id="menuPageLogo"/>
 				<div className="chefDetailHolder">
-					<h1>Veracios Pizza</h1>
+					<h1>{this.props.chef.yourChef.first_name+" "+this.props.chef.yourChef.last_name}</h1>
+					<img src={this.props.chef.yourChef.profile_photo} alt="chef" id="chef_photo" width="50px" height="50px"/>
 				</div>
 				</div>
 				<ul className="menuHolder menuTop">
-						<li><a href="">Appitizers</a></li>
-						<li><a href="">salads</a></li>
-						<li><a href="">Wing Zone</a></li>
-						<li><a href="">Pizza</a></li>
-						<li><a href="">Small Combination Pizzas</a></li>
-						<li><a href="">Medium Combination Pizzas</a></li>
-						<li><a href="">Large Combination Pizzas</a></li>
+				{(this.props.chef.fetched)? this.props.chef.menuCategoriesKeys.map((categ,key)=><li key={key}><a href={'#'+categ}>{categ}</a></li>):null}
 				</ul>
 				</div>)
 	}

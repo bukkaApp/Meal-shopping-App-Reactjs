@@ -17,9 +17,24 @@
 .m-position-fix{
 	position: absolute;
 	top:400px;
+	z-index: 1 !important;
 }
-.m-pad{
-
+.loader{
+  animation-name: loading;
+  animation-duration: 0.5s;
+  animation-delay:0;
+  animation-iteration-count: infinite;
+  display: inline-block;
+}
+@keyframes loading{
+  0%{-ms-transform: rotate(0deg);-webkit-transform: rotate(0deg);transform: rotate(0deg);}
+  25%{-ms-transform: rotate(90deg);-webkit-transform: rotate(90deg);transform: rotate(90deg);}
+  50%{-ms-transform: rotate(180deg);-webkit-transform: rotate(180deg);transform: rotate(180deg);}
+  75%{-ms-transform: rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);}
+  100%{-ms-transform: rotate(360deg);-webkit-transform: rotate(360deg);transform: rotate(360deg);}
+}
+.load{
+  pointer-events: none;
 }
 #headingHolder{
 display: flex;

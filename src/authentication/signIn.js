@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../style/signIn.css';
-import fetch    from 'isomorphic-fetch';
+import Faspinner from 'react-icons/lib/fa/spinner';
 
 export default class signIn extends Component{
 	constructor(props){
@@ -25,7 +24,9 @@ export default class signIn extends Component{
 						<input placeholder="Email" id="SignInemail"/>
 						<input placeholder="Password" type="password" id="SignInPassword"/>
 						<a>Forgot Password?</a>
-						<button className="btn-red" onClick={this.getUser}>Sign In</button>
+						{(!this.props.user.fetching)?<button className="btn-red" onClick={this.getUser}>Sign In</button>:null}
+						{(this.props.user.fetching)?<button className="btn-red load" onClick={this.getUser}>Signing in<span className="loader"><Faspinner/></span></button>:null}
+						{(this.props.user.fetching_lastCardDigits)?<button className="btn-red load" onClick={this.getUser}>Updating Your Info..<span className="loader"><Faspinner/></span></button>:null}
 						<p>New User<a id="sign-btn" onClick={this.props.toggleSignUp}>Sign Up</a></p>
 					</div>
 				</div>

@@ -1,60 +1,60 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../style/App.css';
 import '../style/headerStories.css';
 import MdShoppingCart from 'react-icons/lib/md/shopping-cart';
 import SimpleForm from './autoComplete';
 import ShoppingCart from './shoppingCart';
+import {Link} from 'react-router-dom';
 
 
 export default class headerStories extends Component{
-	constructor(props) {
-		super(props);
-		this.state={
-			categ:'',
-			address:this.props.address
-		}
-	}
-	searchResultForParent=(result)=>{
-		this.props.searchResultForParent(result);
-	}
-	addressForParent=(adr)=>{
-		this.props.addressForParent(adr);
-	}
-	componentDidMount(){
-		this.setState({address:this.props.address});
-	}
-	/*async getCategories(){
-		var categor=Array.from(new Set(this.props.chef.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category)));
-		console.log(categor);
-	}
-	componentDidMount() {
-		(this.props.checkchef)? this.getCategories():null
-	}*/
-	
 	render(){
 		return(
 				<div  className="myheader header-min bigMenuHolder">
-				<img src="http://res.cloudinary.com/www-mybukka-com/image/upload/v1505151382/logo_m8ik1x.png" id="logo" alt="logo"/>
-				<div className="search-box search-box-min search">
-				<SimpleForm searchResultForParent={this.searchResultForParent} addressForParent={this.addressForParent} address={this.state.address} > </SimpleForm>
-				</div>
-				<div className="header-top-button header-top-button-min head-option">
-				<button ></button>
-				<button className="btn-red"></button>
-				<MdShoppingCart className="shopping-cart"/>
-				</div>
+					<Link to="/"><img src="http://res.cloudinary.com/www-mybukka-com/image/upload/v1505151382/logo_m8ik1x.png" id="logo" alt="logo"/></Link>
+					<div className="search-box search-box-min search">
+						<SimpleForm> </SimpleForm>
+					</div>
+				{(!this.props.user.isAuthenticated)? <div className="header-top-button header-top-button-min head-option">
+																<button onClick={this.props.toggleSignin}>Sign In</button>
+																<button className="btn-red" onClick={this.props.toggleSignUp} >Sign Up</button>
+																<div className='m-cart-not-signed-in'>
+																	<MdShoppingCart className="shopping-cart"/>
+																	<div className="m-cart-items">
+																		<ShoppingCart   cart={this.props.cart} 
+																			    		deleteCart={this.props.deleteCart} 
+																			    		quantityUpdate={this.props.quantityUpdate} 
+																			    		checkOut={this.props.checkOut} />
+																	</div>
+																</div>
+															</div>:
+															(<div className="m-info">
+																<div className="m-profile-photo-holder">
+																	<div className="m-user-icon-holder">
+																	<p className="m-name">{this.props.user.user.first_name+" "+this.props.user.user.last_name}</p>
+																	<img src={this.props.user.user.profile_photo} alt="" className="m-profile-photo"/>
+																	</div>
+																	<div className="m-profile-options">
+																		<Link to="/profile" className="lin m-options">Account</Link>
+																		<a className="m-options" onClick={this.props.signout}>Log Out</a>
+																	</div>
+																</div>
+																<div className='m-cart'>
+																	<MdShoppingCart className="m-shopping-cart"/>
+																	<div className="m-cart-items">
+																		<ShoppingCart   cart={this.props.cart} 
+																			    		deleteCart={this.props.deleteCart} 
+																			    		quantityUpdate={this.props.quantityUpdate} 
+																			    		checkOut={this.props.checkOut} />
+																	</div>
+																</div>
+															</div>)
+
+														}
 				<div className="divider"></div>
 				<ul className="menuHolder">
-							{	
-								(this.props.checkchef)? Array.from(new Set(this.props.chef.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category))).map((cate,key)=>{
-									return(<li key={key}><a>{cate}</a></li>)}) : 
-								null
-							}
+					{(this.props.chef.fetched)? this.props.chef.menuCategoriesKeys.map((categ,key)=><li key={key}><a href={'#'+categ}>{categ}</a></li>):null}
 				</ul>
-				{
-					(this.props.checkchef)? <ShoppingCart cart={this.props.cart} deleteCart={this.props.deleteCart} quantityUpdate={this.props.quantityUpdate} checkOut={this.props.checkOut} />:null
-				}
 			</div>
 				)
 	}

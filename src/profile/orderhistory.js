@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../style/profile.css';
 
 export default class orderhistory extends Component{
+	constructor(props) {
+		super(props);
+		this.props.orderhistory();
+	}
 
 	render(){
 		return(
@@ -19,17 +22,21 @@ export default class orderhistory extends Component{
 							<th>FOOD ITEMS</th>
 							<th>QTY</th>
 							<th>PRICE</th>
+							<th>PAYMENT STATUS</th>
 							<th>DATE</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>Brown Rice and Dodo with Chicken</td>
-							<td>1</td>
-							<td>800</td>
-							<td>October 3rd 2017</td>
-						</tr>
+					{(this.props.userstore.fetched_orderhistory)? this.props.userstore.orderhistory.map((meal,key)=>{return(
+						<tr key={key}>
+							<td>{key+1}</td>
+							<td>{meal.itemName}</td>
+							<td>{meal.itemQuantity}</td>
+							<td>{meal.amount}</td>
+							<td>{meal.paymentStatus}</td>
+							<td>{meal.date}</td>
+						</tr>)
+					}): null}
 					</tbody>
 				</table>
 			</div>

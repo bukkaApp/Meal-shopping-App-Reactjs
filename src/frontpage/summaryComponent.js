@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../style/summaryComponent.css';
 
 export default class summaryComponent extends Component{

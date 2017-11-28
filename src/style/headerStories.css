@@ -1,10 +1,8 @@
-
 .menuHolder{
 	padding:20px;
 	list-style: none;
 	display: flex;
 	justify-content: space-around;
-	z-index: 2;
 }
 .menuHolder a{
 	text-decoration: none;
@@ -36,4 +34,8 @@
 }
 #logo{
 	margin-top:-8px !important;
+}
+.bigMenuHolder .menuHolder{
+	padding-left: 0 !important;
+	padding-right: 0 !important;
 }

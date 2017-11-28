@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../style/signIn.css';
-import fetch from 'isomorphic-fetch';
+import Faspinner from 'react-icons/lib/fa/spinner';
 
 export default class SignUp extends Component{
 	constructor(props){
 		super(props);
 		this.signup=this.signup.bind(this);
+		console.log(this.props);
 	}
 
 	signup(){
@@ -39,7 +39,9 @@ export default class SignUp extends Component{
 						<input placeholder="Email" type="email" id="emaili"/>
 						<input placeholder="Password" type="password" id="Passwordi"/>
 						<input placeholder="Confirm Password" type="password" id="ConfirmPasswordi"/>
-						<button className="btn-red" onClick={this.signup}>Sign Up</button>
+						{(!this.props.SignUp.fetching)?<button className="btn-red" onClick={this.signup}>Sign Up</button>:null}
+						{(this.props.SignUp.fetching)?<button className="btn-red load" onClick={this.signup}>Creating account<span className="loader"><Faspinner/></span></button>:null}
+						{(this.props.user.fetching)?<button className="btn-red load" onClick={this.getUser}>Signing in<span className="loader"><Faspinner/></span></button>:null}
 						<p>Already a User<a id="sign-btn" onClick={this.props.toggleSignin}>Sign In</a></p>
 					</div>
 

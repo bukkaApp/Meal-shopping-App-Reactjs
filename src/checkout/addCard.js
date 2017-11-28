@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../style/signIn.css';
-import fetch from 'isomorphic-fetch';
+import Faspinner from 'react-icons/lib/fa/spinner';
 
 export default class addcard extends Component{
 	constructor(props){
 		super(props);
 		this.addcard=this.addcard.bind(this);
+		console.log("see",this.props.user)
 	}
 	addcard(){
 		var number=document.getElementById("cardNumber").value;
@@ -56,7 +57,8 @@ export default class addcard extends Component{
 								</div>
 							</div>
 						</div>
-						<button className="btn-red" onClick={this.addcard}>Add Card</button>
+						{(!this.props.user.fetching_addcard)?<button className="btn-red" onClick={this.addcard}>Add Card</button>:null}
+						{(this.props.user.fetching_addcard)?<button className="btn-red load">Just a Second!<span className="loader"><Faspinner/></span></button>:null}
 					</div>
 
 				</div>

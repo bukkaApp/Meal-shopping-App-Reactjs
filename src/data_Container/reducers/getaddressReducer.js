@@ -3,7 +3,7 @@ const initialstate={
 			lat:"",
 			Location:"",
 			error:null,
-			Located:false
+			Located:false,
 };
 
 const getaddress=(state=initialstate,action)=>{
@@ -14,7 +14,7 @@ const getaddress=(state=initialstate,action)=>{
 						lng:action.payload.lng,
 						lat:action.payload.lat,
 						Location:action.payload.address,
-						Located:true
+						Located:true,
 					}
 				}
 				default:{return state}

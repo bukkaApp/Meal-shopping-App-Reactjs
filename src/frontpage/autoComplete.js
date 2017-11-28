@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import { fetch_address, fetch_chef, identify_user, get_chef } from '../data_Container/action/actions';
 import fetch   from 'isomorphic-fetch';
 import axios from 'axios';
+import Faspinner from 'react-icons/lib/fa/spinner';
 
 class SimpleForm extends React.Component {
   constructor(props) {
@@ -17,24 +18,31 @@ class SimpleForm extends React.Component {
   }
 
   chefResult=(result)=>{
+    try{
     var yourChef=result.filter((chef)=>chef.role==="Super Chef")[0];
     var categ=Array.from(new Set(result.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category)));
-    var categorizedMenu=[];
+    var categorizedMenu={};
     for(var i=0;i<categ.length;i++){
       var menuPerCategory=[];
       yourChef.menu.map((items)=>{
         if(items.category===categ[i]){
+          if(items.visibility){
           menuPerCategory.push(items);
+        }
         }
       }
       )
-      categorizedMenu.push(menuPerCategory);
+      if(menuPerCategory.length>0){
+        categorizedMenu[`${categ[i]}`]=menuPerCategory;
+      }
     }
     return{
       menu:categorizedMenu,
       yourChef,
-      categ
-    };
+      categ:Object.keys(categorizedMenu)
+    }}catch(e){
+      console.log("Network error",e);
+    }
   }
   handleFormSubmit = (event) => {
     event.preventDefault()
@@ -85,7 +93,8 @@ class SimpleForm extends React.Component {
     return (
       <form onSubmit={this.handleFormSubmit} style={{display:'flex',justifyContent:'spaceBetween',}}>
         <PlacesAutocomplete inputProps={inputProps} autocompleteItem={AutocompleteItem} classNames={cssClasses} onEnterKeyDown={this.handleEnter} onSelect={this.handleSelect} />
-        <button type="submit" className=" btn-red search-Btn">Submit</button>
+        {(!this.props.chef.fetching)? <button type="submit" className=" btn-red search-Btn">Submit</button>:null}
+        {(this.props.chef.fetching)?<button type="submit" className=" btn-red search-Btn load"><span className="loader"><Faspinner/></span></button>:null}
       </form>
     )
   }

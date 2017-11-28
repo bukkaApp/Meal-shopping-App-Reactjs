@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../style/menuItems.css'
 
 export default class menuItems extends Component{
@@ -9,9 +8,7 @@ export default class menuItems extends Component{
 			cart:{
 			
 			},
-			total:0.00,
-			chefInUse:null,
-			categ:null
+			total:0.00
 		}
 		this.addToCart=this.addToCart.bind(this);
 	}
@@ -64,31 +61,26 @@ export default class menuItems extends Component{
 			}
 			
 	}
-	componentDidMount() {
-		
-			}
-	componentWillReceiveProps(nextProps){
-		(nextProps.chef != null)?
-		this.setState({categ: nextProps.chef.filter((chef)=>chef.role==="Super Chef")[0].menu, chefInUse:nextProps.chefInUse}) : null
-	}
 	render(){
 		return(
 					<div className="MenuList">
-					{(this.state.categ!=null)? this.state.categ.map((menu,key)=> {return(
+					{(this.props.chef.fetched)? this.props.chef.menuCategoriesKeys.map((categ,key)=> {return(
 						<div className="eachMenuHolder" key={key}>
+							<h3 className="category" id={categ}>{categ}</h3>
 							<div className="row menuRow">
-								<div className="col-md-6 menuCol">
-								<img src={menu.image} alt="food-logo" className="food-logo"/>
-								<h3 className="foodName" id={menu.menu.split(' ').join('')}>{menu.menu}</h3>
-								<h6>{menu.desc}</h6>
-								<h4 className="price" id={key+"priceId"}>{menu.price}</h4>
-								<div className="cartBtn">
-									<a onClick={this.increaseNumberOfItem} data-id={key+"numberOfItems"}>+</a>
-									<p id={key+"numberOfItems"} >1</p>
-									<a className="minusButton" onClick={this.reduceNumberOfItem} data-id={key+"numberOfItems"}>-</a>
-									<button className="btn btn-red" onClick={this.addToCart} data-foodname={menu.menu.split(' ').join('')} data-quantity={key+"numberOfItems"} data-price={key+"priceId"}>Add to Cart</button>
-								</div>
-								</div>
+								{this.props.chef.menuCategories[categ].map((menu,identifier)=>
+									<div className="col-md-6 menuCol" key={identifier}>
+										<img src={menu.image} alt="food-logo" className="food-logo"/>
+										<h4 className="foodName" id={menu.menu.split(' ').join('')}>{menu.menu}</h4>
+										<h6>{menu.desc}</h6>
+										<h4 className="price" id={identifier+"priceId"}>{menu.price}</h4>
+										<div className="cartBtn">
+											<a onClick={this.increaseNumberOfItem} data-id={identifier+"numberOfItems"}>+</a>
+											<p id={identifier+"numberOfItems"} >1</p>
+											<a className="minusButton" onClick={this.reduceNumberOfItem} data-id={identifier+"numberOfItems"}>-</a>
+											<button className="btn btn-red" onClick={this.addToCart} data-foodname={menu.menu.split(' ').join('')} data-quantity={identifier+"numberOfItems"} data-price={identifier+"priceId"}>Add to Cart</button>
+										</div>
+									</div>)}
 							</div>
 						</div>
 						)}):null}

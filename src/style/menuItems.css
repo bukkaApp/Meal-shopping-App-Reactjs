@@ -2,11 +2,13 @@
 	width: 100%;
     padding: 80px;
    	position: absolute;
-   	top:485px;
+   	top:490px;
    	z-index: 1;
+   	overflow-y: scroll;
+   	bottom: 370px;
 }
 .eachMenuHolder{
-	margin-top: 10px;
+	margin-top: 50px;
 }
 .menuRow{
 	width:100%;
@@ -77,4 +79,7 @@
 }
 .minusButton{
 	margin-right: 20px;
+}
+.category{
+	margin-bottom: 30px;
 }

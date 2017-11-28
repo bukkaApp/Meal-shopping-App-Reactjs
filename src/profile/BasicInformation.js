@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../style/profile.css';
 
 export default class basicinformation extends Component{

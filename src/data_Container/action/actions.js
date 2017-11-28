@@ -8,9 +8,6 @@ export const fetch_chef=(chef)=>({
 	type:'GET_CHEFS',
 	payload:chef
 });
-export const fetch_chef_pending=()=>({
-	type:'GET_CHEFS_PENDING'
-})
 export const identify_user=(user)=>({
 	type:'IDENTIFYING_USER',
 	payload:user
@@ -31,6 +28,11 @@ export const showsignUp=(signup)=>({
 	type:'SIGN_UP',
 	payload:signup
 });
+export const showaddCard=(addCard)=>({
+	type:'ADD_CARD_PAGE',
+	payload:addCard
+});
+
 export const signout=()=>({
 	type:'SIGN_OUT'
 });
@@ -42,3 +44,11 @@ export const addcard=(response)=>({
 	type:'ADD_CARD',
 	payload:response
 });
+export const orderhistory=(response)=>({
+	type:'FETCH_ORDER_HISTORY',
+	payload:response
+});
+export const update_cart=(response)=>({
+	type:'UPDATE_CART',
+	payload:response
+})

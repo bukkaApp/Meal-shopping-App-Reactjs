@@ -16,9 +16,9 @@ const signUp=(state=initialstate,action)=>{
 		case"SIGN_UP_FULFILLED":{
 			return{...state,fetching:false,fetched:true,response:action.payload.data,error:null}
 		}
-
+		default:
+		return state;
 	}
-	return state;
 }
 
 export default signUp;

@@ -1,6 +1,7 @@
 const initialstate={
 	fetching:false,
 	fetched:false,
+	fetched_chefsInYourArea:false,
 	chefsInYourArea:{},
 	yourChef:{},
 	menuCategoriesKeys:[],
@@ -20,7 +21,7 @@ const getChefs=(state=initialstate,action)=>{
 			return{
 				...state,
 				fetching:false,
-				error:action.payload.response.data,
+				error:action.payload,
 				chefsInYourArea:{},
 				yourChef:{},
 				menuCategoriesKeys:[],
@@ -31,8 +32,7 @@ const getChefs=(state=initialstate,action)=>{
 		case'GET_CHEFS_FULFILLED':{
 			return{
 				...state,
-				fetching:false,
-				fetching:true,
+				fetched_chefsInYourArea:true,
 				chefsInYourArea:action.payload.data,
 				error:null
 			}
