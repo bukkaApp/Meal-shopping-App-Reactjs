@@ -6,6 +6,7 @@ import ShoppingCart from './shoppingCart';
 import {Link} from 'react-router-dom';
 
 export default class HeaderMax extends Component{
+	
 	render(){
 		return(
 			<div className="myheader">
@@ -13,15 +14,18 @@ export default class HeaderMax extends Component{
 				{(!this.props.user.isAuthenticated)? <div className="header-top-button">
 																<button onClick={this.props.toggleSignin}>Sign In</button>
 																<button className="btn-red" onClick={this.props.toggleSignUp} >Sign Up</button>
-																<div className='m-cart-not-signed-in'>
-																	<MdShoppingCart className="shopping-cart"/>
-																	<div className="m-cart-items">
-																		<ShoppingCart   cart={this.props.cart} 
+																{(this.props.Located)?
+																		<div className='m-cart-not-signed-in'>
+																			<MdShoppingCart className="shopping-cart"/>
+																			<div className="m-cart-items">
+																				<ShoppingCart   cart={this.props.cart} 
 																			    		deleteCart={this.props.deleteCart} 
 																			    		quantityUpdate={this.props.quantityUpdate} 
 																			    		checkOut={this.props.checkOut} />
-																	</div>
-																</div>
+																			</div>
+																		</div>:
+																		null
+																}
 															</div>:
 															(<div className="m-info">
 																<div className="m-profile-photo-holder">
@@ -34,15 +38,18 @@ export default class HeaderMax extends Component{
 																		<a className="m-options" onClick={this.props.signout}>Log Out</a>
 																	</div>
 																</div>
-																<div className='m-cart'>
-																	<MdShoppingCart className="m-shopping-cart"/>
-																	<div className="m-cart-items">
-																		<ShoppingCart   cart={this.props.cart} 
-																			    		deleteCart={this.props.deleteCart} 
-																			    		quantityUpdate={this.props.quantityUpdate} 
-																			    		checkOut={this.props.checkOut} />
-																	</div>
-																</div>
+																{(this.props.Located)?
+																		 <div className='m-cart'>
+																			<MdShoppingCart className="m-shopping-cart"/>
+																			<div className="m-cart-items">
+																				<ShoppingCart   cart={this.props.cart} 
+																								deleteCart={this.props.deleteCart} 
+																								quantityUpdate={this.props.quantityUpdate} 
+																								checkOut={this.props.checkOut} />
+																			</div>
+																		</div>:
+																		null
+																}
 															</div>)
 
 														}

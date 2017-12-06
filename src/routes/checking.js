@@ -44,22 +44,22 @@ class Checking extends Component{
 		var uid=this.props.user.user.uid;
 		var token=this.props.user.user.token;
 		var email=this.props.user.user.email;
-		var url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/cardDetails/"+ uid;
+		var url="https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/cardDetails/"+ uid;
 		this.props.dispatch(addcard(axios({ method: 'post',url: url,headers:{token,uid},data:{email,cardNumber,ccv,expirationMonth,expirationYear}})))
 		.then(()=>this.signout())
 		.then(()=>this.toggleShowcard())
 	}
 	//signin and signup
 	signin(email,password){
-		this.props.dispatch(identify_user(axios.post("http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login",{email,password})))
+		this.props.dispatch(identify_user(axios.post("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login",{email,password})))
 		.then(()=>{this.props.dispatch(updating_user_info(axios.get("http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
 		.then(()=>this.toggleSignin())
 	}
 
 	signup(email,firstname,lastname,password,mobile,isCustomer){
-		this.props.dispatch(signup(axios.post("http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/register",{email,firstname,lastname,password,mobile,isCustomer})))
-		.then(()=>{this.props.dispatch(identify_user(axios.post("http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login",{email,password})))})
-		.then(()=>{this.props.dispatch(updating_user_info(axios.get("http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
+		this.props.dispatch(signup(axios.post("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/register",{email,firstname,lastname,password,mobile,isCustomer})))
+		.then(()=>{this.props.dispatch(identify_user(axios.post("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login",{email,password})))})
+		.then(()=>{this.props.dispatch(updating_user_info(axios.get("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
 		.then(()=>this.toggleSignUp())
 	}
 	//signout

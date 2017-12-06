@@ -13,7 +13,8 @@ export default class scrollLogic extends Component{
 			address:this.props.address,
 			searchResult:''
 		};
-		this.scrollDetector=this.scrollDetector.bind(this)
+        this.scrollDetector=this.scrollDetector.bind(this);
+        console.log(this.props.Located)
 	}
 
 	scrollDetector() {
@@ -40,14 +41,16 @@ render() {
                                                 quantityUpdate={this.props.quantityUpdate}
                                                 user={this.props.user}
                                                 signout={this.props.signout}
-                                                cart={this.props.cart} />:
+                                                cart={this.props.cart}
+                                                Located={this.props.Located} />:
                                     <HeaderMax  toggleSignin={this.props.toggleSignin} 
                                                 toggleSignUp={this.props.toggleSignUp}
                                                 deleteCart={this.props.deleteCart} 
                                                 quantityUpdate={this.props.quantityUpdate}
                                                 user={this.props.user}
                                                 signout={this.props.signout}
-                                                cart={this.props.cart} />):
+                                                cart={this.props.cart} 
+                                                Located={this.props.Located} />):
             (this.state.scroll)?    <HeaderStories  toggleSignin={this.props.toggleSignin} 
                                                     toggleSignUp={this.props.toggleSignUp} 
                                                     chef={this.props.chef} 
@@ -55,14 +58,16 @@ render() {
                                                     quantityUpdate={this.props.quantityUpdate} 
                                                     deleteCart={this.props.deleteCart} 
                                                     user={this.props.user}
-                                                    signout={this.props.signout} />:
+                                                    signout={this.props.signout} 
+                                                    Located={this.props.Located} />:
                                     <HeaderMin  toggleSignin={this.props.toggleSignin} 
                                                 toggleSignUp={this.props.toggleSignUp}
                                                 user={this.props.user}
                                                 signout={this.props.signout}
                                                 deleteCart={this.props.deleteCart} 
                                                 quantityUpdate={this.props.quantityUpdate}
-                                                cart={this.props.cart}/>
+                                                cart={this.props.cart}
+                                                Located={this.props.Located} />
 )
 }
 }

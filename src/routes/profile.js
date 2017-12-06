@@ -103,7 +103,7 @@ import axios from 'axios';
 		var uid=this.props.user.user.uid;
 		var token=this.props.user.user.token;
 		var email=this.props.user.user.email;
-		var url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/cardDetails/"+ uid;
+		var url="https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/cardDetails/"+ uid;
 		this.props.dispatch(addcard(axios({ method: 'post',url: url,headers:{token,uid},data:{email,cardNumber,ccv,expirationMonth,expirationYear}})))
 		.then(()=>this.signout())
 	}
@@ -111,7 +111,7 @@ import axios from 'axios';
 	orderhistory(){
 		var uid=this.props.user.user.uid;
 		var token=this.props.user.user.token;
-		var url="http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/orders/"+ uid;
+		var url="https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/orders/"+ uid;
 		this.props.dispatch(orderhistory(axios({method: 'get',url: url,headers:{token,uid}})));
 	}
 	render(){

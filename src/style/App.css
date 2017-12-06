@@ -15,6 +15,9 @@
 #logo{
   width:200px;
 }
+.display{
+  display:none;
+}
 .header-top-button{
 position: absolute;
 top:20px;
@@ -213,4 +216,26 @@ margin-left: 20px;
 .devin{
   position: relative;
   height: 100%;
+}
+@media(max-width:1010px){
+
+  .display-toggle {
+    display: none;
+  }
+  .display{
+    display:inline-block;
+  }
+  .display >span{
+    width:100%;
+    border-bottom:1px solid black;
+    margin-top:1px;
+    display: block;
+  }
+  .header-top-button{
+    justify-content: flex-end;
+  }
+  .m-profile-photo-holder{
+    justify-content: flex-end;
+    margin-top: 5px;
+  }
 }

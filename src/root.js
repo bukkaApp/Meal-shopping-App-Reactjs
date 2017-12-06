@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import PropTypes from 'prop-types';
 import Checking from './routes/checking';
 import Authenticatedroute from './routes/AuthenticatedRoute';
+import EventHome from './homepage/eventHome';
 
 
 
@@ -19,6 +20,7 @@ const Root = ({ store }) => (
 		<Route exact path="/" component={App}/>
 		<Route exact path="/profile" component={Authenticatedroute} />
 		<Route exact path="/checkout" component={Checking}/>
+		<Route exact path="/event" component={EventHome} />
 	</Switch>
 	</BrowserRouter>
 	</Provider>
