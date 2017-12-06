@@ -48,7 +48,7 @@ class SimpleForm extends React.Component {
     event.preventDefault()
     geocodeByAddress(this.state.address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.dispatch(fetch_chef(axios.get("http://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng))).then(()=>{this.props.dispatch(get_chef(this.chefResult(this.props.chef.chefsInYourArea)))});})
+      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.dispatch(fetch_chef(axios.get("https://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng))).then(()=>{this.props.dispatch(get_chef(this.chefResult(this.props.chef.chefsInYourArea)))});})
       .catch(error => console.error('Error', error))
 
   }
@@ -56,7 +56,7 @@ class SimpleForm extends React.Component {
   handleEnter = (address) => {
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
-    .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.dispatch(fetch_chef(axios.get("http://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng))).then(()=>{this.props.dispatch(get_chef(this.chefResult(this.props.chef.chefsInYourArea)))});})
+    .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.dispatch(fetch_chef(axios.get("https://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng))).then(()=>{this.props.dispatch(get_chef(this.chefResult(this.props.chef.chefsInYourArea)))});})
     .catch(error => console.error('Error', error))
 }
   setaddress(){
@@ -66,7 +66,7 @@ class SimpleForm extends React.Component {
  	this.setState({ address, placeId });
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
-      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.dispatch(fetch_chef(axios.get("http://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng))).then(()=>{this.props.dispatch(get_chef(this.chefResult(this.props.chef.chefsInYourArea)))});})
+      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.dispatch(fetch_chef(axios.get("https://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng))).then(()=>{this.props.dispatch(get_chef(this.chefResult(this.props.chef.chefsInYourArea)))});})
       .catch(error => console.error('Error', error))
 }
 
