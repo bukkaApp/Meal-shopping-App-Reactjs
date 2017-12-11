@@ -55,7 +55,7 @@ export default class HeaderMax extends Component{
 														}
 				<p id="search-text">Find the food that matches your taste around you</p>
 				<div className="search-box">
-				<SimpleForm > </SimpleForm>
+				<SimpleForm chefResult={this.props.chefResult}/>
 				</div>
 			</div>
 			)

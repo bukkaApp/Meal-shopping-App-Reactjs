@@ -32,29 +32,31 @@ export default class checkoutPage extends Component{
 	render(){
 		return(
 			<div id="deliveryInformation" >
-				
 				{(!this.props.user.isAuthenticated)? <div className="btn-Holder">
-				<button onClick={this.props.toggleSignin}>Sign In</button>
+				<h3 className="instruction">
+				Sign in or sign up with a Bukka account
+				</h3>
 				<button onClick={this.props.toggleSignUp} className="btn-red">Sign Up</button>
+				<button onClick={this.props.toggleSignin}>Sign In</button>
 				</div> : null }
-				<h2>Delivery Info</h2>
+				<h3 id="d-info">Delivery Info</h3>
 				<div className="infoholder">
-				<input value={this.props.address.Location} className="inputs" readOnly/>
-				<span className="icon">
+				<input value={this.props.address.Location} className="input-add" readOnly/>
+				<span className="icon" style={{color:'black'}}>
 					<FaMapMarker/>
 				</span>
 				</div>
 
 				<div className="infoholder">
 				<input placeholder="Apartment/Suite/Floor..." className="hideBorder inputs"/>
-				<span className="icon">
+				<span className="icon l-icon-small">
 					<GoHome/>
 				</span>
 				</div>
 
 				<div className="infoholder">
 				<input placeholder="Add delivery note" className="hideBorder inputs"/>
-				<span className="icon">
+				<span className="icon l-icon-small" >
 					<FaStickyNote/>
 				</span>
 				</div>

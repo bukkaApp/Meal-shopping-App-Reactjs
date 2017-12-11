@@ -12,6 +12,7 @@ import SignIn from '../authentication/signIn';
 import SignUp from '../authentication/SignUp';
 import axios from 'axios';
 import AddCard from '../checkout/addCard';
+import Footer from '../frontpage/Footer';
 
 class Checking extends Component{
 	constructor(props){
@@ -99,24 +100,32 @@ class Checking extends Component{
 	}
 	render(){
 		return(
+			
 			<div className="devi">
+				
 				<HeaderCheckout 	user={this.props.user}
                             		signout={this.signout}
-                            		cart={this.props.cart} />
+									cart={this.props.cart}
+									error={this.props.chef.error} />
+				
 				<PageBackground/> 
-				<CheckoutPage 	newUser={this.newUser} 
+				<div id="checking-content-holder">
+				<CheckoutPage 	newUser={this.newUser}
 							  	user={this.props.user}
 							  	address={this.props.address}
 							  	toggleSignin={this.toggleSignin}
 							  	toggleSignUp={this.toggleSignUp}
-							  	toggleshowaddcard={this.toggleShowcard} /> 
+								  toggleshowaddcard={this.toggleShowcard} /> 
 				<CheckoutSlip 	cart={this.props.cart}
-								user={this.props.user} 
-								chef={this.props.chef}
-								address={this.props.address} 
-								deleteCart={this.deleteCart} 
-								quantityUpdate={this.quantityUpdate}
-								placeorder={this.placeorder} />
+									user={this.props.user} 
+									chef={this.props.chef}
+									address={this.props.address} 
+									deleteCart={this.deleteCart} 
+									quantityUpdate={this.quantityUpdate}
+									placeorder={this.placeorder} />
+				</div>
+				
+				
 				{(this.props.page.showsignIn)? <SignIn  toggleSignin={this.toggleSignin}
    											   			toggleSignUp={this.toggleSignUp}
    											   			signin={this.signin}
@@ -130,6 +139,9 @@ class Checking extends Component{
 				{(this.props.page.showaddCard)? <AddCard 	addCard={this.addcard} 
 															user={this.props.user}
 															toggleshowaddcard={this.toggleShowcard}/>:null}
+															
+				<Footer/>
+				
 			</div>
 			)
 	}

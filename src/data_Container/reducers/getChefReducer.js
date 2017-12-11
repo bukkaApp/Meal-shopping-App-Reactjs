@@ -21,6 +21,8 @@ const getChefs=(state=initialstate,action)=>{
 			return{
 				...state,
 				fetching:false,
+				fetched:false,
+				fetched_chefsInYourArea:false,
 				error:action.payload,
 				chefsInYourArea:{},
 				yourChef:{},

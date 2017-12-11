@@ -10,14 +10,13 @@ import { ButtonToolbar,DropdownButton,MenuItem} from 'react-bootstrap';
 export default class HeaderMin extends Component{
 	constructor(Props){
 		super(Props)
-		console.log(this.props.Located)
 	}
 	render(){
 		return(
 			<div  className="myheader header-min">
 				<Link to="/"><img src="http://res.cloudinary.com/www-mybukka-com/image/upload/v1505151382/logo_m8ik1x.png" id="logo" alt="logo"/></Link>
 				<div className="search-box search-box-min">
-				<SimpleForm> </SimpleForm>
+				<SimpleForm chefResult={this.props.chefResult}/>
 				</div>
 				{(!this.props.user.isAuthenticated)? <div className=" header-top-button header-top-button-min ">
 																<button onClick={this.props.toggleSignin} className="display-toggle">Sign In</button>
@@ -25,6 +24,7 @@ export default class HeaderMin extends Component{
 																{(this.props.Located)?
 																				<div className='m-cart-not-signed-in display-toggle'>
 																					<MdShoppingCart className="shopping-cart display-toggle"/>
+																					
 																					<div className="m-cart-items">
 																						<ShoppingCart   cart={this.props.cart} 
 																										deleteCart={this.props.deleteCart} 

@@ -1,19 +1,17 @@
 .mobileAppImage-holder{
 	background-color: white;
-	position: absolute;
-	bottom: 0;
-	width:100%;
-	min-height:485px;
-	bottom:40%;
-	z-index: 1;
+	position: relative;
+	margin-top: 200px;
 }
 
 .mobileAppImage-holder .row{
 	padding:0 !important;
 	margin:0 !important;
+	margin-bottom: 145px !important;
 }
 .mobileAppImage-holder .col-sm-6{
 	position: relative;
+	padding-left: 118px !important;
 }
 .m-app-store{
 	padding: 0!important;

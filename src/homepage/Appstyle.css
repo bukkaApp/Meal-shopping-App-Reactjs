@@ -8,16 +8,15 @@
     z-index: 1;
     position: relative;
     top: -43px;
-    margin-left: 100px;
+    margin-left: 2%;
   }
   
   .formcom Form{
-    width: 26.9%;
+    width: 450px;
     z-index: 1;
-    position: relative;
-    right: -900px;
-    top: -1100px;
-    bottom: 0;
+    position: absolute;
+    left: 55%;
+    top: 130px;
     background-color: #f8f8f8;
     border-top: 10px solid #f0f0f0;
   }
@@ -59,7 +58,9 @@
     height: 50px;
     border-radius: 0px !important;
   }
-  
+  .btn-bukka{
+    color: #9c1c26;
+  }
   .condstyle{
     margin-left: 20px;
     margin-bottom: 10px;
@@ -72,48 +73,43 @@
     padding-bottom: 20px;
     margin-right: 20px;
   }
-  .container-fluid{
+  .m-event-cont{
     padding: 0 !important;
     position: relative;
-    width: 100%;
   }
-  
   .Event-img-holder>img{
     width: 100%;
     height: 700px;
-    margin-top: 150px;
+    top: 583px;
     z-index: 0;
     position: absolute;
   }
   
   
   .firststyle{
-    margin-left: 120px;
-    margin-top: 50px !important;
-    position: relative;
+   z-index: 1;
+   top: 75%;
+   left: 3%;
+   right: 0;
+    position: absolute;
   }
-  .firststyle>h1{
-    font-size: 50px;
-  }
+.firststyle>h1{
+  font-size: 3.5em;
+}
   
   .branchesstyle{
     background-color: white;
-    font-size: 20px;
     margin-left: 10%;
     padding-bottom: 0;
     z-index: 1;
-    position: relative;
+    position: absolute;
     padding-left: 60px;
     padding-top: 80px;
-    top: 750px;
+    top: 1200px;
     padding-right: 70px;
   }
-  .branchesstyle>h1{
-    font-size: 50px; 
-  }
-  .readystyle>h1{
-    font-size: 50px; 
-  }
+  
+  
 
   .lightstyle{
     font-weight: 100;
@@ -147,9 +143,7 @@
     color: blue;
   }
   
-  .col-sm-4>h2{
-    font-size: 30px;
-  }
+  
   
   .autoCon1{
     background-color:white;
@@ -163,4 +157,41 @@
   .autoCon2{
     color: black; 
     font-size: 1em;
+  }
+
+  @media(max-width:1011px){
+    .firststyle>h1{
+      text-align: center;
+    }
+    .formcom Form{
+      left: 24%;
+      top: 250px;
+    } 
+    .m-hidden{
+      display:none;
+    }
+    .branchesstyle{
+      margin:0;
+      top:1283px;
+    }
+    .readystyle{
+      display:none;
+    }
+  }
+  @media(max-width:767px){
+   .branchesstyle{
+      display: none;
+    }
+
+    .iconsstyle{
+      display: block;
+      margin: auto
+    }
+    .formcom Form{
+      left: 0;
+      top: 250px;
+      right: 0;
+      width:auto;
+      margin-right: 0!important;
+    }
   }

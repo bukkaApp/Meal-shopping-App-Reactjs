@@ -29,11 +29,11 @@ const identifyUser=(state=initialstate,action)=>{
 			break;
 		}
 		case'UPDATING_USER_INFORMATION_PENDING':{
-			return{...state,fetching_lastCardDigits:true,isAuthenticated:false};
+			return{...state,fetching_lastCardDigits:true};
 			break;
 		}
 		case'UPDATING_USER_INFORMATION_REJECTED':{
-			return{...state,fetching_lastCardDigits:false,lastCardDigits:"",error:action.payload,isAuthenticated:true};
+			return{...state,fetching_lastCardDigits:false,lastCardDigits:"",error:action.payload};
 			break;
 		}
 		case'FETCH_ORDER_HISTORY_REJECTED':{
@@ -53,11 +53,11 @@ const identifyUser=(state=initialstate,action)=>{
 			break;
 		}
 		case'IDENTIFYING_USER_FULFILLED':{
-			return{...state,lastCardDigits:"",fetched:true,fetching:false,user:action.payload.data.data,error:null};
+			return{...state,lastCardDigits:"",fetched:true,fetching:false,user:action.payload.data.data,isAuthenticated:true,error:null};
 			break;
 		}
 		case'UPDATING_USER_INFORMATION_FULFILLED':{
-			return{...state,fetching_lastCardDigits:false,fetched_lastCardDigits:true,lastCardDigits:action.payload.data.data.last,isAuthenticated:true,error:null};
+			return{...state,fetching_lastCardDigits:false,fetched_lastCardDigits:true,lastCardDigits:action.payload.data.data.last,error:null};
 			break;
 		}
 		case'ADD_CARD_FULFILLED':{

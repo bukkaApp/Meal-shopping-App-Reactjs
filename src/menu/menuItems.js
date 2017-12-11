@@ -63,23 +63,23 @@ export default class menuItems extends Component{
 	}
 	render(){
 		return(
-					<div className="MenuList">
+					<div className="MenuList" id="many">
 					{(this.props.chef.fetched)? this.props.chef.menuCategoriesKeys.map((categ,key)=> {return(
 						<div className="eachMenuHolder" key={key}>
 							<h3 className="category" id={categ}>{categ}</h3>
 							<div className="row">
 								{this.props.chef.menuCategories[categ].map((menu,identifier)=>
-									<div className="col-md-6 menuCol" key={identifier}>
-										<div className="m-menuitem-holder">
+									<div className="col-lg-6 menuCol" key={identifier} >
+										<div className="m-menuitem-holder" >
 											<img src={menu.image} alt="food-logo" className="food-logo img-responsive"/>
 											<h4 className="foodName" id={menu.menu.split(' ').join('')}>{menu.menu}</h4>
 											<h6>{menu.desc}</h6>
 											<div className="cartBtn">
 												<h4 className="price" id={identifier+"priceId"} data-price={menu.price}>₦{menu.price}</h4>
-												<a onClick={this.increaseNumberOfItem} data-id={identifier+"numberOfItems"}>+</a>
-												<p id={identifier+"numberOfItems"} >1</p>
-												<a className="minusButton" onClick={this.reduceNumberOfItem} data-id={identifier+"numberOfItems"}>-</a>
-												<button className="btn btn-red" onClick={this.addToCart} data-foodname={menu.menu.split(' ').join('')} data-quantity={identifier+"numberOfItems"} data-price={menu.price}>Add to Cart</button>
+												<a onClick={this.increaseNumberOfItem} data-id={identifier+"numberOfItems"} style={{display:'none'}}>+</a>
+												<p id={identifier+"numberOfItems"} style={{display:'none'}} >1</p>
+												<a className="minusButton" style={{display:'none'}} onClick={this.reduceNumberOfItem} data-id={identifier+"numberOfItems"}>-</a>
+												<button className="btn btn-red"  onClick={this.addToCart} data-foodname={menu.menu.split(' ').join('')} data-quantity={identifier+"numberOfItems"} data-price={menu.price}>Add to Cart</button>
 											</div>
 										</div>
 									</div>)}

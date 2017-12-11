@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
 import '../style/chefComponent.css';
 
 
@@ -18,10 +18,10 @@ export default class chefComponent extends Component{
 						<br />
 						<p>Get access to a new pool of clients, serve delicious meals to keep your ratings high. Then you would be making money from cooking at home. </p>
 						<p>Complete registration process, input address, account information, menu and take chef assessment test. You would get result within 24 hours.</p>
-						<button type="button" className="btn chef-color">Become A Chef</button>
+						<button type="button" className="btn btn-red">Become A Chef</button>
 					</div>
 				</div>
 			</div>
 			)
 	}
-}
+}*/

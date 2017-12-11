@@ -5,7 +5,7 @@ import '../style/index.css';
 import PageBackground from '../frontpage/PageBackground';
 import Footer from '../frontpage/Footer';
 import ScrollLogic from '../frontpage/ScrollLogic';
-import ChefComponent from '../frontpage/chefComponent';
+/*import ChefComponent from '../frontpage/chefComponent';*/
 import MobileAppComponent from '../frontpage/mobileAppComponent';
 import SummaryComponent from '../frontpage/summaryComponent';
 import MenuPage from '../menu/menuPage';
@@ -22,6 +22,7 @@ import '../homepage/Appstyle.css';
 import Home from '../homepage/Home';
 import Map from '../homepage/Map';
 import Reg from '../homepage/Reg';
+import Nochefavailable from '../frontpage/nochef';
 
 
 
@@ -33,7 +34,8 @@ class App extends Component {
 					cart:this.props.cart,
 					user:this.props.user,
 					page:this.props.page,
-					signup:this.props.SignUp
+					signup:this.props.SignUp,
+					
 					};
 		this.deleteCart=this.deleteCart.bind(this);
 		this.quantityUpdate=this.quantityUpdate.bind(this);
@@ -43,7 +45,8 @@ class App extends Component {
 		this.signout=this.signout.bind(this);
 		this.signup=this.signup.bind(this);
 		this.updateCart=this.updateCart.bind(this);
-		console.log(this.props.SignUp);
+		this.chefResult=this.chefResult.bind(this);
+		this.chefcloseby=this.chefcloseby.bind(this);
 	}
 
 	//togglepages
@@ -58,13 +61,14 @@ class App extends Component {
 		this.props.dispatch(identify_user(axios.post("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login",{email,password})))
 		.then(()=>{this.props.dispatch(updating_user_info(axios.get("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
 		.then(()=>this.toggleSignin())
+		.catch((e)=>console.log('Sorry! There was a problem',e))
 	}
 
 	signup(email,firstname,lastname,password,mobile,isCustomer){
 		this.props.dispatch(signup(axios.post("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/register",{email,firstname,lastname,password,mobile,isCustomer})))
 		.then(()=>{this.props.dispatch(identify_user(axios.post("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login",{email,password})))})
-		.then(()=>{this.props.dispatch(updating_user_info(axios.get("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
 		.then(()=>this.toggleSignUp())
+		.catch((e)=>console.log('Sorry! There was a problem',e))
 	}
 	//signout
 	signout(){
@@ -95,61 +99,116 @@ class App extends Component {
 		cart.total=total;
 		this.updateCart(cart);
 	}
+	//getchef
+	chefResult=(latLng)=>{
+		this.props.dispatch(fetch_chef(axios.get("https://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng)))
+		.then(()=>{this.props.dispatch(get_chef(this.chefcloseby(this.props.chef.chefsInYourArea)))})
+		.catch((e)=>console.log('Sorry! There was a problem',e))
+	}
+	chefcloseby=(result)=>{
+		try{
+		var yourChef=result.filter((chef)=>chef.role==="Super Chef")[0];
+		var categ=Array.from(new Set(result.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category)));
+		var categorizedMenu={};
+		//var menuP=yourChef.menu.filter(items=>categ.indexOf(items.category)>-1).filter(item=>item.visibility===true)
+		
+		for(var i=0;i<categ.length;i++){
+		  var menuPerCategory=[];
+		  yourChef.menu.map((items)=>{
+			if(items.category===categ[i]){
+			  if(items.visibility){
+			  //menuPerCategory.push(items);
+			}
+			menuPerCategory.push(items);
+			}
+		  }
+		  )
+		  if(menuPerCategory.length>0){
+			categorizedMenu[`${categ[i]}`]=menuPerCategory;
+		  }
+		}
+		
+		return{
+		  menu:categorizedMenu,
+		  yourChef:yourChef,
+		  categ:Object.keys(categorizedMenu)
+		}}catch(e){
+		  console.log("Network error",e);
+		}
+	  }
   render() {
     return (
-    	(!this.props.chef.fetched)? <div className="dev">
-    											<ScrollLogic address={this.props.address.Location} 
-    														 chef={this.props.chef}
-    														 toggleSignin={this.toggleSignin}
-    														 toggleSignUp={this.toggleSignUp}
-    														 deleteCart={this.deleteCart} 
-    				 										 quantityUpdate={this.quantityUpdate}
-    														 user={this.props.user}
-    														 signout={this.signout}
-    														 cart={this.props.cart} />
-    											<PageBackground />
-    											<SummaryComponent/>
-    											<MobileAppComponent/>
-    											<ChefComponent/>
-    											<Footer/>
-    											{(this.props.page.showsignIn)? <SignIn newUser={this.props.newUser} 
-    																				   toggleSignin={this.toggleSignin} 
-    																				   toggleSignUp={this.toggleSignUp}
-    																				   signin={this.signin}
-    																				   user={this.props.user}/>:null}
-												{(this.props.page.showsignUp)? <SignUp newUser={this.props.newUser} 
-																					   toggleSignUp={this.toggleSignUp} 
-																					   toggleSignin={this.toggleSignin}
-																					   signup={this.signup}
-																					   SignUp={this.props.SignUp}
-																					   user={this.props.user}/>:null}
-    											</div>:
-    	<div className="dev"> 
-    	<ScrollLogic address={this.props.address.Location}
-    				 Located={this.props.address.Located} 
-    				 chef={this.props.chef} 
-    				 deleteCart={this.deleteCart} 
-    				 quantityUpdate={this.quantityUpdate} 
-    				 toggleSignin={this.toggleSignin}
-    				 toggleSignUp={this.toggleSignUp}
-    				 user={this.props.user}
-    				 signout={this.signout}
-    				 cart={this.props.cart}/>
-    	<MenuPage chef={this.props.chef}/>
-    	<MenuItems updateCart={this.updateCart} 
-    			   chef={this.props.chef} />
-   		<Footer/>
-   		{(this.props.page.showsignIn)? <SignIn toggleSignin={this.toggleSignin}
-   											   toggleSignUp={this.toggleSignUp}
-   											   signin={this.signin}
-   											   user={this.props.user} /> :null}
+		(this.props.chef.error)?
+			<Nochefavailable    user={this.props.user}
+								signout={this.signout}
+								cart={this.props.cart}
+								error={this.props.chef.error}
+								chefResult={this.chefResult}
+								/>:
+		(!this.props.chef.fetched)? 
+			<div style={{position:'absolute'}}> 
+				<ScrollLogic    address={this.props.address.Location} 
+								chef={this.props.chef}
+								toggleSignin={this.toggleSignin}
+								toggleSignUp={this.toggleSignUp}
+								deleteCart={this.deleteCart} 
+								quantityUpdate={this.quantityUpdate}
+								user={this.props.user}
+								signout={this.signout}
+								cart={this.props.cart}
+								chefResult={this.chefResult} />
+				<div className="first-page-background">
+				<PageBackground />
+				</div>
+				<div className="dev">
+					<SummaryComponent/>
+					<MobileAppComponent/>
+					<Footer/>
+					{(this.props.page.showsignIn)? 
+						<SignIn newUser={this.props.newUser} 
+								toggleSignin={this.toggleSignin} 
+								toggleSignUp={this.toggleSignUp}
+								signin={this.signin}
+								user={this.props.user}/>:null}
+					{(this.props.page.showsignUp)? 
+						<SignUp newUser={this.props.newUser} 
+								toggleSignUp={this.toggleSignUp} 
+								toggleSignin={this.toggleSignin}
+								signup={this.signup}
+								SignUp={this.props.SignUp}
+								user={this.props.user}/>:null}
+					
+				</div>
+			</div>:
+			<div className="devi">
+				<ScrollLogic    address={this.props.address.Location}
+								Located={this.props.address.Located} 
+								chef={this.props.chef} 
+								deleteCart={this.deleteCart} 
+								quantityUpdate={this.quantityUpdate} 
+								toggleSignin={this.toggleSignin}
+								toggleSignUp={this.toggleSignUp}
+								user={this.props.user}
+								signout={this.signout}
+								cart={this.props.cart}
+								chefResult={this.chefResult}/>
+				<MenuPage chef={this.props.chef}/>
+				<MenuItems updateCart={this.updateCart} 
+						chef={this.props.chef} />
+				<Footer/>
+				{(this.props.page.showsignIn)? 
+					<SignIn toggleSignin={this.toggleSignin}
+							toggleSignUp={this.toggleSignUp}
+							signin={this.signin}
+							user={this.props.user} /> :null}
 
-		{(this.props.page.showsignUp)? <SignUp  toggleSignUp={this.toggleSignUp}
-											    toggleSignin={this.toggleSignin}
-											    signup={this.signup}
-											    SignUp={this.props.SignUp}
-											    user={this.props.user} />:null}
-   		</div>
+				{(this.props.page.showsignUp)? 
+					<SignUp toggleSignUp={this.toggleSignUp}
+							toggleSignin={this.toggleSignin}
+							signup={this.signup}
+							SignUp={this.props.SignUp}
+							user={this.props.user} />:null}
+			</div>
     	);
   }
 };

@@ -28,9 +28,8 @@
 .divider{
 	margin-top: 18px;
 	border-top:1px solid rgba(0,0,0,0.2);
-	margin-left: -20px;
-	margin-right: -20px;
-	width:120%;
+	margin-left: -118px;
+	width:264%;
 }
 #logo{
 	margin-top:-8px !important;
@@ -38,4 +37,13 @@
 .bigMenuHolder .menuHolder{
 	padding-left: 0 !important;
 	padding-right: 0 !important;
+	margin-left: -100px;
+}
+@media(max-width:767px){
+	.divider{
+		display: none;
+	}
+	.bigMenuHolder{
+		height: 80px !important;
+	}
 }

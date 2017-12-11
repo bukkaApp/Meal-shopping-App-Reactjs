@@ -8,12 +8,25 @@ import {Link} from 'react-router-dom';
 
 
 export default class headerStories extends Component{
+	changecol(e){
+		var category=document.getElementsByClassName("m-categories");
+		for(var i=0;i<category.length;i++){
+			if(category[i].classList.contains('l-selecting')){
+				category[i].classList.remove("l-selecting");
+			}
+		}
+		console.log(e.target.dataset.categ)
+		var uniquecategory=document.getElementsByClassName(e.target.dataset.categ);
+		for(var i=0;i<uniquecategory.length;i++){
+			uniquecategory[i].classList.add("l-selecting")
+		}
+	}
 	render(){
 		return(
 				<div  className="myheader header-min bigMenuHolder">
 					<Link to="/"><img src="http://res.cloudinary.com/www-mybukka-com/image/upload/v1505151382/logo_m8ik1x.png" id="logo" alt="logo"/></Link>
 					<div className="search-box search-box-min search">
-						<SimpleForm> </SimpleForm>
+						<SimpleForm chefResult={this.props.chefResult}/>
 					</div>
 				{(!this.props.user.isAuthenticated)? <div className="header-top-button header-top-button-min head-option">
 																<button onClick={this.props.toggleSignin}>Sign In</button>
@@ -53,7 +66,7 @@ export default class headerStories extends Component{
 														}
 				<div className="divider"></div>
 				<ul className="menuHolder">
-					{(this.props.chef.fetched)? this.props.chef.menuCategoriesKeys.map((categ,key)=><li key={key}><a href={'#'+categ}>{categ}</a></li>):null}
+					{(this.props.chef.fetched)? this.props.chef.menuCategoriesKeys.map((categ,key)=><li key={key}><a href={'#'+categ} className={"m-categories "+categ} data-categ={categ} onClick={this.changecol.bind(this)}>{categ}</a></li>):null}
 				</ul>
 			</div>
 				)

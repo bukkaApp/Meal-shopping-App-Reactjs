@@ -1,0 +1,155 @@
+.signInPopup{
+	position: fixed;
+	left:0;
+	right: 0;
+	top:0;
+	bottom: 0;
+	height:100%;
+	width:100%;
+	margin: auto;
+  	background-color: rgba(0,0,0, 0.5);
+  	z-index: 100;
+}
+.white-background{
+	background-color: white;
+	max-height: 500px;
+}
+.m-position-fix{
+	position: absolute;
+	top:400px;
+	z-index: 1 !important;
+}
+.loader{
+  animation-name: loading;
+  animation-duration: 0.5s;
+  animation-delay:0;
+  animation-iteration-count: infinite;
+  display: inline-block;
+}
+@keyframes loading{
+  0%{-ms-transform: rotate(0deg);-webkit-transform: rotate(0deg);transform: rotate(0deg);}
+  25%{-ms-transform: rotate(90deg);-webkit-transform: rotate(90deg);transform: rotate(90deg);}
+  50%{-ms-transform: rotate(180deg);-webkit-transform: rotate(180deg);transform: rotate(180deg);}
+  75%{-ms-transform: rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);}
+  100%{-ms-transform: rotate(360deg);-webkit-transform: rotate(360deg);transform: rotate(360deg);}
+}
+.load{
+  pointer-events: none;
+}
+#headingHolder{
+display: flex;
+justify-content: space-between;
+}
+#headingHolder p{
+	margin-top: 16px;
+}
+#cardNumberHolder p{
+text-align: left;
+}
+#CVVNumber{
+	width:50%;
+	margin-right: 0;
+}
+#imageHolder img{
+	width:51px;
+	height:32px;
+	margin-left: 5px;
+}
+#info,.otherinfoHolder,.YearDate{
+	display: flex;
+	justify-content: space-between;
+
+}
+.cvvinfo{
+	position: relative;
+	width: 50%;
+}
+#CVVNumber{
+	width:20%;
+	position: absolute;
+	right: 0;
+	top:0;
+	align-self: right;
+}
+#MonthNumber{
+	margin-right: 10px;
+	padding: 2px;
+	width:70%;
+}
+.YearDate input{
+	padding-left:20px;
+}
+.popupHolder{
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  top: 20%;
+  bottom: 20%;
+  margin: auto;
+  background: white;
+}
+.SignUpPopupHolder{
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  top: 5%;
+  bottom: 5%;
+  margin: auto;
+  background: white;
+}
+.AddcardPopupHolder{
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 5%;
+  bottom: 5%;
+  margin: auto;
+  background: white;
+}
+.formField{
+	padding-left:80px;
+	padding-right: 80px;
+
+}
+
+.formField button{
+	width:100%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	height: 40px;
+}
+.formField p{
+	text-align: center;
+}
+#topPart{
+	top:0;
+	left:0;
+	right:0;
+	position: relative;
+	height:80px;
+}
+#topPart>p{
+	width:20%;
+	border-bottom: 2px solid red;
+	left:40%;
+	top:0;
+	text-align: center;
+	font-size: 2em;
+	position: absolute;
+}
+#topPart>a{
+	position: absolute;
+	right:20px;
+	top:10px;
+	color:red;
+}
+#sign-btn{
+	margin-left: 5px;
+}
+.formField input{
+	display:block !important;
+	width:100% !important;
+	margin-bottom: 20px !important ;
+	height: 40px !important;
+	padding-left: 20px !important;
+}

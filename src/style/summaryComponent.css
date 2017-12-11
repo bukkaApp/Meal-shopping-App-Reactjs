@@ -1,10 +1,7 @@
 .summary-holder{
 	background-color: white;
-	position: absolute;
-	left:0;
-	right:0;
-	bottom:65%;
-	z-index: 1;
+	position: relative;
+	margin-top: 500px;
 }
 .summary-holder .row{
 	padding:0 !important;

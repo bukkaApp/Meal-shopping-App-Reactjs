@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import '../style/checkoutSlip.css';
+import PageBackground from '../frontpage/PageBackground';
+import Footer from '../frontpage/Footer';
 
 export default class checkoutSlip extends Component{
 	constructor(props) {
@@ -82,6 +84,22 @@ export default class checkoutSlip extends Component{
 	render(){
 		return(
 			<div id="checkoutSlip">
+			<img src="https://www.mcdonalds.com/content/dam/usa/documents/mcdelivery/mcdelivery_new11.jpg" alt="food" id="food-img" />
+			<div id="food-card">
+				<h4 id="order-call">Your order</h4>
+				<h1>Continental Cuisine</h1>
+				<h4 id="time">25 - 35 min</h4>
+				<div id="underline"></div>
+			</div>
+			<div id="small-screen-delivery-info">
+				<div id="ssmap">
+					<PageBackground/> 
+				</div>
+				<div id="ssaddress">
+					<input value={this.props.address.Location} className="input-addi" readOnly/>
+					<input placeholder="Add delivery note..." className="inputsi"/>
+				</div>
+			</div>
 			<button className="btn-red order-btn" onClick={this.placeorder}>Place Order</button>
 			{Object.keys(this.props.cart.cart).map((key,i)=>{
 				return(
@@ -97,10 +115,10 @@ export default class checkoutSlip extends Component{
 
 			})}
 			<input className="add-info" id="chefInfo" placeholder="Add Chef instructions"/>
-			<div>
+			<div id='costing'>
 				<div className="Totalbreakdown">
 					<h4>Subtotal</h4>
-					<h4 id="subtotal">{"₦"+this.props.cart.total+".00"}</h4>
+					<h4 id="subtotal">{"₦"+this.props.cart.total}</h4>
 				</div>
 				<div className="Totalbreakdown">
 					<h4>Delivery Fee</h4>

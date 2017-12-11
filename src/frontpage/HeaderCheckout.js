@@ -10,7 +10,7 @@ export default class HeaderMin extends Component{
 			<div  className="myheader header-min">
 				<Link to="/"><img src="http://res.cloudinary.com/www-mybukka-com/image/upload/v1505151382/logo_m8ik1x.png" id="logo" alt="logo"/></Link>
 				<div className="search-box search-box-min">
-				<SimpleForm> </SimpleForm>
+				{(this.props.error!==null)? <SimpleForm chefResult={this.props.chefResult} />:null}
 				</div>
 				{(!this.props.user.isAuthenticated)? null:
 															(<div className="m-info">

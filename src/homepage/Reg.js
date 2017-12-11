@@ -140,7 +140,7 @@ export default class Reg extends React.Component {
                 onChange={e => this.setState({eventDate: e.target.value})} />
             
             <br />
-            <Button className="btn btn-primary one" onClick={() => this.onSubmit()}>Submit <span className="arrow1style"><ArrowForward/></span></Button>
+            <Button className="btn btn-red one" onClick={() => this.onSubmit()}>Submit <span className="arrow1style"><ArrowForward/></span></Button>
             <br />
             <br />
             <h3 className="condstyle">Have an account? <a href="#">Log in</a></h3>

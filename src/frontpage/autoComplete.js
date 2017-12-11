@@ -14,41 +14,15 @@ class SimpleForm extends React.Component {
     super(props)
     this.state = { address: this.props.address.Location }
     this.onChange = (address) => this.setState({ address })
-    this.chefResult=this.chefResult.bind(this);
+   
   }
 
-  chefResult=(result)=>{
-    try{
-    var yourChef=result.filter((chef)=>chef.role==="Super Chef")[0];
-    var categ=Array.from(new Set(result.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category)));
-    var categorizedMenu={};
-    for(var i=0;i<categ.length;i++){
-      var menuPerCategory=[];
-      yourChef.menu.map((items)=>{
-        if(items.category===categ[i]){
-          if(items.visibility){
-          menuPerCategory.push(items);
-        }
-        }
-      }
-      )
-      if(menuPerCategory.length>0){
-        categorizedMenu[`${categ[i]}`]=menuPerCategory;
-      }
-    }
-    return{
-      menu:categorizedMenu,
-      yourChef,
-      categ:Object.keys(categorizedMenu)
-    }}catch(e){
-      console.log("Network error",e);
-    }
-  }
+
   handleFormSubmit = (event) => {
     event.preventDefault()
     geocodeByAddress(this.state.address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.dispatch(fetch_chef(axios.get("https://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng))).then(()=>{this.props.dispatch(get_chef(this.chefResult(this.props.chef.chefsInYourArea)))});})
+      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.chefResult(latLng)})
       .catch(error => console.error('Error', error))
 
   }
@@ -56,7 +30,7 @@ class SimpleForm extends React.Component {
   handleEnter = (address) => {
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
-    .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.dispatch(fetch_chef(axios.get("https://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng))).then(()=>{this.props.dispatch(get_chef(this.chefResult(this.props.chef.chefsInYourArea)))});})
+    .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.chefResult(latLng)})
     .catch(error => console.error('Error', error))
 }
   setaddress(){
@@ -66,7 +40,7 @@ class SimpleForm extends React.Component {
  	this.setState({ address, placeId });
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
-      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.dispatch(fetch_chef(axios.get("https://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng))).then(()=>{this.props.dispatch(get_chef(this.chefResult(this.props.chef.chefsInYourArea)))});})
+      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.chefResult(latLng)})
       .catch(error => console.error('Error', error))
 }
 
@@ -93,8 +67,8 @@ class SimpleForm extends React.Component {
     return (
       <form onSubmit={this.handleFormSubmit} style={{display:'flex',justifyContent:'spaceBetween',}}>
         <PlacesAutocomplete inputProps={inputProps} autocompleteItem={AutocompleteItem} classNames={cssClasses} onEnterKeyDown={this.handleEnter} onSelect={this.handleSelect} />
-        {(!this.props.chef.fetching)? <button type="submit" className=" btn-red search-Btn">Submit</button>:null}
-        {(this.props.chef.fetching)?<button type="submit" className=" btn-red search-Btn load"><span className="loader"><Faspinner/></span></button>:null}
+        {(!this.props.chef.fetching)? <button type="submit" className="btn-red">Submit</button>:null}
+        {(this.props.chef.fetching)?<button type="submit" className="btn-red"><span className="loader"><Faspinner/></span></button>:null}
       </form>
     )
   }

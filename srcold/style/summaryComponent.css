@@ -1,0 +1,23 @@
+.summary-holder{
+	background-color: white;
+	position: absolute;
+	left:0;
+	right:0;
+	bottom:65%;
+	z-index: 1;
+}
+.summary-holder .row{
+	padding:0 !important;
+	padding-top: 5% !important;
+	padding-bottom: 2% !important;
+}
+
+.image4{
+	width:250px;
+	height: 250px;
+	display: block;
+	margin:auto;
+}
+.summary-holder .col-sm-4{
+	text-align: center;
+}

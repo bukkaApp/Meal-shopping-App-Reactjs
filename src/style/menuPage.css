@@ -1,3 +1,48 @@
+#chefinformation{
+	position: relative;
+}
+.menuCont{
+	height: 440px;
+	background-image: url('http://www.miami.com/wp-content/uploads/sites/2/2016/12/h-mcdonalds-Double-Quarter-Pounder-with-Cheese-Extra-Value-Meals.png');
+	background-size: 100%;
+	padding: 50px;
+	padding-top: 100px;
+	padding-bottom: 1px;
+	color:white;
+}
+.menuCont>img{
+	display: block;
+	margin:auto;
+	border-radius: 50%;
+	max-height: 100px;
+}
+.menuCont>.row{
+	width:40%;
+	margin:auto !important;
+	margin-top: 35px !important
+}
+.menu-left{
+	border-top:1px solid rgba(255,255,255,0.5);
+	text-align: left;
+}
+.menu-left>h4{
+color:#DAA520;
+}
+.chef-buttons{
+	margin-top: 10px;
+}
+.chef-buttons .buttn{
+	margin:5px;
+}
+.menu-middle{
+	border:1px solid rgba(255,255,255,0.5);
+	border-bottom: none;
+	text-align: center
+}
+.menu-right{
+	border-top:1px solid rgba(255,255,255,0.5);
+	text-align: right;
+}
 .menuHolder{
 	padding:20px;
 	list-style: none;
@@ -7,7 +52,7 @@
 .menuHolder a{
 	text-decoration: none;
 	color:black;
-	font-size:1.2em;
+	font-size: 0.8em
 }
 .menuHolder a:hover{
 	cursor: pointer;
@@ -16,12 +61,30 @@
 .menuHolder a:active{
 	color:#9c1c26;
 }
+
+#m-background{
+position: absolute;
+top:0;
+bottom:0;
+left:0;
+right:0;
+z-index:-1;
+width: 100%
+}
+#rate:hover{
+color:#DAA520;
+cursor: pointer;
+}
+#more{
+	color:#9c1c26;
+}
+#more:hover{
+	color:#b94a55;
+	cursor: pointer;
+}
+/*
 .menuCont{
-	position: absolute;
-	top:0;
-	height:inherit;
-	width:100%;
-	z-index: 1;
+	position: relative;
 }
 .imageHolder{
 	width:100%;
@@ -47,8 +110,35 @@
 	display: flex;
 	justify-content: space-around;
 	list-style: none;
+}*/
+.l-selecting{
+	color:#b94a55 !important;
 }
 .menuTop{
 	border-top:1px solid rgba(0,0,0,0.2);
 	border-bottom:1px solid rgba(0,0,0,0.2);
+}
+
+@media(max-width:999px){
+	.menuCont>.row{
+		width:60%
+	}
+}
+@media(max-width:767px){
+	.menuCont>.row{
+		width:100%
+	}
+	.menuHolder{
+		display:none;
+	}
+	.menuCont{
+		background-size: 100% 100%;
+	}
+}
+
+@media(max-width:476px){
+	.menu-left >h4{
+		font-size: 8px;
+		line-height: 2em;
+	}
 }

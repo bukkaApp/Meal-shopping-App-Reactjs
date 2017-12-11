@@ -32,12 +32,12 @@ onSubmit = () => {
 
     render () {
         return(
-            <div className="container-fluid">
+            <div className="container-fluid m-event-cont"> 
             <nav className="navbar navbar-light"></nav>
             <img className="bukkastyle" src='http://res.cloudinary.com/www-mybukka-com/image/upload/v1505586721/logo-light_xnxon0.png' alt="bukka"/>
             <div className="firststyle">
                 <h1>Partner with Bukka</h1>
-                <h1 className="lightstyle">Eat what your heart desires<br />at your own time</h1>
+                <h1 className="lightstyle m-hidden">Eat what your <br />heart desires<br />at your own time</h1>
             </div>
             <div className="Event-img-holder">
                 <img src={foto} alt="image3"/>
@@ -48,7 +48,7 @@ onSubmit = () => {
                 <h1>A new way to <br /> <span className="lightstyle">partner with Bukka</span></h1>
                 <br />
                 <br />
-                <div className="row">
+                <div className="row m-branch">
                     <div className="col-sm-4">
                         <span className="iconsstyle"><Calender /></span>
                         
@@ -79,9 +79,6 @@ onSubmit = () => {
                 <br />
                 <div className="readystyle">
                     <h1>Ready to get started?<br /> <span className="lightstyle">Sign up today and let us care for you</span></h1>
-                    <br />
-                    <br />
-                    <Button className="btn btn-primary" onClick={() => this.onSubmit()}>GET STARTED<span className="arrow2style"> <ArrowForward/></span></Button>
                 </div>
             </div>
             

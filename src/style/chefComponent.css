@@ -1,15 +1,12 @@
 
-.chef-Holder{
+/*.chef-Holder{
 	background-color: white;
-	position: absolute;
-	bottom:18.8%;
-	left:0;
-	right:0;
-	z-index: 1;
+	position: relative;
+	margin-top: 200px;
 }
 .chef-Holder img{
 	position: absolute;
-	top: -129px;
+	top: -116px;
 	left:-37px;
     max-height: 520px;
     -moz-transform: scaleX(-1);
@@ -33,7 +30,7 @@
 
 @media(max-width:767px){
 	.chef-Holder{
-		bottom: 20.26%;
+		margin-top:0;
 	}
 	.m-right{
 		display: none;
@@ -41,4 +38,4 @@
 	.chef-Holder img{
 		display:none;
 	}
-}
+}*/

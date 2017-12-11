@@ -1,13 +1,11 @@
 #deliveryInformation{
 	width:350px;
 	padding:15px;
-	position: absolute;
-	z-index:1;
-	top:85px;
 	background-color: white;
-	left:0px;
 	padding-top: 20px;
-	max-height: 487px;
+	margin-top: 100px;
+	margin-left: 50px;
+	max-height: 540px;
 }
 #addCard:hover{
 cursor: pointer;
@@ -42,16 +40,30 @@ background-color: white;
 border:1px solid grey;
 margin-bottom:10px;
 }
-#deliveryInformation h2{
+#d-info{
 	color:black;
-	line-height: 2em;
+	line-height: 1em;
+	padding-left:10px;
+	padding-right:10px;
+	margin-bottom: 0;
+    margin-top: 50px;
+}
+#deliveryInformation{
+	color:black;
+	line-height: 1em;
+	padding-left:10px;
+	padding-right:10px;
+	margin-bottom: 0;
+    margin-top: 30px;
 }
 .infoholder{
 	width:100%;
 	position: relative;
-	margin-top: 30px;
+	margin-top: 20px;
 	font-size: 1.5em;
 	color:grey;
+	padding-left:10px;
+	padding-right:10px;
 }
 .inputs{
 	width:100%;
@@ -63,16 +75,35 @@ margin-bottom:10px;
 }
 .icon{
 	position: absolute;
-	top:2px;
-	left:10px;
+	top: 8px;
+    left: 20px;
 }
 
-.infoholder:nth-child(2){
-	color:black !important;
-	border:1px solid rgba(0,0,0,0.2);
-	border-radius: 5px;
-	font-size: 1.7em;
-}
+
 .inputs:focus{
 	border:1px solid #9c1c26;
+}
+.l-icon-small{
+	font-size: 0.7em;
+    top: 8px;
+}
+.input-add{
+	color:black;
+	width: 100%;
+    padding-left: 50px;
+	height: 40px;
+	font-size: 0.8em;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+@media(max-width:783px){
+	#deliveryInformation{
+		margin:0;
+		width:100%;
+		border: 1px solid white;
+		padding: 0;
+	}
+	#d-info,.carddetails,.infoholder{
+		display: none;
+	}
 }

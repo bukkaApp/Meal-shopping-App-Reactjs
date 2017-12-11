@@ -13,6 +13,9 @@
 	max-width: 60px;
 	padding-left: 10px;
 	margin-right: 10px;
+	color:#9c1c26;
+	border:1px solid rgba(0,0,0,0.2);
+	background-color: transparent;
 }
 .descriptionHolder{
 	display:flex !important;
@@ -23,16 +26,19 @@
 }
 .item{
 	position: relative;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
+	padding-top: 10px;
+    padding-bottom: 10px;
 }
 .cancelBtn{
 	position: absolute;
-	font-size: 2em;
-	top:-20px;
+	font-size: 1.5em;
+	top:5px;
 	right: 5px;
-	color: black;
+	color: rgba(0,0,0,0.5);
 	text-decoration: none;
 }
+
 .cancelBtn:hover{
 	text-decoration: none;
 	color:#9c1c26;
@@ -55,4 +61,9 @@ h4,p,h4:hover,p:hover{
 	margin-right:-10px;
 	margin-left:-10px;
 	padding: 10px;
+}
+@media(max-width:783px){
+	.cancelBtn{
+		display: none;
+	}
 }

@@ -1,11 +1,7 @@
 .MenuList{
 	width: 100%;
-    padding: 40px;
-   	position: absolute;
-   	top:490px;
-   	z-index: 1;
-   	overflow-y: scroll;
-   	bottom: 370px;
+	padding: 20px;
+	position: relative;
 }
 .eachMenuHolder{
 	margin-top: 50px;
@@ -79,8 +75,37 @@
 }
 .category{
 	margin-bottom: 30px;
+	padding-top: 150px;
+    margin-top: -100px;
+    -webkit-background-clip: content-box;
+	background-clip: content-box;
+	padding-left: 30px;
+    padding-right: 30px
 }
+.m-menuitem-holder:hover{
+	background-color:rgba(0,0,0,0.05);
+	cursor:pointer;
+ }
 
-@media(max-width:991){
-
+@media(max-width:500px){
+	.menuCol{
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.m-menuitem-holder{
+		border-top:none;
+		border-right: none;
+		border-left:none;
+	}
+	.category{
+		text-align: center;
+	}
+	.food-logo{
+		max-height: 130px;
+	}
+}
+@media(max-width:390px){
+	.food-logo{
+		max-height: 100px;
+	}
 }

@@ -5,13 +5,9 @@ body {
   font-family: sans-serif;
   font-family: 'Varela Round', sans-serif !important;
 }
+.devi,.dev{
+  position: relative;
+}
 html,body{
-	height:200%;
-}
-.dev{
-	height:inherit;
-	position: relative;
-}
-.devi{
-	height: inherit;
+  height:100%;
 }

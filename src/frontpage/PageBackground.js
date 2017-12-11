@@ -34,14 +34,14 @@ export default class PageBackground extends Component{
 		            			 		}
 		            			 		catch(e){
 		            			 			this.setState({position:[6.4531,3.3958]})
-		            			 			console.log("we are using a default Location,")
+		            			 			console.log("we are using a default Location due to",e)
 		            			 		}})()
 	}
 							   
 	render(){
 		return (
 			<div className="map-holder">
-      <Map center={this.state.position} zoom={15} >
+      <Map center={(!this.props.loc)?this.state.position:this.props.loc} zoom={15} >
         <TileLayer
           attribution=''
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
