@@ -13,7 +13,7 @@ const Nochefavailable=(props)=>{
                         signout={props.signout}
                         cart={props.cart}
                         chefResult={props.chefResult} />
-        <PageBackground/>
+        <PageBackground loc={[props.address.lat,props.address.lng]}/>
         <div id="no-chef-available">
             <div id="no-chef-available-holder">
             <h3>

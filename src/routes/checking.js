@@ -108,7 +108,7 @@ class Checking extends Component{
 									cart={this.props.cart}
 									error={this.props.chef.error} />
 				
-				<PageBackground/> 
+				<PageBackground loc={(this.props.address.lat!=="")?[this.props.address.lat,this.props.address.lng]:[6.4531,3.3958]}/> 
 				<div id="checking-content-holder">
 				<CheckoutPage 	newUser={this.newUser}
 							  	user={this.props.user}

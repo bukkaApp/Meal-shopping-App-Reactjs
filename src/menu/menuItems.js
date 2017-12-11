@@ -79,7 +79,7 @@ export default class menuItems extends Component{
 												<a onClick={this.increaseNumberOfItem} data-id={identifier+"numberOfItems"} style={{display:'none'}}>+</a>
 												<p id={identifier+"numberOfItems"} style={{display:'none'}} >1</p>
 												<a className="minusButton" style={{display:'none'}} onClick={this.reduceNumberOfItem} data-id={identifier+"numberOfItems"}>-</a>
-												<button className="btn btn-red"  onClick={this.addToCart} data-foodname={menu.menu.split(' ').join('')} data-quantity={identifier+"numberOfItems"} data-price={menu.price}>Add to Cart</button>
+												<button className="btn btn-red" style={{display:'none'}} onClick={this.addToCart} data-foodname={menu.menu.split(' ').join('')} data-quantity={identifier+"numberOfItems"} data-price={menu.price}>Add to Cart</button>
 											</div>
 										</div>
 									</div>)}

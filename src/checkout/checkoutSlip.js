@@ -9,7 +9,6 @@ export default class checkoutSlip extends Component{
 		this.deleteDiv=this.deleteDiv.bind(this);
 		this.quantityUpdate=this.quantityUpdate.bind(this);
 		this.placeorder=this.placeorder.bind(this);
-		console.log(this.state)
 	} 
 
 	deleteDiv(e){

@@ -51,4 +51,8 @@ export const orderhistory=(response)=>({
 export const update_cart=(response)=>({
 	type:'UPDATE_CART',
 	payload:response
+});
+export const get_chef_update_failed=(response)=>({
+	type:'GET_CHEFS_UPDATE_FAILED',
+	payload:response
 })

@@ -52,6 +52,14 @@ const getChefs=(state=initialstate,action)=>{
 			}
 			break;
 		}
+		case 'GET_CHEFS_UPDATE_FAILED':{
+			return{
+				...state,
+				fetching:false,
+				fetched:false,
+				error:action.payload
+			}
+		}
 	}
 	return state
 };

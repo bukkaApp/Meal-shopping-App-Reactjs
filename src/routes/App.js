@@ -13,7 +13,7 @@ import MenuItems from '../menu/menuItems';
 import CheckoutPage from '../checkout/checkoutPage';
 import CheckoutSlip from '../checkout/checkoutSlip';
 import {connect} from 'react-redux';
-import { fetch_address, fetch_chef, identify_user, get_chef,showsignIn,showsignUp,updating_user_info,signout,signup,update_cart} from '../data_Container/action/actions';
+import { fetch_address, fetch_chef, identify_user, get_chef,showsignIn,showsignUp,get_chef_update_failed,updating_user_info,signout,signup,update_cart} from '../data_Container/action/actions';
 import fetch   from 'isomorphic-fetch';
 import SignIn from '../authentication/signIn';
 import SignUp from '../authentication/SignUp';
@@ -102,37 +102,58 @@ class App extends Component {
 	//getchef
 	chefResult=(latLng)=>{
 		this.props.dispatch(fetch_chef(axios.get("https://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng)))
-		.then(()=>{this.props.dispatch(get_chef(this.chefcloseby(this.props.chef.chefsInYourArea)))})
+		.then(()=>{
+			if(this.chefcloseby(this.props.chef.chefsInYourArea).yourChef.length===0){
+				var res={
+					response:{
+						data:""
+					}
+				}
+				res.response.data="No Chefs found around this location"
+				this.props.dispatch(get_chef_update_failed(res))
+			}else{
+			this.props.dispatch(get_chef(this.chefcloseby(this.props.chef.chefsInYourArea)))
+			}
+			}
+		)
 		.catch((e)=>console.log('Sorry! There was a problem',e))
 	}
 	chefcloseby=(result)=>{
 		try{
-		var yourChef=result.filter((chef)=>chef.role==="Super Chef")[0];
-		var categ=Array.from(new Set(result.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category)));
-		var categorizedMenu={};
-		//var menuP=yourChef.menu.filter(items=>categ.indexOf(items.category)>-1).filter(item=>item.visibility===true)
-		
-		for(var i=0;i<categ.length;i++){
-		  var menuPerCategory=[];
-		  yourChef.menu.map((items)=>{
-			if(items.category===categ[i]){
-			  if(items.visibility){
-			  //menuPerCategory.push(items);
+			var yourChef=result.filter((chef)=>chef.role==="Super Chef")[0];
+			console.log("yourChef",yourChef)
+			if(yourChef){
+				var categ=Array.from(new Set(result.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category)));
+				var categorizedMenu={};
+				//var menuP=yourChef.menu.filter(items=>categ.indexOf(items.category)>-1).filter(item=>item.visibility===true)
+				
+				for(var i=0;i<categ.length;i++){
+					var menuPerCategory=[];
+					yourChef.menu.map((items)=>{
+						if(items.category===categ[i]){
+						if(items.visibility){
+							//menuPerCategory.push(items);
+						}
+						menuPerCategory.push(items);
+						}
+					}
+					)
+					if(menuPerCategory.length>0){
+						categorizedMenu[`${categ[i]}`]=menuPerCategory;
+					}
+				}
+			
+				return{
+				menu:categorizedMenu,
+				yourChef:yourChef,
+				categ:Object.keys(categorizedMenu)
+				}
+			}else{
+				return{
+					yourChef:[]
+				}
 			}
-			menuPerCategory.push(items);
-			}
-		  }
-		  )
-		  if(menuPerCategory.length>0){
-			categorizedMenu[`${categ[i]}`]=menuPerCategory;
-		  }
-		}
-		
-		return{
-		  menu:categorizedMenu,
-		  yourChef:yourChef,
-		  categ:Object.keys(categorizedMenu)
-		}}catch(e){
+		}catch(e){
 		  console.log("Network error",e);
 		}
 	  }
@@ -144,6 +165,7 @@ class App extends Component {
 								cart={this.props.cart}
 								error={this.props.chef.error}
 								chefResult={this.chefResult}
+								address={this.props.address}
 								/>:
 		(!this.props.chef.fetched)? 
 			<div style={{position:'absolute'}}> 
