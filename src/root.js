@@ -11,6 +11,7 @@ import Authenticatedroute from './routes/AuthenticatedRoute';
 import EventHome from './homepage/eventHome';
 import Menupage from './menu/menuPage';
 import Nochefavailable from './frontpage/nochef';
+import Addmenu from './frontpage/addmenu';
 
 
 
@@ -23,7 +24,7 @@ const Root = ({ store }) => (
 		<Route exact path="/profile" component={Authenticatedroute} />
 		<Route exact path="/checkout" component={Checking}/>
 		<Route exact path="/event" component={EventHome} />
-		<Route exact path="/menu" component={Nochefavailable} />
+		<Route exact path="/menu" component={Addmenu} />
 	</Switch>
 	</BrowserRouter>
 	</Provider>

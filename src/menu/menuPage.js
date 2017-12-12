@@ -35,10 +35,14 @@ const menuPage = (props) =>{
 		for(var i=0;i<uniquecategory.length;i++){
 			uniquecategory[i].classList.add("l-selecting")
 		}
+	};
+	const mystyle={
+		backgroundImage:`url('https://www.miami.com/wp-content/uploads/sites/2/2016/12/h-mcdonalds-Double-Quarter-Pounder-with-Cheese-Extra-Value-Meals.png')`
 	}
 	return(
+		
 	<div id="chefinformation">
-		<div className="menuCont" >
+		<div className="menuCont" style={mystyle} >
 			<img src={props.chef.yourChef.profile_photo} alt="chef"/>
 			<h3 className="text-center">{props.chef.yourChef.first_name+" "+props.chef.yourChef.last_name}</h3>
 			<h5 className="text-center">{props.chef.yourChef.role}</h5>
