@@ -7,9 +7,9 @@
 }
 #addmenu-holder{
     position: relative;
-    left: 25%;
-    right: 25%;
-    width: 50%;
+    left: 26%;
+    right: 26%;
+    width: 48%;
     background-color: white;
     border-radius: 5px;
 }
@@ -23,14 +23,21 @@
     padding: 30px;
     padding-bottom: 20px;
 }
+#title h1{
+    line-height: 1.3em
+}
 .foodie{
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     width: 100%;
     height: 300px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 .foodie:before{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     position: absolute;
     width: 100%;
     height: 300px;
