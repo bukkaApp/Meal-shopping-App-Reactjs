@@ -5,9 +5,14 @@ import MdShoppingCart from 'react-icons/lib/md/shopping-cart';
 import SimpleForm from './autoComplete';
 import ShoppingCart from './shoppingCart';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
+class headerStories extends Component{
+	constructor(Props){
+		super(Props)
+		this.addClass=this.addClass.bind(this)
+	}
 
-export default class headerStories extends Component{
 	changecol(e){
 		var category=document.getElementsByClassName("m-categories");
 		for(var i=0;i<category.length;i++){
@@ -21,6 +26,38 @@ export default class headerStories extends Component{
 			uniquecategory[i].classList.add("l-selecting")
 		}
 	}
+
+	addClass(){
+		const k = document.getElementById('k');
+		
+		if (Object.keys(this.props.cart.cart).length){
+				if(!k.classList.contains('s-cart-filled')){
+					k.classList.add('s-cart-filled')
+					
+				}
+		}
+		else if(!Object.keys(this.props.cart.cart).length){
+				if(k.classList.contains('s-cart-filled')){
+					k.classList.remove('s-cart-filled')
+					
+				}
+		}
+
+		
+	}
+	componentDidMount(){
+		(this.props.chef.fetched)?
+		this.addClass():
+		null
+	}
+	componentWillReceiveProps(nextProps){
+		(nextProps.cart.cart!==this.props.cart.cart)?
+		(this.props=nextProps,
+		this.addClass()):
+		null
+	}
+
+
 	render(){
 		return(
 				<div  className="myheader header-min bigMenuHolder">
@@ -29,9 +66,15 @@ export default class headerStories extends Component{
 						<SimpleForm chefResult={this.props.chefResult}/>
 					</div>
 				{(!this.props.user.isAuthenticated)? <div className="header-top-button header-top-button-min head-option">
-																<button onClick={this.props.toggleSignin}>Sign In</button>
-																<button className="btn-red" onClick={this.props.toggleSignUp} >Sign Up</button>
-																<div className='m-cart-not-signed-in'>
+																<button className="stories-sign-in" onClick={this.props.toggleSignin}>Sign In</button>
+																<button className="btn-red stories-sign-up" onClick={this.props.toggleSignUp} >Sign Up</button>
+																<div>
+																	<span className="s-cart">
+																	{(Object.keys(this.props.cart.cart).length)? (Object.keys(this.props.cart.cart).map((val,key)=>this.props.cart.cart[val].quantity).reduce((a,b)=>a+b,0)):null}	
+																	</span>
+																</div>
+																				
+																<div className='m-cart-not-signed-in' id="k">
 																	<MdShoppingCart className="shopping-cart"/>
 																	<div className="m-cart-items">
 																		<ShoppingCart   cart={this.props.cart} 
@@ -52,6 +95,7 @@ export default class headerStories extends Component{
 																		<a className="m-options" onClick={this.props.signout}>Log Out</a>
 																	</div>
 																</div>
+																
 																<div className='m-cart'>
 																	<MdShoppingCart className="m-shopping-cart"/>
 																	<div className="m-cart-items">
@@ -72,3 +116,8 @@ export default class headerStories extends Component{
 				)
 	}
 }
+
+function mapStateToProps(state){
+	return state;
+};
+export default connect(mapStateToProps)(headerStories);

@@ -2,29 +2,43 @@
 	background-color: white;
 	position: relative;
 	margin-top: 200px;
+	height: 650px;
 }
-
+/*p{
+	font-size: 15px;
+}*/
 .mobileAppImage-holder .row{
 	padding:0 !important;
 	margin:0 !important;
 	margin-bottom: 145px !important;
 }
-.mobileAppImage-holder .col-sm-6{
+.mobileAppImage-holder .col-sm-4{
 	position: relative;
 	padding-left: 118px !important;
 }
-.m-app-store{
+/*.m-app-store{
 	padding: 0!important;
 	padding-top: 6% !important;
 	padding-left: 18% !important;
-}
+}*/
 .pic{
 	height: 600px;
 	position: absolute;
-	top: -117px;
-    right: 0;
+	top: -180px;
+	left: -15%;
+	
 }
-.appleapp{
+.left-side{
+	text-align: right;
+	left: -40px;
+	display: block;
+}
+.right-side{
+	text-align: left;
+	right: 40px;
+	display: block;
+}
+/*.appleapp{
 	width: 160px;
 	height: 46px;
 	position: relative;
@@ -33,7 +47,64 @@
 	width: 160px;
 	height: 46px;
 	position: relative;
+}*/
+
+@media(max-width:1258px){
+	.pic{
+		left: -16%;
+	}
 }
+@media(max-width:1238px){
+	.pic{
+		left: -19%;
+	}
+}
+@media(max-width:1171px){
+	.pic{
+		left: -24%;
+	}
+}
+@media(max-width:1123px){
+	.pic{
+		left: -29%;
+	}
+}
+@media(max-width:1048px){
+	.pic{
+		left: -33%;
+	}
+}
+@media(max-width:996px){
+	.pic{
+		left: -36%;
+	}
+}
+@media(max-width:979px){
+	.pic{
+		left: -40%;
+	}
+}
+@media(max-width:923px){
+	.pic{
+		left: -44%;
+	}
+}
+@media(max-width:891px){
+	.pic{
+		left: -47%;
+	}
+}
+@media(max-width:875px){
+	.pic{
+		left: -37%;
+	}
+}
+@media(max-width:833px){
+	.pic{
+		left: -40%;
+	}
+}
+
 @media(max-width:875px){
 	.pic{
 		height:525px;
@@ -45,5 +116,16 @@
 	}
 	.mobileAppImage-holder{
 		bottom: 45%;
+	}
+	.left-side, .right-side{
+		text-align: center;
+		left: -59px;
+		top: -199px;
+	}
+}
+
+@media(max-width:886px){
+	.left-side, .right-side{
+		top: -185px;
 	}
 }

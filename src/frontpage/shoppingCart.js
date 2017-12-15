@@ -4,11 +4,15 @@ import '../style/App.css';
 import {Link} from 'react-router-dom';
 
 
+
+
+
 export default class shoppingCart extends Component{
 	constructor(props) {
 		super(props);
 		this.deleteDiv=this.deleteDiv.bind(this);
 		this.quantityUpdate=this.quantityUpdate.bind(this);
+		console.log(Object.keys(this.props.cart.cart).length);
 	} 
 
 	deleteDiv(e){

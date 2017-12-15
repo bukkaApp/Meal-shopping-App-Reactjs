@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import '../style/summaryComponent.css';
-import image4 from '../assets/image4.jpg';
-import image5 from '../assets/image5.jpg';
-import image6 from '../assets/image6.jpg';
+
 
 
 export default class summaryComponent extends Component{
@@ -10,26 +8,29 @@ export default class summaryComponent extends Component{
 		return(
 				<div className="summary-holder">
 					<div className="row">
+						<h1 className="summary-text"><b>HOW TO USE</b></h1>
+						<br />
+						<br />
 						<div className="col-sm-4">
-							<img className="image4 img-responsive" src={image4} alt="image4"/>
+							<img className="image4 img-responsive" src="http://res.cloudinary.com/bukka/image/upload/v1500737722/app/location.png" alt="image4"/>
 							<br />
-							<h2>Selection you want</h2>
+							<h2 className="s-text"><b>SELECT YOUR COMPANY</b></h2>
 							<br />
-							<p>We're working with over a hundred of the best spots in your city to put the best local food all in one place. If you’re craving it, you can find it on UberEATS.</p>
+							<p className="summary-p">Select company or event name above after subscription has been approved to access menu from your assigned personal chef.</p>
 						</div>
 						<div className="col-sm-4">
-							<img className="image4 img-responsive" src={image5} alt="image5"/>
+							<img className="image4 img-responsive" src="http://res.cloudinary.com/bukka/image/upload/v1500737722/app/register.png" alt="image5"/>
 							<br />
-							<h2>Speed you need</h2>
+							<h2 className="s-text"><b>SUBSCRIBE</b></h2>
 							<br />
-							<p>By tapping into the Uber network, you can get anything from our roster of local restaurants, fast. The average order takes 35 minutes from start to finish.</p>
+							<p className="summary-p">Complete a subscription form for the service you want. Give us quick information about you and your workplace and we would get back to you within 24hours.</p>
 						</div>
 						<div className="col-sm-4">
-							<img className="image4 img-responsive" src={image6}  alt="image6"/>
+							<img className="image4 img-responsive" src="http://res.cloudinary.com/bukka/image/upload/v1500737722/app/meal.png" alt="image6"/>
 							<br />
-							<h2>Service you love</h2>
+							<h2 className="s-text"><b>ENJOY YOUR MEAL</b></h2>
 							<br />
-							<p>When you're ready to place your order, you'll see a total that includes the food and delivery price. Pay with your Uber account and track your order on the site as it comes to you.</p>
+							<p className="summary-p">The earlier you place your order, the sooner it would be prepared and delivered. Breakfast order before: 10am, Lunch order before 1pm.</p>
 						</div>
 					</div>
 				</div>

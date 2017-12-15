@@ -23,7 +23,8 @@ import Home from '../homepage/Home';
 import Map from '../homepage/Map';
 import Reg from '../homepage/Reg';
 import Nochefavailable from '../frontpage/nochef';
-
+import SimpleForm from '../frontpage/autoComplete';
+import Cuisine from '../frontpage/cuisine';
 
 
 class App extends Component {
@@ -182,6 +183,7 @@ class App extends Component {
 				<div className="first-page-background">
 				<PageBackground />
 				</div>
+				
 				<div className="dev">
 					<SummaryComponent/>
 					<MobileAppComponent/>
@@ -214,9 +216,11 @@ class App extends Component {
 								signout={this.signout}
 								cart={this.props.cart}
 								chefResult={this.chefResult}/>
+				
 				<MenuPage chef={this.props.chef}/>
 				<MenuItems updateCart={this.updateCart} 
 						chef={this.props.chef} />
+				
 				<Footer/>
 				{(this.props.page.showsignIn)? 
 					<SignIn toggleSignin={this.toggleSignin}
