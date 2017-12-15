@@ -7,12 +7,28 @@ import CheckoutPage from '../checkout/checkoutPage';
 import CheckoutSlip from '../checkout/checkoutSlip';
 import {connect} from 'react-redux';
 import HeaderCheckout from '../frontpage/HeaderCheckout';
-import { fetch_address, fetch_chef, identify_user, get_chef,showsignIn,showsignUp,updating_user_info,signout,signup,update_cart,showaddCard,addcard} from '../data_Container/action/actions';
+import { 	fetch_address, 
+			fetch_chef,
+			identify_user, 
+			get_chef,
+			showsignIn,
+			showsignUp,
+			updating_user_info,
+			signout,
+			signup,
+			update_cart,
+			showaddCard,
+			addcard,
+			clear_receipt,
+			add_receipt,
+			delete_cart,
+			show_receipt	} from '../data_Container/action/actions';
 import SignIn from '../authentication/signIn';
 import SignUp from '../authentication/SignUp';
 import axios from 'axios';
 import AddCard from '../checkout/addCard';
 import Footer from '../frontpage/Footer';
+import Receipt from '../frontpage/receipt';
 
 class Checking extends Component{
 	constructor(props){
@@ -28,6 +44,8 @@ class Checking extends Component{
 		this.updateCart=this.updateCart.bind(this);
 		this.toggleShowcard=this.toggleShowcard.bind(this);
 		this.addcard=this.addcard.bind(this);
+		this.toggleShowReceipt=this.toggleShowReceipt.bind(this);
+		
 
 	}
 	//togglepages
@@ -40,27 +58,30 @@ class Checking extends Component{
 	toggleShowcard(){
 		this.props.dispatch(showaddCard(this.props.page.showaddCard))
 	}
+	toggleShowReceipt(){
+		this.props.dispatch(show_receipt(this.props.page.showreceipt))
+	}
 	//addcard
 	addcard(cardNumber,ccv,expirationMonth,expirationYear){
 		var uid=this.props.user.user.uid;
 		var token=this.props.user.user.token;
 		var email=this.props.user.user.email;
-		var url="https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/cardDetails/"+ uid;
+		var url="https://chef.mybukka.com/api/v1/bukka/customer/cardDetails/"+ uid;
 		this.props.dispatch(addcard(axios({ method: 'post',url: url,headers:{token,uid},data:{email,cardNumber,ccv,expirationMonth,expirationYear}})))
 		.then(()=>this.signout())
 		.then(()=>this.toggleShowcard())
 	}
 	//signin and signup
 	signin(email,password){
-		this.props.dispatch(identify_user(axios.post("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login",{email,password})))
-		.then(()=>{this.props.dispatch(updating_user_info(axios.get("http://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
+		this.props.dispatch(identify_user(axios.post("https://chef.mybukka.com/api/v1/bukka/auth/custom/login",{email,password})))
+		.then(()=>{this.props.dispatch(updating_user_info(axios.get("https://chef.mybukka.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
 		.then(()=>this.toggleSignin())
 	}
 
 	signup(email,firstname,lastname,password,mobile,isCustomer){
-		this.props.dispatch(signup(axios.post("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/register",{email,firstname,lastname,password,mobile,isCustomer})))
-		.then(()=>{this.props.dispatch(identify_user(axios.post("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login",{email,password})))})
-		.then(()=>{this.props.dispatch(updating_user_info(axios.get("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
+		this.props.dispatch(signup(axios.post("https://chef.mybukka.com/api/v1/bukka/auth/register",{email,firstname,lastname,password,mobile,isCustomer})))
+		.then(()=>{this.props.dispatch(identify_user(axios.post("https://chef.mybukka.com/api/v1/bukka/auth/custom/login",{email,password})))})
+		.then(()=>{this.props.dispatch(updating_user_info(axios.get("https://chef.mybukka.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
 		.then(()=>this.toggleSignUp())
 	}
 	//signout
@@ -92,15 +113,37 @@ class Checking extends Component{
 		cart.total=total;
 		this.updateCart(cart);
 	}
-	//placeorder
-	placeorder=(transaction,token,uid,url)=>{
-		axios({ method: 'post',url: url,headers:{token,uid},body:{transaction:transaction}})
-		.then((r)=>console.log(r))
-		.catch((e)=>console.log("it is me!!!",e))
-	}
+	
+	 //placeorder
+	 placeorder = (transaction, token, chefUid, url) => {
+		console.log(transaction,chefUid,token)
+		axios({
+		  method: 'post',
+		  url: url,
+		  headers: {token, chefUid },
+		  data: {
+			   transaction
+		  }
+		})
+		/*.then((r) => console.log(r))
+		.catch((e) => console.log("it is me!!!", e))*/
+	  }
+	
 	render(){
 		return(
-			
+			(this.props.receipt.receiptGenerated)?
+				<div className="devi">
+					<HeaderCheckout 	user={this.props.user}
+										signout={this.signout}
+										cart={this.props.cart}
+										error={this.props.chef.error} />
+					
+					<PageBackground loc={(this.props.address.lat!=="")?[this.props.address.lat,this.props.address.lng]:[6.4531,3.3958]}/> 
+					<div id="checking-content">
+						<Receipt/>
+					</div>										
+					<Footer/>	
+				</div>:
 			<div className="devi">
 				
 				<HeaderCheckout 	user={this.props.user}
@@ -115,14 +158,15 @@ class Checking extends Component{
 							  	address={this.props.address}
 							  	toggleSignin={this.toggleSignin}
 							  	toggleSignUp={this.toggleSignUp}
-								  toggleshowaddcard={this.toggleShowcard} /> 
-				<CheckoutSlip 	cart={this.props.cart}
+								toggleshowaddcard={this.toggleShowcard} /> 
+				<CheckoutSlip 		cart={this.props.cart}
 									user={this.props.user} 
 									chef={this.props.chef}
 									address={this.props.address} 
 									deleteCart={this.deleteCart} 
 									quantityUpdate={this.quantityUpdate}
-									placeorder={this.placeorder} />
+									placeorder={this.placeorder}
+									toggleshowaddcard={this.toggleShowcard} />
 				</div>
 				
 				

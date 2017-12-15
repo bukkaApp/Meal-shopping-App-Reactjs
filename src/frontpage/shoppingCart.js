@@ -22,6 +22,7 @@ export default class shoppingCart extends Component{
 
 	render(){
 		return(
+			(Object.keys(this.props.cart.cart).length)?
 			<div className="ShoppingCartHolder">
 			{Object.keys(this.props.cart.cart).map((key,i)=>{
 				return(
@@ -43,6 +44,9 @@ export default class shoppingCart extends Component{
 					</div>
 					<Link to="/checkout"><button className="btn btn-red btn-big" >checkout</button></Link>
 				</div>
+			</div>:
+			<div className="ShoppingCartHolder text-center" id="z">
+				<h4><em id="z">cart is empty</em></h4>
 			</div>
 			)
 	}

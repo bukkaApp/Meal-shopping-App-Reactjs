@@ -10,6 +10,37 @@ import { ButtonToolbar,DropdownButton,MenuItem} from 'react-bootstrap';
 export default class HeaderMin extends Component{
 	constructor(Props){
 		super(Props)
+		this.addClass=this.addClass.bind(this)
+		
+	}
+	addClass(){
+		const l = document.getElementById('l');
+		
+		if (Object.keys(this.props.cart.cart).length){
+				if(!l.classList.contains('s-cart-filled')){
+					l.classList.add('s-cart-filled')
+					
+				}
+		}
+		else if(!Object.keys(this.props.cart.cart).length){
+				if(l.classList.contains('s-cart-filled')){
+					l.classList.remove('s-cart-filled')
+					
+				}
+		}
+		
+			
+	}
+	componentDidMount(){
+		(this.props.chef.fetched)?
+		this.addClass():
+		null
+	}
+	componentWillReceiveProps(nextProps){
+			(nextProps.cart.cart!==this.props.cart.cart)?
+			(this.props=nextProps,
+			this.addClass()):
+			null
 	}
 	render(){
 		return(

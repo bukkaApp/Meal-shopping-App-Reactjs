@@ -1,17 +1,30 @@
 #addmenu{
     width:100%;
     background-color: rgba(0,0,0,0.3);
-    padding: 5%;
-    padding-top: 7.5%;
+    justify-content: center;
+    display: flex;
+    position:relative;
+    box-sizing:border-box;
     min-height: 100%;
+    padding-bottom: 10%;
+}
+#bigmenu{
+    position: fixed;
+    overflow-y:scroll; 
+    left:0;
+    right:0;
+    bottom:0;
+    top:0;
+    z-index: 2;
 }
 #addmenu-holder{
     position: relative;
-    left: 26%;
-    right: 26%;
-    width: 48%;
     background-color: white;
     border-radius: 5px;
+    max-width: 565px;
+    margin-top: 92px;
+    margin-bottom: 24px;
+    flex-grow: 1;
 }
 #addmenu-holder img{
     width: 100%;
@@ -140,32 +153,19 @@
     color:rgba(0,0,0,0.02);
     cursor:pointer;
 }
-@media(max-width:1105px){
-    #addmenu-holder{
-        left: 20%;
-        right: 20%;
-        width: 60%;
+
+@media(max-width:1025px){
+    #addmenu{
+        padding-bottom: 45%;
     }
 }
-@media(max-width:918px){
-    #addmenu-holder{
-        left: 10%;
-        right: 10%;
-        width: 80%;
-    }
+@media(max-width:800px){
     #addmenu{
-        padding: 5%;
+        padding-bottom: 15%;
     }
 }
 @media(max-width:698px){
-    #addmenu-holder{
-        left: 0;
-        right: 0;
-        width: 100%;
-    }
-    #addmenu{
-        padding: 0;
-    }
+    
     #placeorder{
         display: block;
     }
@@ -179,6 +179,16 @@
         width:100%;
     }
 
+}
+@media(max-width:600px){
+    #addmenu{
+        padding-bottom:0;
+    }
+    #addmenu-holder{
+      width:100%;
+      height: 100%;
+      margin: 0;  
+    }
 }
 @media(max-width:332px){
     .first{

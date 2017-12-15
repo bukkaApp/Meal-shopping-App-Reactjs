@@ -3,51 +3,156 @@ import '../style/addmenu.css';
 import '../style/App.css';
 import MdRemove from 'react-icons/lib/md/remove';
 import Mdadd from 'react-icons/lib/md/add';
+import {connect} from 'react-redux';
 
-const addmenu=(props)=>{
+class addmenu extends Component{
+    constructor(props) {
+		super(props);
+		this.state={
+            carti:this.props.cart.cart,
+            cart:{},
+            total:0,
+            unitcost:parseInt(this.props.menu.price,10),
+            defaultQuantity:1,
+            itemTotal:parseInt(this.props.menu.price,10),
+            chefinstruction:''
+		}
+        this.addToCart=this.addToCart.bind(this);
+        this.increaseNumberOfItem=this.increaseNumberOfItem.bind(this);
+        this.reduceNumberOfItem=this.reduceNumberOfItem.bind(this);
+        this.addchefinstructions=this.addchefinstructions.bind(this)
+    }
+    //add chef instruction
+        async addchefinstructions(e){
+            e.stopPropagation()
+            e.preventDefault()
+           await this.setState({chefinstruction:e.target.value})
+           
+        }
+    //increase number of items
+		async increaseNumberOfItem(e){
+            e.stopPropagation()
+            e.preventDefault()
+            await this.setState({defaultQuantity:this.state.defaultQuantity+1});
+            await this.setState({itemTotal:this.state.defaultQuantity*this.state.unitcost});
+	
+		}
+		//reduce number of items
+		async reduceNumberOfItem(e){
+            e.stopPropagation()
+            e.preventDefault()
+            await (this.state.defaultQuantity>1)? 
+                this.setState({defaultQuantity:this.state.defaultQuantity-1}):
+                null
+            await this.setState({itemTotal:this.state.defaultQuantity*this.state.unitcost});
+		}
+		//additem to cart
+		async addToCart(e){
+            e.stopPropagation()
+            e.preventDefault()
+            var name=this.props.menu.menu,
+                desc=this.props.menu.desc,
+			    price=this.state.unitcost,
+			    quantity=this.state.defaultQuantity,
+                totalCost=this.state.itemTotal,
+                hour=this.props.menu.hour,
+                min=this.props.menu.min,
+                chefinstruction=this.state.chefinstruction
+				if(this.state.carti.hasOwnProperty(name)){
+					var newQuantity=this.state.carti[name].quantity+quantity,
+					    newTotalcost=price*newQuantity,
+					    cartUpdate={}
+					cartUpdate[name]={
+						'price':price,
+						'quantity':newQuantity,
+                        'totalCost':newTotalcost,
+                        'chefinstruction':chefinstruction,
+                        'desc':desc,
+                        'hour':hour,
+                        'min':min
+                    }
+					await this.setState({cart:{
+                                ...this.state.carti,
+                                ...cartUpdate
+                            }
+                        })
+					var total=Object.keys(this.state.cart).map((key,i)=>this.state.cart[key].totalCost).reduce((sum,value)=>sum+value,0.00).toFixed(2);
+					await this.setState({total:total});
+                    this.props.updateCart({cart:this.state.cart,total:this.state.total});
+				}
+	
+				if(!this.state.carti.hasOwnProperty(name)){
+					var newCart={}
+					newCart[name]={
+						'price':price,
+						'quantity':quantity,
+                        'totalCost':totalCost,
+                        'chefinstruction':chefinstruction,
+                        'desc':desc,
+                        'hour':hour,
+                        'min':min
+						}
+                        await this.setState({cart:{
+                            ...this.state.carti,
+                            ...newCart
+                        }
+                    })
+                    var total= await Object.keys(this.state.cart).map((key,i)=>this.state.cart[key].totalCost).reduce((sum,value)=>sum+value,0).toFixed(2);
+					await this.setState({total:total});
+                    this.props.updateCart({cart:this.state.cart,total:this.state.total});
+                }
+                this.props.showaddmenu()
+		}
+    render(){
    const mystyle={
-        backgroundImage:`url('https://duyt4h9nfnj50.cloudfront.net/sku/640274c9cc74a3771f04b6f30131eb05')`
+        backgroundImage:`url(${this.props.menu.image})`
     }
     return(
+        <div id="bigmenu">
         <div id="addmenu"> 
             <div id="addmenu-holder">
                 <div className="foodie" style={mystyle}>
                 </div>
-                <a className="cancle-x">&times;</a>
+                <a className="cancle-x" onClick={this.props.showaddmenu}>&times;</a>
                 <div id="title">
                     <h1>
-                        Double Quarter Pounder®* with Cheese Meal
+                        {this.props.menu.menu}
                     </h1>
                     <h5>
-                        Comes with medium beverage and 1 side choice
+                        {this.props.menu.desc}
                     </h5>
                 </div>
                 <div id="instructions">
                     <h4>Special Instructions</h4>
-                    <input className="form-control" placeholder="Add note(extra sauce,no onions etc)"/>
+                    <input className="form-control" id="Note-for-chef" onChange={this.addchefinstructions} placeholder="Add note(extra sauce,no onions etc)"/>
                 </div>
                 <div id="placeorder">
-                    <div class="placeorder-holder">
-                    <h3 className="add">
-                    <MdRemove />
-                    </h3>
-                    <h4 className="item-quantity">
-                        1
-                    </h4>
-                    <h3 className="minus">
-                    <Mdadd />
-                    </h3>
+                    <div className="placeorder-holder">
+                        <h3 className="add" onClick={this.reduceNumberOfItem} >
+                        <MdRemove />
+                        </h3>
+                        <h4 className="item-quantity">
+                            {this.state.defaultQuantity}
+                        </h4>
+                        <h3 className="minus"  onClick={this.increaseNumberOfItem} >
+                        <Mdadd />
+                        </h3>
                     </div>
-                    <button className="btn-large">
+                    <button className="btn-large" onClick={this.addToCart}>
                         <div>
-                        <h5 className="first">₦500.00</h5>
-                        <h4 className="second">Add 1 to cart</h4>
-                        <h5 className="third">₦500.00</h5>
+                        <h5 className="first">₦{this.state.itemTotal}.00</h5>
+                        <h4 className="second">Add {this.state.defaultQuantity} to cart</h4>
+                        <h5 className="third">₦{this.state.itemTotal}.00</h5>
                         </div>
                     </button>
                 </div>
             </div>
         </div>
+        </div>
     )
 }
-export default addmenu;
+}
+function mapStateToProps(state){
+	return state;
+};
+export default connect(mapStateToProps)(addmenu);

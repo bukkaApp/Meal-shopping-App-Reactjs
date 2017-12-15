@@ -16,6 +16,10 @@ export const updating_user_info=(user)=>({
 	type:'UPDATING_USER_INFORMATION',
 	payload:user
 });
+export const show_receipt=(receipt)=>({
+	type:'RECEIPT',
+	payload:receipt
+});
 export const get_chef=(chef)=>({
 	type:'GET_CHEFS_UPDATE',
 	payload:chef
@@ -32,7 +36,10 @@ export const showaddCard=(addCard)=>({
 	type:'ADD_CARD_PAGE',
 	payload:addCard
 });
-
+export const showaddmenu=(addmenu)=>({
+	type:'ADD_MENU',
+	payload:addmenu
+});
 export const signout=()=>({
 	type:'SIGN_OUT'
 });
@@ -44,6 +51,7 @@ export const addcard=(response)=>({
 	type:'ADD_CARD',
 	payload:response
 });
+
 export const orderhistory=(response)=>({
 	type:'FETCH_ORDER_HISTORY',
 	payload:response
@@ -55,4 +63,14 @@ export const update_cart=(response)=>({
 export const get_chef_update_failed=(response)=>({
 	type:'GET_CHEFS_UPDATE_FAILED',
 	payload:response
+});
+export const clear_receipt=()=>({
+	type:'CLEAR_RECEIPT'
+});
+export const add_receipt=(receipt)=>({
+	type:'ADD_RECEIPT',
+	payload:receipt
+});
+export const delete_cart=()=>({
+	type:'DELETE_CART'
 })

@@ -4,7 +4,8 @@ import getChefs from './getChefReducer';
 import updateCart from './updateCartReducer';
 import identifyUser from './identifyingUserReducer';
 import showPage from './showPageReducer';
-import signup from './signUpReducer'
+import signup from './signUpReducer';
+import receipt from './receiptReducer';
 
 
 export default combineReducers({
@@ -13,5 +14,6 @@ export default combineReducers({
 	cart:updateCart,
 	user:identifyUser,
 	page:showPage,
-	SignUp:signup
+	SignUp:signup,
+	receipt:receipt
 		});

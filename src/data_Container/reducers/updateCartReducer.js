@@ -9,6 +9,9 @@ const updateCart=(state=initialstate,action)=>{
 			return{cart:{...state.cart,...action.payload.cart},total:action.payload.total};
 			break;
 		}
+		case'DELETE_CART':{
+			return{...initialstate}
+		}
 	}
 	return state;
 };

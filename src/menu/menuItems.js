@@ -2,64 +2,31 @@ import React, { Component } from 'react';
 import '../style/menuItems.css'
 
 export default class menuItems extends Component{
-	constructor(props) {
+	constructor(props){
 		super(props);
-		this.state={
-			cart:{
-			
-			},
-			total:0.00
+		this.additem=this.additem.bind(this);
+		this.stoppropa=this.stoppropa.bind(this);
+	}
+	additem(e){
+		e.stopPropagation();
+		e.preventDefault();
+		const menu={
+			category:e.target.dataset.category,
+			desc:e.target.dataset.desc,
+			hour:e.target.dataset.hour,
+			menu:e.target.dataset.menu,
+			min:e.target.dataset.min,
+			price:e.target.dataset.price,
+			quantity:e.target.dataset.quantity,
+			visibility:e.target.dataset.visibility,
+			image:e.target.dataset.image
 		}
-		this.addToCart=this.addToCart.bind(this);
+		this.props.addItem(menu)
 	}
-
-	increaseNumberOfItem(e){
-		document.getElementById(e.target.dataset.id).innerHTML=parseInt(document.getElementById(e.target.dataset.id).innerHTML,10)+1;
-
-	}
-	reduceNumberOfItem(e){
-		(parseInt(document.getElementById(e.target.dataset.id).innerHTML,10)>1)? document.getElementById(e.target.dataset.id).innerHTML=parseInt(document.getElementById(e.target.dataset.id).innerHTML,10)-1:
-		null
-	}
-	async addToCart(e){
-		var name=document.getElementById(e.target.dataset.foodname).innerHTML;
-		var price=e.target.dataset.price;
-		var quantity=parseInt(document.getElementById(e.target.dataset.quantity).innerHTML,10);
-		var totalCost=price*quantity;
-			if(this.state.cart.hasOwnProperty(name)){
-				var newQuantity=this.state.cart[name].quantity+quantity
-				var newTotalcost=price*newQuantity
-				var cartUpdate={}
-				cartUpdate[name]={
-					'price':price,
-					'quantity':newQuantity,
-					'totalCost':newTotalcost
-				}
-				await this.setState({cart:{
-					...this.state.cart,
-					...cartUpdate
-					}})
-				var total=Object.keys(this.state.cart).map((key,i)=>this.state.cart[key].totalCost).reduce((sum,value)=>sum+value,0.00).toFixed(2);
-				await this.setState({total:total});
-				this.props.updateCart(this.state);
-			}
-
-			if(!this.state.cart.hasOwnProperty(name)){
-				var newCart={}
-				newCart[name]={
-					'price':price,
-					'quantity':quantity,
-					'totalCost':totalCost
-					}
-				await this.setState({cart:{
-					...this.state.cart,
-					...newCart
-					}})
-				var total= await Object.keys(this.state.cart).map((key,i)=>this.state.cart[key].totalCost).reduce((sum,value)=>sum+value,0).toFixed(2);
-				await this.setState({total:total});
-				this.props.updateCart(this.state);
-			}
-			
+	stoppropa(e){
+		e.stopPropagation();
+		e.preventDefault();
+		document.getElementById(e.target.dataset.id).click();
 	}
 	render(){
 		return(
@@ -69,17 +36,70 @@ export default class menuItems extends Component{
 							<h3 className="category" id={categ}>{categ}</h3>
 							<div className="row">
 								{this.props.chef.menuCategories[categ].map((menu,identifier)=>
-									<div className="col-lg-6 menuCol" key={identifier} >
-										<div className="m-menuitem-holder" >
-											<img src={menu.image} alt="food-logo" className="food-logo img-responsive"/>
-											<h4 className="foodName" id={menu.menu.split(' ').join('')}>{menu.menu}</h4>
-											<h6>{menu.desc}</h6>
-											<div className="cartBtn">
-												<h4 className="price" id={identifier+"priceId"} data-price={menu.price}>₦{menu.price}</h4>
-												<a onClick={this.increaseNumberOfItem} data-id={identifier+"numberOfItems"} style={{display:'none'}}>+</a>
-												<p id={identifier+"numberOfItems"} style={{display:'none'}} >1</p>
-												<a className="minusButton" style={{display:'none'}} onClick={this.reduceNumberOfItem} data-id={identifier+"numberOfItems"}>-</a>
-												<button className="btn btn-red" style={{display:'none'}} onClick={this.addToCart} data-foodname={menu.menu.split(' ').join('')} data-quantity={identifier+"numberOfItems"} data-price={menu.price}>Add to Cart</button>
+									<div 	className="col-lg-6 menuCol" 
+											key={identifier}  
+											onClick={this.stoppropa} 
+											data-id={menu.category+identifier}>
+										<div className="m-menuitem-holder"  onClick={this.additem} 
+																			id={menu.category+identifier}
+																			data-category={menu.category} 
+																			data-desc={menu.desc}
+																			data-hour={menu.hour}
+																			data-menu={menu.menu}
+																			data-min={menu.min}
+																			data-price={menu.price}
+																			data-quantity={menu.quantity}
+																			data-visibility={menu.visibility}
+																			data-image={menu.image} >
+											<img 	src={menu.image} 
+													alt="food-logo" 
+													className="food-logo img-responsive" 
+													onClick={this.stoppropa} 
+													data-id={menu.category+identifier}/>
+											<h4 	className="foodName" 
+													id={menu.menu.split(' ').join('')} 
+													onClick={this.stoppropa} 
+													data-id={menu.category+identifier}>
+												{menu.menu}
+											</h4>
+											<h6 	onClick={this.stoppropa} 
+													data-id={menu.category+identifier}>
+												{menu.desc}
+											</h6>
+											<div 	className="cartBtn" 
+													onClick={this.stoppropa} 
+													onClick={this.stoppropa} 
+													data-id={menu.category+identifier}>
+												<h4		className="price" 
+														id={identifier+"priceId"} 
+														data-price={menu.price} 
+														onClick={this.stoppropa} 
+														data-id={menu.category+identifier}>
+													₦{menu.price}
+												</h4>
+												<a 		onClick={this.increaseNumberOfItem} 
+														data-id={identifier+"numberOfItems"} 
+														style={{display:'none'}} >
+													+
+												</a>
+												<p		id={identifier+"numberOfItems"} 
+														style={{display:'none'}} >
+													1
+												</p>
+												<a 		className="minusButton" 
+														style={{display:'none'}} 
+														onClick={this.reduceNumberOfItem} 
+														data-id={identifier+"numberOfItems"}>
+													-
+												</a>
+												<button className="btn btn-red" 
+														style={{display:'none'}} 
+														onClick={this.addToCart} 
+														data-foodname={menu.menu.split(' ').join('')} 
+														data-quantity={identifier+"numberOfItems"} 
+														data-price={menu.price}>
+													Add to Cart
+												</button>
 											</div>
 										</div>
 									</div>)}
