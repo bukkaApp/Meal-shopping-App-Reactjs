@@ -28,6 +28,45 @@ class checkoutSlip extends Component{
 		console.log("the values are ",e.target.value,e.target.dataset.key);
 		this.props.quantityUpdate(e.target.value,e.target.dataset.key);
 	}
+	timewillpass(){
+		const k=Object.keys(this.props.cart.cart);
+		const a= k.map((val,key)=>{
+			var h=this.props.cart.cart[`${val}`].hour.toString();
+			var m=this.props.cart.cart[`${val}`].min.toString()
+			return h+m;
+		})
+		const b=a.map((a)=>parseInt(a))
+		const v=Math.max(...b)
+		if (v.toString().length<3)
+			return v+"min"
+		else{
+			var o=v.toString()
+			var len=o.length;
+			var lenh=len-2;
+			var om=parseInt(o.substring(lenh))
+			var oh=parseInt(o.substring(0,lenh))
+			var today=new Date()
+			var h=parseInt(today.getHours())+oh
+			var m=parseInt(today.getMinutes())+om
+			var d=today.getDay()
+			if(m>60){
+				m-=60
+				h+=1
+			}
+			if(h>24){
+				h-=24
+			}
+			if (h<10){
+				h+="0"+h;
+			}
+			if (m<10){
+				m+='0'+m
+			}
+			var days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+			return days[d-1]+" "+h+ " : "+ m
+		}
+
+	}
 
 	//create Receipt
 	async createReceipt(){

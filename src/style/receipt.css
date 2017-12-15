@@ -1,6 +1,10 @@
 #a{
     padding: 0;
+<<<<<<< HEAD
     width: 414px;
+=======
+    width:414px;
+>>>>>>> 919a5f5729f2fd56ef9837b71583ea5dfb5c65ef
 }
 #b{
     height: 400px;
@@ -15,7 +19,11 @@
     text-align: center;
 }
 #c img{
+<<<<<<< HEAD
     width:37%;
+=======
+    width:55%;
+>>>>>>> 919a5f5729f2fd56ef9837b71583ea5dfb5c65ef
     margin:auto;
     display:block;
 }
@@ -37,7 +45,10 @@
 #e{
     padding: 20px;
     border-bottom: 1px solid #b94a55;
+<<<<<<< HEAD
     padding-top: 0;
+=======
+>>>>>>> 919a5f5729f2fd56ef9837b71583ea5dfb5c65ef
 }
 #ea{
     font-size: 20px;
@@ -49,12 +60,17 @@
 #g{
     border-bottom: 1px dashed #b94a55;
 }
+<<<<<<< HEAD
 #f h5,#g h5,#e h5,#i{
+=======
+#f h6,#g h6,#e h6{
+>>>>>>> 919a5f5729f2fd56ef9837b71583ea5dfb5c65ef
     display: flex;
     justify-content: space-between;
 }
 #e h1{
     text-align: center;
+<<<<<<< HEAD
     margin-top: 0;
     margin-bottom: 15px
 }
@@ -65,12 +81,23 @@
 }
   #a:after {
     background: linear-gradient(-45deg, transparent 10px, #dddccf 0), linear-gradient(45deg, transparent 10px, #dddccf 0);
+=======
+}
+#a {
+    position: relative;
+    padding-bottom: 30px;
+    background: #dddccf;
+}
+  #a:after {
+    background: linear-gradient(-45deg, #ffffff 10px, transparent 0), linear-gradient(45deg, #ffffff 10px, transparent 0);
+>>>>>>> 919a5f5729f2fd56ef9837b71583ea5dfb5c65ef
     background-position: left-bottom;
     background-repeat: repeat-x;
     background-size: 15px 15px;
     content: " ";
     display: block;
     position: absolute;
+<<<<<<< HEAD
     bottom: -5px;
     left: 0px;
     width:100%;
@@ -87,11 +114,19 @@
     top: -5px;
     left: 0px;
     width:100%;
+=======
+    bottom: 0px;
+    left: 0px;
+    width:414px;
+>>>>>>> 919a5f5729f2fd56ef9837b71583ea5dfb5c65ef
     height: 15px;
 }
 #h{
     text-align:center;
+<<<<<<< HEAD
     border-bottom: 1px solid #b94a55;
+=======
+>>>>>>> 919a5f5729f2fd56ef9837b71583ea5dfb5c65ef
 }
 .so{
     
@@ -99,6 +134,7 @@
     padding: 2px;
     
 }
+<<<<<<< HEAD
 #i{
     padding: 20px;
     padding-bottom: 8px;
@@ -124,3 +160,5 @@
 a:hover{
     text-decoration: none;
 }
+=======
+>>>>>>> 919a5f5729f2fd56ef9837b71583ea5dfb5c65ef
