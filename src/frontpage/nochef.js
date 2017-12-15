@@ -16,11 +16,17 @@ const Nochefavailable=(props)=>{
         <PageBackground loc={[props.address.lat,props.address.lng]}/>
         <div id="no-chef-available">
             <div id="no-chef-available-holder">
+            {(!props.error.message)?
             <h3>
                 We are deeply sorry!
                 {" "+props.error.response.data}
+            </h3>:
+            <h3>
+                We are deeply sorry!
+                {" "+props.error.message}
             </h3>
-            {(props.error.response.data==='No Chefs found around this location')?
+            }
+            {(props.error.response)?
                 <h5>
                     My Bukka isn't available in this area right now. But we're continuing to expand please check back soon!
                 </h5>:

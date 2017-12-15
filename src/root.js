@@ -11,7 +11,7 @@ import Authenticatedroute from './routes/AuthenticatedRoute';
 import EventHome from './homepage/eventHome';
 import Menupage from './menu/menuPage';
 import Nochefavailable from './frontpage/nochef';
-import Addmenu from './frontpage/addmenu';
+import Addmenu from './frontpage/receipt';
 
 
 

@@ -92,12 +92,20 @@ class Checking extends Component{
 		cart.total=total;
 		this.updateCart(cart);
 	}
-	//placeorder
-	placeorder=(transaction,token,uid,url)=>{
-		axios({ method: 'post',url: url,headers:{token,uid},body:{transaction:transaction}})
-		.then((r)=>console.log(r))
-		.catch((e)=>console.log("it is me!!!",e))
-	}
+	 //placeorder
+	 placeorder = (transaction, token, chefUid, url) => {
+		console.log(transaction,chefUid,token)
+		axios({
+		  method: 'post',
+		  url: url,
+		  headers: {token, chefUid },
+		  data: {
+			   transaction
+		  }
+		})
+		.then((r) => console.log(r))
+		.catch((e) => console.log("it is me!!!", e))
+	  }
 	render(){
 		return(
 			
@@ -115,14 +123,15 @@ class Checking extends Component{
 							  	address={this.props.address}
 							  	toggleSignin={this.toggleSignin}
 							  	toggleSignUp={this.toggleSignUp}
-								  toggleshowaddcard={this.toggleShowcard} /> 
-				<CheckoutSlip 	cart={this.props.cart}
+								toggleshowaddcard={this.toggleShowcard} /> 
+				<CheckoutSlip 		cart={this.props.cart}
 									user={this.props.user} 
 									chef={this.props.chef}
 									address={this.props.address} 
 									deleteCart={this.deleteCart} 
 									quantityUpdate={this.quantityUpdate}
-									placeorder={this.placeorder} />
+									placeorder={this.placeorder}
+									toggleshowaddcard={this.toggleShowcard} />
 				</div>
 				
 				

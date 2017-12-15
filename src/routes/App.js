@@ -13,7 +13,18 @@ import MenuItems from '../menu/menuItems';
 import CheckoutPage from '../checkout/checkoutPage';
 import CheckoutSlip from '../checkout/checkoutSlip';
 import {connect} from 'react-redux';
-import { fetch_address, fetch_chef, identify_user, get_chef,showsignIn,showsignUp,get_chef_update_failed,updating_user_info,signout,signup,update_cart} from '../data_Container/action/actions';
+import {	fetch_address, 
+			fetch_chef, 
+			identify_user, 
+			get_chef,
+			showsignIn,
+			showsignUp,
+			get_chef_update_failed,
+			updating_user_info,
+			signout,
+			signup,
+			update_cart,
+			showaddmenu } from '../data_Container/action/actions';
 import fetch   from 'isomorphic-fetch';
 import SignIn from '../authentication/signIn';
 import SignUp from '../authentication/SignUp';
@@ -23,6 +34,7 @@ import Home from '../homepage/Home';
 import Map from '../homepage/Map';
 import Reg from '../homepage/Reg';
 import Nochefavailable from '../frontpage/nochef';
+import Addmenu from '../frontpage/addmenu';
 
 
 
@@ -35,7 +47,8 @@ class App extends Component {
 					user:this.props.user,
 					page:this.props.page,
 					signup:this.props.SignUp,
-					
+					menuinview:null,
+					scrollposition:null
 					};
 		this.deleteCart=this.deleteCart.bind(this);
 		this.quantityUpdate=this.quantityUpdate.bind(this);
@@ -47,6 +60,8 @@ class App extends Component {
 		this.updateCart=this.updateCart.bind(this);
 		this.chefResult=this.chefResult.bind(this);
 		this.chefcloseby=this.chefcloseby.bind(this);
+		this.addItem=this.addItem.bind(this);
+		this.toggleAddmenu=this.toggleAddmenu.bind(this);
 	}
 
 	//togglepages
@@ -56,10 +71,25 @@ class App extends Component {
 	toggleSignUp(){
 		this.props.dispatch(showsignUp(this.props.page.showsignUp))
 	}
+	async toggleAddmenu(){
+		const pole=document.getElementById('board')
+		const top=window.scrollY;
+		if(pole.classList.contains('popups')){
+			pole.classList.remove("popups")
+			//await setTimeout(()=>window.scrollTop(this.state.scrollposition),1000)
+			console.log("scrolled to",this.state.scrollposition)
+			await this.setState({scrollposition:null})
+		}else{
+			console.log(window.scrollY)
+			await this.setState({scrollposition:top})
+			pole.classList.add("popups")
+		}
+		this.props.dispatch(showaddmenu(this.props.page.showaddmenu))
+	}
 	//signin and signup
 	signin(email,password){
-		this.props.dispatch(identify_user(axios.post("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login",{email,password})))
-		.then(()=>{this.props.dispatch(updating_user_info(axios.get("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
+		this.props.dispatch(identify_user(axios.post("https://chef.mybukka.com/api/v1/bukka/auth/custom/login",{email,password})))
+		.then(()=>{this.props.dispatch(updating_user_info(axios.get("https://chef.mybukka.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
 		.then(()=>this.toggleSignin())
 		.catch((e)=>console.log('Sorry! There was a problem',e))
 	}
@@ -98,6 +128,11 @@ class App extends Component {
 		cart.cart=newCart;
 		cart.total=total;
 		this.updateCart(cart);
+	}
+	//additem
+	 addItem=async (menu)=>{
+		await this.setState({menuinview:menu})
+		this.toggleAddmenu()
 	}
 	//getchef
 	chefResult=(latLng)=>{
@@ -157,6 +192,7 @@ class App extends Component {
 		  console.log("Network error",e);
 		}
 	  }
+		
   render() {
     return (
 		(this.props.chef.error)?
@@ -202,7 +238,7 @@ class App extends Component {
 					
 				</div>
 			</div>:
-			<div className="devi">
+			<div className="devi" id="big-pole">
 				<ScrollLogic    address={this.props.address.Location}
 								Located={this.props.address.Located} 
 								chef={this.props.chef} 
@@ -216,7 +252,8 @@ class App extends Component {
 								chefResult={this.chefResult}/>
 				<MenuPage chef={this.props.chef}/>
 				<MenuItems updateCart={this.updateCart} 
-						chef={this.props.chef} />
+						chef={this.props.chef}
+						addItem={this.addItem} />
 				<Footer/>
 				{(this.props.page.showsignIn)? 
 					<SignIn toggleSignin={this.toggleSignin}
@@ -230,6 +267,11 @@ class App extends Component {
 							signup={this.signup}
 							SignUp={this.props.SignUp}
 							user={this.props.user} />:null}
+				{(this.props.page.showaddmenu)?
+					<Addmenu	menu={this.state.menuinview}
+								showaddmenu={this.toggleAddmenu}
+								updateCart={this.updateCart}
+								/>:null}
 			</div>
     	);
   }

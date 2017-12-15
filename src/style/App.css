@@ -220,6 +220,10 @@ button:active,.shopping-cart:active {
   background-color:#b94a55 !important;
 	cursor: pointer;
 }
+.popups{
+  overflow: hidden;
+  /*max-height: 100%;*/
+}
 @keyframes loading{
   0%{-ms-transform: rotate(0deg);-webkit-transform: rotate(0deg);transform: rotate(0deg);}
   25%{-ms-transform: rotate(90deg);-webkit-transform: rotate(90deg);transform: rotate(90deg);}

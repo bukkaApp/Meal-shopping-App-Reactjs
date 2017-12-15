@@ -32,7 +32,10 @@ export const showaddCard=(addCard)=>({
 	type:'ADD_CARD_PAGE',
 	payload:addCard
 });
-
+export const showaddmenu=(addmenu)=>({
+	type:'ADD_MENU',
+	payload:addmenu
+});
 export const signout=()=>({
 	type:'SIGN_OUT'
 });
@@ -44,6 +47,7 @@ export const addcard=(response)=>({
 	type:'ADD_CARD',
 	payload:response
 });
+
 export const orderhistory=(response)=>({
 	type:'FETCH_ORDER_HISTORY',
 	payload:response

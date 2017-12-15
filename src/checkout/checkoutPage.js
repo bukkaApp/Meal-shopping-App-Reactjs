@@ -73,10 +73,8 @@ export default class checkoutPage extends Component{
 									XXXX XXXX XXXX {this.props.user.lastCardDigits}
 								</p>
 								</div>:
-								<div  id="carddetails">
-									<h5 id="addCard" onClick={this.props.toggleshowaddcard}>
-										Add Card +
-									</h5>
+								<div className="btn-Holder">
+									<button onClick={this.props.toggleshowaddcard} className="btn-red">Add Card</button>
 								</div>
 								:null
 							}
