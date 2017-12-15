@@ -5,9 +5,10 @@ import SimpleForm from './autoComplete';
 import ShoppingCart from './shoppingCart';
 import {Link} from 'react-router-dom';
 import { ButtonToolbar,DropdownButton,MenuItem} from 'react-bootstrap';
+import {connect} from 'react-redux';
 
 
-export default class HeaderMin extends Component{
+class HeaderMin extends Component{
 	constructor(Props){
 		super(Props)
 		this.addClass=this.addClass.bind(this)
@@ -45,15 +46,26 @@ export default class HeaderMin extends Component{
 	render(){
 		return(
 			<div  className="myheader header-min">
-				<Link to="/"><img src="http://res.cloudinary.com/www-mybukka-com/image/upload/v1505151382/logo_m8ik1x.png" id="logo" alt="logo"/></Link>
-				<div className="search-box search-box-min">
+				<Link to="/"><img src="http://res.cloudinary.com/www-mybukka-com/image/upload/v1505151382/logo_m8ik1x.png" id="logo-min" alt="logo"/></Link>
+				<div className="search-box2 search-box-min">
 				<SimpleForm chefResult={this.props.chefResult}/>
 				</div>
+				
 				{(!this.props.user.isAuthenticated)? <div className=" header-top-button header-top-button-min ">
-																<button onClick={this.props.toggleSignin} className="display-toggle">Sign In</button>
-																<button className="btn-red display-toggle" onClick={this.props.toggleSignUp} >Sign Up</button>
+																<button onClick={this.props.toggleSignin} className="display-toggle min-sign-in">Sign In</button>
+																<button className="btn-red display-toggle min-sign-up" onClick={this.props.toggleSignUp} >Sign Up</button>
 																{(this.props.Located)?
-																				<div className='m-cart-not-signed-in display-toggle'>
+																			<div>
+																				
+																				<div>
+																					<span className="s-cart">
+																					{(Object.keys(this.props.cart.cart).length)? (Object.keys(this.props.cart.cart).map((val,key)=>this.props.cart.cart[val].quantity).reduce((a,b)=>a+b,0)):null}	
+																					</span>
+																				</div>
+																				
+																				<div className='m-cart-not-signed-in display-toggle' id="l">
+																					
+																					
 																					<MdShoppingCart className="shopping-cart display-toggle"/>
 																					
 																					<div className="m-cart-items">
@@ -62,9 +74,11 @@ export default class HeaderMin extends Component{
 																										quantityUpdate={this.props.quantityUpdate} 
 																										checkOut={this.props.checkOut} />
 																					</div>
+																				</div>
 																				</div>: 
 																				null
-																} 
+																			
+																} 	
 																
 															</div>:
 															(<div className=" m-info ">
@@ -81,6 +95,7 @@ export default class HeaderMin extends Component{
 																{(this.props.Located)?
 																<div className='m-cart display-toggle'>
 																	<MdShoppingCart className="m-shopping-cart"/>
+																	
 																	<div className="m-cart-items">
 																		<ShoppingCart   cart={this.props.cart} 
 																			    		deleteCart={this.props.deleteCart} 
@@ -98,3 +113,7 @@ export default class HeaderMin extends Component{
 			)
 	}
 }
+function mapStateToProps(state){
+	return state;
+};
+export default connect(mapStateToProps)(HeaderMin);
