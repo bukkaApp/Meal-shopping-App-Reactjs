@@ -16,21 +16,44 @@ class HeaderMin extends Component{
 	}
 	addClass(){
 		const l = document.getElementById('l');
-		
+		const sc=document.getElementsByClassName('shopping-cart');
+		const na=document.getElementsByClassName('s-cart');
+		if (l!==null & sc!==null){
 		if (Object.keys(this.props.cart.cart).length){
+				for(var i=0;i<sc.length;i++){
+				if(!sc[i].classList.contains('color-white')){
+					sc[i].classList.add('color-white')
+				}
+			}
+			for(var c=0;c<na.length;c++){
+				if(na[c].classList.contains('no-disp')){
+					console.log("b")
+					na[c].classList.remove('no-disp')
+				}	
+			}
 				if(!l.classList.contains('s-cart-filled')){
 					l.classList.add('s-cart-filled')
 					
 				}
 		}
 		else if(!Object.keys(this.props.cart.cart).length){
+			for(var i=0;i<sc.length;i++){
+				if(sc[i].classList.contains('color-white')){
+					sc[i].classList.remove('color-white')
+				}
+			}
+			for(var p=0;p<na.length;p++){
+				if(!na[p].classList.contains('no-disp')){
+					na[p].classList.add('no-disp')
+				}	
+			}
 				if(l.classList.contains('s-cart-filled')){
 					l.classList.remove('s-cart-filled')
 					
 				}
+
 		}
-		
-			
+	}		
 	}
 	componentDidMount(){
 		(this.props.chef.fetched)?
@@ -38,10 +61,10 @@ class HeaderMin extends Component{
 		null
 	}
 	componentWillReceiveProps(nextProps){
-			(nextProps.cart.cart!==this.props.cart.cart)?
-			(this.props=nextProps,
-			this.addClass()):
-			null
+		(nextProps.cart.cart!==this.props.cart.cart)?
+		(this.props=nextProps,
+		this.addClass()):
+		null
 	}
 	render(){
 		return(

@@ -39,6 +39,14 @@
 	padding-right: 0 !important;
 	margin-left: -100px;
 }
+.color-white{
+	color:white!important;
+}
+@media(max-width:1010px){
+	.bigMenuHolder .menuHolder{
+		margin-left:0;
+	}
+}
 @media(max-width:767px){
 	.divider{
 		display: none;
@@ -46,4 +54,5 @@
 	.bigMenuHolder{
 		height: 80px !important;
 	}
+	
 }

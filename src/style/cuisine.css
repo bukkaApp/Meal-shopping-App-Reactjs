@@ -1,0 +1,21 @@
+.container{
+    position: relative;
+    top: 120px;
+    margin-bottom: 200px;
+  }
+  .container .row{
+    padding-left: 13px;
+  }
+.left{
+    height: 240px;
+    width: 320px;
+    padding: 0;
+  }
+  .myheader {
+    top: 0; 
+  }
+  .container>h1{
+    font-size: 22px;
+    padding-bottom: 10px;
+    padding-left: 25px;   
+  }

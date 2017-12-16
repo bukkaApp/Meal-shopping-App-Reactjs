@@ -1,14 +1,16 @@
 .signInPopup{
 	position: fixed;
-	left:0;
-	right: 0;
-	top:0;
-	bottom: 0;
-	height:100%;
-	width:100%;
-	margin: auto;
-  	background-color: rgba(0,0,0, 0.5);
-  	z-index: 100;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    min-height: 100%;
+    background-color: rgba(0,0,0, 0.5);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+	padding: 10%;
+	padding-bottom: 12%;
 }
 .white-background{
 	background-color: white;
@@ -80,22 +82,18 @@ text-align: left;
 	padding-left:20px;
 }
 .popupHolder{
-  position: absolute;
-  left: 30%;
-  right: 30%;
-  top: 20%;
-  bottom: 20%;
-  margin: auto;
-  background: white;
+	position: absolute;
+    top: 15%;
+    margin: auto;
+	background: white;
+	width: 500px;
 }
 .SignUpPopupHolder{
-  position: absolute;
-  left: 30%;
-  right: 30%;
-  top: 5%;
-  bottom: 5%;
-  margin: auto;
-  background: white;
+	position: absolute;
+    top: 15%;
+    margin: auto;
+	background: white;
+	width: 500px;
 }
 .AddcardPopupHolder{
   position: absolute;
@@ -107,9 +105,9 @@ text-align: left;
   background: white;
 }
 .formField{
-	padding-left:80px;
-	padding-right: 80px;
-
+	padding-left: 30px;
+    padding-right: 30px;
+    max-width: 519px;
 }
 
 .formField button{
@@ -126,12 +124,12 @@ text-align: left;
 	left:0;
 	right:0;
 	position: relative;
-	height:80px;
+	height:89px;
 }
 #topPart>p{
-	width:20%;
+	width:34%;
 	border-bottom: 2px solid red;
-	left:40%;
+	left:30%;
 	top:0;
 	text-align: center;
 	font-size: 2em;
@@ -142,6 +140,7 @@ text-align: left;
 	right:20px;
 	top:10px;
 	color:red;
+	cursor: pointer;
 }
 #sign-btn{
 	margin-left: 5px;
@@ -151,5 +150,79 @@ text-align: left;
 	width:100% !important;
 	margin-bottom: 20px !important ;
 	height: 40px !important;
-	padding-left: 20px !important;
+	padding-left: 10px !important;
+}
+/*.msign-up{
+	padding-left:25px;
+	padding-right: 25px;
+}*/
+
+/*@media(max-width:1010px){
+	.popupHolder{
+		margin:0,0,0,0;
+	}
+}*/
+@media(max-width:503px){
+	.popupHolder{
+		width: 450px;
+	}
+	.SignUpPopupHolder{
+		width: 500px;
+	}
+	.formField{
+		max-width: 519px;
+	}
+}
+@media(max-width:445px){
+	.popupHolder{
+		width: 430px;
+	}
+	.SignUpPopupHolder{
+		width: 500px;
+	}
+	.formField{
+		max-width: 519px;
+	}
+}
+@media(max-width:398px){
+	.popupHolder{
+		width: 390px;
+	}
+	
+}
+@media(max-width:354px){
+	.popupHolder{
+		width: 350px;
+	}
+	
+}
+@media(max-width: 473px){
+	.SignUpPopupHolder {
+		width: 467px;
+	}
+}
+@media(max-width:436px){
+	.SignUpPopupHolder {
+		width: 433px;
+	}
+}
+@media(max-width:402px){
+	.SignUpPopupHolder {
+		width: 399px;
+	}
+}
+@media(max-width:371px){
+	.SignUpPopupHolder {
+		width: 365px;
+	}
+}
+@media(max-width:350px){
+	.SignUpPopupHolder {
+		width: 375px;
+	}
+}
+@media(max-width:338px){
+	.SignUpPopupHolder {
+		width: 355px;
+	}
 }

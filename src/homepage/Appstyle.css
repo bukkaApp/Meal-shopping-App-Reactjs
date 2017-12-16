@@ -14,11 +14,12 @@
   .formcom Form{
     width: 450px;
     z-index: 1;
-    position: absolute;
+    position: relative;
     left: 55%;
-    top: 130px;
+    top: -993px;
     background-color: #f8f8f8;
     border-top: 10px solid #f0f0f0;
+   
   }
   .formcom h3, .formcom h4{
     text-align: center;
@@ -80,18 +81,19 @@
   .Event-img-holder>img{
     width: 100%;
     height: 700px;
-    top: 583px;
+    top: 220px;
     z-index: 0;
-    position: absolute;
+    position: relative;
   }
   
   
   .firststyle{
-   z-index: 1;
-   top: 75%;
-   left: 3%;
-   right: 0;
-    position: absolute;
+    z-index: 1;
+    top: 75%;
+    left: 3%;
+    right: 0;
+    position: relative;
+    padding-top: 124px;
   }
 .firststyle>h1{
   font-size: 3.5em;
@@ -105,7 +107,7 @@
     position: absolute;
     padding-left: 60px;
     padding-top: 80px;
-    top: 1200px;
+    top: 1188px;
     padding-right: 70px;
   }
   
@@ -177,6 +179,9 @@
     .readystyle{
       display:none;
     }
+  }
+  .dev{
+
   }
   @media(max-width:767px){
    .branchesstyle{

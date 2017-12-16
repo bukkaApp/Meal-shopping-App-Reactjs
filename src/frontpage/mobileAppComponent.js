@@ -7,17 +7,22 @@ export default class mobileAppComponent extends Component{
 		return(
 				<div className="mobileAppImage-holder">
 					<div className="row">
-						<div className="col-sm-6 m-app-store">
-							<h1>Crave. Tap. Enjoy.</h1>
-							<p>With the MyBukka app, your favourite meal are always a tap away.</p>
-							<br/>
-							<br />
-							<h3>DOWNLOAD THE APP</h3>
-							<br />
-							<a href="#"><img className="appleapp" src='http://res.cloudinary.com/www-mybukka-com/image/upload/v1508504845/c4c51cdd9a95bdb0c488ff0a013c865c_smq7g5.png' alt="applestore"/></a> <a href="#"><img className="googleapp" src='http://res.cloudinary.com/www-mybukka-com/image/upload/v1508342712/appstore_bkvsi2.png' alt="googleplay"/></a>
+						<div className="col-sm-4 left-side">
+							<h3>DOWNLOAD BUKKA</h3>
+							<p>With as little as four (4) swipes you can begin to enjoy your favourite meals. Join, select your location and place your orders. Relax while your chef delivers.</p>
+							
+							<h3>1000+ MEALS</h3>
+							<p>With more than 500 chefs registered, we have the largest variety of meals available for you to pick form on Bukka.</p>
 						</div>
-						<div className="col-sm-6">
+						<div className="col-sm-4">
 							<img className="pic" src={pic} alt="app5"/>
+						</div>
+						<div className="col-sm-4 right-side">
+							<h3>HEALTH AND SAFETY</h3>
+							<p>We take food hygiene seriously. Every chef and kitchen goes through a rigorous assessment before being able to cook on Bukka.</p>
+							
+							<h3>RATE AND REPORT</h3>
+							<p>Give every chef a rating, give your opinion and report services you are not comfortable with so we ensure it does not reoccur.</p>
 						</div>
 					</div>
 				</div>

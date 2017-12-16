@@ -12,8 +12,8 @@ export default class HeaderMax extends Component{
 			<div className="myheader">
 				<Link to="/"><img src="http://res.cloudinary.com/www-mybukka-com/image/upload/v1505151382/logo_m8ik1x.png" id="logo" alt="logo"/></Link>
 				{(!this.props.user.isAuthenticated)? <div className="header-top-button">
-																<button onClick={this.props.toggleSignin}>Sign In</button>
-																<button className="btn-red" onClick={this.props.toggleSignUp} >Sign Up</button>
+																<button className="max-sign-in" onClick={this.props.toggleSignin}>Sign In</button>
+																<button className="btn-red max-sign-up" onClick={this.props.toggleSignUp} >Sign Up</button>
 																{(this.props.Located)?
 																		<div className='m-cart-not-signed-in'>
 																			<MdShoppingCart className="shopping-cart"/>
@@ -53,8 +53,8 @@ export default class HeaderMax extends Component{
 															</div>)
 
 														}
-				<p id="search-text">Find the food that matches your taste around you</p>
-				<div className="search-box">
+				<p id="search-text"><b>Find the food that matches your taste around you</b></p>
+				<div className="search-box max-search">
 				<SimpleForm chefResult={this.props.chefResult}/>
 				</div>
 			</div>

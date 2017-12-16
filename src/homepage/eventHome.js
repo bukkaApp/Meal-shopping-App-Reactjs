@@ -11,15 +11,9 @@ class App extends Component {
   render() {
     return (
       <div className="dev">
-      <div>
         <Home />
-      </div>
-      <div>
         <Reg />
-      </div>
-      <div>
         <Footer />
-      </div>
       </div>
     );
   }
