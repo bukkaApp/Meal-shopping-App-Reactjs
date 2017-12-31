@@ -9,7 +9,7 @@ class authenticatedRoute extends Component{
 		super(props)
 	}
 	render(){
-		return((this.props.user.isAuthenticated)? <Profile/>:<App/>)
+		return((this.props.user.isAuthenticated)? <Profile/>: <Redirect to='/'/> )
 	}
 	}
 

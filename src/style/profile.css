@@ -161,11 +161,10 @@
 }
 .m-history-holder{
 	padding-left: 10%;
-	padding-right: 10%;
-	background-color: white;
-	position: absolute;
-	top:200px;
-	width:100%;
+    padding-right: 10%;
+    background-color: white;
+    position: absolute;
+    width: 100%;
 }
 .m-content-holder h4{
 border-bottom: 1px solid #e1e1e1;

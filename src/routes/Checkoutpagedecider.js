@@ -12,7 +12,7 @@ class checkoutpagedecider extends Component{
         return(
             (Object.keys(this.props.cart.cart).length)? 
         <Checking/>:
-        <App/>
+        <Redirect to='/'/>
     )
 	}
 	}

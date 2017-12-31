@@ -64,7 +64,7 @@ class App extends Component {
 		this.addItem=this.addItem.bind(this);
 		this.toggleAddmenu=this.toggleAddmenu.bind(this);
 	}
-
+	
 	//togglepages
 	toggleSignin(){
 		this.props.dispatch(showsignIn(this.props.page.showsignIn))
@@ -72,20 +72,20 @@ class App extends Component {
 	toggleSignUp(){
 		this.props.dispatch(showsignUp(this.props.page.showsignUp))
 	}
+	
 	async toggleAddmenu(){
-		const pole=document.getElementById('board')
-		const top=window.scrollY;
+		const pole=document.getElementsByTagName("BODY")[0];
+		const he=document.getElementById('head')
+		if(pole!==null && he!==null){
 		if(pole.classList.contains('popups')){
 			pole.classList.remove("popups")
-			//await setTimeout(()=>window.scrollTop(this.state.scrollposition),1000)
-			console.log("scrolled to",this.state.scrollposition)
-			await this.setState({scrollposition:null})
+			he.classList.remove('scr')
 		}else{
-			console.log(window.scrollY)
-			await this.setState({scrollposition:top})
 			pole.classList.add("popups")
+			he.classList.add('scr')
 		}
 		this.props.dispatch(showaddmenu(this.props.page.showaddmenu))
+		}
 	}
 	//signin and signup
 	signin(email,password){
@@ -122,9 +122,12 @@ class App extends Component {
 	}
 	//quantityUpdate
 	quantityUpdate=(Quantity,key)=>{
-		var price=this.props.cart.cart[key].price,totalCost=price*Quantity,newCart=this.props.cart.cart,cart={};
-		newCart[key].quantity=Quantity;
-		newCart[key].totalCost=totalCost;
+		if(Quantity===""){
+			Quantity=0;
+		}
+		var price=parseInt(this.props.cart.cart[key].price,10),totalCost=price*parseInt(Quantity,10),newCart=this.props.cart.cart,cart={};
+		newCart[key].quantity=parseInt(Quantity,10);
+		newCart[key].totalCost=parseInt(totalCost,10);
 		var total=Object.keys(newCart).map((key,i)=>newCart[key].totalCost).reduce((sum,value)=>sum+value,0).toFixed(2);
 		cart.cart=newCart;
 		cart.total=total;
@@ -284,3 +287,4 @@ function mapStateToProps(state){
 	return state;
 };
 export default connect(mapStateToProps)(App);
+

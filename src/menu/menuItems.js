@@ -68,7 +68,6 @@ export default class menuItems extends Component{
 											</h6>
 											<div 	className="cartBtn" 
 													onClick={this.stoppropa} 
-													onClick={this.stoppropa} 
 													data-id={menu.category+identifier}>
 												<h4		className="price" 
 														id={identifier+"priceId"} 

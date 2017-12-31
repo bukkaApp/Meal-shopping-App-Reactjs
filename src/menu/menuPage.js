@@ -3,25 +3,6 @@ import '../style/menuPage.css';
 import FaStar from 'react-icons/lib/fa/star';
 import MdMore from 'react-icons/lib/md/more';
 
-
-/*export default class menuPage extends Component{
-	render(){
-		return (
-				<div className="menuCont">
-				<div className="imageHolder">
-				<img src="https://res.cloudinary.com/bukka/image/upload/v1500737722/app/MENU-bg.jpg" alt="advert-banner" id="menuPageLogo"/>
-				<div className="chefDetailHolder">
-					<h1>{this.props.chef.yourChef.first_name+" "+this.props.chef.yourChef.last_name}</h1>
-					<img src={this.props.chef.yourChef.profile_photo} alt="chef" id="chef_photo" width="50px" height="50px"/>
-				</div>
-				</div>
-				<ul className="menuHolder menuTop">
-				{(this.props.chef.fetched)? this.props.chef.menuCategoriesKeys.map((categ,key)=><li key={key}><a href={'#'+categ}>{categ}</a></li>):null}
-				</ul>
-				</div>)
-	}
-}*/
-
 const menuPage = (props) =>{
 	function changecolor(e){
 		var category=document.getElementsByClassName("m-categories");
@@ -36,6 +17,14 @@ const menuPage = (props) =>{
 			uniquecategory[i].classList.add("l-selecting")
 		}
 	};
+	function show(){
+		const m=document.getElementById('mt');
+		if(m.classList.contains('d')){
+			m.classList.remove('d')
+		}else{
+			m.classList.add('d')
+		}
+	}
 	const mystyle={
 		backgroundImage:`url('https://www.miami.com/wp-content/uploads/sites/2/2016/12/h-mcdonalds-Double-Quarter-Pounder-with-Cheese-Extra-Value-Meals.png')`,
 		
@@ -118,9 +107,45 @@ const menuPage = (props) =>{
 				<MdMore className="buttn" id="more"/>
 			</h1>
 		</div>
+
 		<ul className="menuHolder menuTop">
-		{(props.chef.fetched)? props.chef.menuCategoriesKeys.map((categ,key)=><li key={key}><a href={'#'+categ} className={"m-categories "+categ} data-categ={categ} onClick={changecolor}>{categ}</a></li>):null}
-		</ul>
+					{ 
+						(props.chef.fetched)? 
+							props.chef.menuCategoriesKeys.map(
+								(categ,key)=> (key<9)? 
+									<li key={key}>
+										<a 		href={'#'+categ} 
+												className={"m-categories "+categ} 
+												data-categ={categ} 
+												onClick={changecolor}>
+										{categ}
+										</a>
+									</li>:
+									null ):
+									null
+					}
+					<li id="more" className="r">
+						<a id="il" onClick={show}>More...</a>
+						{
+						(props.chef.fetched)? 
+							<div id='mt' className="moreitems kp d">
+								{
+									props.chef.menuCategoriesKeys.map(
+									(categ,key)=> (key>=9)?
+											<a 		key={key}
+													href={'#'+categ} 
+													className={"m-categories "+categ} 
+													data-categ={categ} 
+													onClick={changecolor}>
+											{categ}
+											</a>:
+										null )
+								}
+							</div>:
+						null
+						}
+					</li>
+				</ul>
 	</div>
 )};
 

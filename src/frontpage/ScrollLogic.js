@@ -13,7 +13,6 @@ export default class scrollLogic extends Component{
 			searchResult:''
 		};
         this.scrollDetector=this.scrollDetector.bind(this);
-        console.log(document.body.width)
 	}
 
 	scrollDetector() {
@@ -28,8 +27,6 @@ export default class scrollLogic extends Component{
         ((window.scrollY/scrollmax)*100>6.343403826787512)? this.setState({ scroll:true }):this.setState({ scroll:false }):
         (window.scrollY>362)? this.setState({ scroll:true }):this.setState({ scroll:false })
 
-              console.log(window.scrollY);
-              console.log(window.innerWidth);
     }
     componentDidMount() {
         window.addEventListener('scroll', this.scrollDetector);

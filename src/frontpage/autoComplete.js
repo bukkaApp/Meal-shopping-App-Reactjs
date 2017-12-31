@@ -66,7 +66,7 @@ class SimpleForm extends React.Component {
 
     return (
       
-      <form onSubmit={this.handleFormSubmit} style={{display:'flex',justifyContent:'spaceBetween',}}>
+      <form onSubmit={this.handleFormSubmit} style={{display:'flex',justifyContent:'spaceBetween',}} className="abc">
         <PlacesAutocomplete inputProps={inputProps} autocompleteItem={AutocompleteItem} classNames={cssClasses} onEnterKeyDown={this.handleEnter} onSelect={this.handleSelect} />
         {(!this.props.chef.fetching)? <button type="submit" className="btn-red max-summit min-submit">Submit</button>:null}
         {(this.props.chef.fetching)?<button type="submit" className="btn-red"><span className="loader"><Faspinner/></span></button>:null}

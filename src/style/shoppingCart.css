@@ -48,10 +48,6 @@
 	text-decoration: none;
 	color:#9c1c26;
 	cursor:pointer;
-	-webkit-tap-highlight-color: transparent;
-}
-h4,p,h4:hover,p:hover{
-	-webkit-tap-highlight-color: transparent;
 }
 .Totalcost{
 	display: flex;

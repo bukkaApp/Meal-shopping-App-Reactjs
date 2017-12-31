@@ -19,7 +19,6 @@ class checkoutSlip extends Component{
 		this.timewillpass=this.timewillpass.bind(this);
 		this.createReceipt=this.createReceipt.bind(this);
 	} 
-
 	deleteDiv(e){
 		this.props.deleteCart(e.target.dataset.key);
 	}
@@ -188,7 +187,8 @@ class checkoutSlip extends Component{
 					)
 					.catch(r=>console.log(r))
 		}
-}
+}	
+	
 	render(){
 		return(
 			<div id="checkoutSlip">

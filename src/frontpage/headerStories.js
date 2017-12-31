@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../style/App.css';
 import '../style/headerStories.css';
-import MdShoppingCart from 'react-icons/lib/md/shopping-cart';
+import MdShoppingCart from 'react-icons/lib/md/shopping-basket';
 import SimpleForm from './autoComplete';
 import ShoppingCart from './shoppingCart';
 import {Link} from 'react-router-dom';
@@ -10,6 +10,9 @@ import {connect} from 'react-redux';
 class headerStories extends Component{
 	constructor(Props){
 		super(Props)
+		this.state={
+			more:this.props.chef.menuCategoriesKeys
+		}
 		this.addClass=this.addClass.bind(this)
 	}
 
@@ -26,7 +29,14 @@ class headerStories extends Component{
 			uniquecategory[i].classList.add("l-selecting")
 		}
 	}
-
+	show(){
+		const m=document.getElementById('mt');
+		if(m.classList.contains('d')){
+			m.classList.remove('d')
+		}else{
+			m.classList.add('d')
+		}
+	}
 	addClass(){
 		const k = document.getElementById('k');
 		const sc=document.getElementsByClassName('shopping-cart');
@@ -51,7 +61,6 @@ class headerStories extends Component{
 		}
 		else if(!Object.keys(this.props.cart.cart).length){
 			for(var i=0;i<sc.length;i++){
-				console.log("b")
 				if(sc[i].classList.contains('color-white')){
 					sc[i].classList.remove('color-white')
 				}
@@ -66,32 +75,36 @@ class headerStories extends Component{
 					
 				}
 		}
+	}	
 	}
-
-		
+	floatingpadd(){
+		var h= document.getElementById('head');
+		if(h.classList.contains('ab')){
+			h.classList.remove('ab');
+			h.classList.add('bc')
+		}
 	}
 	componentDidMount(){
 		(this.props.chef.fetched)?
-		this.addClass():
+		(this.addClass(),this.floatingpadd()):
 		null
 	}
 	componentWillReceiveProps(nextProps){
 		(nextProps.cart.cart!==this.props.cart.cart)?
 		(this.props=nextProps,
-		this.addClass()):
+			setTimeout(this.addClass,50)):
 		null
 	}
 
-
 	render(){
 		return(
-				<div  className="myheader header-min bigMenuHolder">
+				<div id="head" className="myheader header-min bigMenuHolder ab">
 					<Link to="/"><img src="http://res.cloudinary.com/www-mybukka-com/image/upload/v1505151382/logo_m8ik1x.png" id="logo" alt="logo"/></Link>
 					<div className="search-box search-box-min search">
 						<SimpleForm chefResult={this.props.chefResult}/>
 					</div>
-				{(!this.props.user.isAuthenticated)? <div className="header-top-button header-top-button-min head-option">
-																<button className="stories-sign-in" onClick={this.props.toggleSignin}>Sign In</button>
+				{(!this.props.user.isAuthenticated)? <div className="header-top-button header-top-button-min small-head head-option">
+																<button className="stories-sign-in " onClick={this.props.toggleSignin}>Sign In</button>
 																<button className="btn-red stories-sign-up" onClick={this.props.toggleSignUp} >Sign Up</button>
 																<div>
 																	<span className="s-cart">
@@ -99,7 +112,7 @@ class headerStories extends Component{
 																	</span>
 																</div>
 																				
-																<div className='m-cart-not-signed-in' id="k">
+																<div className='m-cart-not-signed-in em' id="k">
 																	<span><MdShoppingCart className="shopping-cart" id="sc"/></span>
 																	<div className="m-cart-items">
 																		<ShoppingCart   cart={this.props.cart} 
@@ -110,9 +123,8 @@ class headerStories extends Component{
 																</div>
 															</div>:
 															(<div className="m-info">
-																<div className="m-profile-photo-holder">
+																<div className="m-profile-photo-holder hh">
 																	<div className="m-user-icon-holder">
-																	<p className="m-name">{this.props.user.user.first_name+" "+this.props.user.user.last_name}</p>
 																	<img src={this.props.user.user.profile_photo} alt="" className="m-profile-photo"/>
 																	</div>
 																	<div className="m-profile-options">
@@ -121,21 +133,74 @@ class headerStories extends Component{
 																	</div>
 																</div>
 																
-																<div className='m-cart'>
-																	<MdShoppingCart className="m-shopping-cart"/>
-																	<div className="m-cart-items">
-																		<ShoppingCart   cart={this.props.cart} 
-																			    		deleteCart={this.props.deleteCart} 
-																			    		quantityUpdate={this.props.quantityUpdate} 
-																			    		checkOut={this.props.checkOut} />
-																	</div>
-																</div>
-															</div>)
+																{(this.props.Located)?
+																	(
+																	<div>
+																		
+																		<div>
+																			<span className="s-cart lf">
+																			{(Object.keys(this.props.cart.cart).length)? (Object.keys(this.props.cart.cart).map((val,key)=>this.props.cart.cart[val].quantity).reduce((a,b)=>a+b,0)):null}	
+																			</span>
+																		</div>
+																		
+																		<div className='m-cart-not-signed-in display-toggle em lk' id="k">
+																			
+																			
+																			<MdShoppingCart className="shopping-cart display-toggle"/>
+																			
+																			<div className="m-cart-items">
+																				<ShoppingCart   cart={this.props.cart} 
+																								deleteCart={this.props.deleteCart} 
+																								quantityUpdate={this.props.quantityUpdate} 
+																								checkOut={this.props.checkOut} />
+																			</div>
+																		</div>
+																		</div>): 
+																		null
+																		
+																	
+														}
+																</div>)
 
 														}
 				<div className="divider"></div>
 				<ul className="menuHolder">
-					{(this.props.chef.fetched)? this.props.chef.menuCategoriesKeys.map((categ,key)=><li key={key}><a href={'#'+categ} className={"m-categories "+categ} data-categ={categ} onClick={this.changecol.bind(this)}>{categ}</a></li>):null}
+					{ 
+						(this.props.chef.fetched)? 
+							this.state.more.map(
+								(categ,key)=> (key<9)? 
+									<li key={key}>
+										<a 		href={'#'+categ} 
+												className={"m-categories "+categ} 
+												data-categ={categ} 
+												onClick={this.changecol.bind(this)}>
+										{categ}
+										</a>
+									</li>:
+									null ):
+									null
+					}
+					<li id="more" className="r">
+						<a id="il" onClick={this.show}>More...</a>
+						{
+						(this.props.chef.fetched)? 
+							<div id='mt' className="moreitems d zp">
+								{
+									this.state.more.map(
+									(categ,key)=> (key>=9)?
+											<a 		key={key}
+													href={'#'+categ} 
+													className={"m-categories "+categ} 
+													data-categ={categ} 
+													onClick={this.changecol.bind(this)}>
+											{categ}
+											</a>:
+										null )
+								}
+							</div>:
+						null
+						}
+					</li>
 				</ul>
 			</div>
 				)

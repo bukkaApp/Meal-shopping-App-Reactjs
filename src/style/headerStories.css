@@ -23,7 +23,10 @@
 	top:17% !important;
 }
 .head-option{
-	top:17% !important;
+	top:24px !important;
+}
+.stories-sign-in{
+	margin-left: 13px;
 }
 .divider{
 	margin-top: 18px;
@@ -31,16 +34,18 @@
 	margin-left: -118px;
 	width:264%;
 }
-#logo{
-	margin-top:-8px !important;
-}
 .bigMenuHolder .menuHolder{
 	padding-left: 0 !important;
 	padding-right: 0 !important;
-	margin-left: -100px;
+	margin-left:-50px;
 }
 .color-white{
 	color:white!important;
+}
+@media (max-width: 1024px){
+	.bigMenuHolder .menuHolder{
+		margin-left: -30px;
+	}
 }
 @media(max-width:1010px){
 	.bigMenuHolder .menuHolder{
