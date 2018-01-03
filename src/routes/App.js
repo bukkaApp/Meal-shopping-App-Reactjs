@@ -1,42 +1,24 @@
-import React, { Component } from 'react';
-import logo from '../logo.svg';
-import '../style/App.css';
-import '../style/index.css';
-import PageBackground from '../frontpage/PageBackground';
-import Footer from '../frontpage/Footer';
-import ScrollLogic from '../frontpage/ScrollLogic';
-/*import ChefComponent from '../frontpage/chefComponent';*/
-import MobileAppComponent from '../frontpage/mobileAppComponent';
-import SummaryComponent from '../frontpage/summaryComponent';
-import MenuPage from '../menu/menuPage';
-import MenuItems from '../menu/menuItems';
-import CheckoutPage from '../checkout/checkoutPage';
-import CheckoutSlip from '../checkout/checkoutSlip';
-import {connect} from 'react-redux';
-import {	fetch_address, 
-			fetch_chef, 
-			identify_user, 
-			get_chef,
-			showsignIn,
-			showsignUp,
-			get_chef_update_failed,
-			updating_user_info,
-			signout,
-			signup,
-			update_cart,
-			showaddmenu } from '../data_Container/action/actions';
-import fetch   from 'isomorphic-fetch';
-import SignIn from '../authentication/signIn';
-import SignUp from '../authentication/SignUp';
-import axios from 'axios';
-import '../homepage/Appstyle.css';
-import Home from '../homepage/Home';
-import Map from '../homepage/Map';
-import Reg from '../homepage/Reg';
-import Nochefavailable from '../frontpage/nochef';
-import SimpleForm from '../frontpage/autoComplete';
-import Cuisine from '../frontpage/cuisine';
-import Addmenu from '../frontpage/addmenu';
+import React, { Component } from 'react'
+import '../style/App.css'
+import '../style/index.css'
+import PageBackground from '../frontpage/PageBackground'
+import Footer from '../frontpage/Footer'
+import ScrollLogic from '../frontpage/ScrollLogic'
+import MobileAppComponent from '../frontpage/mobileAppComponent'
+import SummaryComponent from '../frontpage/summaryComponent'
+import MenuPage from '../menu/menuPage'
+import MenuItems from '../menu/menuItems'
+import {connect} from 'react-redux'
+import SignIn from '../authentication/signIn'
+import SignUp from '../authentication/SignUp'
+import '../homepage/Appstyle.css'
+import Home from '../homepage/Home'
+import Map from '../homepage/Map'
+import Reg from '../homepage/Reg'
+import Nochefavailable from '../frontpage/nochef'
+import Cuisine from '../frontpage/cuisine'
+import Addmenu from '../frontpage/addmenu'
+import lib from '../util/lib'
 
 
 class App extends Component {
@@ -51,233 +33,52 @@ class App extends Component {
 					menuinview:null,
 					scrollposition:null
 					};
-		this.deleteCart=this.deleteCart.bind(this);
-		this.quantityUpdate=this.quantityUpdate.bind(this);
-		this.toggleSignin=this.toggleSignin.bind(this);
-		this.toggleSignUp=this.toggleSignUp.bind(this);
-		this.signin=this.signin.bind(this);
-		this.signout=this.signout.bind(this);
-		this.signup=this.signup.bind(this);
-		this.updateCart=this.updateCart.bind(this);
-		this.chefResult=this.chefResult.bind(this);
-		this.chefcloseby=this.chefcloseby.bind(this);
-		this.addItem=this.addItem.bind(this);
-		this.toggleAddmenu=this.toggleAddmenu.bind(this);
 	}
-	
-	//togglepages
-	toggleSignin(){
-		this.props.dispatch(showsignIn(this.props.page.showsignIn))
-	}
-	toggleSignUp(){
-		this.props.dispatch(showsignUp(this.props.page.showsignUp))
-	}
-	
-	async toggleAddmenu(){
-		const pole=document.getElementsByTagName("BODY")[0];
-		const he=document.getElementById('head')
-		if(pole!==null && he!==null){
-		if(pole.classList.contains('popups')){
-			pole.classList.remove("popups")
-			he.classList.remove('scr')
-		}else{
-			pole.classList.add("popups")
-			he.classList.add('scr')
-		}
-		this.props.dispatch(showaddmenu(this.props.page.showaddmenu))
-		}
-	}
-	//signin and signup
-	signin(email,password){
-		this.props.dispatch(identify_user(axios.post("https://chef.mybukka.com/api/v1/bukka/auth/custom/login",{email,password})))
-		.then(()=>{this.props.dispatch(updating_user_info(axios.get("https://chef.mybukka.com/api/v1/bukka/customer/card/"+this.props.user.user.uid)))})
-		.then(()=>this.toggleSignin())
-		.catch((e)=>console.log('Sorry! There was a problem',e))
-	}
-
-	signup(email,firstname,lastname,password,mobile,isCustomer){
-		this.props.dispatch(signup(axios.post("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/register",{email,firstname,lastname,password,mobile,isCustomer})))
-		.then(()=>{this.props.dispatch(identify_user(axios.post("https://salty-escarpment-2400.herokuapp.com/api/v1/bukka/auth/custom/login",{email,password})))})
-		.then(()=>this.toggleSignUp())
-		.catch((e)=>console.log('Sorry! There was a problem',e))
-	}
-	//signout
-	signout(){
-		this.props.dispatch(signout());
-	}
-	//updatecart
-	updateCart=(cart)=>{
-		this.props.dispatch(update_cart(cart));
-	}
-	
-	//deleteCartItem
-	deleteCart=(food)=>{
-		var newCart=this.props.cart.cart;
-		delete newCart[food];
-		var cart={};
-		cart.cart=newCart;
-		var total=Object.keys(newCart).map((key,i)=>newCart[key].totalCost).reduce((sum,value)=>sum+value,0).toFixed(2);
-		cart.total=total;
-		this.updateCart(cart);
-	}
-	//quantityUpdate
-	quantityUpdate=(Quantity,key)=>{
-		if(Quantity===""){
-			Quantity=0;
-		}
-		var price=parseInt(this.props.cart.cart[key].price,10),totalCost=price*parseInt(Quantity,10),newCart=this.props.cart.cart,cart={};
-		newCart[key].quantity=parseInt(Quantity,10);
-		newCart[key].totalCost=parseInt(totalCost,10);
-		var total=Object.keys(newCart).map((key,i)=>newCart[key].totalCost).reduce((sum,value)=>sum+value,0).toFixed(2);
-		cart.cart=newCart;
-		cart.total=total;
-		this.updateCart(cart);
-	}
-	//additem
-	 addItem=async (menu)=>{
-		await this.setState({menuinview:menu})
-		this.toggleAddmenu()
-	}
-	//getchef
-	chefResult=(latLng)=>{
-		this.props.dispatch(fetch_chef(axios.get("https://chef.mybukka.com/api/v1/bukka/chefs/"+latLng.lat+"/"+latLng.lng)))
-		.then(()=>{
-			if(this.chefcloseby(this.props.chef.chefsInYourArea).yourChef.length===0){
-				var res={
-					response:{
-						data:""
-					}
-				}
-				res.response.data="No Chefs found around this location"
-				this.props.dispatch(get_chef_update_failed(res))
-			}else{
-			this.props.dispatch(get_chef(this.chefcloseby(this.props.chef.chefsInYourArea)))
-			}
-			}
-		)
-		.catch((e)=>console.log('Sorry! There was a problem',e))
-	}
-	chefcloseby=(result)=>{
-		try{
-			var yourChef=result.filter((chef)=>chef.role==="Super Chef")[0];
-			console.log("yourChef",yourChef)
-			if(yourChef){
-				var categ=Array.from(new Set(result.filter((chef)=>chef.role==="Super Chef")[0].menu.map((menu)=>menu.category)));
-				var categorizedMenu={};
-				//var menuP=yourChef.menu.filter(items=>categ.indexOf(items.category)>-1).filter(item=>item.visibility===true)
-				
-				for(var i=0;i<categ.length;i++){
-					var menuPerCategory=[];
-					yourChef.menu.map((items)=>{
-						if(items.category===categ[i]){
-						if(items.visibility){
-							//menuPerCategory.push(items);
-						}
-						menuPerCategory.push(items);
-						}
-					}
-					)
-					if(menuPerCategory.length>0){
-						categorizedMenu[`${categ[i]}`]=menuPerCategory;
-					}
-				}
-			
-				return{
-				menu:categorizedMenu,
-				yourChef:yourChef,
-				categ:Object.keys(categorizedMenu)
-				}
-			}else{
-				return{
-					yourChef:[]
-				}
-			}
-		}catch(e){
-		  console.log("Network error",e);
-		}
-	  }
 		
   render() {
     return (
 		(this.props.chef.error)?
-			<Nochefavailable    user={this.props.user}
-								signout={this.signout}
-								cart={this.props.cart}
-								error={this.props.chef.error}
-								chefResult={this.chefResult}
-								address={this.props.address}
-								/>:
+			<Nochefavailable  />:
 		(!this.props.chef.fetched)? 
 			<div style={{position:'absolute'}}> 
-				<ScrollLogic    address={this.props.address.Location} 
-								chef={this.props.chef}
-								toggleSignin={this.toggleSignin}
-								toggleSignUp={this.toggleSignUp}
-								deleteCart={this.deleteCart} 
-								quantityUpdate={this.quantityUpdate}
-								user={this.props.user}
-								signout={this.signout}
-								cart={this.props.cart}
-								chefResult={this.chefResult} />
+				<ScrollLogic chef={this.props.chef.fetched} />
 				<div className="first-page-background">
-				<PageBackground />
+					<PageBackground />
 				</div>
-				
 				<div className="dev">
 					<SummaryComponent/>
 					<MobileAppComponent/>
 					<Footer/>
 					{(this.props.page.showsignIn)? 
-						<SignIn newUser={this.props.newUser} 
-								toggleSignin={this.toggleSignin} 
-								toggleSignUp={this.toggleSignUp}
-								signin={this.signin}
-								user={this.props.user}/>:null}
+						<SignIn user={this.props.user}/>:
+						null
+					}
 					{(this.props.page.showsignUp)? 
 						<SignUp newUser={this.props.newUser} 
-								toggleSignUp={this.toggleSignUp} 
-								toggleSignin={this.toggleSignin}
-								signup={this.signup}
 								SignUp={this.props.SignUp}
-								user={this.props.user}/>:null}
-					
+								user={this.props.user}/>:
+						null
+					}	
 				</div>
 			</div>:
-			<div className="devi" id="big-pole">
-				<ScrollLogic    address={this.props.address.Location}
-								Located={this.props.address.Located} 
-								chef={this.props.chef} 
-								deleteCart={this.deleteCart} 
-								quantityUpdate={this.quantityUpdate} 
-								toggleSignin={this.toggleSignin}
-								toggleSignUp={this.toggleSignUp}
-								user={this.props.user}
-								signout={this.signout}
-								cart={this.props.cart}
-								chefResult={this.chefResult}/>
-				
+			<div className="devi">
+				<ScrollLogic chef={this.props.chef.fetched} />
 				<MenuPage chef={this.props.chef}/>
-				<MenuItems updateCart={this.updateCart} 
-						chef={this.props.chef}
-						addItem={this.addItem} />
+				<MenuItems	chef={this.props.chef} />
 				<Footer/>
 				{(this.props.page.showsignIn)? 
-					<SignIn toggleSignin={this.toggleSignin}
-							toggleSignUp={this.toggleSignUp}
-							signin={this.signin}
-							user={this.props.user} /> :null}
-
+					<SignIn user={this.props.user} /> :
+					null
+				}
 				{(this.props.page.showsignUp)? 
-					<SignUp toggleSignUp={this.toggleSignUp}
-							toggleSignin={this.toggleSignin}
-							signup={this.signup}
+					<SignUp signup={this.signup}
 							SignUp={this.props.SignUp}
-							user={this.props.user} />:null}
+							user={this.props.user} />:
+					null}
 				{(this.props.page.showaddmenu)?
-					<Addmenu	menu={this.state.menuinview}
-								showaddmenu={this.toggleAddmenu}
-								updateCart={this.updateCart}
-								/>:null}
+					<Addmenu/>:
+					null
+				}
 			</div>
     	);
   }

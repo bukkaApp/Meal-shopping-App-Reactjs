@@ -8,6 +8,7 @@ import { fetch_address, fetch_chef, identify_user, get_chef } from '../data_Cont
 import fetch   from 'isomorphic-fetch';
 import axios from 'axios';
 import Faspinner from 'react-icons/lib/fa/spinner';
+import lib from '../util/lib'
 
 class SimpleForm extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class SimpleForm extends React.Component {
     event.preventDefault()
     geocodeByAddress(this.state.address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.chefResult(latLng)})
+      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));lib.chefResult(latLng)})
       .catch(error => console.error('Error', error))
 
   }
@@ -30,7 +31,7 @@ class SimpleForm extends React.Component {
   handleEnter = (address) => {
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
-    .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.chefResult(latLng)})
+    .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));lib.chefResult(latLng)})
     .catch(error => console.error('Error', error))
 }
   setaddress(){
@@ -40,7 +41,7 @@ class SimpleForm extends React.Component {
  	this.setState({ address, placeId });
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
-      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));this.props.chefResult(latLng)})
+      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));lib.chefResult(latLng)})
       .catch(error => console.error('Error', error))
 }
 

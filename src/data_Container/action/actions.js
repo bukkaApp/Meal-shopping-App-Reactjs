@@ -1,21 +1,43 @@
+import axios from 'axios';
+import ajx from '../../util/ajax'
+
+
+//sign in
+export const identify_user=(email,password)=>({
+	type:'IDENTIFYING_USER',
+	payload:axios.post(ajx.loginendpoint,{email,password})
+})
+
+//get card details
+//takes uid as argument
+export const updating_user_info=(uid)=>({
+	type:'UPDATING_USER_INFORMATION',
+	payload:axios.get(ajx.carddtlsendpoint+uid)
+})
+
+//fetch list of chefs
+export const fetch_chef=(latLng)=>({
+	type:'GET_CHEFS',
+	payload:axios.get(ajx.chefendpoint+latLng.lat+"/"+latLng.lng)
+})
+
+//menu in view info
+export const menuview=(_)=>({
+	type:'ADD_MENU_IN_VIEW',
+	payload:_
+})
+
+
+
 export const fetch_address=(address)=>{
 	return{
 		type:'FETCH_ADDRESS',
 		payload:address
 	}
 };
-export const fetch_chef=(chef)=>({
-	type:'GET_CHEFS',
-	payload:chef
-});
-export const identify_user=(user)=>({
-	type:'IDENTIFYING_USER',
-	payload:user
-});
-export const updating_user_info=(user)=>({
-	type:'UPDATING_USER_INFORMATION',
-	payload:user
-});
+
+
+
 export const show_receipt=(receipt)=>({
 	type:'RECEIPT',
 	payload:receipt
@@ -43,9 +65,9 @@ export const showaddmenu=(addmenu)=>({
 export const signout=()=>({
 	type:'SIGN_OUT'
 });
-export const signup=(success)=>({
+export const signup=(email,firstname,lastname,password,mobile,isCustomer)=>({
 	type:'SIGN_UP',
-	payload:success
+	payload:axios.post(ajx.signupendpoint,{email,firstname,lastname,password,mobile,isCustomer})
 });
 export const addcard=(response)=>({
 	type:'ADD_CARD',

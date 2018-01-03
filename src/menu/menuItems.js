@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import '../style/menuItems.css'
+import lib from '../util/lib'
 
 export default class menuItems extends Component{
 	constructor(props){
 		super(props);
-		this.additem=this.additem.bind(this);
 		this.stoppropa=this.stoppropa.bind(this);
 	}
 	additem(e){
@@ -21,7 +21,7 @@ export default class menuItems extends Component{
 			visibility:e.target.dataset.visibility,
 			image:e.target.dataset.image
 		}
-		this.props.addItem(menu)
+		lib.addItem(menu)
 	}
 	stoppropa(e){
 		e.stopPropagation();

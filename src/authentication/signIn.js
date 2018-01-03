@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import '../style/signIn.css';
 import Faspinner from 'react-icons/lib/fa/spinner';
+import lib from '../util/lib'
 
 export default class signIn extends Component{
 	constructor(props){
 		super(props);
 		this.getUser=this.getUser.bind(this);
 	}
+
 	getUser(){
   	var email=document.getElementById("SignInemail").value,password=document.getElementById("SignInPassword").value;
-  	this.props.signin(email,password);
+	  lib.signin(email,password)
 	}
 
 	render(){
@@ -18,7 +20,7 @@ export default class signIn extends Component{
 				<div className="popupHolder">
 					<div id="topPart">
 						<p>Login</p>
-						<a onClick={this.props.toggleSignin}>X</a>
+						<a onClick={lib.toggleSignin}>X</a>
 					</div>
 					<div className="formField">
 						<input placeholder="Email" id="SignInemail"/>
@@ -27,7 +29,7 @@ export default class signIn extends Component{
 						{(!this.props.user.fetching)?<button className="btn-red" onClick={this.getUser}>Sign In</button>:null}
 						{(this.props.user.fetching)?<button className="btn-red load" onClick={this.getUser}>Signing in<span className="loader"><Faspinner/></span></button>:null}
 						{(this.props.user.fetching_lastCardDigits)?<button className="btn-red load" onClick={this.getUser}>Updating Your Info..<span className="loader"><Faspinner/></span></button>:null}
-						<p>New User<a id="sign-btn" onClick={this.props.toggleSignUp}>Sign Up</a></p>
+						<p>New User<a id="sign-btn" onClick={lib.toggleSignUp}>Sign Up</a></p>
 					</div>
 				</div>
 			</div>

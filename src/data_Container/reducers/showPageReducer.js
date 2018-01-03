@@ -1,5 +1,5 @@
 const initialstate={
-	showsignIn:false,
+	showsignIn:false, 
 	showsignUp:false,
 	showaddCard:false,
 	showaddmenu:false,

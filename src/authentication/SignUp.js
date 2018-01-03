@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import '../style/signIn.css';
 import Faspinner from 'react-icons/lib/fa/spinner';
+import lib from '../util/lib'
 
 export default class SignUp extends Component{
 	constructor(props){
 		super(props);
 		this.signup=this.signup.bind(this);
-		console.log(this.props);
 	}
 
 	signup(){
@@ -20,7 +20,7 @@ export default class SignUp extends Component{
 		var password=document.getElementById("Passwordi").value
 		var mobile=document.getElementById("MobileNumberi").value
 		var isCustomer=true;
-		this.props.signup(email,firstname,lastname,password,mobile,isCustomer);
+		lib.signup(email,firstname,lastname,password,mobile,isCustomer);
 	}
 }
 
@@ -30,7 +30,7 @@ export default class SignUp extends Component{
 				<div className="SignUpPopupHolder">
 					<div id="topPart">
 						<p>Sign Up</p>
-						<a onClick={this.props.toggleSignUp}>X</a>
+						<a onClick={lib.toggleSignUp}>X</a>
 					</div>
 					<div className="formField">
 						<input placeholder="First Name" type="text" id="FirstNamei"/>
@@ -42,7 +42,7 @@ export default class SignUp extends Component{
 						{(!this.props.SignUp.fetching)?<button className="btn-red" onClick={this.signup}>Sign Up</button>:null}
 						{(this.props.SignUp.fetching)?<button className="btn-red load" onClick={this.signup}>Creating account<span className="loader"><Faspinner/></span></button>:null}
 						{(this.props.user.fetching)?<button className="btn-red load" onClick={this.getUser}>Signing in<span className="loader"><Faspinner/></span></button>:null}
-						<p>Already a User<a id="sign-btn" onClick={this.props.toggleSignin}>Sign In</a></p>
+						<p>Already a User<a id="sign-btn" onClick={lib.toggleSignin}>Sign In</a></p>
 					</div>
 
 				</div>
