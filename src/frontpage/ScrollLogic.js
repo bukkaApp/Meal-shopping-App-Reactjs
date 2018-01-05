@@ -1,8 +1,9 @@
-import React from 'react';
-import { Component } from 'react';
-import HeaderMax from './HeaderMax';
-import HeaderMin from './HeaderMin';
-import HeaderStories from './headerStories';
+import React from 'react'
+import { Component } from 'react'
+import HeaderMax from './HeaderMax'
+import HeaderMin from './HeaderMin'
+import HeaderStories from './headerStories'
+import propTypes from 'prop-types'
 
 export default class scrollLogic extends Component{
 	constructor(props) {
@@ -16,7 +17,7 @@ export default class scrollLogic extends Component{
 	scrollDetector() {
         const scrollmax=(Math.max( 
             document.body.scrollHeight, 
-            document.body.offsetHeight,
+            document.body.offsetHeight, 
             document.documentElement.clientHeight, 
             document.documentElement.scrollHeight, 
             document.documentElement.offsetHeight ))-(Math.min( 
@@ -51,7 +52,7 @@ export default class scrollLogic extends Component{
 
 render() {
         return (
-        	(!this.props.chef)?
+        	(!this.props.chef_fetched)?
             (this.state.scroll)?  
                 <HeaderMin />:
                 <HeaderMax />:
@@ -62,4 +63,9 @@ render() {
                 <HeaderMin  />
 )
 }
+}
+
+
+scrollLogic.propTypes={
+    chef_fetched:propTypes.bool.isRequired
 }

@@ -1,41 +1,31 @@
-import React, { Component } from 'react';
-import '../style/menuPage.css';
-import FaStar from 'react-icons/lib/fa/star';
-import MdMore from 'react-icons/lib/md/more';
+import React, { Component } from 'react'
+import '../style/menuPage.css'
+import FaStar from 'react-icons/lib/fa/star'
+import MdMore from 'react-icons/lib/md/more'
+import lib from '../util/lib'
+import ajx from '../util/ajax'
+import propTypes from 'prop-types'
 
 const menuPage = (props) =>{
-	function changecolor(e){
-		var category=document.getElementsByClassName("m-categories");
-		for(var i=0;i<category.length;i++){
-			if(category[i].classList.contains('l-selecting')){
-				category[i].classList.remove("l-selecting");
-			}
-		}
-		console.log(e.target.position)
-		var uniquecategory=document.getElementsByClassName(e.target.dataset.categ);
-		for(var i=0;i<uniquecategory.length;i++){
-			uniquecategory[i].classList.add("l-selecting")
-		}
-	};
-	function show(){
-		const m=document.getElementById('mt');
-		if(m.classList.contains('d')){
-			m.classList.remove('d')
-		}else{
-			m.classList.add('d')
-		}
-	}
+	
 	const mystyle={
-		backgroundImage:`url('https://www.miami.com/wp-content/uploads/sites/2/2016/12/h-mcdonalds-Double-Quarter-Pounder-with-Cheese-Extra-Value-Meals.png')`,
+		backgroundImage:`url(${ajx.menupageBackground})`,
 		
 	}
 	return(
 		
 	<div id="chefinformation">
-		<div className="menuCont" style={mystyle} >
-			<img src={props.chef.yourChef.profile_photo} style={{border:'3px solid #f69323'}} alt="chef"/>
-			<h3 className="text-center">{props.chef.yourChef.first_name+" "+props.chef.yourChef.last_name}</h3>
-			<h5 className="text-center">{props.chef.yourChef.role}</h5>
+		<div 	className="menuCont" 
+				style={mystyle} >
+			<img 	src={props.chef.yourChef.profile_photo} 
+					style={{border:'3px solid #f69323'}} 
+					alt="chef"/>
+			<h3 	className="text-center">
+				{props.chef.yourChef.first_name+" "+props.chef.yourChef.last_name}
+			</h3>
+			<h5 	className="text-center">
+				{props.chef.yourChef.role}
+			</h5>
 			<div className="row">
 				<div className="col-xs-4 menu-left">
 					<h4>
@@ -117,7 +107,7 @@ const menuPage = (props) =>{
 										<a 		href={'#'+categ} 
 												className={"m-categories "+categ} 
 												data-categ={categ} 
-												onClick={changecolor}>
+												onClick={lib.changecol}>
 										{categ}
 										</a>
 									</li>:
@@ -125,7 +115,7 @@ const menuPage = (props) =>{
 									null
 					}
 					<li id="more" className="r">
-						<a id="il" onClick={show}>More...</a>
+						<a id="il" onClick={lib.show}>More...</a>
 						{
 						(props.chef.fetched)? 
 							<div id='mt' className="moreitems kp d">
@@ -136,7 +126,7 @@ const menuPage = (props) =>{
 													href={'#'+categ} 
 													className={"m-categories "+categ} 
 													data-categ={categ} 
-													onClick={changecolor}>
+													onClick={lib.changecol}>
 											{categ}
 											</a>:
 										null )
@@ -150,3 +140,7 @@ const menuPage = (props) =>{
 )};
 
 export default menuPage;
+
+menuPage.propTypes={
+	chef:propTypes.object.isRequired,
+}

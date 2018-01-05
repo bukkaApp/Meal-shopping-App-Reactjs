@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import '../style/receipt.css';
 import {delete_cart,clear_receipt} from '../data_Container/action/actions';
 import {Link} from 'react-router-dom';
+import lib from '../util/lib'
+import ajx from '../util/ajax'
 
 class receipt extends Component{
     constructor(props){
@@ -14,28 +16,7 @@ class receipt extends Component{
         this.gettime=this.gettime.bind(this);
     }
     gettime(){
-        const time=new Date();
-        let h=parseInt(time.getHours())
-        let m=parseInt(time.getMinutes())
-        var d=time.getDay()
-        if(m>59){
-            m-=60
-            h+=1
-        }
-        if(h>=24){
-            h-=24
-        }
-        if (h<10){
-            h="0"+h;
-            
-        }
-        if (m<10){
-            m='0'+m
-            
-        }
-        var days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
-
-        return  time.getDate()+"/"+time.getMonth()+"/"+time.getFullYear()+", "+days[d-1]+" "+h+ " : "+ m;
+        return lib.timewillpass().current
     }
     componentWillUnmount(){
         this.props.dispatch(clear_receipt())
@@ -47,7 +28,7 @@ class receipt extends Component{
             <div id="b">
                 <div id="c">
                     <h2>Thank you for shopping with us</h2>
-                    <img src="https://res.cloudinary.com/www-mybukka-com/image/upload/v1513294716/logo-light_xnxon0_rzghhp.png" alt="my-bukka"/>
+                    <img src={ajx.normalizedlogo} alt="my-bukka"/>
                 </div>
                 <div id="d">
                     <img src={this.props.receipt.chefProfilepic} alt="chef"/>

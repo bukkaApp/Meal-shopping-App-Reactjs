@@ -30,8 +30,6 @@ class App extends Component {
 					user:this.props.user,
 					page:this.props.page,
 					signup:this.props.SignUp,
-					menuinview:null,
-					scrollposition:null
 					};
 	}
 		
@@ -41,7 +39,7 @@ class App extends Component {
 			<Nochefavailable  />:
 		(!this.props.chef.fetched)? 
 			<div style={{position:'absolute'}}> 
-				<ScrollLogic chef={this.props.chef.fetched} />
+				<ScrollLogic chef_fetched={this.props.chef.fetched} />
 				<div className="first-page-background">
 					<PageBackground />
 				</div>
@@ -54,15 +52,14 @@ class App extends Component {
 						null
 					}
 					{(this.props.page.showsignUp)? 
-						<SignUp newUser={this.props.newUser} 
-								SignUp={this.props.SignUp}
+						<SignUp SignUp={this.props.SignUp}
 								user={this.props.user}/>:
 						null
 					}	
 				</div>
 			</div>:
 			<div className="devi">
-				<ScrollLogic chef={this.props.chef.fetched} />
+				<ScrollLogic chef_fetched={this.props.chef.fetched} />
 				<MenuPage chef={this.props.chef}/>
 				<MenuItems	chef={this.props.chef} />
 				<Footer/>
@@ -71,8 +68,7 @@ class App extends Component {
 					null
 				}
 				{(this.props.page.showsignUp)? 
-					<SignUp signup={this.signup}
-							SignUp={this.props.SignUp}
+					<SignUp SignUp={this.props.SignUp}
 							user={this.props.user} />:
 					null}
 				{(this.props.page.showaddmenu)?

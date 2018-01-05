@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'axios'
 import ajx from '../../util/ajax'
 
 
@@ -26,8 +26,6 @@ export const menuview=(_)=>({
 	type:'ADD_MENU_IN_VIEW',
 	payload:_
 })
-
-
 
 export const fetch_address=(address)=>{
 	return{

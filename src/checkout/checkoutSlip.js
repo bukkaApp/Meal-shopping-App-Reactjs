@@ -9,62 +9,23 @@ import {
 		delete_cart,
 		clear_receipt
 					} from '../data_Container/action/actions';
+import lib from '../util/lib'
 
 class checkoutSlip extends Component{
 	constructor(props) {
 		super(props);
-		this.deleteDiv=this.deleteDiv.bind(this);
-		this.quantityUpdate=this.quantityUpdate.bind(this);
 		this.placeorder=this.placeorder.bind(this);
-		this.timewillpass=this.timewillpass.bind(this);
 		this.createReceipt=this.createReceipt.bind(this);
 	} 
 	deleteDiv(e){
-		this.props.deleteCart(e.target.dataset.key);
+		lib.deleteCart(e.currentTarget.dataset.key)
 	}
 
 	quantityUpdate(e) {
-		console.log("the values are ",e.target.value,e.target.dataset.key);
-		this.props.quantityUpdate(e.target.value,e.target.dataset.key);
+		lib.quantityUpdate(e.currentTarget.value,e.currentTarget.dataset.key)
 	}
 	timewillpass(){
-		const k=Object.keys(this.props.cart.cart);
-		const a= k.map((val,key)=>{
-			var h=this.props.cart.cart[`${val}`].hour.toString();
-			var m=this.props.cart.cart[`${val}`].min.toString()
-			return h+m;
-		})
-		const b=a.map((a)=>parseInt(a))
-		const v=Math.max(...b)
-		if (v.toString().length<3)
-			return v+"min"
-		else{
-			var o=v.toString()
-			var len=o.length;
-			var lenh=len-2;
-			var om=parseInt(o.substring(lenh))
-			var oh=parseInt(o.substring(0,lenh))
-			var today=new Date()
-			var h=parseInt(today.getHours())+oh
-			var m=parseInt(today.getMinutes())+om
-			var d=today.getDay()
-			if(m>60){
-				m-=60
-				h+=1
-			}
-			if(h>24){
-				h-=24
-			}
-			if (h<10){
-				h+="0"+h;
-			}
-			if (m<10){
-				m+='0'+m
-			}
-			var days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
-			return days[d-1]+" "+h+ " : "+ m
-		}
-
+		return lib.timewillpass().timewillpass
 	}
 
 	//create Receipt
@@ -74,54 +35,21 @@ class checkoutSlip extends Component{
 		const deliveryFee=this.props.chef.yourChef.delivery_charge
 		const chefProfilepic=this.props.chef.yourChef.profile_photo
 		const receiptGenerated=this.props.receipt.receiptGenerated
-	   await this.props.dispatch(add_receipt({
+	  /* await this.props.dispatch(add_receipt({
 										receipt,
 									   tax,
 									   deliveryFee,
 									   chefProfilepic,
 									   receiptGenerated
-								   }))
+								   }))*/
 	   //this.props.dispatch(delete_cart())
 	   //this.toggleShowReceipt()
-	}
-	timewillpass(){
-		const k=Object.keys(this.props.cart.cart);
-		const a= k.map((val,key)=>{
-			var h=this.props.cart.cart[`${val}`].hour.toString();
-			var m=this.props.cart.cart[`${val}`].min.toString()
-			return h+m;
-		})
-		const b=a.map((a)=>parseInt(a))
-		const v=Math.max(...b)
-		if (v.toString().length<3)
-			return v+"min"
-		else{
-			var o=v.toString()
-			var len=o.length;
-			var lenh=len-2;
-			var om=parseInt(o.substring(lenh))
-			var oh=parseInt(o.substring(0,lenh))
-			var today=new Date()
-			var h=parseInt(today.getHours())+oh
-			var m=parseInt(today.getMinutes())+om
-			var d=today.getDay()
-			if(m>=60){
-				m-=60
-				h+=1
-			}
-			if(h>=24){
-				h-=24
-			}
-			if (h<10){
-				h="0"+h;
-			}
-			if (m<10){
-				m='0'+m
-			}
-			var days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
-			return days[d-1]+" "+h+ " : "+ m
-		}
-
+	   lib.generateReceipt({	receipt,
+								tax,
+								deliveryFee,
+								chefProfilepic,
+								receiptGenerated
+													})
 	}
 
 	async placeorder(){
@@ -129,7 +57,7 @@ class checkoutSlip extends Component{
 			alert("You must Sign in first");
 		}
 		else if(this.props.user.lastCardDigits===""){
-			this.props.toggleshowaddcard()
+			lib.toggleShowcard()
 		}
 		else{
 					var chefUid = this.props.chef.yourChef.uid,
@@ -179,7 +107,8 @@ class checkoutSlip extends Component{
 								charge_customer,
 								change_amount
 							  }]
-							return this.props.placeorder(transaction,token,chefUid, url)
+							  
+							return lib.placeorder(transaction,token,chefUid, url)
 						})
 					)
 					.then(

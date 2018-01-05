@@ -10,8 +10,15 @@ import {	fetch_address,
             signup,
             update_cart,
             showaddmenu,
-            menuview                } from '../data_Container/action/actions'
+            menuview,
+            _scroll,
+            showaddCard,
+            show_receipt,
+            add_receipt,
+            addcard               } from '../data_Container/action/actions'
 import storage from '../data_Container/store'
+import axios from 'axios'
+import ajx from './ajax'
 
 
 export default{ 
@@ -19,6 +26,13 @@ export default{
     toggleSignin:()=>storage.dispatch(showsignIn(storage.getState().page.showsignIn)),
 
     toggleSignUp:()=>storage.dispatch(showsignUp(storage.getState().page.showsignUp)),
+
+    toggleShowcard:()=>storage.dispatch(showaddCard(storage.getState().page.showaddCard)),
+
+    toggleShowReceipt:()=>storage.dispatch(show_receipt(storage.getState().page.showreceipt)),
+
+    generateReceipt:(a)=>storage.dispatch(add_receipt(a)),
+
 
     signin(email,password){
         storage.dispatch(identify_user(email,password))
@@ -41,7 +55,7 @@ export default{
 		}
 		storage.dispatch(showaddmenu(storage.getState().page.showaddmenu))
 		}
-    },
+    }, 
 
     signup(email,firstname,lastname,password,mobile,isCustomer){
 		storage.dispatch(signup(email,firstname,lastname,password,mobile,isCustomer))
@@ -49,6 +63,7 @@ export default{
 		.then(storage.dispatch(showsignUp(storage.getState().page.showsignUp)))
 		.catch((e)=>console.log('Sorry! There was a problem',e))
     },
+
     signout:()=>storage.dispatch(signout()),
 
     updateCart(cart){
@@ -221,4 +236,84 @@ export default{
             (val,key)=>storage.getState().cart.cart[val].quantity).reduce(
                 (a,b)=>a+b,0)
     },
+    addcard(cardNumber,ccv,expirationMonth,expirationYear){
+		var uid=storage.getState().user.user.uid;
+		var token=storage.getState().user.user.token;
+		var email=storage.getState().user.user.email;
+		var url=ajx.addcard + uid;
+        storage.dispatch(addcard(axios({    method: 'post',
+                                            url: url,
+                                            headers:{token,uid},
+                                            data:{  email,
+                                                    cardNumber,
+                                                    ccv,
+                                                    expirationMonth,
+                                                    expirationYear  }
+                                        })))
+		.then(()=>this.signout())
+        .then(()=>this.toggleShowcard())
+        .then(()=>this.toggleSignin())
+    },
+    placeorder(transaction, token, chefUid, url) {
+		axios({ method: 'post',
+                url: url,
+                headers: {token, chefUid },
+                data: {transaction} })
+      },
+      timewillpass(){
+		const k=Object.keys(storage.getState().cart.cart)
+		const a= k.map((val,key)=>{
+			var h=storage.getState().cart.cart[`${val}`].hour.toString()
+			var m=storage.getState().cart.cart[`${val}`].min.toString()
+			return h+m;
+		})
+		const b=a.map((a)=>parseInt(a))
+        const v=Math.max(...b)
+        var today=new Date()
+		if (v.toString().length<3)
+			return v+"min"
+		else{
+			var o=v.toString()
+			var len=o.length;
+			var lenh=len-2;
+			var om=parseInt(o.substring(lenh))
+			var oh=parseInt(o.substring(0,lenh))
+			var h=parseInt(today.getHours())+oh
+			var m=parseInt(today.getMinutes())+om
+			var d=today.getDay()
+			if(m>60){
+				m-=60
+				h+=1
+			}
+			if(h>24){
+				h-=24
+			}
+			if (h<10){
+				h+="0"+h;
+			}
+			if (m<10){
+				m+='0'+m
+			}
+        }
+        let h1=parseInt(today.getHours()),m1=parseInt(today.getMinutes()), d1=today.getDay()
+        if(m1>59){
+            m1-=60
+            h1+=1
+        }
+        if(h1>=24){
+            h1-=24
+        }
+        if (h1<10){
+            h1="0"+h1;
+            
+        }
+        if (m1<10){
+            m1='0'+m1
+            
+        }
+        var days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+        return {    timewillpass:days[d-1]+" "+h+ " : "+ m,
+                    current:today.getDate()+"/"+today.getMonth()+"/"+today.getFullYear()+", "+days[d1-1]+" "+h1+ " : "+ m1
+                                                                                                                                }
+	}, 
 }

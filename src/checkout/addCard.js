@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../style/signIn.css';
 import Faspinner from 'react-icons/lib/fa/spinner';
+import lib from '../util/lib'
+
 
 export default class addcard extends Component{
 	constructor(props){
@@ -10,15 +12,21 @@ export default class addcard extends Component{
 		console.log("see",this.props.user)
 	}
 	addcard(){
-		var number=document.getElementById("cardNumber").value;
-		var cvv=document.getElementById("CVVNumber").value;
-		var expiry_month=document.getElementById("MonthNumber").value;
-		var expiry_year=document.getElementById("YearNumber").value;
+		var number=document.getElementById("cardNumber").value,
+		cvv=document.getElementById("CVVNumber").value,
+		expiry_month=document.getElementById("MonthNumber").value,
+		expiry_year=document.getElementById("YearNumber").value
 		if(number==""||cvv==""||expiry_year==""||expiry_month==""){
-
+			(number=="")?
+			console.log("number field cannot be empty"):
+			(cvv=="")?
+			console.log("cvv field cannot be empty"):
+			(expiry_year==""||expiry_month=="")?
+			console.log("expiry field cannot be empty"):
+			null
 		}
 		else{
-			this.props.addCard(number,cvv,expiry_month,expiry_year)
+			lib.addcard(number,cvv,expiry_month,expiry_year)
 		}
 	}
 	render(){
@@ -27,7 +35,7 @@ export default class addcard extends Component{
 				<div className="AddcardPopupHolder">
 					<div id="topPart">
 						<p>Add Card</p>
-						<a onClick={this.props.toggleshowaddcard}>X</a>
+						<a onClick={lib.toggleShowcard}>X</a>
 					</div>
 					<div className="formField">
 						<div id="headingHolder">
