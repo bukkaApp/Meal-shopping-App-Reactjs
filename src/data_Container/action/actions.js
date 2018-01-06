@@ -7,7 +7,11 @@ export const identify_user=(email,password)=>({
 	type:'IDENTIFYING_USER',
 	payload:axios.post(ajx.loginendpoint,{email,password})
 })
-
+//signup
+export const signup=(email,firstname,lastname,password,mobile,isCustomer)=>({
+	type:'SIGN_UP',
+	payload:axios.post(ajx.signupendpoint,{email,firstname,lastname,password,mobile,isCustomer})
+});
 //get card details
 //takes uid as argument
 export const updating_user_info=(uid)=>({
@@ -26,16 +30,25 @@ export const menuview=(_)=>({
 	type:'ADD_MENU_IN_VIEW',
 	payload:_
 })
-
-export const fetch_address=(address)=>{
-	return{
+//add new transaction
+export const transaction=(_)=>({
+	type:'ADD_NEW_TRANSACTION',
+	payload:_
+})
+//clear transaction object
+export const cleartransaction=()=>({
+	type:'CLEAR_TRANSACTION',
+	payload:[]
+})
+//place order
+export const order=(_)=>({
+	type:'ORDER_STATUS',
+	payload:Promise.all(_)
+})
+export const fetch_address=(add,latLng)=>({
 		type:'FETCH_ADDRESS',
-		payload:address
-	}
-};
-
-
-
+		payload:{address:add,lng:latLng.lng,lat:latLng.lat}
+})
 export const show_receipt=(receipt)=>({
 	type:'RECEIPT',
 	payload:receipt
@@ -60,13 +73,27 @@ export const showaddmenu=(addmenu)=>({
 	type:'ADD_MENU',
 	payload:addmenu
 });
+
+export const showpaymentinfo=(_)=>({
+	type:'PAYMENT_INFO',
+	payload:_
+})
+export const showorderhistory=(_)=>({
+	type:'ORDER_HISTORY',
+	payload:_
+})
+export const shownotification=(_)=>({
+	type:'NOTIFICATION',
+	payload:_
+})
+export const showbasicinformation=(_)=>({
+	type:'BASIC_INFORMATION',
+	payload:_
+})
 export const signout=()=>({
 	type:'SIGN_OUT'
 });
-export const signup=(email,firstname,lastname,password,mobile,isCustomer)=>({
-	type:'SIGN_UP',
-	payload:axios.post(ajx.signupendpoint,{email,firstname,lastname,password,mobile,isCustomer})
-});
+
 export const addcard=(response)=>({
 	type:'ADD_CARD',
 	payload:response

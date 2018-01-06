@@ -1,16 +1,13 @@
-import React,{Commponent} from 'react';
-import ReactDOM from 'react-dom';
-import './style/index.css';
-import App from './routes/App';
-import {BrowserRouter , Route, Switch} from 'react-router-dom';
-import Profile from './routes/profile';
-import { Provider } from 'react-redux';
-import PropTypes from 'prop-types';
-import Authenticatedroute from './routes/AuthenticatedRoute';
-import EventHome from './homepage/eventHome';
-import Menupage from './menu/menuPage';
-import Nochefavailable from './frontpage/nochef';
-import Checkoutpagedecider from './routes/Checkoutpagedecider';
+import React from 'react'
+import './style/index.css'
+import App from './routes/App'
+import {BrowserRouter , Route, Switch} from 'react-router-dom'
+import { Provider } from 'react-redux'
+import PropTypes from 'prop-types'
+import Authenticatedroute from './routes/AuthenticatedRoute'
+import EventHome from './homepage/eventHome'
+import Nochefavailable from './frontpage/nochef'
+import Checkoutpagedecider from './routes/Checkoutpagedecider'
 import Cuisine from './frontpage/cuisine'
 
 

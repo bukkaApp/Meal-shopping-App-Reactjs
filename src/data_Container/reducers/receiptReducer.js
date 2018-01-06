@@ -22,8 +22,10 @@ const receipt=(state=initialstate,action)=>{
         case'CLEAR_RECEIPT':{
             return{...initialstate}
         }
+        default:{
+            return{...state}
+        }
     }
-    return state;
 }
 
 export default receipt;

@@ -10,10 +10,6 @@ import ajx from '../util/ajax'
  
 
 class HeaderMin extends Component{
-	constructor(Props){ 
-		super(Props)
-	}
-
 	componentDidMount(){
 		lib.cki('l')
 	}

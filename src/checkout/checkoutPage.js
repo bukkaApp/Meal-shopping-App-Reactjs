@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../style/checkoutPage.css';
 import FaMapMarker from 'react-icons/lib/fa/map-marker';
 import GoHome from 'react-icons/lib/fa/home';
@@ -8,7 +8,7 @@ import lib from '../util/lib'
 import propTypes from 'prop-types'
 
 const checkoutPage =(props)=>{	
-		return(
+		return( 
 			<div id="deliveryInformation" >
 				{(!props.user.isAuthenticated)? <div className="btn-Holder">
 				<h3 className="instruction">

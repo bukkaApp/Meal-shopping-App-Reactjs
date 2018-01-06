@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import FaMapMarker from 'react-icons/lib/fa/map-marker';
 import '../style/App.css';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { fetch_address, fetch_chef, identify_user, get_chef } from '../data_Container/action/actions';
-import fetch   from 'isomorphic-fetch';
-import axios from 'axios';
 import Faspinner from 'react-icons/lib/fa/spinner';
 import lib from '../util/lib'
 
@@ -23,7 +19,7 @@ class SimpleForm extends React.Component {
     event.preventDefault()
     geocodeByAddress(this.state.address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));lib.chefResult(latLng)})
+      .then(latLng => {lib.address(this.state.address,latLng);lib.chefResult(latLng)})
       .catch(error => console.error('Error', error))
 
   }
@@ -31,18 +27,17 @@ class SimpleForm extends React.Component {
   handleEnter = (address) => {
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
-    .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));lib.chefResult(latLng)})
+    .then(latLng => {lib.address(address);lib.chefResult(latLng)})
     .catch(error => console.error('Error', error))
 }
-  setaddress(){
- 
-  }
+  
+
  handleSelect = (address, placeId) => {
  	this.setState({ address, placeId });
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
-      .then(latLng => {this.props.dispatch(fetch_address({address:this.state.address,lng:latLng.lng,lat:latLng.lat}));lib.chefResult(latLng)})
-      .catch(error => console.error('Error', error))
+    .then(latLng => {lib.address(address,latLng);lib.chefResult(latLng)})
+    .catch(error => console.error('Error', error))
 }
 
    render() {
@@ -67,10 +62,30 @@ class SimpleForm extends React.Component {
 
     return (
       
-      <form onSubmit={this.handleFormSubmit} style={{display:'flex',justifyContent:'spaceBetween',}} className="abc">
-        <PlacesAutocomplete inputProps={inputProps} autocompleteItem={AutocompleteItem} classNames={cssClasses} onEnterKeyDown={this.handleEnter} onSelect={this.handleSelect} />
-        {(!this.props.chef.fetching)? <button type="submit" className="btn-red max-summit min-submit">Submit</button>:null}
-        {(this.props.chef.fetching)?<button type="submit" className="btn-red"><span className="loader"><Faspinner/></span></button>:null}
+      <form onSubmit={this.handleFormSubmit} 
+            style={{display:'flex',justifyContent:'spaceBetween',}} 
+            className="abc">
+        <PlacesAutocomplete inputProps={inputProps} 
+                            autocompleteItem={AutocompleteItem} 
+                            classNames={cssClasses} 
+                            onEnterKeyDown={this.handleEnter} 
+                            onSelect={this.handleSelect} />
+        {(!this.props.chef.fetching)? 
+          <button type="submit" 
+                  className="btn-red max-summit min-submit">
+            Submit
+          </button>:
+          null
+        }
+        {(this.props.chef.fetching)?
+          <button type="submit" 
+                  className="btn-red">
+            <span className="loader">
+              <Faspinner/>
+            </span>
+          </button>:
+          null
+        }
       </form>
       
     )

@@ -1,8 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { Form, FormControl, Button } from "react-bootstrap";
+import React, { Component } from 'react';
 import './Appstyle.css';
 import foto from '../assets/image3.jpg';
-import ArrowForward from 'react-icons/lib/md/arrow-forward';
 import Money from 'react-icons/lib/fa/money';
 import Calender from 'react-icons/lib/fa/calendar';
 import Car from 'react-icons/lib/fa/automobile';

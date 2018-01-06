@@ -10,7 +10,7 @@ import foodpic2 from '../assets/image2.jpg';
 
 
 
-export default class Stores extends React.Component {
+export default class Stores extends Component {
     static propTypes = {};
 
     render () {

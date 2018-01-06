@@ -43,7 +43,7 @@ class receipt extends Component{
                 </div>
             </div>
             <div id="e">
-                <h1><span id="ea">₦</span>{parseInt(this.props.receipt.receipt.total)+parseInt(this.props.receipt.deliveryFee)+parseInt(this.props.receipt.tax)}.00</h1>
+                <h1><span id="ea">₦</span>{parseInt(this.props.receipt.receipt.total,10)+parseInt(this.props.receipt.deliveryFee,10)+parseInt(this.props.receipt.tax,10)}.00</h1>
                 <div id="f" >
                     {Object.keys(this.props.receipt.receipt.cart).map((item,key)=>
                         <h5 key={key}>
@@ -68,7 +68,7 @@ class receipt extends Component{
                 </div>
                 <h5>
                 <span>Total</span>
-                <span>₦{parseInt(this.props.receipt.receipt.total)+parseInt(this.props.receipt.deliveryFee)+parseInt(this.props.receipt.tax)}.00</span>
+                <span>₦{parseInt(this.props.receipt.receipt.total,10)+parseInt(this.props.receipt.deliveryFee,10)+parseInt(this.props.receipt.tax,10)}.00</span>
                 </h5>
             </div>
 

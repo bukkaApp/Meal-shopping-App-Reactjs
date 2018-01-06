@@ -3,7 +3,11 @@ const initialstate={
 	showsignUp:false,
 	showaddCard:false,
 	showaddmenu:false,
-	showreceipt:false
+	showreceipt:false,
+	showpaymentinfo:false,
+	showorderhistory:false,
+	shownotification:false,
+	showbasicinformation:true
 };
 
 const showPage=(state=initialstate,action)=>{
@@ -15,7 +19,6 @@ const showPage=(state=initialstate,action)=>{
 					showaddCard:false,
 					showreceipt:false,
 					showaddmenu:false	}
-			break
 		}
 		case'RECEIPT':{
 			return{	...state, 
@@ -24,7 +27,6 @@ const showPage=(state=initialstate,action)=>{
 					showaddCard:false,
 					showaddmenu:false,
 					showreceipt:!action.payload	}
-			break
 		}
 		case'SIGN_UP':{
 			return{	...state,
@@ -33,7 +35,6 @@ const showPage=(state=initialstate,action)=>{
 					showaddCard:false,
 					showaddmenu:false,
 					showreceipt:false	}
-			break
 		}
 		case'ADD_CARD_PAGE':{
 			return{	...state,
@@ -42,7 +43,6 @@ const showPage=(state=initialstate,action)=>{
 					showsignUp:false,
 					showaddmenu:false,
 					showreceipt:false	}
-			break
 		}
 		case 'ADD_MENU':{
 			return{	...state,
@@ -51,8 +51,36 @@ const showPage=(state=initialstate,action)=>{
 					showsignUp:false,
 					showaddmenu:!action.payload,
 					showreceipt:false}
-			break
 		}
+		case'PAYMENT_INFO':{
+			return{	...state,
+					showpaymentinfo:!action.payload,
+					showorderhistory:false,
+					shownotification:false,
+					showbasicinformation:false	}
+		}
+		case'ORDER_HISTORY':{
+			return{	...state,
+					showpaymentinfo:false,
+					showorderhistory:!action.payload,
+					shownotification:false,
+					showbasicinformation:false	}
+		}
+		case'NOTIFICATION':{
+			return{	...state,
+					showpaymentinfo:false,
+					showorderhistory:false,
+					shownotification:!action.payload,
+					showbasicinformation:false	}
+		}
+		case'BASIC_INFORMATION':{
+			return{	...state,
+					showpaymentinfo:false,
+					showorderhistory:false,
+					shownotification:false,
+					showbasicinformation:!action.payload	}
+		}
+		
 		default:
 		return state
 	}

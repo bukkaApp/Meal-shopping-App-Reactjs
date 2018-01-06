@@ -6,13 +6,19 @@ const initialstate={
 const updateCart=(state=initialstate,action)=>{
 	switch(action.type){
 		case'UPDATE_CART':{
-			return{cart:{...state.cart,...action.payload.cart},total:action.payload.total};
-			break;
+			return{
+				cart:{
+						...state.cart,
+						...action.payload.cart	},
+				total:action.payload.total	
+														}
 		}
 		case'DELETE_CART':{
 			return{...initialstate}
 		}
+		default:{
+			return{...state}
+		}
 	}
-	return state;
-};
+}
 export default updateCart;

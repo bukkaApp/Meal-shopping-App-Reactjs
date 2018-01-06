@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import '../style/nochef.css'
 import '../style/App.css'
 import PageBackground from '../frontpage/PageBackground'

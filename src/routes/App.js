@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import '../style/App.css'
 import '../style/index.css'
 import PageBackground from '../frontpage/PageBackground'
@@ -12,34 +12,17 @@ import {connect} from 'react-redux'
 import SignIn from '../authentication/signIn'
 import SignUp from '../authentication/SignUp'
 import '../homepage/Appstyle.css'
-import Home from '../homepage/Home'
-import Map from '../homepage/Map'
-import Reg from '../homepage/Reg'
 import Nochefavailable from '../frontpage/nochef'
-import Cuisine from '../frontpage/cuisine'
 import Addmenu from '../frontpage/addmenu'
-import lib from '../util/lib'
 
 
-class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state={address:this.props.address,
-					chef:this.props.chef,
-					cart:this.props.cart,
-					user:this.props.user,
-					page:this.props.page,
-					signup:this.props.SignUp,
-					};
-	}
-		
-  render() {
-    return (
-		(this.props.chef.error)?
-			<Nochefavailable  />:
-		(!this.props.chef.fetched)? 
+const App =(props)=> {
+return (
+	(props.chef.error)?
+		<Nochefavailable  />:
+		(!props.chef.fetched)? 
 			<div style={{position:'absolute'}}> 
-				<ScrollLogic chef_fetched={this.props.chef.fetched} />
+				<ScrollLogic chef_fetched={props.chef.fetched} />
 				<div className="first-page-background">
 					<PageBackground />
 				</div>
@@ -47,38 +30,37 @@ class App extends Component {
 					<SummaryComponent/>
 					<MobileAppComponent/>
 					<Footer/>
-					{(this.props.page.showsignIn)? 
-						<SignIn user={this.props.user}/>:
+					{(props.page.showsignIn)? 
+						<SignIn user={props.user}/>:
 						null
 					}
-					{(this.props.page.showsignUp)? 
-						<SignUp SignUp={this.props.SignUp}
-								user={this.props.user}/>:
+					{(props.page.showsignUp)? 
+						<SignUp SignUp={props.SignUp}
+								user={props.user}/>:
 						null
 					}	
 				</div>
 			</div>:
 			<div className="devi">
-				<ScrollLogic chef_fetched={this.props.chef.fetched} />
-				<MenuPage chef={this.props.chef}/>
-				<MenuItems	chef={this.props.chef} />
+				<ScrollLogic chef_fetched={props.chef.fetched} />
+				<MenuPage chef={props.chef}/>
+				<MenuItems	chef={props.chef} />
 				<Footer/>
-				{(this.props.page.showsignIn)? 
-					<SignIn user={this.props.user} /> :
+				{(props.page.showsignIn)? 
+					<SignIn user={props.user} /> :
 					null
 				}
-				{(this.props.page.showsignUp)? 
-					<SignUp SignUp={this.props.SignUp}
-							user={this.props.user} />:
+				{(props.page.showsignUp)? 
+					<SignUp SignUp={props.SignUp}
+							user={props.user} />:
 					null}
-				{(this.props.page.showaddmenu)?
+				{(props.page.showaddmenu)?
 					<Addmenu/>:
 					null
 				}
 			</div>
-    	);
+	)
   }
-};
 
 function mapStateToProps(state){
 	return state;

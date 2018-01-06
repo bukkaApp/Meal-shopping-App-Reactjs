@@ -9,7 +9,6 @@
                 ...state,
                 menuinview:action.payload
             }
-            break;
         }
         default:{
             return state;

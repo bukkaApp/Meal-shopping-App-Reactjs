@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import '../style/App.css'
 import SimpleForm from './autoComplete'
 import {Link} from 'react-router-dom'

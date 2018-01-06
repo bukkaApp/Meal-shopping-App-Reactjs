@@ -11,11 +11,18 @@ import {	fetch_address,
             update_cart,
             showaddmenu,
             menuview,
-            _scroll,
             showaddCard,
             show_receipt,
             add_receipt,
-            addcard               } from '../data_Container/action/actions'
+            addcard,
+            transaction,
+            order,
+            cleartransaction,
+            showpaymentinfo,
+            showorderhistory,
+            shownotification,
+            showbasicinformation,
+            orderhistory             } from '../data_Container/action/actions'
 import storage from '../data_Container/store'
 import axios from 'axios'
 import ajx from './ajax'
@@ -159,12 +166,12 @@ export default{
 		const na=document.getElementsByClassName('s-cart');
 		if (l!==null & sc!==null){
 		if (Object.keys(storage.getState().cart.cart).length){
-				for(var i=0;i<sc.length;i++){
+				for(let i=0;i<sc.length;i++){
 				if(!sc[i].classList.contains('color-white')){
 					sc[i].classList.add('color-white')
 				}
 			}
-			for(var c=0;c<na.length;c++){
+			for(let c=0;c<na.length;c++){
 				if(na[c].classList.contains('no-disp')){
 					na[c].classList.remove('no-disp')
 				}	
@@ -174,12 +181,12 @@ export default{
 			}
 		}
 		else if(!Object.keys(storage.getState().cart.cart).length){
-			for(var i=0;i<sc.length;i++){
+			for(let i=0;i<sc.length;i++){
 				if(sc[i].classList.contains('color-white')){
 					sc[i].classList.remove('color-white')
 				}
 			}
-			for(var p=0;p<na.length;p++){
+			for(let p=0;p<na.length;p++){
 				if(!na[p].classList.contains('no-disp')){
 					na[p].classList.add('no-disp')
 				}	
@@ -227,8 +234,8 @@ export default{
 			}
 		}
 		
-		for(var i=0;i<uniquecategory.length;i++){
-			uniquecategory[i].classList.add("l-selecting")
+		for(var _i=0;_i<uniquecategory.length;_i++){
+			uniquecategory[_i].classList.add("l-selecting")
 		}
     },
     amountofitems(){
@@ -251,69 +258,190 @@ export default{
                                                     expirationYear  }
                                         })))
 		.then(()=>this.signout())
-        .then(()=>this.toggleShowcard())
+        .then(()=>(storage.getState().page.showaddCard)? 
+                    this.toggleShowcard():
+                    null)
         .then(()=>this.toggleSignin())
     },
-    placeorder(transaction, token, chefUid, url) {
-		axios({ method: 'post',
-                url: url,
-                headers: {token, chefUid },
-                data: {transaction} })
+    placeorder() {
+        let token=storage.getState().user.user.token,
+        chefUid=storage.getState().chef.yourChef.uid,
+        transaction=storage.getState().user.transaction,
+        p=transaction.map( (_)=>
+                            {return   axios({ 
+                                                method: 'post',
+                                                url:ajx.placeorderendpoint,
+                                                headers: {token, chefUid },
+                                                data: {transaction:_} 
+                                                                            })
+                                                                                }  )
+        storage.dispatch(order(p))
+        .then((res)=>{console.log(res);this.createReceipt();storage.dispatch(cleartransaction())})
+        .catch((err)=>console.log("please try again",err))
       },
-      timewillpass(){
-		const k=Object.keys(storage.getState().cart.cart)
-		const a= k.map((val,key)=>{
-			var h=storage.getState().cart.cart[`${val}`].hour.toString()
-			var m=storage.getState().cart.cart[`${val}`].min.toString()
-			return h+m;
-		})
-		const b=a.map((a)=>parseInt(a))
-        const v=Math.max(...b)
-        var today=new Date()
-		if (v.toString().length<3)
-			return v+"min"
-		else{
-			var o=v.toString()
-			var len=o.length;
-			var lenh=len-2;
-			var om=parseInt(o.substring(lenh))
-			var oh=parseInt(o.substring(0,lenh))
-			var h=parseInt(today.getHours())+oh
-			var m=parseInt(today.getMinutes())+om
-			var d=today.getDay()
-			if(m>60){
-				m-=60
-				h+=1
-			}
-			if(h>24){
-				h-=24
-			}
-			if (h<10){
-				h+="0"+h;
-			}
-			if (m<10){
-				m+='0'+m
-			}
-        }
-        let h1=parseInt(today.getHours()),m1=parseInt(today.getMinutes()), d1=today.getDay()
+    timewillpass(){
+        var k=Object.keys(storage.getState().cart.cart),
+        a= k.map((val,key)=>{
+            var h=parseInt(storage.getState().cart.cart[`${val}`].hour,10)*60,
+            m=parseInt(storage.getState().cart.cart[`${val}`].min,10)
+            return (h+m)*60*1000
+        }),
+        v=Math.max(...a.map((a)=>parseInt(a,10))),
+        t=new Date((new Date().getTime())+v),
+        today=new Date(),
+        h1=parseInt(today.getHours(),10),
+        m1=parseInt(today.getMinutes(),10), 
+        d1=today.getDay(),
+        d=t.getDay(),
+        h=t.getHours(),
+        m=t.getMinutes(),
+        _a=this.timeformatter(m1,h1,d1),
+        _b=this.timeformatter(m,h,d),
+        days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+        return {    timewillpass:days[_b.day-1]+" "+_b.hour+ " : "+_b.minute,
+                    current:today.getDate()+"/"+(today.getMonth()+1)+"/"+today.getFullYear()+", "+days[_a.day-1]+" "+_a.hour+ " : "+ _a.minute
+                                                                                                                                                }
+    },
+    timeformatter(m,h,d) {
+        var m1=m,h1=h,d1=d
         if(m1>59){
             m1-=60
             h1+=1
         }
         if(h1>=24){
             h1-=24
+            d1+=1
         }
         if (h1<10){
-            h1="0"+h1;
-            
+            h1="0"+h1;  
         }
         if (m1<10){
-            m1='0'+m1
-            
+            m1='0'+m1 
         }
-        var days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
-        return {    timewillpass:days[d-1]+" "+h+ " : "+ m,
-                    current:today.getDate()+"/"+today.getMonth()+"/"+today.getFullYear()+", "+days[d1-1]+" "+h1+ " : "+ m1
-                                                                                                                                }
-	}, 
+        return{
+            day:d1,
+            hour:h1,
+            minute:m1
+        }
+    },
+    createReceipt(){
+        const receipt=storage.getState().cart,
+        tax=0,
+        deliveryFee=storage.getState().chef.yourChef.delivery_charge,
+        chefProfilepic=storage.getState().chef.yourChef.profile_photo,
+        receiptGenerated=storage.getState().receipt.receiptGenerated
+	    this.generateReceipt({	receipt,
+								tax,
+								deliveryFee,
+								chefProfilepic,
+								receiptGenerated
+													})
+    },
+    newtransact(_v){
+        let _b=storage.getState().user.transaction
+        _b.push(_v)
+        storage.dispatch(transaction(_b))
+    },
+    processtransact(){
+        var chefUid = storage.getState().chef.yourChef.uid,
+        customerUid = storage.getState().user.user.uid,
+        customerName = storage.getState().user.user.first_name + " " + storage.getState().user.user.last_name,
+        customerEmail = storage.getState().user.user.email,
+        customerImage = storage.getState().user.user.profile_photo,
+        coupon_used = false,
+        chefName = storage.getState().chef.yourChef.first_name + " " + storage.getState().chef.yourChef.last_name,
+        chefEmail = storage.getState().chef.yourChef.email,
+        customerAddress = storage.getState().address.Location,
+        chefImage = storage.getState().chef.yourChef.profile_photo,
+        customerPhoneNumber = storage.getState().user.user.mobile,
+        payment_option = "card",
+        items=Object.keys(storage.getState().cart.cart);
+        var coupon=(coupon_used)? 500:0;
+        
+        Object.keys(storage.getState().cart.cart).forEach((menu,key)=>{
+        var quantity=storage.getState().cart.cart[`${items[key]}`].quantity,
+            originalAmt=storage.getState().cart.cart[`${items[key]}`].totalCost,
+            item=items[key],
+            charge_customer=true,
+            change_amount=originalAmt-coupon,
+            description=storage.getState().cart.cart[`${items[key]}`].desc,
+            additionalInfo=storage.getState().cart.cart[`${items[key]}`].chefinstruction,
+            transaction = [  {  
+                                chefUid,
+                                customerUid,
+                                originalAmt,
+                                item,
+                                customerAddress,
+                                description,
+                                quantity,
+                                customerName,
+                                customerEmail,
+                                customerImage,
+                                chefName,
+                                chefEmail,
+                                chefImage,
+                                customerPhoneNumber,
+                                payment_option,
+                                coupon_used,
+                                additionalInfo,
+                                charge_customer,
+                                change_amount
+                                                        }   ]
+                this.newtransact(transaction)
+                                                                                        }   )
+        this.placeorder()
+    },
+    
+    showpaymentinfo(e){
+        storage.dispatch(showpaymentinfo(storage.getState().page.showpaymentinfo))
+        this.highsel(e)
+    },
+    shownotification(e){
+        storage.dispatch(shownotification(storage.getState().page.shownotification))
+        this.highsel(e)
+    },
+    showbasicinformation(e){
+        storage.dispatch(showbasicinformation(storage.getState().page.showbasicinformation))
+        this.highsel(e)
+    },
+    showorderhistory(e){
+        storage.dispatch(showorderhistory(storage.getState().page.showorderhistory))
+        this.highsel(e)
+    },
+    highsel(e){
+        let menuItem=document.getElementsByClassName("l-menu-item")
+		for(var i=0;i<menuItem.length;i++){
+			if(menuItem[i].classList.contains('l-menu-item')){
+				menuItem[i].classList.remove("l-select");
+			}
+		}
+		document.getElementById(e.currentTarget.dataset.key).classList.add("l-select");
+    },
+    newcard(){
+		var number=document.getElementById("cardNumber").value,
+		cvv=document.getElementById("CVVNumber").value,
+		expiry_month=document.getElementById("MonthNumber").value,
+		expiry_year=document.getElementById("YearNumber").value
+		if(number==""||cvv==""||expiry_year==""||expiry_month==""){
+			(number=="")?
+			console.log("number field cannot be empty"):
+			(cvv=="")?
+			console.log("cvv field cannot be empty"):
+			(expiry_year==""||expiry_month=="")?
+			console.log("expiry field cannot be empty"):
+			null
+		}
+		else{
+			this.addcard(number,cvv,expiry_month,expiry_year)
+		}
+    },
+    orderhistory(){
+        let uid=storage.getState().user.user.uid,
+        token=storage.getState().user.user.token,
+        url=ajx.order_history+ uid
+		storage.dispatch(orderhistory(axios({method: 'get',url: url,headers:{token,uid}})))
+    },
+    address(a,b){
+        storage.dispatch(fetch_address(a,b))
+    }
 }

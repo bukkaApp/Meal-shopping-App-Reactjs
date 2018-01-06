@@ -1,20 +1,14 @@
-import { Route, Redirect } from "react-router-dom";
-import React, { Component } from 'react';
+import { Redirect } from "react-router-dom";
+import React from 'react';
 import {connect} from 'react-redux';
-import App from './App';
 import Checking from './checking';
 
-class checkoutpagedecider extends Component{
-	constructor(props) {
-        super(props)
-	}
-	render(){
+const checkoutpagedecider =(props)=>{
         return(
-            (Object.keys(this.props.cart.cart).length)? 
-        <Checking/>:
-        <Redirect to='/'/>
-    )
-	}
+            (Object.keys(props.cart.cart).length)? 
+                <Checking/>:
+                <Redirect to='/'/>
+        )
 	}
 
 const mapStateToProps=(state)=>{

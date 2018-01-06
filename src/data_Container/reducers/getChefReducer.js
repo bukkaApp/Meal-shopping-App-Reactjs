@@ -14,8 +14,7 @@ const getChefs=(state=initialstate,action)=>{
 		case'GET_CHEFS_PENDING':{
 			return{
 				...state,
-				fetching:true};
-			break;
+				fetching:true}
 		}
 		case'GET_CHEFS_REJECTED':{
 			return{
@@ -28,8 +27,7 @@ const getChefs=(state=initialstate,action)=>{
 				yourChef:{},
 				menuCategoriesKeys:[],
 				menuCategories:[],
-				};
-			break;
+				}
 		}
 		case'GET_CHEFS_FULFILLED':{
 			return{
@@ -38,7 +36,6 @@ const getChefs=(state=initialstate,action)=>{
 				chefsInYourArea:action.payload.data,
 				error:null
 			}
-			break;
 		}
 		case 'GET_CHEFS_UPDATE':{
 			return{
@@ -50,7 +47,6 @@ const getChefs=(state=initialstate,action)=>{
 				menuCategories:action.payload.menu,
 				error:null
 			}
-			break;
 		}
 		case 'GET_CHEFS_UPDATE_FAILED':{
 			return{
@@ -60,8 +56,10 @@ const getChefs=(state=initialstate,action)=>{
 				error:action.payload
 			}
 		}
+		default:{
+			return{...state}
+		}
 	}
-	return state
 };
 
 export default getChefs;

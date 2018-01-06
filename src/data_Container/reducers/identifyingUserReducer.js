@@ -11,7 +11,11 @@ const initialstate={
 	error:null,
 	orderhistory:[],
 	fetching_orderhistory:false,
-	fetched_orderhistory:false
+	fetched_orderhistory:false,
+	transaction:[],
+	orderstatus_fetching:false,
+	orderstatus_fetched:false,
+	orderstatus:[]
 };
 
 const identifyUser=(state=initialstate,action)=>{
@@ -19,42 +23,69 @@ const identifyUser=(state=initialstate,action)=>{
 		case'IDENTIFYING_USER_PENDING':{
 			return{	...state,
 					fetching:true	}
-			break
+			
+		}
+		case 'ORDER_STATUS_PENDING':{
+			return{	...state,
+					orderstatus_fetching:true,
+					orderstatus_fetched:false,
+					orderstatus:[]	}
+		}
+		case 'ORDER_STATUS_FULFILLED':{
+			return{	...state,
+					orderstatus_fetching:false,
+					orderstatus_fetched:true,
+					orderstatus:action.payload	}
+		}
+		case 'ORDER_STATUS_REJECTED':{
+			return{	...state,
+					orderstatus_fetching:false,
+					orderstatus_fetched:false,
+					orderstatus:action.payload	}
+		}
+		case 'ADD_NEW_TRANSACTION':{
+			return {	...state,
+						transaction:action.payload	}
+			
+		}
+		case 'CLEAR_TRANSACTION':{
+			return{		...state,
+						transaction:action.payload	}
 		}
 		case'ADD_CARD_PENDING':{
 			return{	...state,
 					fetching_addcard:true	}
-			break
+			
 		}
 		case'FETCH_ORDER_HISTORY_PENDING':{
 			return{	...state,
 					fetching_orderhistory:true	}
-			break;
+			;
 		}
 		case'UPDATING_USER_INFORMATION_PENDING':{
 			return{	...state,
 					fetching_lastCardDigits:true	}
-			break
+			
 		}
 		case'UPDATING_USER_INFORMATION_REJECTED':{
 			return{	...state,
 					fetching_lastCardDigits:false,
 					lastCardDigits:"",
 					error:action.payload	}
-			break
+			
 		}
 		case'FETCH_ORDER_HISTORY_REJECTED':{
 			return{	...state,
 					fetching_orderhistory:false,
 					error:action.payload	}
-			break
+			
 		}
 		case'ADD_CARD_REJECTED':{
 			return{	...state,
 					fetching_addcard:false,
 					fetched_addcard:false,
 					error:action.payload	}
-			break
+			
 		}
 		case'IDENTIFYING_USER_REJECTED':{
 			return{	...state,
@@ -63,7 +94,7 @@ const identifyUser=(state=initialstate,action)=>{
 					isAuthenticated:false,
 					lastCardDigits:"",
 					error:action.payload	}
-			break
+			
 		}
 		case'FETCH_ORDER_HISTORY_FULFILLED':{
 			return{	...state,
@@ -71,7 +102,7 @@ const identifyUser=(state=initialstate,action)=>{
 					fetching_orderhistory:false,
 					orderhistory:action.payload.data,
 					error:null	}
-			break
+			
 		}
 		case'IDENTIFYING_USER_FULFILLED':{
 			return{	...state,
@@ -81,7 +112,7 @@ const identifyUser=(state=initialstate,action)=>{
 					user:action.payload.data.data,
 					isAuthenticated:true,
 					error:null	}
-			break
+			
 		}
 		case'UPDATING_USER_INFORMATION_FULFILLED':{
 			return{	...state,
@@ -89,7 +120,7 @@ const identifyUser=(state=initialstate,action)=>{
 					fetched_lastCardDigits:true,
 					lastCardDigits:action.payload.data.data.last,
 					error:null	}
-			break
+			
 		}
 		case'ADD_CARD_FULFILLED':{
 			return{	...state,
@@ -97,14 +128,16 @@ const identifyUser=(state=initialstate,action)=>{
 					fetched_addcard:true,
 					lastCardDigits:action.payload,
 					error:null	}
-			break
+			
 		}
 		case 'SIGN_OUT':{
 			return{...initialstate}
-			break
+			
+		}
+		default:{
+			return{...state}
 		}
 	}
-	return state;
 };
 
 export default identifyUser;

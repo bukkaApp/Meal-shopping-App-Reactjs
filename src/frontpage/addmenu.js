@@ -27,7 +27,7 @@ class addmenu extends Component{
         async addchefinstructions(e){
             e.stopPropagation()
             e.preventDefault()
-           await this.setState({chefinstruction:e.target.value})
+           await this.setState({chefinstruction:e.currentTarget.value})
            
         }
     //increase number of items
@@ -39,11 +39,9 @@ class addmenu extends Component{
 	
 		}
 		//reduce number of items
-		async reduceNumberOfItem(e){
-            e.stopPropagation()
-            e.preventDefault()
-            await (this.state.defaultQuantity>1)? 
-                this.setState({defaultQuantity:this.state.defaultQuantity-1}):
+		async reduceNumberOfItem(){
+            (this.state.defaultQuantity>1)? 
+             await this.setState({defaultQuantity:this.state.defaultQuantity-1}):
                 null
             await this.setState({itemTotal:this.state.defaultQuantity*this.state.unitcost});
 		}
@@ -77,7 +75,9 @@ class addmenu extends Component{
                                 ...cartUpdate
                             }
                         })
-					var total=Object.keys(this.state.cart).map((key,i)=>this.state.cart[key].totalCost).reduce((sum,value)=>sum+value,0.00).toFixed(2);
+					let total=Object.keys(this.state.cart).map(
+                        (key,i)=>this.state.cart[key].totalCost).reduce(
+                            (sum,value)=>sum+value,0.00).toFixed(2);
 					await this.setState({total:total});
                     lib.updateCart({cart:this.state.cart,total:this.state.total});
 				}
@@ -98,7 +98,9 @@ class addmenu extends Component{
                             ...newCart
                         }
                     })
-                    var total= await Object.keys(this.state.cart).map((key,i)=>this.state.cart[key].totalCost).reduce((sum,value)=>sum+value,0).toFixed(2);
+                    let total= await Object.keys(this.state.cart).map(
+                        (key,i)=>this.state.cart[key].totalCost).reduce(
+                            (sum,value)=>sum+value,0).toFixed(2);
 					await this.setState({total:total});
                     lib.updateCart({cart:this.state.cart,total:this.state.total});
                 }
@@ -125,17 +127,22 @@ class addmenu extends Component{
                 </div>
                 <div id="instructions">
                     <h4>Special Instructions</h4>
-                    <input className="form-control" id="Note-for-chef" onChange={this.addchefinstructions} placeholder="Add note(extra sauce,no onions etc)"/>
+                    <input  className="form-control" 
+                            id="Note-for-chef" 
+                            onChange={this.addchefinstructions} 
+                            placeholder="Add note(extra sauce,no onions etc)"/>
                 </div>
                 <div id="placeorder">
                     <div className="placeorder-holder">
-                        <h3 className="add" onClick={this.reduceNumberOfItem} >
-                        <MdRemove />
+                        <h3     className="add" 
+                                onClick={this.reduceNumberOfItem} >
+                            <MdRemove />
                         </h3>
                         <h4 className="item-quantity">
                             {this.state.defaultQuantity}
                         </h4>
-                        <h3 className="minus"  onClick={this.increaseNumberOfItem} >
+                        <h3     className="minus"  
+                                onClick={this.increaseNumberOfItem} >
                         <Mdadd />
                         </h3>
                     </div>
@@ -154,6 +161,6 @@ class addmenu extends Component{
 }
 }
 function mapStateToProps(state){
-	return state;
-};
-export default connect(mapStateToProps)(addmenu);
+	return state
+}
+export default connect(mapStateToProps)(addmenu)

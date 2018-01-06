@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import './Appstyle.css';
 import { Form, FormControl, Button } from "react-bootstrap";
 import ArrowForward from 'react-icons/lib/md/arrow-forward';
@@ -8,7 +8,7 @@ import Autocomplete from './Map';
 
 
 
-export default class Reg extends React.Component {
+export default class Reg extends Component {
     constructor(props){
         super(props);
         this.onSubmit=this.onSubmit.bind(this);
@@ -55,7 +55,7 @@ export default class Reg extends React.Component {
 
     render () {
 
-        const {  contactName, mobileNumber, company, budget, noOfPeople, mealType, type, address, eventDate} = this.props
+       // const {  contactName, mobileNumber, company, budget, noOfPeople, mealType, type, address, eventDate} = this.props
         return (
             <div className="formcom">
             <Form inline={false}>
@@ -143,8 +143,8 @@ export default class Reg extends React.Component {
             <Button className="btn btn-red one" onClick={() => this.onSubmit()}>Submit <span className="arrow1style"><ArrowForward/></span></Button>
             <br />
             <br />
-            <h3 className="condstyle">Have an account? <a href="#">Log in</a></h3>
-            <p className="condistyle">By proceeding, I agree to Bukka terms and conditions. I have read and understand the<a href="#">Bukka Terms and Conditions</a>.</p>
+            <h3 className="condstyle">Have an account? <a>Log in</a></h3>
+            <p className="condistyle">By proceeding, I agree to Bukka terms and conditions. I have read and understand the<a>Bukka Terms and Conditions</a>.</p>
         </Form>
         
         </div>

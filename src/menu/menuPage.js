@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import '../style/menuPage.css'
 import FaStar from 'react-icons/lib/fa/star'
 import MdMore from 'react-icons/lib/md/more'
