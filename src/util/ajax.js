@@ -20,5 +20,6 @@ export default{
     order_history:"https://chef.mybukka.com/api/v1/bukka/customer/orders/",
     African:foodpic,
     Continental:foodpic1,
-    Vegetarian:foodpic2
+    Vegetarian:foodpic2,
+    GMapApi:"https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing"
 }

@@ -9,12 +9,13 @@ import {
   DirectionsRenderer,
 } from 'react-google-maps'
 import {connect} from 'react-redux'
+import ajx from '../util/ajax'
  
 const google=window.google
 var aloc,bloc,cloc
 const MapWithADirectionsRenderer=compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places",
+    googleMapURL: ajx.GMapApi,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div  style={{ height: `70%`,position:'absolute',width:'100%', }} />,
     mapElement: <div style={{ height: `100%` }} />,
@@ -51,7 +52,7 @@ const MapWithADirectionsRenderer=compose(
 
 const MyMapComponent = compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places",
+    googleMapURL: ajx.GMapApi,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `100%`,position:'absolute',width:'100%', top:'0',bottom:'0',}} />,
     mapElement: <div style={{ height: `100%` }} />,
