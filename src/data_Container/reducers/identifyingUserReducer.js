@@ -15,14 +15,16 @@ const initialstate={
 	transaction:[],
 	orderstatus_fetching:false,
 	orderstatus_fetched:false,
-	orderstatus:[]
+	orderstatus:[],
+	user_updated:false
 };
 
 const identifyUser=(state=initialstate,action)=>{
 	switch(action.type){
 		case'IDENTIFYING_USER_PENDING':{
 			return{	...state,
-					fetching:true	}
+					fetching:true,
+					user_update:false	}
 			
 		}
 		case 'ORDER_STATUS_PENDING':{
@@ -64,14 +66,16 @@ const identifyUser=(state=initialstate,action)=>{
 		}
 		case'UPDATING_USER_INFORMATION_PENDING':{
 			return{	...state,
-					fetching_lastCardDigits:true	}
+					fetching_lastCardDigits:true,
+					user_updated:false	}
 			
 		}
 		case'UPDATING_USER_INFORMATION_REJECTED':{
 			return{	...state,
 					fetching_lastCardDigits:false,
 					lastCardDigits:"",
-					error:action.payload	}
+					error:action.payload,
+					user_updated:false	}
 			
 		}
 		case'FETCH_ORDER_HISTORY_REJECTED':{
@@ -119,7 +123,8 @@ const identifyUser=(state=initialstate,action)=>{
 					fetching_lastCardDigits:false,
 					fetched_lastCardDigits:true,
 					lastCardDigits:action.payload.data.data.last,
-					error:null	}
+					error:null,
+					user_updated:true	}
 			
 		}
 		case'ADD_CARD_FULFILLED':{

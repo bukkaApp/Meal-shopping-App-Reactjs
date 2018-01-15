@@ -4,21 +4,21 @@ import Faspinner from 'react-icons/lib/fa/spinner'
 import lib from '../util/lib'
 import ajx from '../util/ajax'
  
-const addcard =()=>{
+const addcard =(props)=>{
 	return(
 		<div className="signInPopup">
 			<div className="AddcardPopupHolder">
 				<div id="topPart">
 					<p>Add Card</p>
-					<a onClick={lib.toggleShowcard}>X</a>
+					<a onClick={()=>lib.toggleShowcard()}>X</a>
 				</div>
 				<div className="formField">
 					<div id="headingHolder">
-						<h3>Card Information</h3>
 						<div id="imageHolder">
 							<img src={ajx.visa} alt="visa" />
 							<img src={ajx.master} alt="master"/>
 							<img src={ajx.verve} alt="verve"/>
+							<img  alt=""/>
 						</div>
 					</div>
 					<div id="cardNumberHolder">
@@ -53,14 +53,14 @@ const addcard =()=>{
 							</div>
 						</div>
 					</div>
-					{(!this.props.user.fetching_addcard)?
+					{(!props.user.fetching_addcard)?
 						<button className="btn-red" 
-								onClick={lib.newcard}>
+								onClick={()=>lib.newcard()}>
 							Add Card
 						</button>:
 						null
 					}
-					{(this.props.user.fetching_addcard)?
+					{(props.user.fetching_addcard)?
 						<button className="btn-red load">
 							Just a Second!
 							<span className="loader">

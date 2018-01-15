@@ -22,19 +22,36 @@ import {	fetch_address,
             showorderhistory,
             shownotification,
             showbasicinformation,
-            orderhistory             } from '../data_Container/action/actions'
+            orderhistory,
+            chef_Cuisine            } from '../data_Container/action/actions'
 import storage from '../data_Container/store'
 import axios from 'axios'
 import ajx from './ajax'
+import Mdar from 'react-icons/lib/md/arrow-drop-down'
 
 
-export default{ 
+export default{
+    toggleSignin(){
+        storage.dispatch(showsignIn(storage.getState().page.showsignIn))
+        this.noscroll()
+    },
 
-    toggleSignin:()=>storage.dispatch(showsignIn(storage.getState().page.showsignIn)),
+    toggleSignUp(){
+        storage.dispatch(showsignUp(storage.getState().page.showsignUp))
+        this.noscroll()
+    },
+    toggleSignin_noscroll(){
+        storage.dispatch(showsignIn(storage.getState().page.showsignIn))
+    },
 
-    toggleSignUp:()=>storage.dispatch(showsignUp(storage.getState().page.showsignUp)),
+    toggleSignUp_noscroll(){
+        storage.dispatch(showsignUp(storage.getState().page.showsignUp))
+    },
 
-    toggleShowcard:()=>storage.dispatch(showaddCard(storage.getState().page.showaddCard)),
+    toggleShowcard(){
+        storage.dispatch(showaddCard(storage.getState().page.showaddCard))
+        this.noscroll()
+    },
 
     toggleShowReceipt:()=>storage.dispatch(show_receipt(storage.getState().page.showreceipt)),
 
@@ -44,14 +61,26 @@ export default{
     signin(email,password){
         storage.dispatch(identify_user(email,password))
 		.then(()=>storage.dispatch(updating_user_info(storage.getState().user.user.uid)))
-		.then(()=>storage.dispatch(showsignIn(storage.getState().page.showsignIn)))
-        .catch((e)=>{console.log('Sorry! There was a problem',e)
-                    storage.dispatch(showsignIn(storage.getState().page.showsignIn))})
+		.then(()=>{this.toggleSignin()})
+        .catch((e)=>{
+            console.log('Sorry! There was a problem',e),
+            (!storage.getState().user.user_updated)?
+            this.toggleSignin():
+            null
+        })
     },
 
     addmenu(){
         const pole=document.getElementsByTagName("BODY")[0];
-		const he=document.getElementById('head')
+        const he=document.getElementById('head')
+        this.noscroll()
+		if(pole!==null && he!==null){
+		storage.dispatch(showaddmenu(storage.getState().page.showaddmenu))
+		}
+    }, 
+    noscroll(){
+        const pole=document.getElementsByTagName("BODY")[0];
+        const he=document.getElementById('head')
 		if(pole!==null && he!==null){
 		if(pole.classList.contains('popups')){
 			pole.classList.remove("popups")
@@ -60,14 +89,13 @@ export default{
 			pole.classList.add("popups")
 			he.classList.add('scr')
 		}
-		storage.dispatch(showaddmenu(storage.getState().page.showaddmenu))
 		}
-    }, 
+    },
 
     signup(email,firstname,lastname,password,mobile,isCustomer){
 		storage.dispatch(signup(email,firstname,lastname,password,mobile,isCustomer))
 		.then(()=>storage.dispatch(identify_user(email,password)))
-		.then(storage.dispatch(showsignUp(storage.getState().page.showsignUp)))
+		.then(()=>this.toggleSignUp())
 		.catch((e)=>console.log('Sorry! There was a problem',e))
     },
 
@@ -107,13 +135,31 @@ export default{
         await storage.dispatch(menuview(menu))
 		this.addmenu()
     },
+    //chefs by cuisine dispatcher
+    updatechefbycuisine(_){
+        storage.dispatch(get_chef(this.chefcloseby(_)))
+    },
+    //get chef data
     chefcloseby(result){
-        var yourChef=result.filter((chef)=>chef.role==="Super Chef")[0];
+        var yourChef,cuisine
+
+        if(typeof result ==='string'){
+            yourChef=storage.getState().chef.chefAndCuisine[`${result}`][0]
+            cuisine=result
+
+            /*.filter((chef)=>chef.role==="Super Chef")*/
+        }else{
+            console.log("you called",result)
+            yourChef=result
+            cuisine=result.cuisine
+        }
         if(yourChef){
-            var categ=Array.from(new Set(result.filter(
+            /*var categ=Array.from(new Set(result.filter(
                 (chef)=>chef.role==="Super Chef")[0].menu.map(
-                    (menu)=>menu.category)))
-            var categorizedMenu={}
+                    (menu)=>menu.category)))*/
+            var categorizedMenu={},
+            categ=Array.from(new Set(yourChef.menu.map((menu)=>
+                                menu.category)))
             //var menuP=yourChef.menu.filter(items=>categ.indexOf(items.category)>-1).filter(item=>item.visibility===true)
             for(var i=0;i<categ.length;i++){
                 var menuPerCategory=[];
@@ -132,31 +178,37 @@ export default{
             return{
                     menu:categorizedMenu,
                     yourChef:yourChef,
-                    categ:Object.keys(categorizedMenu)
+                    categ:Object.keys(categorizedMenu),
+                    cuisine:cuisine
                 }
         }else{
             return{
-                yourChef:{}
+                menu:[],
+                yourChef:{},
+                categ:[],
+                cuisine:null
             }
         }
     },
     chefResult(latLng){
         storage.dispatch(fetch_chef(latLng))
-		.then(()=>{
-			if(!Object.keys(this.chefcloseby(storage.getState().chef.chefsInYourArea).yourChef).length){
-				var res={
-					response:{
-						data:""
-					}
-				}
-				res.response.data="No Chefs found around this location"
-				storage.dispatch(get_chef_update_failed(res))
-			}else{
-                storage.dispatch(get_chef(this.chefcloseby(storage.getState().chef.chefsInYourArea)))
-			}
-			}
-		)
+        .then(()=>this.chefCuisines(storage.getState().chef.chefsInYourArea))
 		.catch((e)=>console.log('Sorry! There was a problem',e))
+    },
+    chefCuisines(chefs){
+        var cuisines=Array.from(new Set(chefs.map((chef)=>chef.cuisine))) 
+        var chefAndCuisine={},chefPerCuisine=[]
+        cuisines.forEach((cui)=>{
+          chefs.forEach((chef)=>{
+          if(chef.cuisine===cui){
+              chefPerCuisine.push(chef)
+            }
+        })
+        chefAndCuisine[`${cui}`]=chefPerCuisine
+        chefPerCuisine=[]
+      }
+      )
+        storage.dispatch(chef_Cuisine(chefAndCuisine))
     },
     //cart decoration and to notify if cart has items in it
     //_y->id of shopping cart icon container
@@ -297,9 +349,10 @@ export default{
         m=t.getMinutes(),
         _a=this.timeformatter(m1,h1,d1),
         _b=this.timeformatter(m,h,d),
-        days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
-        return {    timewillpass:days[_b.day-1]+" "+_b.hour+ " : "+_b.minute,
-                    current:today.getDate()+"/"+(today.getMonth()+1)+"/"+today.getFullYear()+", "+days[_a.day-1]+" "+_a.hour+ " : "+ _a.minute
+        days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+        
+        return {    timewillpass:days[_b.day]+" "+_b.hour+ " : "+_b.minute,
+                    current:today.getDate()+"/"+(today.getMonth()+1)+"/"+today.getFullYear()+", "+days[_a.day]+" "+_a.hour+ " : "+ _a.minute
                                                                                                                                                 }
     },
     timeformatter(m,h,d) {
@@ -443,5 +496,12 @@ export default{
     },
     address(a,b){
         storage.dispatch(fetch_address(a,b))
-    }
+    },
+    addcuisine(_){
+        (_)?
+        (window.innerWidth>1025)?
+          _.innerHTML="&#9662"+storage.getState().chef.currentCuisine:
+          _.innerHTML="&#9662":
+          null
+      }
 }

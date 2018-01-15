@@ -1,21 +1,32 @@
-.container{
-    position: relative;
-    top: 120px;
-    margin-bottom: 200px;
+.zn{
+  position: relative;
+  padding: 100px 100px;
+  padding-top: 140px;
   }
-  .container .row{
-    padding-left: 13px;
+.kt{
   }
-.left{
-    height: 240px;
-    width: 320px;
+.lt{
+    height: 200px;
+    width: 100%;
     padding: 0;
   }
-  .myheader {
-    top: 0; 
-  }
-  .container>h1{
+  
+  .zn>h1{
     font-size: 22px;
     padding-bottom: 10px;
-    padding-left: 25px;   
+    padding-left:15px;
+    padding-right: 15px;  
+  }
+  .lt:hover{
+    cursor: pointer;
+  }
+  .m{
+    cursor: default;
+    height: 270px;
+  }
+  @media(max-width:1010px){
+    .zn{
+      padding-left: 5px;
+      padding-right: 5px;
+    }
   }

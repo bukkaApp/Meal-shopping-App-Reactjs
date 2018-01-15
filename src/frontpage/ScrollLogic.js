@@ -67,5 +67,6 @@ render() {
 
 
 scrollLogic.propTypes={
-    chef_fetched:propTypes.bool.isRequired
+    chef_fetched:propTypes.bool.isRequired,
+    Located:propTypes.bool.isRequired
 }

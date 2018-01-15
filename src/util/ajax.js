@@ -1,4 +1,6 @@
-
+import foodpic from '../assets/image.jpg'
+import foodpic1 from '../assets/image1.jpg'
+import foodpic2 from '../assets/image2.jpg'
 export default{
     loginendpoint:"https://chef.mybukka.com/api/v1/bukka/auth/custom/login",
     carddtlsendpoint:"https://chef.mybukka.com/api/v1/bukka/customer/card/",
@@ -15,6 +17,8 @@ export default{
     visa:"https://res.cloudinary.com/bukka/image/upload/v1500737722/app/visa.png",
     master:"https://res.cloudinary.com/bukka/image/upload/v1500737722/app/mastercard.png",
     verve:"https://res.cloudinary.com/bukka/image/upload/v1500737722/app/verve.png",
-    order_history:"https://chef.mybukka.com/api/v1/bukka/customer/orders/"
-    
+    order_history:"https://chef.mybukka.com/api/v1/bukka/customer/orders/",
+    African:foodpic,
+    Continental:foodpic1,
+    Vegetarian:foodpic2
 }

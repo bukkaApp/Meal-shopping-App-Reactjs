@@ -1,7 +1,7 @@
 import React from 'react'
 import '../style/nochef.css'
 import '../style/App.css'
-import PageBackground from '../frontpage/PageBackground'
+import PageBackground from '../frontpage/gmap'
 import Footer from '../frontpage/Footer'
 import HeaderCheckout from './HeaderCheckout'
 import {connect} from 'react-redux'
@@ -11,7 +11,7 @@ const Nochefavailable=(props)=>{
     return(
         <div className="deven">
         <HeaderCheckout />
-        <PageBackground loc={[props.address.lat,props.address.lng]}/>
+        <PageBackground one={true} bloc={{lat:props.address.lat,lng:props.address.lng}} />
         <div id="no-chef-available">
             <div id="no-chef-available-holder">
             {
@@ -23,7 +23,7 @@ const Nochefavailable=(props)=>{
                         </h3>:
                         <h3>
                             We are deeply sorry!
-                            {" "+props.chef.error.message}
+                            {" "+props.chef.error.response.data}
                         </h3>:
                         <h3>
                             We are deeply sorry!

@@ -14,8 +14,8 @@ const checkoutPage =(props)=>{
 				<h3 className="instruction">
 					Sign in or sign up with a Bukka account
 				</h3>
-				<button onClick={lib.toggleSignUp} className="btn-red">Sign Up</button>
-				<button onClick={lib.toggleSignin}>Sign In</button>
+				<button onClick={()=>lib.toggleSignUp()} className="btn-red">Sign Up</button>
+				<button onClick={()=>lib.toggleSignin()}>Sign In</button>
 				</div> : null }
 				<h3 id="d-info">Delivery Info</h3>
 				<div className="infoholder">
@@ -52,7 +52,7 @@ const checkoutPage =(props)=>{
 								</p>
 								</div>:
 								<div className="btn-Holder">
-									<button onClick={lib.toggleShowcard} className="btn-red">Add Card</button>
+									<button onClick={()=>lib.toggleShowcard()} className="btn-red">Add Card</button>
 								</div>
 								:null
 							}

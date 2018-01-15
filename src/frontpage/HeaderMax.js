@@ -9,7 +9,7 @@ import ajx from '../util/ajax'
 
 const HeaderMax=(props)=>{
 return(
-	<div className="myheader ab">
+	<div id='head' className="myheader ab">
 		<Link to="/">
 			<img 	src={ajx.logo} 
 					id="logo" 
@@ -18,15 +18,15 @@ return(
 		{(!props.user.isAuthenticated)? 
 			<div className="header-top-button">
 				<button className="max-sign-in" 
-						onClick={lib.toggleSignin}>
+						onClick={()=>lib.toggleSignin()}>
 					Sign In
 				</button>
 				<button className="btn-red max-sign-up" 
-						onClick={lib.toggleSignUp} >
+						onClick={()=>lib.toggleSignUp()} >
 					Sign Up
 				</button>
 			</div>:
-			<div className=" m-info small-head">
+			<div className=" m-info">
 				<div className="m-profile-photo-holder hh">
 					<div className="m-user-icon-holder display-toggle">
 						<img 	src={props.user.user.profile_photo} 

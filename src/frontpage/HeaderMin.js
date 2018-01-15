@@ -28,17 +28,17 @@ class HeaderMin extends Component{
 							id="logo-min" 
 							alt="logo"/>
 				</Link>
-				<div className="search-box2 search-box-min search-loc">
+				<div className="search-box search-box-min search-loc">
 					<SimpleForm chefResult={this.props.chefResult}/>
 				</div>
 				{(!this.props.user.isAuthenticated)? 
 					<div className=" header-top-button header-top-button-min small-head ">
-						<button onClick={lib.toggleSignin} 
+						<button onClick={()=>lib.toggleSignin()} 
 								className="display-toggle min-sign-in">
 						Sign In
 						</button>
 						<button className="btn-red display-toggle min-sign-up" 
-								onClick={lib.toggleSignUp}>
+								onClick={()=>lib.toggleSignUp()}>
 						Sign Up
 						</button> 
 						{(this.props.chef.fetched)?

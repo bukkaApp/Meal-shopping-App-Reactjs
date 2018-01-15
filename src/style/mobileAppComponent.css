@@ -2,11 +2,8 @@
 	background-color: white;
 	position: relative;
 	margin-top: 200px;
-	height: 650px;
 }
-/*p{
-	font-size: 15px;
-}*/
+
 .mobileAppImage-holder .row{
 	padding:0 !important;
 	margin:0 !important;
@@ -16,11 +13,7 @@
 	position: relative;
 	padding-left: 118px !important;
 }
-/*.m-app-store{
-	padding: 0!important;
-	padding-top: 6% !important;
-	padding-left: 18% !important;
-}*/
+
 .pic{
 	height: 600px;
 	position: absolute;
@@ -38,16 +31,7 @@
 	right: 40px;
 	display: block;
 }
-/*.appleapp{
-	width: 160px;
-	height: 46px;
-	position: relative;
-}
-.googleapp{
-	width: 160px;
-	height: 46px;
-	position: relative;
-}*/
+
 
 @media(max-width:1258px){
 	.pic{
@@ -113,9 +97,6 @@
 @media(max-width:767px){
 	.pic{
 		display:none;
-	}
-	.mobileAppImage-holder{
-		bottom: 45%;
 	}
 	.left-side, .right-side{
 		text-align: center;

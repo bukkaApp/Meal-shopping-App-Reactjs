@@ -116,7 +116,7 @@ class addmenu extends Component{
             <div id="addmenu-holder">
                 <div className="foodie" style={mystyle}>
                 </div>
-                <a className="cancle-x" onClick={lib.addmenu}>&times;</a>
+                <a className="cancle-x" onClick={()=>lib.addmenu()}>&times;</a>
                 <div id="title">
                     <h1>
                         {this.props.menuinview.menuinview.menu}

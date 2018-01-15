@@ -21,17 +21,21 @@
 }
 
 .food-logo{
-	max-width:180px;
-	position: absolute;
-	top:0;
-	max-height: 148px;
-	right:0;
-
+	width: 180px;
+    position: absolute;
+    top: 0;
+    height: 148px;
+    right: 0;
 }
 .m-menuitem-holder>h4,.m-menuitem-holder>h6{
 	max-width:55%;
 }
-
+.m-menuitem-holder>h6{
+	max-width: 55%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .foodName{
 	line-height: 1.6em;
 }
@@ -102,10 +106,12 @@
 	}
 	.food-logo{
 		max-height: 130px;
+		width:162px
 	}
 }
 @media(max-width:390px){
 	.food-logo{
 		max-height: 100px;
+		width:132px
 	}
 }

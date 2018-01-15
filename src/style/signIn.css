@@ -8,9 +8,36 @@
     background-color: rgba(0,0,0, 0.5);
     z-index: 2;
     display: flex;
-    justify-content: center;
-	padding: 10%;
-	padding-bottom: 12%;
+	justify-content: center;
+	align-items: center;
+	overflow-y: scroll;
+}
+.ee{
+	display: block;
+    background-color: #9c1c26;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border-top-right-radius: 1px;
+    border-top-left-radius: 1px;
+    text-align: center;
+}
+.ef{
+	margin-top: -20px;
+    margin-left: 10px;
+    display: block;
+    font-size: 10px;
+    color: #9c1c26;
+}
+.sp{
+	margin-bottom: 30px;
+}
+.signInPopup a{
+	color: #9c1c26;
+}
+.signInPopup a:hover{
+	cursor: pointer;
+	text-decoration: underline;
 }
 .white-background{
 	background-color: white;
@@ -39,7 +66,7 @@
 }
 #headingHolder{
 display: flex;
-justify-content: space-between;
+justify-content: center;
 }
 #headingHolder p{
 	margin-top: 16px;
@@ -81,21 +108,26 @@ text-align: left;
 	padding-left:20px;
 }
 .popupHolder{
-	position: absolute;
-    top: 15%;
-    margin: auto;
 	background: white;
 	width: 500px;
+	border-radius: 5px;
 }
 .SignUpPopupHolder{
-	position: absolute;
-    top: 15%;
-    margin: auto;
 	background: white;
 	width: 500px;
+	border-radius: 5px;
+}
+input:-webkit-autofill{
+	background-color: white !important;
 }
 .AddcardPopupHolder{
-	width:100%;
+	width:425px;
+	background-color:white;
+	border-radius: 5px;
+}
+.la{
+	margin: 10px 10px;
+    display: block;
 }
 .formField{
 	padding-left: 30px;
@@ -117,11 +149,11 @@ text-align: left;
 	left:0;
 	right:0;
 	position: relative;
-	height:89px;
+	height:50px;
 }
 #topPart>p{
 	width:34%;
-	border-bottom: 2px solid red;
+	border-bottom: 2px solid #9c1c26;
 	left:30%;
 	top:0;
 	text-align: center;
@@ -132,18 +164,24 @@ text-align: left;
 	position: absolute;
 	right:20px;
 	top:10px;
-	color:red;
+	color:#9c1c26;
 	cursor: pointer;
+	text-decoration: none;
 }
 #sign-btn{
 	margin-left: 5px;
 }
 .formField input{
-	display:block !important;
-	width:100% !important;
-	margin-bottom: 20px !important ;
-	height: 40px !important;
-	padding-left: 10px !important;
+	width: 100%;
+    margin-bottom: 20px;
+    height: 40px;
+    padding-left: 10px;
+    border: none;
+    border-bottom: 1px solid grey;
+}
+.formField input:focus{
+	outline: none;
+	border-bottom: 2px solid #b94a55
 }
 /*.msign-up{
 	padding-left:25px;
@@ -180,6 +218,18 @@ text-align: left;
 @media(max-width:398px){
 	.popupHolder{
 		width: 390px;
+	}
+	.AddcardPopupHolder{
+		width:100%;
+	}
+	#imageHolder img{
+		display:none;
+	}
+	#topPart>p{
+		font-size:1.5em;
+	}
+	#CVVNumber{
+		width:35%;
 	}
 	
 }

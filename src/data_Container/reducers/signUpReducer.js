@@ -11,7 +11,7 @@ const signUp=(state=initialstate,action)=>{
 			return{...state,fetching:true,fetched:false,response:"",error:null}
 		}
 		case"SIGN_UP_REJECTED":{
-			return{...state,fetching:false,fetched:false,response:"",error:action.payload.message}
+			return{...state,fetching:false,fetched:false,response:"",error:action.payload}
 		}
 		case"SIGN_UP_FULFILLED":{
 			return{...state,fetching:false,fetched:true,response:action.payload.data,error:null}

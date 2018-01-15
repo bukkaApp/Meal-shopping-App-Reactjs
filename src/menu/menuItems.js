@@ -2,6 +2,7 @@ import React from 'react';
 import '../style/menuItems.css'
 import lib from '../util/lib'
 import propTypes from 'prop-types'
+import ajx from '../util/ajax'
 
 
 const menuItems =(props)=>{
@@ -50,8 +51,8 @@ const menuItems =(props)=>{
 											data-price={menu.price}
 											data-quantity={menu.quantity}
 											data-visibility={menu.visibility}
-											data-image={menu.image} >
-										<img 	src={menu.image} 
+											data-image={(menu.image)?menu.image:ajx[`${props.chef.currentCuisine}`]} >
+										<img 	src={(menu.image)?menu.image:ajx[`${props.chef.currentCuisine}`]} 
 												alt="food-logo" 
 												className="food-logo img-responsive"
 												data-id={menu.category+identifier}/>

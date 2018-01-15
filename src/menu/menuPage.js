@@ -7,29 +7,39 @@ import ajx from '../util/ajax'
 import propTypes from 'prop-types'
 
 const menuPage = (props) =>{
-	
+	const cui=props.chef.currentCuisine
 	const mystyle={
-		backgroundImage:`url(${ajx.menupageBackground})`,
-		
+		backgroundImage:`url(${ajx[cui]})`,
 	}
 	return(
 		
 	<div id="chefinformation">
 		<div 	className="menuCont" 
 				style={mystyle} >
+			<div className="zip">
+				{
+				props.chef.chefAndCuisine[cui].map((chef,key)=>
+				<img 	src={chef.profile_photo} 
+						alt="chef"
+						key={key}
+						className="zzr"
+						onClick={()=>lib.updatechefbycuisine(chef)}/>
+				)
+				}
+			</div>
 			<img 	src={props.chef.yourChef.profile_photo} 
 					style={{border:'3px solid #f69323'}} 
 					alt="chef"/>
 			<h3 	className="text-center">
 				{props.chef.yourChef.first_name+" "+props.chef.yourChef.last_name}
 			</h3>
-			<h5 	className="text-center">
+			{/**<h5 	className="text-center">
 				{props.chef.yourChef.role}
-			</h5>
+			</h5>**/}
 			<div className="row">
 				<div className="col-xs-4 menu-left">
 					<h4>
-						{(props.chef.yourChef.rating_overall===5)?
+						{/*(props.chef.yourChef.rating_overall===5)?
 							(	<span>
 									<FaStar/>
 									<FaStar/>
@@ -79,7 +89,10 @@ const menuPage = (props) =>{
 										</span>):null
 								  
 							   
-							}
+									 */
+										Number(Math.round(props.chef.yourChef.rating_overall+'e2')+'e-2')
+									}
+									 
 					</h4>
 					<h6>RATINGS</h6>
 				</div>
@@ -114,27 +127,30 @@ const menuPage = (props) =>{
 									null ):
 									null
 					}
-					<li id="more" className="r">
-						<a id="il" onClick={lib.show}>More...</a>
-						{
-						(props.chef.fetched)? 
-							<div id='mt' className="moreitems kp d">
-								{
-									props.chef.menuCategoriesKeys.map(
-									(categ,key)=> (key>=9)?
-											<a 		key={key}
-													href={'#'+categ} 
-													className={"m-categories "+categ} 
-													data-categ={categ} 
-													onClick={lib.changecol}>
-											{categ}
-											</a>:
-										null )
-								}
-							</div>:
+					{(props.chef.menuCategoriesKeys.length>=9)?
+						<li id="more" className="r">
+							<a id="il" onClick={lib.show}>More...</a>
+							{
+							(props.chef.fetched)? 
+								<div id='mt' className="moreitems kp d">
+									{
+										props.chef.menuCategoriesKeys.map(
+										(categ,key)=> (key>=9)?
+												<a 		key={key}
+														href={'#'+categ} 
+														className={"m-categories "+categ} 
+														data-categ={categ} 
+														onClick={lib.changecol}>
+												{categ}
+												</a>:
+											null )
+									}
+								</div>:
+							null
+							}
+						</li>:
 						null
-						}
-					</li>
+					}
 				</ul>
 	</div>
 )};

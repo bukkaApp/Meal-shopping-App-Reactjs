@@ -6,16 +6,16 @@ import lib from '../util/lib'
 import {connect} from 'react-redux'
 import ajx from '../util/ajax'
  
-
+ 
 const HeaderCheckout=(props)=>{
 		return(
-			<div  className="myheader header-min bc">
+			<div id="head"  className="myheader header-min bc">
 				<Link to="/">
 					<img 	src={ajx.logo} 
-							id="logo" 
+							id="logo-min" 
 							alt="logo"/>
 				</Link>
-				<div className="search-box search-box-min">
+				<div className="search-box search-box-min search-loc">
 					{(props.chef.error!==null)? 
 						<SimpleForm />:
 						null

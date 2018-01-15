@@ -2,10 +2,15 @@ const initialstate={
 	fetching:false,
 	fetched:false,
 	fetched_chefsInYourArea:false,
+	fetched_chefAndCuisine:false,
+	fetching_chefAndCuisine:false,
+	first_search_completed:false,
 	chefsInYourArea:{},
+	chefAndCuisine:{},
 	yourChef:{},
 	menuCategoriesKeys:[],
 	menuCategories:[],
+	currentCuisine:null,
 	error:null
 };
 
@@ -14,7 +19,18 @@ const getChefs=(state=initialstate,action)=>{
 		case'GET_CHEFS_PENDING':{
 			return{
 				...state,
-				fetching:true}
+				fetched:false,
+				fetched_chefsInYourArea:false,
+				fetching_chefAndCuisine:true,
+				fetching:true,
+				chefsInYourArea:{},
+				chefAndCuisine:{},
+				yourChef:{},
+				menuCategoriesKeys:[],
+				menuCategories:[],
+				currentCuisine:null,
+				error:null
+			}
 		}
 		case'GET_CHEFS_REJECTED':{
 			return{
@@ -22,11 +38,14 @@ const getChefs=(state=initialstate,action)=>{
 				fetching:false,
 				fetched:false,
 				fetched_chefsInYourArea:false,
+				fetched_chefAndCuisine:false,
+				fetching_chefAndCuisine:false,
 				error:action.payload,
 				chefsInYourArea:{},
 				yourChef:{},
+				chefAndCuisine:{},
 				menuCategoriesKeys:[],
-				menuCategories:[],
+				menuCategories:[]
 				}
 		}
 		case'GET_CHEFS_FULFILLED':{
@@ -45,6 +64,7 @@ const getChefs=(state=initialstate,action)=>{
 				yourChef:action.payload.yourChef,
 				menuCategoriesKeys:action.payload.categ,
 				menuCategories:action.payload.menu,
+				currentCuisine:action.payload.cuisine,
 				error:null
 			}
 		}
@@ -54,6 +74,19 @@ const getChefs=(state=initialstate,action)=>{
 				fetching:false,
 				fetched:false,
 				error:action.payload
+			}
+		}
+		case 'GET_CHEF_AND_CUISINE':{
+			return{
+				...state,
+				chefAndCuisine:action.payload,
+				fetched_chefAndCuisine:true,
+				fetching_chefAndCuisine:false,
+				first_search_completed:true,
+				yourChef:{},
+				menuCategoriesKeys:[],
+				menuCategories:[],
+				currentCuisine:null
 			}
 		}
 		default:{

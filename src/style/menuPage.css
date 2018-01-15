@@ -2,7 +2,7 @@
 	position: relative;
 }
 .menuCont{
-	height: 440px;
+	height: 470px;
 	background-size: 100%;
 	padding: 50px;
 	padding-top: 100px;
@@ -25,7 +25,6 @@
 	text-align: left;
 }
 .menu-left>h4{
-color:#DAA520;
 }
 .chef-buttons{
 	margin-top: 10px;
@@ -131,13 +130,13 @@ cursor: pointer;
 		display:none;
 	}
 	.menuCont{
-		background-size: 100% 100%;
+		background-size: 100%
 	}
 }
 
 @media(max-width:476px){
-	.menu-left >h4{
+	/*.menu-left >h4{
 		font-size: 8px;
 		line-height: 2em;
-	}
+	}*/
 }

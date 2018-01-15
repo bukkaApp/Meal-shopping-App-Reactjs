@@ -45,6 +45,10 @@ export const order=(_)=>({
 	type:'ORDER_STATUS',
 	payload:Promise.all(_)
 })
+export const chef_Cuisine=(_)=>({
+	type:'GET_CHEF_AND_CUISINE',
+	payload:_
+})
 export const fetch_address=(add,latLng)=>({
 		type:'FETCH_ADDRESS',
 		payload:{address:add,lng:latLng.lng,lat:latLng.lat}

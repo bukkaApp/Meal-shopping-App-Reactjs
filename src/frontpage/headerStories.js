@@ -40,11 +40,11 @@ class headerStories extends Component{
 					{(!this.props.user.isAuthenticated)? 
 						<div className="header-top-button header-top-button-min small-head head-option">
 							<button 	className="stories-sign-in " 
-										onClick={lib.toggleSignin}>
+										onClick={()=>lib.toggleSignin()}>
 								Sign In
 							</button>
 							<button className="btn-red stories-sign-up" 
-									onClick={lib.toggleSignUp} >
+									onClick={()=>lib.toggleSignUp()} >
 								Sign Up
 							</button>
 							<div>
@@ -120,30 +120,33 @@ class headerStories extends Component{
 									null ):
 									null
 						}
-						<li id="more" 
-							className="r">
-							<a 	id="il" 
-								onClick={lib.show}>
-								More...
-							</a>
-							{(this.props.chef.fetched)? 
-								<div id='mt' className="moreitems d zp">
-									{this.state.more.map(
-										(categ,key)=> 
-											(key>=9)?
-												<a 		key={key}
-														href={'#'+categ} 
-														className={"m-categories "+categ} 
-														data-categ={categ} 
-														onClick={lib.changecol}>
-													{categ}
-												</a>:
-												null )
-									}
-								</div>:
-								null
+						{(this.state.more.length>=9)?
+							<li id="more" 
+								className="r">
+								<a 	id="il" 
+									onClick={lib.show}>
+									More...
+								</a>
+								{(this.props.chef.fetched)? 
+									<div id='mt' className="moreitems d zp">
+										{this.state.more.map(
+											(categ,key)=> 
+												(key>=9)?
+													<a 		key={key}
+															href={'#'+categ} 
+															className={"m-categories "+categ} 
+															data-categ={categ} 
+															onClick={lib.changecol}>
+														{categ}
+													</a>:
+													null )
+										}
+									</div>:
+									null
+								}
+							</li>:
+							null
 							}
-						</li>
 					</ul>
 				</div>
 			)
