@@ -24,8 +24,8 @@ const menuPage = (props) =>{
 						alt="chef"
 						key={key}
 						className={(JSON.stringify(chef)=== JSON.stringify(props.chef.yourChef))?
-									"zzr blk blka":
-									"zzr blk blkd"
+									"zzr bblk blk blka":
+									"zzr bblk blk blkd"
 								  }
 						onClick={()=>lib.updatechefbycuisine(chef)}/>
 				)
@@ -122,11 +122,23 @@ const menuPage = (props) =>{
 					<img 	src={chef.profile_photo} 
 							alt="chef"
 							className={(JSON.stringify(chef)=== JSON.stringify(props.chef.yourChef))?
-										 "blk blka":
-										 "blk blkd"
+										 "bblk blk blka":
+										 "bblk blk blkd"
 									}
 							onClick={()=>lib.updatechefbycuisine(chef)}/>
 							<h6 className="tt">{chef.first_name+" "+chef.last_name}</h6>
+							{
+								(!chef.visibility)?
+								<div className="middle">
+									<div className={(JSON.stringify(chef)=== JSON.stringify(props.chef.yourChef))?
+										"dpps blk blka":
+										"dpps blk blkd"} 
+										onClick={()=>lib.updatechefbycuisine(chef)}>
+										Closed
+									</div>
+								</div>:
+								null
+							}
 					</div>
 					)
 				}

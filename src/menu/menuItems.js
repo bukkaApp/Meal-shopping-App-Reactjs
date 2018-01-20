@@ -27,6 +27,7 @@ const menuItems =(props)=>{
 			<div className="MenuList" id="many">
 				{(props.chef.fetched)? 
 					(props.chef.yourChef.menu.length)?
+					(props.chef.yourChef.visibility)?
 					props.chef.menuCategoriesKeys.map(
 						(categ,key)=> {return(
 						<div 	className="eachMenuHolder" 
@@ -104,7 +105,10 @@ const menuItems =(props)=>{
 						</div>)
 					}):
 					<div className="fly">
-						<h4>Sorry! This chef currently has no items for sale,Please checkback some other time. </h4>
+						<h4>Sorry! This chef is currently closed,Please checkback around 8:00am to 10:00pm tomorrow.Thank you. </h4>
+					</div>:
+					<div className="fly">
+						<h4>Sorry! This chef currently has no items for sale,Please checkback some other time.Thank you. </h4>
 					</div>:
 				null
 				}

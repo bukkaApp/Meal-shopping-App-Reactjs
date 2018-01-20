@@ -41,9 +41,6 @@ export default class scrollLogic extends Component{
         (window.scrollY>410)? 
         this.setState({ scroll:true }):
         this.setState({ scroll:false })
-
-
-        console.log(window.scrollY)
     }
     componentDidMount() {
         window.addEventListener('scroll', this.scrollDetector);
