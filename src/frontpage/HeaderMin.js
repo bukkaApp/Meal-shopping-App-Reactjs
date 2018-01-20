@@ -6,7 +6,7 @@ import ShoppingCart from './shoppingCart'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import lib from '../util/lib'
-import ajx from '../util/ajax'
+import ajx,{mapStateToProps} from '../util/ajax'
  
 
 class HeaderMin extends Component{
@@ -19,6 +19,9 @@ class HeaderMin extends Component{
 		setTimeout(()=>lib.addClass('l'),50)):
 		null
 	}
+	componentWillUnmount(){
+        window.removeEventListener('scroll', this.scrolld);
+    }
 	render(){  
 		return(
 			<div id="head" className="myheader header-min header-small ab">
@@ -104,7 +107,5 @@ class HeaderMin extends Component{
 			)
 	}
 }
-function mapStateToProps(state){
-	return state
-}
+
 export default connect(mapStateToProps)(HeaderMin)

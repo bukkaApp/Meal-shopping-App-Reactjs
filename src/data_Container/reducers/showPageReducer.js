@@ -7,7 +7,9 @@ const initialstate={
 	showpaymentinfo:false,
 	showorderhistory:false,
 	shownotification:false,
-	showbasicinformation:true
+	showbasicinformation:true,
+	showdifcheferror:false,
+	showforgotpasswordpage:false
 };
 
 const showPage=(state=initialstate,action)=>{
@@ -19,6 +21,18 @@ const showPage=(state=initialstate,action)=>{
 					showaddCard:false,
 					showreceipt:false,
 					showaddmenu:false	}
+		}
+		case 'DIF_CHEF_ERROR':{
+			return{
+				...state, 
+				showdifcheferror:!action.payload
+			}
+		}
+		case 'FORGOT_PASSWORD_PAGE':{
+			return{
+				...state,
+				showforgotpasswordpage:!action.payload
+			}
 		}
 		case'RECEIPT':{
 			return{	...state, 

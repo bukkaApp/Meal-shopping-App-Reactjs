@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import '../style/addmenu.css';
-import '../style/App.css';
-import MdRemove from 'react-icons/lib/md/remove';
-import Mdadd from 'react-icons/lib/md/add';
-import {connect} from 'react-redux';
+import React, { Component } from 'react'
+import '../style/addmenu.css'
+import '../style/App.css'
+import MdRemove from 'react-icons/lib/md/remove'
+import Mdadd from 'react-icons/lib/md/add'
+import {connect} from 'react-redux'
 import lib from '../util/lib' 
+import {mapStateToProps} from '../util/ajax'
 
 class addmenu extends Component{
     constructor(props) {
@@ -49,6 +50,14 @@ class addmenu extends Component{
 		async addToCart(e){
             e.stopPropagation()
             e.preventDefault()
+            if(Object.keys(this.props.cart.cart).length){
+                var _=Object.keys(this.props.cart.cart)[0]
+                if(this.props.chef.yourChef.uid!==this.props.cart.cart[`${_}`].chef){
+                     lib.addmenu()
+                     lib.toggleShowdifcheferror()
+                    return{}
+                }
+            }
             var name=this.props.menuinview.menuinview.menu,
                 desc=this.props.menuinview.menuinview.desc,
 			    price=this.state.unitcost,
@@ -56,6 +65,7 @@ class addmenu extends Component{
                 totalCost=this.state.itemTotal,
                 hour=this.props.menuinview.menuinview.hour,
                 min=this.props.menuinview.menuinview.min,
+                chef=this.props.chef.yourChef.uid,
                 chefinstruction=this.state.chefinstruction
 				if(this.state.carti.hasOwnProperty(name)){
 					var newQuantity=this.state.carti[name].quantity+quantity,
@@ -68,7 +78,8 @@ class addmenu extends Component{
                         'chefinstruction':chefinstruction,
                         'desc':desc,
                         'hour':hour,
-                        'min':min
+                        'min':min,
+                        'chef':chef
                     }
 					await this.setState({cart:{
                                 ...this.state.carti,
@@ -91,7 +102,8 @@ class addmenu extends Component{
                         'chefinstruction':chefinstruction,
                         'desc':desc,
                         'hour':hour,
-                        'min':min
+                        'min':min,
+                        'chef':chef
 						}
                         await this.setState({cart:{
                             ...this.state.carti,
@@ -105,7 +117,12 @@ class addmenu extends Component{
                     lib.updateCart({cart:this.state.cart,total:this.state.total});
                 }
                 lib.addmenu()
-		}
+        }
+        componentWillReceiveProps(nextProps){
+            if(this.props!==nextProps){
+                this.props=nextProps
+            }
+        }
     render(){
    const mystyle={
         backgroundImage:`url(${this.props.menuinview.menuinview.image})`
@@ -160,7 +177,5 @@ class addmenu extends Component{
     )
 }
 }
-function mapStateToProps(state){
-	return state
-}
+
 export default connect(mapStateToProps)(addmenu)

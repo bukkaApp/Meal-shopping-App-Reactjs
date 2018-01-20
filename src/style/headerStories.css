@@ -35,21 +35,15 @@
 	width:264%;
 }
 .bigMenuHolder .menuHolder{
-	padding-left: 0 !important;
-	padding-right: 0 !important;
-	margin-left:-50px;
+	margin: 0 -20px 0 -50px;
 }
 .color-white{
 	color:white!important;
 }
-@media (max-width: 1024px){
-	.bigMenuHolder .menuHolder{
-		margin-left: -30px;
-	}
-}
+
 @media(max-width:1010px){
 	.bigMenuHolder .menuHolder{
-		margin-left:0;
+		margin: 0 -20px 0 -20px;
 	}
 }
 @media(max-width:767px){

@@ -2,14 +2,13 @@
 import React from "react"
 import { compose, withProps, lifecycle } from 'recompose'
 import {
-  withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker,
   DirectionsRenderer,
 } from 'react-google-maps'
 import {connect} from 'react-redux'
-import ajx from '../util/ajax'
+import ajx,{mapStateToProps} from '../util/ajax'
  
 const google=window.google
 var aloc,bloc,cloc
@@ -21,7 +20,6 @@ const MapWithADirectionsRenderer=compose(
     mapElement: <div style={{ height: `100%` }} />,
     center: cloc,
   }),
-  withScriptjs,
   withGoogleMap,
   lifecycle({
     componentDidMount() {
@@ -57,7 +55,6 @@ const MyMapComponent = compose(
     containerElement: <div style={{ height: `100%`,position:'absolute',width:'100%', top:'0',bottom:'0',}} />,
     mapElement: <div style={{ height: `100%` }} />,
   }),
-  withScriptjs,
   withGoogleMap
 )((props) =>
   <GoogleMap
@@ -113,7 +110,6 @@ const Gmap=(props)=>{
    aloc={}
    bloc={}
  }
-  console.log("this is aloc",cloc)
   return(
     (props.one)?
     (props.bloc)?
@@ -121,8 +117,5 @@ const Gmap=(props)=>{
      <MyFancyComponent/>:
      (<MapWithADirectionsRenderer />)
   )
-}
-function mapStateToProps(state){
-	return state
 }
 export default connect(mapStateToProps)(Gmap)

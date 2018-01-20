@@ -16,7 +16,13 @@ const initialstate={
 	orderstatus_fetching:false,
 	orderstatus_fetched:false,
 	orderstatus:[],
-	user_updated:false
+	user_updated:false,
+	forgot_password:{
+		error:null,
+		done:false,
+		fetching:false,
+		fetched:false
+	}
 };
 
 const identifyUser=(state=initialstate,action)=>{
@@ -27,17 +33,50 @@ const identifyUser=(state=initialstate,action)=>{
 					user_update:false	}
 			
 		}
+		case'FORGOT_PASSWORD_PENDING':{
+			return{
+				...state,
+				forgot_password:{
+					error:null,
+					done:false,
+					fetching:true,
+					fetched:false
+				}
+			}
+		}
 		case 'ORDER_STATUS_PENDING':{
 			return{	...state,
 					orderstatus_fetching:true,
 					orderstatus_fetched:false,
 					orderstatus:[]	}
 		}
+		case'FORGOT_PASSWORD_FULFILLED':{
+			return{
+				...state,
+				forgot_password:{
+					error:null,
+					done:action.payload,
+					fetching:false,
+					fetched:true
+				}
+			}
+		}
 		case 'ORDER_STATUS_FULFILLED':{
 			return{	...state,
 					orderstatus_fetching:false,
 					orderstatus_fetched:true,
 					orderstatus:action.payload	}
+		}
+		case'FORGOT_PASSWORD_REJECTED':{
+			return{
+				...state,
+				forgot_password:{
+					error:action.payload,
+					done:false,
+					fetching:false,
+					fetched:false
+				}
+			}
 		}
 		case 'ORDER_STATUS_REJECTED':{
 			return{	...state,

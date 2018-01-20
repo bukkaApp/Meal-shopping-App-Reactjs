@@ -29,7 +29,7 @@ const addcard =(props)=>{
 					<div id="extrainfoHolder">
 						<div id="info">
 							<h4>Expiration</h4>
-							<h4>CVC Code</h4>
+							<h4>CVV</h4>
 						</div>
 						<div className="otherinfoHolder">
 							<div className="YearDate">

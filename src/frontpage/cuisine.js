@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../style/cuisine.css'
 import '../style/App.css'
 import {connect} from 'react-redux'
-import ajx from '../util/ajax'
+import ajx,{mapStateToProps} from '../util/ajax'
 import lib from '../util/lib'
 
 class Stores extends Component {
@@ -23,12 +23,17 @@ class Stores extends Component {
                             <h5>{cui}</h5>
                             <p>20-60 Mins</p>
                         </div>):
-                        <div    className="col-sm-4 m kki">
-                            <img    className="lt"  
-                                    alt="foodimage" />
-                            <h5> </h5>
-                            <p>20-60 Mins</p>
-                        </div>
+                        null
+                    }
+                    {
+                        (this.props.chef.fetching_chefAndCuisine)?
+                            [1,2,3].map((cui,key)=>
+                                <div    className="col-sm-4 m" >
+                                    <div   className="lt xyxaa"></div>
+                                    <h5 className="avci xyxaa"></h5>
+                                    <p className="avcib xyxaa"></p>
+                                </div>):
+                                null
                     }
                 </div>
                 </div>
@@ -38,7 +43,4 @@ class Stores extends Component {
      }
 }
 
-function mapStateToProps(state){
-	return state;
-};
 export default connect(mapStateToProps)(Stores);

@@ -4,7 +4,7 @@ import SimpleForm from './autoComplete'
 import {Link} from 'react-router-dom'
 import lib from '../util/lib'
 import {connect} from 'react-redux'
-import ajx from '../util/ajax'
+import ajx,{mapStateToProps} from '../util/ajax'
  
  
 const HeaderCheckout=(props)=>{
@@ -13,7 +13,8 @@ const HeaderCheckout=(props)=>{
 				<Link to="/">
 					<img 	src={ajx.logo} 
 							id="logo-min" 
-							alt="logo"/>
+							alt="logo"
+							className="zzq"/>
 				</Link>
 				<div className="search-box search-box-min search-loc">
 					{(props.chef.error!==null)? 
@@ -46,8 +47,5 @@ const HeaderCheckout=(props)=>{
 			</div>
 			)
 	}
-function mapStateToProps(state){
-	return state
-}
-
+	
 export default connect(mapStateToProps)(HeaderCheckout)

@@ -8,7 +8,7 @@ import '../style/receipt.css';
 import {delete_cart,clear_receipt} from '../data_Container/action/actions';
 import {Link} from 'react-router-dom';
 import lib from '../util/lib'
-import ajx from '../util/ajax'
+import ajx,{mapStateToProps} from '../util/ajax'
 
 class receipt extends Component{
     constructor(props){
@@ -18,9 +18,11 @@ class receipt extends Component{
     gettime(){
         return lib.timewillpass().current
     }
-    componentWillUnmount(){
-        this.props.dispatch(clear_receipt())
+    componentDidMount(){
         this.props.dispatch(delete_cart())
+    }
+    componentWillUnmount(){
+        //this.props.dispatch(clear_receipt())
     }
     render(){
     return(
@@ -88,7 +90,5 @@ class receipt extends Component{
     )
 }
 }
-function mapStateToProps(state){
-	return state;
-};
+
 export default connect(mapStateToProps)(receipt)

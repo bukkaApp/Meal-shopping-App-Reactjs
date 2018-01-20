@@ -1,7 +1,8 @@
-import { Redirect } from "react-router-dom";
-import React from 'react';
-import {connect} from 'react-redux';
-import Profile from './profile';
+import { Redirect } from "react-router-dom"
+import React from 'react'
+import {connect} from 'react-redux'
+import Profile from './profile'
+import {mapStateToProps} from '../util/ajax'
 
 const authenticatedRoute =(props)=>{
 		return((props.user.isAuthenticated)?
@@ -9,9 +10,5 @@ const authenticatedRoute =(props)=>{
 				 <Redirect to='/'/>
 				)
 }
-
-const mapStateToProps=(state)=>{
-	return state;
-};
 
 export default connect(mapStateToProps)(authenticatedRoute);

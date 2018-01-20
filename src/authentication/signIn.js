@@ -34,7 +34,7 @@ export default class signIn extends Component{
 
 	render(){
 		return(
-			<div className="signInPopup">
+			<div 	className="signInPopup">
 				<div className="popupHolder">
 					<div id="topPart">
 						<p>Login</p>
@@ -60,7 +60,7 @@ export default class signIn extends Component{
 							<span className="ef sp">password field cannot be empty</span>:
 							null
 						}
-						<a>Forgot Password?</a>
+						<a onClick={()=>lib.forgotPasswordfromSignin()}>Forgot Password?</a>
 						{(!this.props.user.fetching && !this.props.user.fetched)?
 							<button className="btn-red" 
 									onClick={this.getUser}>

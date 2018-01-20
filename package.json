@@ -9,6 +9,7 @@
     "firebase": "^4.6.2",
     "isomorphic-fetch": "^2.2.1",
     "leaflet": "^1.2.0",
+    "lodash": "^4.17.4",
     "needle": "^2.0.1",
     "node-fetch": "^1.7.3",
     "prop-types": "^15.6.0",

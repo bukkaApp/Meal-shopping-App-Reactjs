@@ -5,7 +5,7 @@ import SimpleForm from './autoComplete'
 import {Link} from 'react-router-dom'
 import lib from '../util/lib'
 import {connect} from 'react-redux'
-import ajx from '../util/ajax'
+import ajx,{mapStateToProps} from '../util/ajax'
 
 const HeaderMax=(props)=>{
 return(
@@ -56,7 +56,4 @@ return(
 	)
 }
 
-function mapStateToProps(state){
-	return state
-}
 export default connect(mapStateToProps)(HeaderMax)

@@ -5,6 +5,7 @@ import PageBackground from '../frontpage/gmap'
 import Footer from '../frontpage/Footer'
 import HeaderCheckout from './HeaderCheckout'
 import {connect} from 'react-redux'
+import {mapStateToProps} from '../util/ajax'
 
 
 const Nochefavailable=(props)=>{
@@ -44,7 +45,5 @@ const Nochefavailable=(props)=>{
         </div>
     )
 }
-function mapStateToProps(state){
-	return state
-}
+
 export default connect(mapStateToProps)(Nochefavailable)

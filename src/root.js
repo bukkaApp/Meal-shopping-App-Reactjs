@@ -6,9 +6,10 @@ import { Provider } from 'react-redux'
 import PropTypes from 'prop-types'
 import Authenticatedroute from './routes/AuthenticatedRoute'
 import EventHome from './homepage/eventHome'
-import Nochefavailable from './frontpage/nochef'
 import Checkoutpagedecider from './routes/Checkoutpagedecider'
-import Cuisine from './frontpage/cuisine'
+import Error_ from './routes/Error'
+import Receipt from './routes/receipthandler'
+import Testo from './testo'
 
 
 
@@ -20,8 +21,9 @@ const Root = ({ store }) => (
 		<Route exact path="/profile" component={Authenticatedroute} />
 		<Route exact path="/checkout" component={Checkoutpagedecider}/>
 		<Route exact path="/event" component={EventHome} />
-		<Route exact path="/menu" component={Nochefavailable} />
-		<Route exact path="/cuisine" component={Cuisine} />
+		<Route exact path="/error" component={Error_} />
+		<Route exact path="/receipt" component={Receipt} />
+		<Route component={Testo} />
 	</Switch>
 	</BrowserRouter>
 	</Provider>

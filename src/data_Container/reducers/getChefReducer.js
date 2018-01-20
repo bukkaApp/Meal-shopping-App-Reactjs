@@ -29,7 +29,6 @@ const getChefs=(state=initialstate,action)=>{
 				menuCategoriesKeys:[],
 				menuCategories:[],
 				currentCuisine:null,
-				error:null
 			}
 		}
 		case'GET_CHEFS_REJECTED':{
@@ -87,6 +86,7 @@ const getChefs=(state=initialstate,action)=>{
 				menuCategoriesKeys:[],
 				menuCategories:[],
 				currentCuisine:null
+				
 			}
 		}
 		default:{

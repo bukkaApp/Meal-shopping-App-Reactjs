@@ -6,7 +6,7 @@
 .kt{
   }
 .lt{
-    height: 200px;
+    height: 300px;
     width: 100%;
     padding: 0;
   }
@@ -22,11 +22,20 @@
   }
   .m{
     cursor: default;
-    height: 270px;
+  }
+  @media(max-width:1100px){
+    .lt{
+      height:230px;
+    }
   }
   @media(max-width:1010px){
     .zn{
       padding-left: 5px;
       padding-right: 5px;
+    }
+  }
+  @media(max-width:768px){
+    .lt{
+      height: 200px;
     }
   }

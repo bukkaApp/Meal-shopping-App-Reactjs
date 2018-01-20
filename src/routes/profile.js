@@ -7,6 +7,7 @@ import Basicinformation from '../profile/BasicInformation'
 import HeaderMin from '../frontpage/HeaderMin';
 import {connect} from 'react-redux';
 import lib from '../util/lib'
+import {mapStateToProps} from '../util/ajax'
 
  const profile =(props)=>{
 	return(
@@ -60,9 +61,5 @@ import lib from '../util/lib'
 		</div>
 		)
 }
-
-const mapStateToProps=(state)=>{
-	return state;
-};
 
 export default connect(mapStateToProps)(profile);

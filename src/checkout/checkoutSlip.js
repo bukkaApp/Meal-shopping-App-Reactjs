@@ -1,10 +1,11 @@
 import React from 'react'
 import '../style/checkoutSlip.css'
-import PageBackground from '../frontpage/PageBackground'
+import PageBackground from '../frontpage/gmap'
 import {connect} from 'react-redux'
 import lib from '../util/lib'
 import ajx from '../util/ajax'
 import Faspinner from 'react-icons/lib/fa/spinner'
+import {mapStateToProps} from '../util/ajax'
  
 const checkoutSlip =(props)=>{
 	const deleteDiv=(e)=>{
@@ -32,7 +33,7 @@ const checkoutSlip =(props)=>{
 	
 	return(
 		<div id="checkoutSlip">
-			<img 	src={ajx.macdlogo} 
+			<img 	src={ajx[`${props.chef.currentCuisine}`]} 
 					alt="food" 
 					id="food-img" />
 			<div id="food-card">
@@ -58,7 +59,7 @@ const checkoutSlip =(props)=>{
 			</div>
 			<div id="small-screen-delivery-info">
 				<div id="ssmap">
-					<PageBackground/> 
+				<PageBackground one={true} bloc={{lat:props.address.lat,lng:props.address.lng}} />
 				</div>
 				<div id="ssaddress">
 					<input 	value={props.address.Location} 
@@ -140,7 +141,5 @@ const checkoutSlip =(props)=>{
 				</div>
 		)
 }
-function mapStateToProps(state){
-	return state;
-};
+
 export default connect(mapStateToProps)(checkoutSlip);

@@ -56,7 +56,7 @@ class SignUp extends Component{
 	}
 render(){
 	return(
-		<div className="signInPopup">
+		<div 	className="signInPopup">
 			<div className="SignUpPopupHolder">
 				<div id="topPart">
 					<p>Sign Up</p>

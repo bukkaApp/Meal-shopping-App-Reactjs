@@ -7,7 +7,7 @@ import ShoppingCart from './shoppingCart'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import lib from '../util/lib'
-import ajx from '../util/ajax'
+import ajx,{mapStateToProps} from '../util/ajax'
 
 class headerStories extends Component{
 	constructor(Props){
@@ -153,7 +153,4 @@ class headerStories extends Component{
 		}
 	}
 
-function mapStateToProps(state){
-	return state
-}
 export default connect(mapStateToProps)(headerStories)

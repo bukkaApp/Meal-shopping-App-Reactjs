@@ -2,6 +2,7 @@ import { Redirect } from "react-router-dom";
 import React from 'react';
 import {connect} from 'react-redux';
 import Checking from './checking';
+import {mapStateToProps} from '../util/ajax'
 
 const checkoutpagedecider =(props)=>{
         return(
@@ -10,9 +11,5 @@ const checkoutpagedecider =(props)=>{
                 <Redirect to='/'/>
         )
 	}
-
-const mapStateToProps=(state)=>{
-	return state;
-};
 
 export default connect(mapStateToProps)(checkoutpagedecider);

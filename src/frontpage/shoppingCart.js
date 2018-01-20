@@ -4,6 +4,7 @@ import '../style/App.css'
 import {Link} from 'react-router-dom'
 import lib from '../util/lib'
 import {connect} from 'react-redux'
+import {mapStateToProps} from '../util/ajax'
  
 const shoppingCart=(props)=>{ 
 	 const deleteDiv=(e)=>{
@@ -65,7 +66,5 @@ const shoppingCart=(props)=>{
 			</div>
 		)
 }
-function mapStateToProps(state){
-	return state
-}
+
 export default connect(mapStateToProps)(shoppingCart)

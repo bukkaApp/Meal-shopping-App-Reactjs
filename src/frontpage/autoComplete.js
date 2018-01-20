@@ -5,7 +5,7 @@ import '../style/App.css'
 import {connect} from 'react-redux'
 import Faspinner from 'react-icons/lib/fa/spinner'
 import lib from '../util/lib'
-import MdLocation from 'react-icons/lib/fa/map-pin'
+import {mapStateToProps} from '../util/ajax'
 
 class SimpleForm extends React.Component {
   constructor(props) {
@@ -26,15 +26,16 @@ class SimpleForm extends React.Component {
   }
 
   handleEnter = (address) => {
+  this.setState({ address })
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
-    .then(latLng => {lib.address(address);lib.chefResult(latLng)})
+    .then(latLng => { lib.address(address,latLng);lib.chefResult(latLng);lib.messageChef()})
     .catch(error => console.error('Error', error))
 }
   
 
  handleSelect = (address, placeId) => {
- 	this.setState({ address, placeId });
+ 	this.setState({ address, placeId })
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
     .then(latLng => {lib.address(address,latLng);lib.chefResult(latLng)})
@@ -124,7 +125,4 @@ class SimpleForm extends React.Component {
   }
 }
 
-const mapStateToProps=(state)=>{
-  return state;
-};
 export default connect(mapStateToProps)(SimpleForm);

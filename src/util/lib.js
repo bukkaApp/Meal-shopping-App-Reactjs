@@ -4,7 +4,6 @@ import {	fetch_address,
             get_chef,
             showsignIn,
             showsignUp,
-            get_chef_update_failed,
             updating_user_info,
             signout,
             signup,
@@ -23,11 +22,16 @@ import {	fetch_address,
             shownotification,
             showbasicinformation,
             orderhistory,
-            chef_Cuisine            } from '../data_Container/action/actions'
+            chef_Cuisine,
+            showDifChefsError,
+            delete_cart,
+            forgot_password,
+            showforgotpassword,
+            clear_receipt      } from '../data_Container/action/actions'
 import storage from '../data_Container/store'
 import axios from 'axios'
 import ajx from './ajax'
-import Mdar from 'react-icons/lib/md/arrow-drop-down'
+
 
 
 export default{
@@ -52,7 +56,16 @@ export default{
         storage.dispatch(showaddCard(storage.getState().page.showaddCard))
         this.noscroll()
     },
-
+    toggleShowdifcheferror(){
+        storage.dispatch(showDifChefsError(storage.getState().page.showdifcheferror))
+        this.noscroll()
+    },
+    toggleshowforgotpassword(){
+        console.log(storage.getState().page.showforgotpasswordpage)
+        storage.dispatch(showforgotpassword(storage.getState().page.showforgotpasswordpage))
+        console.log(storage.getState().page.showforgotpasswordpage)
+        this.noscroll()
+    },
     toggleShowReceipt:()=>storage.dispatch(show_receipt(storage.getState().page.showreceipt)),
 
     generateReceipt:(a)=>storage.dispatch(add_receipt(a)),
@@ -64,7 +77,7 @@ export default{
 		.then(()=>{this.toggleSignin()})
         .catch((e)=>{
             console.log('Sorry! There was a problem',e),
-            (!storage.getState().user.user_updated)?
+            (storage.getState().user.error.response.data.msg==="Paystack token does not exists")?
             this.toggleSignin():
             null
         })
@@ -101,7 +114,11 @@ export default{
 
     signout:()=>storage.dispatch(signout()),
 
+    //add items to cart
     updateCart(cart){
+        if(!Object.keys(storage.getState().cart.cart).length){
+            storage.dispatch(clear_receipt())
+        }
 		storage.dispatch(update_cart(cart))
     },
     deleteCart(food){
@@ -142,14 +159,12 @@ export default{
     //get chef data
     chefcloseby(result){
         var yourChef,cuisine
-
         if(typeof result ==='string'){
             yourChef=storage.getState().chef.chefAndCuisine[`${result}`][0]
             cuisine=result
 
             /*.filter((chef)=>chef.role==="Super Chef")*/
         }else{
-            console.log("you called",result)
             yourChef=result
             cuisine=result.cuisine
         }
@@ -442,6 +457,26 @@ export default{
                                                         }   ]
                 this.newtransact(transaction)
                                                                                         }   )
+        var deliveryCharge=[{   chefUid,
+                                customerUid,
+                                originalAmt:storage.getState().chef.yourChef.delivery_charge,
+                                item:"Delivery fee",
+                                customerAddress,
+                                description:"Delivery fee",
+                                quantity:1,
+                                customerName,
+                                customerEmail,
+                                customerImage,
+                                chefName,
+                                chefEmail,
+                                chefImage,
+                                customerPhoneNumber,
+                                payment_option,
+                                coupon_used,
+                                additionalInfo:"",
+                                charge_customer:true,
+                                change_amount:storage.getState().chef.yourChef.delivery_charge       }]
+        this.newtransact(deliveryCharge)
         this.placeorder()
     },
     
@@ -503,5 +538,18 @@ export default{
           _.innerHTML="&#9662"+storage.getState().chef.currentCuisine:
           _.innerHTML="&#9662":
           null
-      }
+      },
+    clear_Cart(){
+        storage.dispatch(delete_cart())
+        this.toggleShowdifcheferror()
+    },
+    forgotPassword(_){
+        storage.dispatch(forgot_password(_))
+        .then(()=>this.toggleshowforgotpassword())
+        .catch(e=>console.log(e))
+    },
+    forgotPasswordfromSignin(){
+        this.toggleSignin()
+        this.toggleshowforgotpassword()
+    }
 }

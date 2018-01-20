@@ -16,13 +16,17 @@ const menuPage = (props) =>{
 	<div id="chefinformation">
 		<div 	className="menuCont" 
 				style={mystyle} >
-			<div className="zip">
+			<div className="zip ipr">
+				
 				{
 				props.chef.chefAndCuisine[cui].map((chef,key)=>
 				<img 	src={chef.profile_photo} 
 						alt="chef"
 						key={key}
-						className="zzr"
+						className={(JSON.stringify(chef)=== JSON.stringify(props.chef.yourChef))?
+									"zzr blk blka":
+									"zzr blk blkd"
+								  }
 						onClick={()=>lib.updatechefbycuisine(chef)}/>
 				)
 				}
@@ -109,6 +113,25 @@ const menuPage = (props) =>{
 				<FaStar className="buttn" id="rate"/>
 				<MdMore className="buttn" id="more"/>
 			</h1>
+			<div className="vt">
+				<h5 className="tt">MORE</h5>
+				<div className="yyv">
+				{
+					props.chef.chefAndCuisine[cui].map((chef,key)=>
+					<div className="lkt" key={key} >
+					<img 	src={chef.profile_photo} 
+							alt="chef"
+							className={(JSON.stringify(chef)=== JSON.stringify(props.chef.yourChef))?
+										 "blk blka":
+										 "blk blkd"
+									}
+							onClick={()=>lib.updatechefbycuisine(chef)}/>
+							<h6 className="tt">{chef.first_name+" "+chef.last_name}</h6>
+					</div>
+					)
+				}
+				</div>
+			</div>
 		</div>
 
 		<ul className="menuHolder menuTop">
@@ -152,6 +175,7 @@ const menuPage = (props) =>{
 						null
 					}
 				</ul>
+
 	</div>
 )};
 

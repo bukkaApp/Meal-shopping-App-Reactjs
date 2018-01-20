@@ -1,7 +1,11 @@
 import axios from 'axios'
 import ajx from '../../util/ajax'
 
-
+//forgot Password
+export const forgot_password=(_)=>({
+	type:"FORGOT_PASSWORD",
+	payload:axios.post(ajx.forgot_password,{_})
+})
 //sign in
 export const identify_user=(email,password)=>({
 	type:'IDENTIFYING_USER',
@@ -11,7 +15,8 @@ export const identify_user=(email,password)=>({
 export const signup=(email,firstname,lastname,password,mobile,isCustomer)=>({
 	type:'SIGN_UP',
 	payload:axios.post(ajx.signupendpoint,{email,firstname,lastname,password,mobile,isCustomer})
-});
+})
+
 //get card details
 //takes uid as argument
 export const updating_user_info=(uid)=>({
@@ -77,7 +82,10 @@ export const showaddmenu=(addmenu)=>({
 	type:'ADD_MENU',
 	payload:addmenu
 });
-
+export const showDifChefsError=(p)=>({
+	type:'DIF_CHEF_ERROR',
+	payload:p
+})
 export const showpaymentinfo=(_)=>({
 	type:'PAYMENT_INFO',
 	payload:_
@@ -92,6 +100,10 @@ export const shownotification=(_)=>({
 })
 export const showbasicinformation=(_)=>({
 	type:'BASIC_INFORMATION',
+	payload:_
+})
+export const showforgotpassword=(_)=>({
+	type:'FORGOT_PASSWORD_PAGE',
 	payload:_
 })
 export const signout=()=>({

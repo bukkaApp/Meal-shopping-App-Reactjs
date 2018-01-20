@@ -9,35 +9,26 @@ import SummaryComponent from '../frontpage/summaryComponent'
 import MenuPage from '../menu/menuPage'
 import MenuItems from '../menu/menuItems'
 import {connect} from 'react-redux'
-import SignIn from '../authentication/signIn'
-import SignUp from '../authentication/SignUp'
 import '../homepage/Appstyle.css'
-import Nochefavailable from '../frontpage/nochef'
-import Addmenu from '../frontpage/addmenu'
 import HeaderMin from '../frontpage/HeaderMin'
 import Cuisine from '../frontpage/cuisine'
-
+import CartPanel from '../frontpage/cartPanel_mobile'
+import ErrorChef from './Error'
+import OptionLeaf from '../frontpage/OptionLeaf'
+import {mapStateToProps} from '../util/ajax'
 
 
 const App =(props)=> {
 return (
 	(props.chef.error)?
-		<Nochefavailable  />:
+		<ErrorChef  />:
 		(!props.chef.fetched)? 
 		(props.chef.fetched_chefAndCuisine)?
 			<div className="devi aah">
 				<HeaderMin/>
 				<Cuisine/>
 				<Footer/>
-				{(props.page.showsignIn)? 
-					<SignIn user={props.user}/>:
-					null
-				}
-				{(props.page.showsignUp)? 
-					<SignUp SignUp={props.SignUp}
-							user={props.user}/>:
-					null
-				}
+				<OptionLeaf/>
 			</div>:
 			<div style={{position:'absolute'}}> 
 				<ScrollLogic 	chef_fetched={props.chef.fetched}
@@ -49,41 +40,20 @@ return (
 					<SummaryComponent/>
 					<MobileAppComponent/>
 					<Footer/>
-					{(props.page.showsignIn)? 
-						<SignIn user={props.user}/>:
-						null
-					}
-					{(props.page.showsignUp)? 
-						<SignUp SignUp={props.SignUp}
-								user={props.user}/>:
-						null
-					}	
+					<OptionLeaf/>	
 				</div>
 			</div>:
 			<div className="devi">
 				<ScrollLogic 	chef_fetched={props.chef.fetched}
 								Located={props.address.Located}		 />
 				<MenuPage chef={props.chef}/>
-				<MenuItems	chef={props.chef} />
+				<CartPanel/>
+				<MenuItems	chef={props.chef} /> 
 				<Footer/>
-				{(props.page.showsignIn)? 
-					<SignIn user={props.user} /> :
-					null
-				}
-				{(props.page.showsignUp)? 
-					<SignUp SignUp={props.SignUp}
-							user={props.user} />:
-					null}
-				{(props.page.showaddmenu)?
-					<Addmenu/>:
-					null
-				}
+				<OptionLeaf/>
 			</div>
 	)
   }
-
-function mapStateToProps(state){
-	return state;
-};
-export default connect(mapStateToProps)(App);
+  
+export default connect(mapStateToProps)(App)
 

@@ -31,16 +31,19 @@ export default class scrollLogic extends Component{
         ((window.scrollY/scrollmax)*100>18.943403826787512)? 
         this.setState({ scroll:true }):
         this.setState({ scroll:false }):
-        (window.scrollY>362)? 
+        (window.scrollY>410)? 
         this.setState({ scroll:true }):
         this.setState({ scroll:false }):
         (!this.props.Located)?
         ((window.scrollY/scrollmax)*100>6.343403826787512)? 
         this.setState({ scroll:true }):
         this.setState({ scroll:false }):
-        (window.scrollY>362)? 
+        (window.scrollY>410)? 
         this.setState({ scroll:true }):
         this.setState({ scroll:false })
+
+
+        console.log(window.scrollY)
     }
     componentDidMount() {
         window.addEventListener('scroll', this.scrollDetector);
