@@ -8,6 +8,12 @@
   padding-right: 118px;
   
 }
+.zzvc{
+  cursor: default;
+}
+.zzvd{
+  cursor: pointer;
+}
 
 .footer1{
   border-bottom: 1px solid grey;

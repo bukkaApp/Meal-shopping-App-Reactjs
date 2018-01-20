@@ -20,10 +20,10 @@ const Footer =()=> {
                         <ul className="">
                             <li>
                                 <a>
-                                    <span className="red">
+                                    <span className="red zzvc">
                                         #
                                     </span>
-                                    <span className="red2">
+                                    <span className="red2 zzvc">
                                         FoodIsReady
                                     </span>
                                 </a>
@@ -68,11 +68,11 @@ const Footer =()=> {
                         </ul>
                     </div>
                     <div className="col-sm-4">
-                        <ul className="">
-                            <li><a >About Bukka</a></li>
-                            <li><a >Contact</a></li>
-                            <li><a >Help</a></li>
-                            <li><a >FAQs</a></li>
+                        <ul >
+                            <li><a className="zzvd">About Bukka</a></li>
+                            <li><a className="zzvd">Contact</a></li>
+                            <li><a className="zzvd">Help</a></li>
+                            <li><a className="zzvd">FAQs</a></li>
                         </ul>
                     </div>
                     </div>
