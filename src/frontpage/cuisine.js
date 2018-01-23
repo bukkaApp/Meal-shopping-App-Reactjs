@@ -4,6 +4,7 @@ import '../style/App.css'
 import {connect} from 'react-redux'
 import ajx,{mapStateToProps} from '../util/ajax'
 import lib from '../util/lib'
+import { CSSTransitionGroup } from 'react-transition-group'
 
 class Stores extends Component {
  
@@ -11,6 +12,12 @@ class Stores extends Component {
         return (
                 <div className="zn">
                 <h1>{this.props.address.Location}</h1>
+                <CSSTransitionGroup
+							transitionName="cuisine"
+							transitionAppear={true}
+							transitionAppearTimeout={1000}
+							transitionEnter={false}
+							transitionLeave={false}>
                 <div className="row kt">
                     {(Object.keys(this.props.chef.chefAndCuisine))?
                         Object.keys(this.props.chef.chefAndCuisine).map((cui,key)=>
@@ -36,6 +43,7 @@ class Stores extends Component {
                                 null
                     }
                 </div>
+                </CSSTransitionGroup>
                 </div>
         );
         

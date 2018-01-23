@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../style/summaryComponent.css';
-
+import { CSSTransitionGroup } from 'react-transition-group'
 
 
 export default class summaryComponent extends Component{
@@ -11,6 +11,12 @@ export default class summaryComponent extends Component{
 						<h1 className="summary-text"><b>HOW TO USE</b></h1>
 						<br />
 						<br />
+						<CSSTransitionGroup
+							transitionName="summary"
+							transitionAppear={true}
+							transitionAppearTimeout={2000}
+							transitionEnter={false}
+							transitionLeave={false}>
 						<div className="col-sm-4">
 							<img className="image4 img-responsive" src="http://res.cloudinary.com/bukka/image/upload/v1500737722/app/location.png" alt="image4"/>
 							<br />
@@ -32,6 +38,7 @@ export default class summaryComponent extends Component{
 							<br />
 							<p className="summary-p">The earlier you place your order, the sooner it would be prepared and delivered. Breakfast order before: 10am, Lunch order before 1pm.</p>
 						</div>
+						</CSSTransitionGroup>
 					</div>
 				</div>
 			)

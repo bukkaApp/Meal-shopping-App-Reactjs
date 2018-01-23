@@ -33,3 +33,12 @@
 	font-size: 17px;
 	color: black;
 }
+
+.summary-appear {
+	transform: translate(100%);
+  }
+  
+  .summary-appear.summary-appear-active {
+	transform: translate(0%);
+	transition: transform 2000ms ease-in-out;
+  }

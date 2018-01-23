@@ -6,6 +6,7 @@ import lib from '../util/lib'
 import ajx from '../util/ajax'
 import propTypes from 'prop-types'
 
+
 const menuPage = (props) =>{
 	const cui=props.chef.currentCuisine
 	const mystyle={
@@ -14,6 +15,7 @@ const menuPage = (props) =>{
 	return(
 		
 	<div id="chefinformation">
+	
 		<div 	className="menuCont" 
 				style={mystyle} >
 			<div className="zip ipr">
