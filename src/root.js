@@ -10,6 +10,7 @@ import Checkoutpagedecider from './routes/Checkoutpagedecider'
 import Error_ from './routes/Error'
 import Receipt from './routes/receipthandler'
 import Testo from './testo'
+import First from './frontpage/MobileSearch'
 
 
 
@@ -23,7 +24,9 @@ const Root = ({ store }) => (
 		<Route exact path="/event" component={EventHome} />
 		<Route exact path="/error" component={Error_} />
 		<Route exact path="/receipt" component={Receipt} />
+		<Route exact path="/j" component={First}/>
 		<Route component={Testo} />
+		
 	</Switch>
 	</BrowserRouter>
 	</Provider>

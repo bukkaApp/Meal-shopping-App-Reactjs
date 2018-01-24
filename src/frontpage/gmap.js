@@ -9,6 +9,7 @@ import {
 } from 'react-google-maps'
 import {connect} from 'react-redux'
 import ajx,{mapStateToProps} from '../util/ajax'
+import lib from '../util/lib'
  
 const google=window.google
 var aloc,bloc,cloc
@@ -66,12 +67,24 @@ const MyMapComponent = compose(
 )
 
 class MyFancyComponent extends React.PureComponent {
-  state = {
-    isMarkerShown: false,
+  constructor(props){
+    super(props)
+    this.state={
+      isMarkerShown: false,
+    }
+    
   }
-
+  componentWillMount(){
+    if(this.props.bloc===undefined){
+      setTimeout(()=>lib.toggleshowfirstpageloader(),1)
+    }
+  }
   componentDidMount() {
+    if(this.props.bloc===undefined){
+      setTimeout(()=>lib.toggleshowfirstpageloader(),1000)
+    }
     this.delayedShowMarker()
+
   }
 
   delayedShowMarker = () => {

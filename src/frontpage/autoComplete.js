@@ -3,6 +3,7 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 import FaMapMarker from 'react-icons/lib/fa/map-marker'
 import '../style/App.css'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import Faspinner from 'react-icons/lib/fa/spinner'
 import lib from '../util/lib'
 import {mapStateToProps} from '../util/ajax'
@@ -88,19 +89,37 @@ class SimpleForm extends React.Component {
           </div>:
           null
         }
-        <div className="bbd">
-        <span className={(this.props.chef.fetching_chefAndCuisine)? "ll bb":"bb"}>
-          {(!this.props.address.Located)?
-            <FaMapMarker/>:
-            <FaMapMarker/>
-          }
-        </span>
-        <PlacesAutocomplete inputProps={inputProps} 
-                            autocompleteItem={AutocompleteItem} 
-                            classNames={cssClasses} 
-                            onEnterKeyDown={this.handleEnter} 
-                            onSelect={this.handleSelect}  />
-        </div>
+        {
+          (window.innerWidth<768)?
+          <Link to="/j">    
+            <div className="bbd" onClick={()=>console.log(window.innerWidth)}>
+                <span className={(this.props.chef.fetching_chefAndCuisine)? "ll bb":"bb"}>
+                  {(!this.props.address.Located)?
+                    <FaMapMarker/>:
+                    <FaMapMarker/>
+                  }
+                </span>
+                <PlacesAutocomplete inputProps={inputProps} 
+                                    autocompleteItem={AutocompleteItem} 
+                                    classNames={cssClasses} 
+                                    onEnterKeyDown={this.handleEnter} 
+                                    onSelect={this.handleSelect}  />
+              </div>
+            </Link>:
+          <div className="bbd">
+          <span className={(this.props.chef.fetching_chefAndCuisine)? "ll bb":"bb"}>
+            {(!this.props.address.Located)?
+              <FaMapMarker/>:
+              <FaMapMarker/>
+            }
+          </span>
+          <PlacesAutocomplete inputProps={inputProps} 
+                              autocompleteItem={AutocompleteItem} 
+                              classNames={cssClasses} 
+                              onEnterKeyDown={this.handleEnter} 
+                              onSelect={this.handleSelect}  />
+          </div>
+        }
         {(!this.props.chef.fetching_chefAndCuisine && !this.props.chef.first_search_completed)? 
           <button type="submit" 
                   className="xp btn-red max-summit min-submit ">

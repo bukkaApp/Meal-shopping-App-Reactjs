@@ -1,11 +1,11 @@
-const initialstate={
+export const initialstatesignup={
 	fetching:false,
 	fetched:false,
 	response:"",
 	error:null
 };
 
-const signUp=(state=initialstate,action)=>{
+const signUp=(state=initialstatesignup,action)=>{
 	switch(action.type){
 		case"SIGN_UP_PENDING":{
 			return{...state,fetching:true,fetched:false,response:"",error:null}

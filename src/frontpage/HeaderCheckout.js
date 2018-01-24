@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{Component} from 'react'
 import '../style/App.css';
 import SimpleForm from './autoComplete'
 import {Link} from 'react-router-dom'
@@ -7,7 +7,14 @@ import {connect} from 'react-redux'
 import ajx,{mapStateToProps} from '../util/ajax'
  
  
-const HeaderCheckout=(props)=>{
+class HeaderCheckout extends Component{
+componentDidMount(){
+	if(this.props.chef.error!==null){
+		lib.logocheckout()
+	}
+}
+
+	render(){
 		return(
 			<div id="head"  className="myheader header-min bc">
 				<Link to="/">
@@ -17,17 +24,17 @@ const HeaderCheckout=(props)=>{
 							className="zzq"/>
 				</Link>
 				<div className="search-box search-box-min search-loc">
-					{(props.chef.error!==null)? 
+					{(this.props.chef.error!==null)? 
 						<SimpleForm />:
 						null
 					}
 				</div>
-				{(!props.user.isAuthenticated)? 
+				{(!this.props.user.isAuthenticated)? 
 					null:
 					<div className=" m-info small-head">
 						<div className="m-profile-photo-holder hh">
 							<div className="m-user-icon-holder display-toggle">
-								<img 	src={props.user.user.profile_photo} 
+								<img 	src={this.props.user.user.profile_photo} 
 										alt="" 
 										className="m-profile-photo"/>
 							</div>
@@ -47,5 +54,6 @@ const HeaderCheckout=(props)=>{
 			</div>
 			)
 	}
+}
 	
 export default connect(mapStateToProps)(HeaderCheckout)

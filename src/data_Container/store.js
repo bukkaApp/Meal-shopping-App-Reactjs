@@ -5,6 +5,8 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import { loadState,saveState } from './localStorage'
 import throttle from 'lodash/throttle'
+import {initialstatepage} from './reducers/showPageReducer'
+import {initialstatesignup} from './reducers/signUpReducer'
 
 
 const middleware=applyMiddleware(promise(),thunk,logger)
@@ -20,8 +22,8 @@ store.subscribe(throttle(()=>{
                 chef:store.getState().chef,
                 cart:store.getState().cart,
                 user:store.getState().user,
-                page:store.getState().page,
-                SignUp:store.getState().SignUp,
+                page:initialstatepage,
+                SignUp:initialstatesignup,
                 receipt:store.getState().receipt,
                 menuinview:store.getState().menuinview     })
 },1000))

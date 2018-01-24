@@ -1,4 +1,4 @@
-const initialstate={
+export const initialstatepage={
 	showsignIn:false, 
 	showsignUp:false,
 	showaddCard:false,
@@ -9,10 +9,11 @@ const initialstate={
 	shownotification:false,
 	showbasicinformation:true,
 	showdifcheferror:false,
-	showforgotpasswordpage:false
+	showforgotpasswordpage:false,
+	showfirstpageloader:false
 };
 
-const showPage=(state=initialstate,action)=>{
+const showPage=(state=initialstatepage,action)=>{
 	switch(action.type){
 		case'SIGN_IN':{
 			return{	...state,
@@ -26,6 +27,12 @@ const showPage=(state=initialstate,action)=>{
 			return{
 				...state, 
 				showdifcheferror:!action.payload
+			}
+		}
+		case 'FIRST_PAGE_LOADER':{
+			return{
+				...state,
+				showfirstpageloader:!action.payload
 			}
 		}
 		case 'FORGOT_PASSWORD_PAGE':{
