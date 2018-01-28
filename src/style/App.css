@@ -9,6 +9,9 @@
   height:350px;
   border:1px solid black;
 }
+.pipip{
+  padding: 2px 20px;
+}
 .hn{
   margin-right: 10px;
   width: 90px;
@@ -93,6 +96,15 @@ width: 230px;
   height: 40px;
   background-color: white;
   border:1px solid grey;
+}
+.pickle{
+  font-size: 2em;
+  color: rgba(0,0,0,.6);
+}
+.picklu{
+  border-top:none !important;
+  border-left:none !important;
+  border-right:none !important;
 }
 .btn-sml{
   width:75px !important;
@@ -544,6 +556,7 @@ display: -ms-flexbox;
   background-color: white;
   display: none;
   left:0;
+  width:120px;
 }
 .abi:hover,
 .abi:focus,
@@ -732,10 +745,15 @@ display: -ms-flexbox;
   position: unset;
 }
 .header-small{
-  padding-left:0;
-  padding-right:0;
+  padding-left:20px;
+  padding-right:20px;
 }
-
+.form-controli,#PlacesAutocomplete__root,.ebb,.bbd,.bbdaa{
+  width:100%;
+}
+.bbd,.bbdaa{
+  margin-right: 0;
+}
 }
 @media(max-width:680px){
   .zzq{
@@ -761,10 +779,10 @@ display: -ms-flexbox;
     margin:0;
     width: 160px;
   }
-  .form-controli,#PlacesAutocomplete__root,.ebb,.bbd{
+  .form-controli,#PlacesAutocomplete__root,.ebb,.bbd,.bbdaa{
     width:100%;
   }
-  .bbd{
+  .bbd,.bbdaa{
     margin-right: 0;
   }
   .fdp{

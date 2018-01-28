@@ -5,7 +5,7 @@ import FaStar from 'react-icons/lib/fa/star';
 import TiSocialInstagram from 'react-icons/lib/ti/social-instagram';
 import {connect} from 'react-redux';
 import '../style/receipt.css';
-import {delete_cart,clear_receipt} from '../data_Container/action/actions';
+import {delete_cart} from '../data_Container/action/actions';
 import {Link} from 'react-router-dom';
 import lib from '../util/lib'
 import ajx,{mapStateToProps} from '../util/ajax'

@@ -8,6 +8,7 @@ import {connect} from 'react-redux'
 import ajx,{mapStateToProps} from '../util/ajax'
 
 const HeaderMax=(props)=>{
+
 return(
 	<div id='head' className="myheader ab">
 		<Link to="/">

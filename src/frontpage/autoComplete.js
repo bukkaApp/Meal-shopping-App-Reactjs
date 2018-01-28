@@ -30,7 +30,7 @@ class SimpleForm extends React.Component {
   this.setState({ address })
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
-    .then(latLng => { lib.address(address,latLng);lib.chefResult(latLng);lib.messageChef()})
+    .then(latLng => { lib.address(address,latLng);lib.chefResult(latLng);})
     .catch(error => console.error('Error', error))
 }
   
@@ -91,8 +91,8 @@ class SimpleForm extends React.Component {
         }
         {
           (window.innerWidth<768)?
-          <Link to="/j">    
-            <div className="bbd" onClick={()=>console.log(window.innerWidth)}>
+          <Link className="bbdaa" to="/Search">    
+            <div className={(this.props.mobileroute)? this.props.mobileroute+" bbd":" bbd"} onClick={()=>console.log(window.innerWidth)}>
                 <span className={(this.props.chef.fetching_chefAndCuisine)? "ll bb":"bb"}>
                   {(!this.props.address.Located)?
                     <FaMapMarker/>:
@@ -144,4 +144,4 @@ class SimpleForm extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(SimpleForm);
+export default connect(mapStateToProps)(SimpleForm)

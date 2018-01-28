@@ -1,15 +1,22 @@
+import React,{Component} from 'react';
 import { Redirect } from "react-router-dom";
-import React from 'react';
 import {connect} from 'react-redux';
 import Checking from './checking';
 import {mapStateToProps} from '../util/ajax'
+import lib from '../util/lib'
 
-const checkoutpagedecider =(props)=>{
+class checkoutpagedecider extends Component {
+        
+        componentWillUnmount(){
+		lib.previouspath(this.props.location.pathname)
+	}
+        render(){
         return(
-            (Object.keys(props.cart.cart).length)? 
+            (Object.keys(this.props.cart.cart).length)? 
                 <Checking/>:
                 <Redirect to='/'/>
         )
-	}
+        }
+}
 
 export default connect(mapStateToProps)(checkoutpagedecider);

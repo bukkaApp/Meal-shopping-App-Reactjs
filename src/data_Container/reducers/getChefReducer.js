@@ -1,4 +1,4 @@
-const initialstate={
+export const initialstatechefs={
 	fetching:false,
 	fetched:false,
 	fetched_chefsInYourArea:false,
@@ -14,13 +14,14 @@ const initialstate={
 	error:null
 };
 
-const getChefs=(state=initialstate,action)=>{
+const getChefs=(state=initialstatechefs,action)=>{
 	switch(action.type){
 		case'GET_CHEFS_PENDING':{
 			return{
 				...state,
 				fetched:false,
 				fetched_chefsInYourArea:false,
+				fetched_chefAndCuisine:false,
 				fetching_chefAndCuisine:true,
 				fetching:true,
 				chefsInYourArea:{},
@@ -28,7 +29,6 @@ const getChefs=(state=initialstate,action)=>{
 				yourChef:{},
 				menuCategoriesKeys:[],
 				menuCategories:[],
-				currentCuisine:null,
 			}
 		}
 		case'GET_CHEFS_REJECTED':{
@@ -50,11 +50,13 @@ const getChefs=(state=initialstate,action)=>{
 		case'GET_CHEFS_FULFILLED':{
 			return{
 				...state,
+				fetched:false,
 				fetched_chefsInYourArea:true,
 				chefsInYourArea:action.payload.data,
 				error:null
 			}
 		}
+		
 		case 'GET_CHEFS_UPDATE':{
 			return{
 				...state,
@@ -78,6 +80,7 @@ const getChefs=(state=initialstate,action)=>{
 		case 'GET_CHEF_AND_CUISINE':{
 			return{
 				...state,
+				fetched:false,
 				chefAndCuisine:action.payload,
 				fetched_chefAndCuisine:true,
 				fetching_chefAndCuisine:false,
@@ -85,7 +88,7 @@ const getChefs=(state=initialstate,action)=>{
 				yourChef:{},
 				menuCategoriesKeys:[],
 				menuCategories:[],
-				currentCuisine:null
+				error:null
 				
 			}
 		}

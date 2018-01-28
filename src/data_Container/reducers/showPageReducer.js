@@ -10,7 +10,8 @@ export const initialstatepage={
 	showbasicinformation:true,
 	showdifcheferror:false,
 	showforgotpasswordpage:false,
-	showfirstpageloader:false
+	showfirstpageloader:false,
+	prevpath:null
 };
 
 const showPage=(state=initialstatepage,action)=>{
@@ -22,6 +23,12 @@ const showPage=(state=initialstatepage,action)=>{
 					showaddCard:false,
 					showreceipt:false,
 					showaddmenu:false	}
+		}
+		case 'PREV_PATH':{
+			return{
+				...state,
+				prevpath:action.payload
+			}
 		}
 		case 'DIF_CHEF_ERROR':{
 			return{

@@ -1,6 +1,3 @@
-
-import axios from 'axios'
-
 export default{
     loginendpoint:"https://chef.mybukka.com/api/v1/bukka/auth/custom/login",
     carddtlsendpoint:"https://chef.mybukka.com/api/v1/bukka/customer/card/",

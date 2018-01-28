@@ -50,6 +50,11 @@ export const order=(_)=>({
 	type:'ORDER_STATUS',
 	payload:Promise.all(_)
 })
+//menupage timestamp
+export const prev_path=(_)=>({
+	type:'PREV_PATH',
+	payload:_
+})
 export const chef_Cuisine=(_)=>({
 	type:'GET_CHEF_AND_CUISINE',
 	payload:_

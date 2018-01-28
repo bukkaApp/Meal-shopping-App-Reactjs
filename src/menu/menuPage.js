@@ -12,7 +12,7 @@ const menuPage = (props) =>{
 		backgroundImage:`url(${ajx[cui]})`,
 	}
 	return(
-		
+	(props.chef.fetched)?	
 	<div id="chefinformation">
 		<div 	className="menuCont" 
 				style={mystyle} >
@@ -116,7 +116,7 @@ const menuPage = (props) =>{
 			<div className="vt">
 				<h5 className="tt">MORE</h5>
 				<div className="yyv">
-				{
+				{	
 					props.chef.chefAndCuisine[cui].map((chef,key)=>
 					<div className="lkt" key={key} >
 					<img 	src={chef.profile_photo} 
@@ -187,8 +187,8 @@ const menuPage = (props) =>{
 						null
 					}
 				</ul>
-
-	</div>
+	</div>:
+	null
 )};
 
 export default menuPage;

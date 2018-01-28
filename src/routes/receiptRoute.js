@@ -8,10 +8,10 @@ import Footer from '../frontpage/Footer'
 import Receipt from '../frontpage/receipt'
 import {mapStateToProps} from '../util/ajax'
 
-const ReceiptRoute=(props)=>(
+const ReceiptRoute=(props)=>{
+return(
     <div className="devi">
         <HeaderCheckout  />
-        
         <PageBackground bloc={{lat:props.address.lat,lng:props.address.lng}}
                         aloc={{lat:props.chef.yourChef.coords.lat,lng:props.chef.yourChef.coords.lng}}	/> 
         <div id="checking-content">
@@ -20,5 +20,6 @@ const ReceiptRoute=(props)=>(
         <Footer/>	
     </div>
 )
+}
 
 export default connect(mapStateToProps)(ReceiptRoute)

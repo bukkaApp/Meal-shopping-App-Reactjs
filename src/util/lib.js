@@ -28,7 +28,8 @@ import {	fetch_address,
             forgot_password,
             showforgotpassword,
             clear_receipt,
-            showfirstpageloader     } from '../data_Container/action/actions'
+            showfirstpageloader,
+            prev_path            } from '../data_Container/action/actions'
 import storage from '../data_Container/store'
 import axios from 'axios'
 import ajx from './ajax'
@@ -75,6 +76,9 @@ export default{
 
     generateReceipt:(a)=>storage.dispatch(add_receipt(a)),
 
+    previouspath(_){
+        storage.dispatch(prev_path(_))
+    },
     signin(email,password){
         storage.dispatch(identify_user(email,password))
 		.then(()=>storage.dispatch(updating_user_info(storage.getState().user.user.uid)))
@@ -161,10 +165,12 @@ export default{
         storage.dispatch(get_chef(this.chefcloseby(_)))
     },
     //get chef data
-    chefcloseby(result){
+   chefcloseby(result){
         var yourChef,cuisine
         if(typeof result ==='string'){
+            
             yourChef=storage.getState().chef.chefAndCuisine[`${result}`][0]
+            console.log("content of result is ",yourChef)
             cuisine=result
 
             /*.filter((chef)=>chef.role==="Super Chef")*/
@@ -210,9 +216,11 @@ export default{
         }
     },
     chefResult(latLng){
+        return(
         storage.dispatch(fetch_chef(latLng))
         .then(()=>this.chefCuisines(storage.getState().chef.chefsInYourArea))
-		.catch((e)=>console.log('Sorry! There was a problem',e))
+        .catch((e)=>console.log('Sorry! There was a problem',e))
+        )
     },
     chefCuisines(chefs){
         var cuisines=Array.from(new Set(chefs.map((chef)=>chef.cuisine))) 
@@ -514,12 +522,12 @@ export default{
 		cvv=document.getElementById("CVVNumber").value,
 		expiry_month=document.getElementById("MonthNumber").value,
 		expiry_year=document.getElementById("YearNumber").value
-		if(number==""||cvv==""||expiry_year==""||expiry_month==""){
-			(number=="")?
+		if(number===""||cvv===""||expiry_year===""||expiry_month===""){
+			(number==="")?
 			console.log("number field cannot be empty"):
-			(cvv=="")?
+			(cvv==="")?
 			console.log("cvv field cannot be empty"):
-			(expiry_year==""||expiry_month=="")?
+			(expiry_year===""||expiry_month==="")?
 			console.log("expiry field cannot be empty"):
 			null
 		}
@@ -560,6 +568,63 @@ export default{
         const _v=document.getElementById('logo-min')
         if(!_v.classList.contains('zzk')){
             _v.classList.add('zzk')
+        }
+    },
+    sendMessage(){
+        const url="http://api.africastalking.com/version1/messaging"
+        fetch(url,{
+            method:"POST",
+            headers:{
+                accept:"application/json",
+                apikey:"170de2d4b18892e18f8f14401f6c041f46e14d7d3b407444def26e2d4ee40165"
+            },
+            body:JSON.stringify({
+                username:"test505",
+                to:"2348144194590",
+                message:"hi! its me john"
+            })
+        })
+        .then((res)=>console.log(res.json()))
+        .catch((err)=>console.log("error",err))
+    },
+    async onRefresh(){
+       /* const _=this
+        if(storage.getState().address.Located){
+			const latLng={
+				lng:storage.getState().address.lng,
+				lat:storage.getState().address.lat
+			}
+	
+           return (
+           this.chefResult(latLng)
+            .then(function(){
+                 if(storage.getState().chef.currentCuisine){
+                const cui=storage.getState().chef.currentCuisine
+                console.log(cui)
+                _.updatechefbycuisine(cui)
+                }})
+            .catch((err)=>console.error("whoops!!",err))
+            )
+        }*/
+        try{
+            if(storage.getState().address.Located){
+                const latLng={
+                    lng:storage.getState().address.lng,
+                    lat:storage.getState().address.lat
+                }
+        
+            await this.chefResult(latLng)
+            if(storage.getState().chef.currentCuisine){
+                const cui=storage.getState().chef.currentCuisine
+                const allcui=Object.keys(storage.getState().chef.chefAndCuisine)
+                console.log("you called",cui,allcui)
+                if(allcui.includes(cui)){
+                    this.updatechefbycuisine(cui)
+                }
+                }
+            }
+        } catch(err) {
+            console.error("whoops!!",err)
         }
     }
 }

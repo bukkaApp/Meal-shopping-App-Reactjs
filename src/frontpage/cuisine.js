@@ -6,7 +6,7 @@ import ajx,{mapStateToProps} from '../util/ajax'
 import lib from '../util/lib'
 
 class Stores extends Component {
- 
+
     render () {
         return (
                 <div className="zn">
@@ -28,7 +28,7 @@ class Stores extends Component {
                     {
                         (this.props.chef.fetching_chefAndCuisine)?
                             [1,2,3].map((cui,key)=>
-                                <div    className="col-sm-4 m" >
+                                <div    className="col-sm-4 m" key={key} >
                                     <div   className="lt xyxaa"></div>
                                     <h5 className="avci xyxaa"></h5>
                                     <p className="avcib xyxaa"></p>

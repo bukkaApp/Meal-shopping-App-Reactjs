@@ -10,13 +10,14 @@ import Checkoutpagedecider from './routes/Checkoutpagedecider'
 import Error_ from './routes/Error'
 import Receipt from './routes/receipthandler'
 import Testo from './testo'
-import First from './frontpage/MobileSearch'
-
+import MobileSearch from './routes/MobileSearch'
+import CuisineRoute from './routes/CuisineRoute'
+import MenuRoute from './routes/MenuRoute'
 
 
 const Root = ({ store }) => (
 	<Provider store={store}>
-	<BrowserRouter>
+	<BrowserRouter >
 	<Switch>
 		<Route exact path="/" component={App}/>
 		<Route exact path="/profile" component={Authenticatedroute} />
@@ -24,7 +25,9 @@ const Root = ({ store }) => (
 		<Route exact path="/event" component={EventHome} />
 		<Route exact path="/error" component={Error_} />
 		<Route exact path="/receipt" component={Receipt} />
-		<Route exact path="/j" component={First}/>
+		<Route exact path="/Search" component={MobileSearch}/>
+		<Route exact path="/Cuisine" component={CuisineRoute}/>
+		<Route exact path="/Cuisine/Menupage" component={MenuRoute}/>
 		<Route component={Testo} />
 		
 	</Switch>
