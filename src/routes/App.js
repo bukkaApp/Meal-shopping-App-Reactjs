@@ -16,6 +16,7 @@ import CartPanel from '../frontpage/cartPanel_mobile'
 import ErrorChef from './Error'
 import OptionLeaf from '../frontpage/OptionLeaf'
 import {mapStateToProps} from '../util/ajax'
+import First from '../frontpage/FirstPagePreloader'
 
 
 const App =(props)=> {
@@ -41,6 +42,10 @@ return (
 					<MobileAppComponent/>
 					<Footer/>
 					<OptionLeaf/>	
+					{(props.page.showfirstpageloader)?
+						<First/>:
+						null
+					}
 				</div>
 			</div>:
 			<div className="devi">

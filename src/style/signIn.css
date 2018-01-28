@@ -168,6 +168,12 @@ input:-webkit-autofill{
 	cursor: pointer;
 	text-decoration: none;
 }
+.lkjq{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+}
 #sign-btn{
 	margin-left: 5px;
 }

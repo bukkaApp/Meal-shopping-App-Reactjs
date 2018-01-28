@@ -86,6 +86,10 @@ export const showDifChefsError=(p)=>({
 	type:'DIF_CHEF_ERROR',
 	payload:p
 })
+export const showfirstpageloader=(_)=>({
+	type:'FIRST_PAGE_LOADER',
+	payload:_
+})
 export const showpaymentinfo=(_)=>({
 	type:'PAYMENT_INFO',
 	payload:_

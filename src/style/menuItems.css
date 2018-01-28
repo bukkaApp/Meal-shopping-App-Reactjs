@@ -115,11 +115,11 @@
 		width:132px
 	}
 }
-.cuisine-appear {
+.menu-appear {
 	transform: translate(100%);
   }
   
-  .cuisine-appear.cuisine-appear-active {
+  .menu-appear.menu-appear-active {
 	transform: translate(0%);
-	transition: transform 1000ms ease-in-out;
+	transition: transform 1000ms ease-in;
   }

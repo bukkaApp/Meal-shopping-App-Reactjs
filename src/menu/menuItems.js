@@ -36,18 +36,19 @@ const menuItems =(props)=>{
 								id={categ}>
 								{categ}
 							</h3>
+							<CSSTransitionGroup
+										transitionName="menu"
+										transitionAppear={true}
+										transitionAppearTimeout={1000}
+										transitionEnter={false}
+										transitionLeave={false}>
 							<div className="row">
 							{props.chef.menuCategories[categ].map(
 								(menu,identifier)=>
 								<div 	className="col-lg-6 menuCol" 
 										key={identifier}
 										data-id={menu.category+identifier}>
-									<CSSTransitionGroup
-										transitionName="cuisine"
-										transitionAppear={true}
-										transitionAppearTimeout={1000}
-										transitionEnter={false}
-										transitionLeave={false}>
+									
 									<div 	className="m-menuitem-holder"  
 											onClick={additem} 
 											id={menu.category+identifier}
@@ -105,10 +106,11 @@ const menuItems =(props)=>{
 											</button>
 										</div>
 									</div>
-									</CSSTransitionGroup>
+									
 								</div>)
 							}
 							</div>
+							</CSSTransitionGroup>
 						</div>)
 					}):
 					<div className="fly">

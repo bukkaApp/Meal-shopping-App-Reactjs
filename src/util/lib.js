@@ -27,7 +27,8 @@ import {	fetch_address,
             delete_cart,
             forgot_password,
             showforgotpassword,
-            clear_receipt      } from '../data_Container/action/actions'
+            clear_receipt,
+            showfirstpageloader     } from '../data_Container/action/actions'
 import storage from '../data_Container/store'
 import axios from 'axios'
 import ajx from './ajax'
@@ -42,6 +43,10 @@ export default{
 
     toggleSignUp(){
         storage.dispatch(showsignUp(storage.getState().page.showsignUp))
+        this.noscroll()
+    },
+    toggleshowfirstpageloader(){
+        storage.dispatch(showfirstpageloader(storage.getState().page.showfirstpageloader))
         this.noscroll()
     },
     toggleSignin_noscroll(){
@@ -69,7 +74,6 @@ export default{
     toggleShowReceipt:()=>storage.dispatch(show_receipt(storage.getState().page.showreceipt)),
 
     generateReceipt:(a)=>storage.dispatch(add_receipt(a)),
-
 
     signin(email,password){
         storage.dispatch(identify_user(email,password))
@@ -551,5 +555,11 @@ export default{
     forgotPasswordfromSignin(){
         this.toggleSignin()
         this.toggleshowforgotpassword()
+    },
+    logocheckout(){
+        const _v=document.getElementById('logo-min')
+        if(!_v.classList.contains('zzk')){
+            _v.classList.add('zzk')
+        }
     }
 }

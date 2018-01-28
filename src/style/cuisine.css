@@ -46,5 +46,5 @@
     
     .cuisine-appear.cuisine-appear-active {
     transform: translate(0%);
-    transition: transform 1000ms ease-in-out;
+    transition: transform 1000ms ease-in;
     }
