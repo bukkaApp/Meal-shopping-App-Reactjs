@@ -116,10 +116,10 @@
 	}
 }
 .menu-appear {
-	transform: translate(100%);
+	opacity: 0.01
   }
   
   .menu-appear.menu-appear-active {
-	transform: translate(0%);
-	transition: transform 1000ms ease-in;
+	opacity: 1;
+	transition: opacity 1000ms ease-in;
   }
