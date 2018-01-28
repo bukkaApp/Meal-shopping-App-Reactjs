@@ -115,10 +115,13 @@ const menuPage = (props) =>{
 				<FaStar className="buttn" id="rate"/>
 				<MdMore className="buttn" id="more"/>
 			</h1>
+			{(props.chef.chefAndCuisine[cui].length===1)?
+					null:
 			<div className="vt">
-				<h5 className="tt">MORE</h5>
+				<h5 className="ttm"><b>MORE</b></h5>
 				<div className="yyv">
 				{
+					
 					props.chef.chefAndCuisine[cui].map((chef,key)=>
 					<div className="lkt" key={key} >
 					<img 	src={chef.profile_photo} 
@@ -128,7 +131,10 @@ const menuPage = (props) =>{
 										 "bblk blk blkd"
 									}
 							onClick={()=>lib.updatechefbycuisine(chef)}/>
-							<h6 className="tt">{chef.first_name+" "+chef.last_name}</h6>
+							<div className="t">
+								<h6 className="ttn"><b>{chef.first_name+" "+chef.last_name}</b></h6>
+								<h6 className="ttd">{(chef.distance).toFixed(2)} km</h6>
+							</div>
 							{
 								(!chef.visibility)?
 								<div className="middle">
@@ -146,6 +152,7 @@ const menuPage = (props) =>{
 				}
 				</div>
 			</div>
+			}
 		</div>
 
 		<ul className="menuHolder menuTop">

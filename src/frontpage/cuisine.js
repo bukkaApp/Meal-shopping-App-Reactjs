@@ -6,6 +6,7 @@ import ajx,{mapStateToProps} from '../util/ajax'
 import lib from '../util/lib'
 import { CSSTransitionGroup } from 'react-transition-group'
 
+
 class Stores extends Component {
  
     render () {
@@ -20,6 +21,8 @@ class Stores extends Component {
 							transitionLeave={false}>
                 <div className="row kt">
                     {(Object.keys(this.props.chef.chefAndCuisine))?
+                        (Object.keys(this.props.chef.chefAndCuisine).length===1)?
+                        lib.updatechefbycuisine(Object.keys(this.props.chef.chefAndCuisine)[0]):
                         Object.keys(this.props.chef.chefAndCuisine).map((cui,key)=>
                         <div    className="col-sm-4 m" 
                                 key={key}>
