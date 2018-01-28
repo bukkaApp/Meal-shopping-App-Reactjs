@@ -12,7 +12,9 @@ class Stores extends Component {
                 <div className="zn">
                 <h1>{this.props.address.Location}</h1>
                 <div className="row kt">
-                    {(Object.keys(this.props.chef.chefAndCuisine))?
+                {(Object.keys(this.props.chef.chefAndCuisine))?
+                        (Object.keys(this.props.chef.chefAndCuisine).length===1)?
+                        lib.updatechefbycuisine(Object.keys(this.props.chef.chefAndCuisine)[0]):
                         Object.keys(this.props.chef.chefAndCuisine).map((cui,key)=>
                         <div    className="col-sm-4 m" 
                                 key={key}>

@@ -144,3 +144,46 @@ cursor: pointer;
 		line-height: 2em;
 	}*/
 }
+.vt {
+    width: 300px;
+    position: absolute;
+    left: 50px;
+    top: 0;
+    bottom: 0;
+    padding: 100px 0 20px 0;
+    background-color: rgba(255,255,255,1);
+    color: rgba(0,0,0,0.7);
+}
+
+h6.tt{
+
+	margin-top: 20px;
+
+}
+.yyv {
+    overflow-y: auto;
+    height: 335px;
+    margin-left: -150px;
+}
+.lkt{
+	padding-top: 20px;
+}
+
+h6.ttd{
+
+	margin-left: 52px;
+}
+.t{
+	display: block;
+	margin-left: 230px;
+    margin-top: -65px;
+}
+.ttm{
+	margin-left: 54px;
+}
+.ttn{
+	margin-left: 52px;
+}
+.blk {
+	padding: 2px;
+}

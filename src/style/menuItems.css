@@ -115,3 +115,11 @@
 		width:132px
 	}
 }
+.menu-appear {
+	transform: translate(100%);
+  }
+  
+  .menu-appear.menu-appear-active {
+	transform: translate(0%);
+	transition: transform 1000ms ease-in;
+  }

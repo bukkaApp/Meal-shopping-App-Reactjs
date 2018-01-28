@@ -16,21 +16,25 @@ const menuPage = (props) =>{
 	<div id="chefinformation">
 		<div 	className="menuCont" 
 				style={mystyle} >
+			{
+				(props.chef.chefAndCuisine[cui].length===1)?
+				null:
 			<div className="zip ipr">
 				
 				{
-				props.chef.chefAndCuisine[cui].map((chef,key)=>
-				<img 	src={chef.profile_photo} 
-						alt="chef"
-						key={key}
-						className={(JSON.stringify(chef)=== JSON.stringify(props.chef.yourChef))?
-									"zzr bblk blk blka":
-									"zzr bblk blk blkd"
-								  }
-						onClick={()=>lib.updatechefbycuisine(chef)}/>
+					props.chef.chefAndCuisine[cui].map((chef,key)=>
+					<img 	src={chef.profile_photo} 
+							alt="chef"
+							key={key}
+							className={(JSON.stringify(chef)=== JSON.stringify(props.chef.yourChef))?
+										"zzr bblk blk blka":
+										"zzr bblk blk blkd"
+									}
+							onClick={()=>lib.updatechefbycuisine(chef)}/>
 				)
 				}
 			</div>
+			}
 			<img 	src={props.chef.yourChef.profile_photo} 
 					style={{border:'3px solid #f69323'}} 
 					alt="chef"/>
@@ -113,6 +117,8 @@ const menuPage = (props) =>{
 				<FaStar className="buttn" id="rate"/>
 				<MdMore className="buttn" id="more"/>
 			</h1>
+			{(props.chef.chefAndCuisine[cui].length===1)?
+					null:
 			<div className="vt">
 				<h5 className="tt">MORE</h5>
 				<div className="yyv">
@@ -126,7 +132,10 @@ const menuPage = (props) =>{
 										 "bblk blk blkd"
 									}
 							onClick={()=>lib.updatechefbycuisine(chef)}/>
-							<h6 className="tt">{chef.first_name+" "+chef.last_name}</h6>
+							<div className="t">
+								<h6 className="ttn"><b>{chef.first_name+" "+chef.last_name}</b></h6>
+								<h6 className="ttd">{(chef.distance).toFixed(2)} km</h6>
+							</div>
 							{
 								(!chef.visibility)?
 								<div className="middle">
@@ -144,6 +153,7 @@ const menuPage = (props) =>{
 				}
 				</div>
 			</div>
+			}
 		</div>
 
 		<ul className="menuHolder menuTop">

@@ -3,7 +3,7 @@ import '../style/menuItems.css'
 import lib from '../util/lib'
 import propTypes from 'prop-types'
 import ajx from '../util/ajax'
-
+import { CSSTransitionGroup } from 'react-transition-group'
 
 const menuItems =(props)=>{
 	
@@ -36,6 +36,12 @@ const menuItems =(props)=>{
 								id={categ}>
 								{categ}
 							</h3>
+							<CSSTransitionGroup
+										transitionName="menu"
+										transitionAppear={true}
+										transitionAppearTimeout={1000}
+										transitionEnter={false}
+										transitionLeave={false}>
 							<div className="row">
 							{props.chef.menuCategories[categ].map(
 								(menu,identifier)=>
@@ -102,6 +108,7 @@ const menuItems =(props)=>{
 								</div>)
 							}
 							</div>
+							</CSSTransitionGroup>
 						</div>)
 					}):
 					<div className="fly">
