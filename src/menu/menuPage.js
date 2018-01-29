@@ -120,7 +120,7 @@ const menuPage = (props) =>{
 			{(props.chef.chefAndCuisine[cui].length===1)?
 					null:
 			<div className="vt">
-				<h5 className="tt">MORE</h5>
+				<h5 className="ttm">MORE</h5>
 				<div className="yyv">
 				{	
 					props.chef.chefAndCuisine[cui].map((chef,key)=>
