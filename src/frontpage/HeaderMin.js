@@ -23,17 +23,29 @@ class HeaderMin extends Component{
         window.removeEventListener('scroll', this.scrolld);
     }
 	render(){  
+		const pp=this.props.page.prevpath||"/"
 		return(
 			<div id="head" className="myheader header-min header-small ab">
-				<Link 	className="Mybukkalogo" 
-						to="/">
+				{(this.props.isrestaurant)?
+					<Link to={pp}>
 					<img 	src={ajx.logo} 
 							id="logo-min" 
-							alt="logo"/>
-				</Link>
-				<div className="search-box search-box-min search-loc">
-					<SimpleForm chefResult={this.props.chefResult}/>
-				</div>
+							alt="logo"
+							className="zzq"/>
+					</Link>:
+					<Link 	className="Mybukkalogo" 
+							to="/">
+						<img 	src={ajx.logo} 
+								id="logo-min" 
+								alt="logo"/>
+					</Link>
+				}
+				{(this.props.isrestaurant)?
+					null:
+					<div className="search-box search-box-min search-loc">
+						<SimpleForm chefResult={this.props.chefResult}/>
+					</div>
+				}
 				{(!this.props.user.isAuthenticated)? 
 					<div className=" header-top-button header-top-button-min small-head ">
 						<button onClick={()=>lib.toggleSignin()} 
@@ -44,7 +56,7 @@ class HeaderMin extends Component{
 								onClick={()=>lib.toggleSignUp()}>
 						Sign Up
 						</button> 
-						{(this.props.chef.fetched)?
+						{(this.props.chef.fetched_chefsInYourArea)?
 							<div>
 								<div>
 									<span className="s-cart">
@@ -82,7 +94,7 @@ class HeaderMin extends Component{
 								</a>
 							</div>
 						</div>
-						{(this.props.chef.fetched)?
+						{(this.props.chef.fetched_chefsInYourArea)?
 							<div>
 								<div>
 									<span className="s-cart lf">

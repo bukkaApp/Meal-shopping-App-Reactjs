@@ -7,6 +7,39 @@
 	margin-left: 50px;
 	max-height: 540px;
 }
+.isop{
+	width:100%
+}
+.isop .form-controli{
+	width:100%;
+	min-width:260px;
+}
+.isop .bbd{
+	justify-content: space-between;
+	height: 45px;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,8);
+    margin: 15px 8px 0 9px;
+	align-items: center;
+	justify-content: stretch;
+	z-index: 1;
+    position: relative;
+}
+.isop .ll{
+	border: none;
+    display: flex;
+    justify-content: center;
+	width: 40px;
+	color:black;
+
+}
+.isop .holder{
+	visibility:true;
+	opacity:1;
+	width:100%;
+	position: absolute ;
+	bottom: -200px !important;
+}
 #addCard:hover{
 cursor: pointer;
 }

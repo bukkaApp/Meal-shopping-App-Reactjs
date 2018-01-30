@@ -15,9 +15,10 @@ componentDidMount(){
 }
 
 	render(){
+		const pp=this.props.page.prevpath||"/"
 		return(
 			<div id="head"  className="myheader header-min bc">
-				<Link to="/">
+				<Link to={pp}>
 					<img 	src={ajx.logo} 
 							id="logo-min" 
 							alt="logo"

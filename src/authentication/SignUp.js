@@ -62,11 +62,13 @@ render(){
 					<p>Sign Up</p>
 					<a onClick={()=>lib.toggleSignUp()}>X</a>
 				</div>
-				<div className="formField">
+				<form className="formField" autoComplete="on">
 					<input 	placeholder="First Name" 
 							type="text" 
 							id="FirstNamei"
-							onChange={this.type}/>
+							name="first-name"
+							onChange={this.type}
+							autoComplete="on"/>
 					{
 						(this.state.f==="")?
 						<span className="ef">Firstname field cannot be empty</span>:
@@ -75,7 +77,9 @@ render(){
 					<input 	placeholder="Last Name" 
 							type="text" 
 							id="LastNamei"
-							onChange={this.type}/>
+							name="last-name"
+							onChange={this.type}
+							autoComplete="on"/>
 					{
 						(this.state.l==="")?
 						<span className="ef">Lastname field cannot be empty</span>:
@@ -84,7 +88,9 @@ render(){
 					<input 	placeholder="Mobile Number" 
 							type="tel" 
 							id="MobileNumberi"
-							onChange={this.type}/>
+							name="tel"
+							onChange={this.type}
+							autoComplete="on"/>
 					{
 						(this.state.m==="")?
 						<span className="ef">Mobile number field cannot be empty</span>:
@@ -93,7 +99,9 @@ render(){
 					<input 	placeholder="name@example.com" 
 							type="email" 
 							id="emaili"
-							onChange={this.type}/>
+							name="email"
+							onChange={this.type}
+							autoComplete="on"/>
 					{
 						(this.state.e==="")?
 						<span className="ef">Email field cannot be empty</span>:
@@ -102,7 +110,9 @@ render(){
 					<input 	placeholder="Password" 
 							type="password" 
 							id="Passwordi"
-							onChange={this.type}/>
+							name="new-password"
+							onChange={this.type}
+							autoComplete="on"/>
 					{
 						(this.state.p==="")?
 						<span className="ef">Password field cannot be empty</span>:
@@ -111,7 +121,9 @@ render(){
 					<input 	placeholder="Confirm Password"  
 							type="password" 
 							id="ConfirmPasswordi"
-							onChange={this.type}/>
+							name="new-password"
+							onChange={this.type}
+							autoComplete="on"/>
 					{
 						(this.state.c==="")?
 						<span className="ef">confirm Password field cannot be empty</span>:
@@ -151,7 +163,7 @@ render(){
 							Sign In
 						</a>
 					</p>
-				</div>
+				</form>
 				{(this.props.SignUp.error)?
 					(!this.props.SignUp.error.response)?
 						<span className="ee">

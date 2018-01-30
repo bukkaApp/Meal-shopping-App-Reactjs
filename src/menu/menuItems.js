@@ -24,8 +24,8 @@ const menuItems =(props)=>{
 		lib.addItem(menu)
 	}
 	return(
-			<div className="MenuList" id="many">
-				{(props.chef.fetched)? 
+			<div className="MenuList min-length" id="many">
+				{(Object.keys(props.chef.yourChef).length)? 
 					(props.chef.yourChef.menu.length)?
 					(props.chef.yourChef.visibility)?
 					props.chef.menuCategoriesKeys.map(

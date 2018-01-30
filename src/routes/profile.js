@@ -12,7 +12,7 @@ import {mapStateToProps} from '../util/ajax'
  const profile =(props)=>{
 	return(
 		<div className="l-profilepage l-grey-background">
-			<HeaderMin  />
+			<HeaderMin  isrestaurant={true}/>
 			<h3 className="l-space-around l-headeri">
 				Manage Account
 			</h3>

@@ -14,14 +14,14 @@ var sendResetLink=()=>{
     return(
         <div id="bigmenu">
             <div id="addmenu" className="vbo">
-                <div className="formField ipp">
+                <form className="formField ipp" autoComplete="on">
                     <div id="topPart">
 						<a onClick={()=>lib.toggleshowforgotpassword()}>X</a>
 					</div>
                     <label className="la">
                         Email
                     </label>
-                    <input placeholder="yourname@email.com" id="emailt"/>
+                    <input placeholder="yourname@email.com" id="emailt" name="email" autoComplete="on"/>
                     <button className="btn-red"
                             onClick={()=>sendResetLink()} >
                         Send reset link
@@ -36,7 +36,7 @@ var sendResetLink=()=>{
                             </span>:
                             null
                     }
-                </div>
+                </form>
             </div>
          </div>
 )

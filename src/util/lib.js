@@ -29,7 +29,8 @@ import {	fetch_address,
             showforgotpassword,
             clear_receipt,
             showfirstpageloader,
-            prev_path            } from '../data_Container/action/actions'
+            prev_path,
+            is_restaurant           } from '../data_Container/action/actions'
 import storage from '../data_Container/store'
 import axios from 'axios'
 import ajx from './ajax'
@@ -75,6 +76,10 @@ export default{
     toggleShowReceipt:()=>storage.dispatch(show_receipt(storage.getState().page.showreceipt)),
 
     generateReceipt:(a)=>storage.dispatch(add_receipt(a)),
+
+    isRestaurant(){
+        storage.dispatch(is_restaurant(storage.getState().page.isRestaurant))
+    },
 
     previouspath(_){
         storage.dispatch(prev_path(_))
@@ -170,7 +175,6 @@ export default{
         if(typeof result ==='string'){
             
             yourChef=storage.getState().chef.chefAndCuisine[`${result}`][0]
-            console.log("content of result is ",yourChef)
             cuisine=result
 
             /*.filter((chef)=>chef.role==="Super Chef")*/
@@ -181,10 +185,20 @@ export default{
         if(yourChef){
             /*var categ=Array.from(new Set(result.filter(
                 (chef)=>chef.role==="Super Chef")[0].menu.map(
-                    (menu)=>menu.category)))*/
-            var categorizedMenu={},
-            categ=Array.from(new Set(yourChef.menu.map((menu)=>
+                    (menu)=>menu.category)))*/      
+            var categorizedMenu={},categ
+            if(Array.isArray(yourChef.menu)){
+                    categ=Array.from(new Set(yourChef.menu.map((menu)=>
                                 menu.category)))
+                }else{
+                    let _=Object.keys(yourChef.menu)
+                    let to=_.map((o)=>yourChef.menu[`${o}`])
+                    yourChef={...yourChef,
+                              menu:to}
+                    categ=Array.from(new Set(yourChef.menu.map((menu)=>
+                              menu.category)))
+                }
+
             //var menuP=yourChef.menu.filter(items=>categ.indexOf(items.category)>-1).filter(item=>item.visibility===true)
             for(var i=0;i<categ.length;i++){
                 var menuPerCategory=[];
@@ -215,10 +229,18 @@ export default{
             }
         }
     },
-    chefResult(latLng){
+    chefResult(val){
+        let _
+        if(typeof val ==='string'){
+            _=val
+        }else{
+            _=val.lat+"/"+val.lng
+        }
         return(
-        storage.dispatch(fetch_chef(latLng))
-        .then(()=>this.chefCuisines(storage.getState().chef.chefsInYourArea))
+        storage.dispatch(fetch_chef(_))
+        .then(()=>(typeof val !=='string')?
+                this.chefCuisines(storage.getState().chef.chefsInYourArea):
+                this.updatechefbycuisine(storage.getState().chef.chefsInYourArea))
         .catch((e)=>console.log('Sorry! There was a problem',e))
         )
     },

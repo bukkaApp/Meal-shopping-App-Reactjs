@@ -6,6 +6,7 @@ import FaStickyNote from 'react-icons/lib/fa/sticky-note';
 import FaCreditCardAlt from 'react-icons/lib/fa/credit-card-alt';
 import lib from '../util/lib'
 import propTypes from 'prop-types'
+import SimpleForm from '../frontpage/autoComplete'
 
 const checkoutPage =(props)=>{	
 		return( 
@@ -18,13 +19,16 @@ const checkoutPage =(props)=>{
 				<button onClick={()=>lib.toggleSignin()}>Sign In</button>
 				</div> : null }
 				<h3 id="d-info">Delivery Info</h3>
-				<div className="infoholder">
-				<input value={props.address.Location} className="input-add" readOnly/>
-				<span className="icon" style={{color:'black'}}>
-					<FaMapMarker/>
-				</span>
-				</div>
-
+				{
+				(props.isRestaurant)?
+					<SimpleForm className="isop"/>:
+					<div className="infoholder">
+					<input value={props.address.Location} className="input-add" readOnly/>
+					<span className="icon" style={{color:'black'}}>
+						<FaMapMarker/>
+					</span>
+					</div>
+				}
 				<div className="infoholder">
 				<input placeholder="Apartment/Suite/Floor..." className="hideBorder inputs"/>
 				<span className="icon l-icon-small">

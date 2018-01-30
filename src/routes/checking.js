@@ -24,7 +24,8 @@ const Checking =(props)=>{
 								bloc={{lat:props.address.lat,lng:props.address.lng}} /> 
 				<div id="checking-content-holder">
 				<CheckoutPage 	user={props.user}
-								address={props.address} /> 
+								address={props.address}
+								isRestaurant={props.page.isRestaurant} /> 
 				<CheckoutSlip />
 				</div>
 				<OptionLeaf/>											

@@ -34,9 +34,12 @@ class headerStories extends Component{
 								id="logo" 
 								alt="logo"/>
 					</Link>
-					<div className="search-box search-box-min search">
-						<SimpleForm chefResult={this.props.chefResult}/>
-					</div>
+					{(this.props.isrestaurant)?
+						null:
+						<div className="search-box search-box-min search">
+							<SimpleForm chefResult={this.props.chefResult}/>
+						</div>
+					}
 					{(!this.props.user.isAuthenticated)? 
 						<div className="header-top-button header-top-button-min small-head head-option">
 							<button 	className="stories-sign-in " 
@@ -82,7 +85,7 @@ class headerStories extends Component{
 									</a>
 								</div>
 							</div>											
-							{(this.props.chef.fetched)?
+							{(this.props.chef.fetched_chefsInYourArea)?
 								<div>
 									<div>
 										<span className="s-cart lf">
@@ -105,7 +108,7 @@ class headerStories extends Component{
 					}
 					<div className="divider"></div>
 					<ul className="menuHolder">
-						{(this.props.chef.fetched)? 
+						{(this.props.chef.fetched_chefsInYourArea)? 
 							this.state.more.map(
 								(categ,key)=> 
 									(key<9)? 
@@ -127,7 +130,7 @@ class headerStories extends Component{
 									onClick={lib.show}>
 									More...
 								</a>
-								{(this.props.chef.fetched)? 
+								{(this.props.chef.fetched_chefsInYourArea)? 
 									<div id='mt' className="moreitems d zp">
 										{this.state.more.map(
 											(categ,key)=> 

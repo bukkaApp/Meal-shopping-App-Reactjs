@@ -53,14 +53,16 @@ export default class scrollLogic extends Component{
 render() {
         return (
         	(!this.props.chef_fetched)?
-            (this.state.scroll)?  
-                <HeaderMin />:
+            (this.state.scroll)?
+                <HeaderMin isrestaurant={this.props.isrestaurant}/>:
+            (this.props.isrestaurant)?
+                <HeaderMin isrestaurant={this.props.isrestaurant}/>:
                 <HeaderMax />:
             (this.state.scroll)?  
             (window.innerWidth>767)?
-                <HeaderStories />:
-                <HeaderMin  />:              
-                <HeaderMin  />
+                <HeaderStories isrestaurant={this.props.isrestaurant}/>:
+                <HeaderMin  isrestaurant={this.props.isrestaurant}/>:              
+                <HeaderMin  isrestaurant={this.props.isrestaurant}/>
 )
 }
 }

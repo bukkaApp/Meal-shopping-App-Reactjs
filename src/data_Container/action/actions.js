@@ -25,9 +25,9 @@ export const updating_user_info=(uid)=>({
 })
 
 //fetch list of chefs
-export const fetch_chef=(latLng)=>({
+export const fetch_chef=(_)=>({
 	type:'GET_CHEFS',
-	payload:axios.get(ajx.chefendpoint+latLng.lat+"/"+latLng.lng)
+	payload:axios.get(ajx.chefendpoint+_)
 })
 
 //menu in view info
@@ -67,6 +67,10 @@ export const show_receipt=(receipt)=>({
 	type:'RECEIPT',
 	payload:receipt
 });
+export const is_restaurant=(_)=>({
+	type:'IS_RESTAURANT',
+	payload:_
+})
 export const get_chef=(chef)=>({
 	type:'GET_CHEFS_UPDATE',
 	payload:chef
