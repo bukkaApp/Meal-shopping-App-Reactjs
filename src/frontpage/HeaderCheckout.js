@@ -15,15 +15,24 @@ componentDidMount(){
 }
 
 	render(){
-		const pp=this.props.page.prevpath||"/"
+		const receiptpath=this.props.page.restaurantPath
 		return(
 			<div id="head"  className="myheader header-min bc">
-				<Link to={pp}>
+			{(this.props.page.isRestaurant)?
+				<Link to={receiptpath}>
+				<img 	src={ajx.logo} 
+						id="logo-min" 
+						alt="logo"
+						className="zzq"/>
+				</Link>:
+				<Link to="/">
 					<img 	src={ajx.logo} 
 							id="logo-min" 
 							alt="logo"
 							className="zzq"/>
 				</Link>
+				
+			}
 				<div className="search-box search-box-min search-loc">
 					{(this.props.chef.error!==null)? 
 						<SimpleForm />:

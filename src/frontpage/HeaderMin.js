@@ -23,11 +23,11 @@ class HeaderMin extends Component{
         window.removeEventListener('scroll', this.scrolld);
     }
 	render(){  
-		const pp=this.props.page.prevpath||"/"
+		const receiptpath=this.props.page.restaurantPath
 		return(
 			<div id="head" className="myheader header-min header-small ab">
 				{(this.props.isrestaurant)?
-					<Link to={pp}>
+					<Link to={receiptpath}>
 					<img 	src={ajx.logo} 
 							id="logo-min" 
 							alt="logo"

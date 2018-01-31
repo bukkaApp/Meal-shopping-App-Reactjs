@@ -30,7 +30,9 @@ import {	fetch_address,
             clear_receipt,
             showfirstpageloader,
             prev_path,
-            is_restaurant           } from '../data_Container/action/actions'
+            is_restaurant,
+            apartment_info,
+            delivery_info          } from '../data_Container/action/actions'
 import storage from '../data_Container/store'
 import axios from 'axios'
 import ajx from './ajax'
@@ -77,12 +79,21 @@ export default{
 
     generateReceipt:(a)=>storage.dispatch(add_receipt(a)),
 
-    isRestaurant(){
-        storage.dispatch(is_restaurant(storage.getState().page.isRestaurant))
+    isRestaurant(_){
+        storage.dispatch(is_restaurant({
+                                isRestaurant:false,
+                                path:_
+                            }))
     },
 
     previouspath(_){
         storage.dispatch(prev_path(_))
+    },
+    saveapartmentinfo(_){
+        storage.dispatch(apartment_info(_))
+    },
+    savedeliveryinfo(_){
+        storage.dispatch(delivery_info(_))
     },
     signin(email,password){
         storage.dispatch(identify_user(email,password))
@@ -491,12 +502,15 @@ export default{
                                                         }   ]
                 this.newtransact(transaction)
                                                                                         }   )
-        var deliveryCharge=[{   chefUid,
+        var adlo=storage.getState().address,
+        deliveryCharge=[{       chefUid,
                                 customerUid,
                                 originalAmt:storage.getState().chef.yourChef.delivery_charge,
                                 item:"Delivery fee",
-                                customerAddress,
-                                description:"Delivery fee",
+                                customerAddress:{lat:adlo.lat,
+                                                 lng:adlo.lng,
+                                                 address:adlo.Location},
+                                description:"",
                                 quantity:1,
                                 customerName,
                                 customerEmail,
@@ -507,7 +521,10 @@ export default{
                                 customerPhoneNumber,
                                 payment_option,
                                 coupon_used,
-                                additionalInfo:"",
+                                additionalInfo:{
+                                                 ApartmentInfo:adlo.apartment,
+                                                 DeliveryNote:adlo.deliverynote
+                                                },
                                 charge_customer:true,
                                 change_amount:storage.getState().chef.yourChef.delivery_charge       }]
         this.newtransact(deliveryCharge)
@@ -593,17 +610,20 @@ export default{
         }
     },
     sendMessage(){
-        const url="http://api.africastalking.com/version1/messaging"
+        const url="http://login.betasms.com/api/"
         fetch(url,{
             method:"POST",
             headers:{
+                'Access-Control-Allow-Origin':'*',
                 accept:"application/json",
-                apikey:"170de2d4b18892e18f8f14401f6c041f46e14d7d3b407444def26e2d4ee40165"
+                //apikey:"170de2d4b18892e18f8f14401f6c041f46e14d7d3b407444def26e2d4ee40165"
             },
             body:JSON.stringify({
-                username:"test505",
-                to:"2348144194590",
-                message:"hi! its me john"
+                username:'ibkadeniyi@gmail.com',
+                password:'chelseafc',
+                message:'test',
+                mobiles:'2348038165991',
+                sender:'john',
             })
         })
         .then((res)=>console.log(res.json()))

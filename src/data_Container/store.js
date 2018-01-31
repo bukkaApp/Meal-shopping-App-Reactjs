@@ -19,7 +19,11 @@ const store=(persistedState)?
 
 store.subscribe(throttle(()=>{
    saveState({
-                address:store.getState().address,
+                address:{
+                            ...store.getState().address,
+                            apartment:"",
+                            deliverynote:""
+                        },
                 chef:{
                         ...initialstatechefs,
                         currentCuisine:store.getState().chef.currentCuisine,

@@ -6,6 +6,7 @@ import lib from '../util/lib'
 import ajx from '../util/ajax'
 import Faspinner from 'react-icons/lib/fa/spinner'
 import {mapStateToProps} from '../util/ajax'
+import {Link} from 'react-router-dom'
  
 const checkoutSlip =(props)=>{
 	const deleteDiv=(e)=>{
@@ -25,11 +26,16 @@ const checkoutSlip =(props)=>{
 		}
 		else if(props.user.lastCardDigits===""){
 			lib.toggleShowcard()
-		}
-		else{ 
+		}else if(!props.address.Located){
+			alert("Please enter a delivery address")
+		}else{ 
 			lib.processtransact()
 		}
 	}	
+	const handledelivery=(e)=>{
+		e.persist()
+		lib.savedeliveryinfo(e.currentTarget.value)
+	}
 	
 	return(
 		<div id="checkoutSlip">
@@ -62,11 +68,21 @@ const checkoutSlip =(props)=>{
 				<PageBackground one={true} bloc={{lat:props.address.lat,lng:props.address.lng}} />
 				</div>
 				<div id="ssaddress">
-					<input 	value={props.address.Location} 
-							className="input-addi" 
-							readOnly/>
+					{(props.page.isRestaurant)?
+						<Link to="/Search" className="vinc">
+							<input 	value={props.address.Location} 
+									className="input-addi" 
+									placeholder="Please enter a delivery address.."
+									readOnly/>
+						</Link>:
+						<input 	value={props.address.Location} 
+								className="input-addi" 
+								placeholder="Please enter a delivery address.."
+								readOnly/>
+					}
 					<input 	placeholder="Add delivery note..." 
-							className="inputsi"/>
+							className="inputsi"
+							onChange={handledelivery} />
 				</div>
 			</div>
 			{(!props.user.orderstatus_fetching)?
@@ -111,9 +127,6 @@ const checkoutSlip =(props)=>{
 						</div>
 					)	})
 				}
-				<input 	className="add-info" 
-						id="chefInfo" 
-						placeholder="Add Chef instructions"/>
 				<div id='costing'>
 					<div className="Totalbreakdown">
 						<h4>Subtotal</h4>

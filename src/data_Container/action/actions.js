@@ -63,6 +63,14 @@ export const fetch_address=(add,latLng)=>({
 		type:'FETCH_ADDRESS',
 		payload:{address:add,lng:latLng.lng,lat:latLng.lat}
 })
+export const apartment_info=(_)=>({
+	type:'APARTMENT',
+	payload:_
+})
+export const delivery_info=(_)=>({
+	type:'DELIVERY_NOTE',
+	payload:_
+})
 export const show_receipt=(receipt)=>({
 	type:'RECEIPT',
 	payload:receipt

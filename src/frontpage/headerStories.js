@@ -27,13 +27,21 @@ class headerStories extends Component{
 	}
 
 	render(){
+		const receiptpath=this.props.page.restaurantPath
 		return(
 				<div id="head" className="myheader header-min bigMenuHolder ab">
+				{(this.props.page.isRestaurant)?
+					<Link to={receiptpath}>
+					<img 	src={ajx.logo} 
+							id="logo" 
+							alt="logo"/>
+					</Link>:
 					<Link to="/">
 						<img 	src={ajx.logo} 
 								id="logo" 
 								alt="logo"/>
 					</Link>
+				}
 					{(this.props.isrestaurant)?
 						null:
 						<div className="search-box search-box-min search">

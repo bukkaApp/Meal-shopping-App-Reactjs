@@ -91,6 +91,7 @@ restaurantHandleSelect = (address, placeId) => {
     autocompleteContainer:'holder',
     googleLogoImage:'Glogo'
   }
+  const pp=this.props.page.prevpath
 
     return (
       
@@ -99,6 +100,8 @@ restaurantHandleSelect = (address, placeId) => {
         { (this.props.page.isRestaurant)?
           null:
           (this.props.chef.currentCuisine)?
+          (pp==="/")?
+          null:
           <div className="hn">
           <h5 id="cci">&#9662;{this.props.chef.currentCuisine}</h5>
           {
@@ -121,11 +124,8 @@ restaurantHandleSelect = (address, placeId) => {
           (window.innerWidth<768)?
           <Link className="bbdaa" to="/Search">    
             <div className={(this.props.mobileroute)? this.props.mobileroute+" bbd":" bbd"} onClick={()=>console.log(window.innerWidth)}>
-                <span className={(this.props.chef.fetching_chefAndCuisine)? "ll bb":"bb"}>
-                  {(!this.props.address.Located)?
-                    <FaMapMarker/>:
+                <span className="bb">
                     <FaMapMarker/>
-                  }
                 </span>
                 <PlacesAutocomplete inputProps={inputProps} 
                                     autocompleteItem={AutocompleteItem} 
@@ -135,11 +135,8 @@ restaurantHandleSelect = (address, placeId) => {
               </div>
             </Link>:
             <div className="bbd">
-            <span className={(this.props.chef.fetching_chefAndCuisine)? "ll bb":"bb"}>
-              {(!this.props.address.Located)?
-                <FaMapMarker/>:
+            <span className="bb">
                 <FaMapMarker/>
-              }
             </span>
             <PlacesAutocomplete inputProps={inputProps} 
                                 autocompleteItem={AutocompleteItem} 
@@ -185,6 +182,11 @@ restaurantHandleSelect = (address, placeId) => {
                   className="xp btn-red max-summit min-submit ">
             Submit
           </button>:
+          (pp==="/")?
+          <button type="submit" 
+                  className="xp btn-red max-summit min-submit ">
+            Submit
+          </button>:
           null:
           null
         }
@@ -192,6 +194,13 @@ restaurantHandleSelect = (address, placeId) => {
           null:
           (this.props.chef.fetching_chefAndCuisine && !this.props.chef.first_search_completed)?
           (this.props.chef.currentCuisine===null)?
+          <button type="submit" 
+                  className="xp btn-red load ">
+            <span className="loader ">
+              <Faspinner/>
+            </span>
+          </button>:
+          (pp==="/")?
           <button type="submit" 
                   className="xp btn-red load ">
             <span className="loader ">

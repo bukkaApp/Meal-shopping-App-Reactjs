@@ -199,6 +199,9 @@ width: 230px;
   padding-left: 10px;
   border: none;
   color: rgba(0,0,0,.9);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .form-controli:focus{
   border:none;
@@ -476,7 +479,7 @@ button:active,.shopping-cart:active {
 }
 .popups{
   overflow-y: hidden;
-  padding-right: 17px;
+  /*padding-right: 17px;*/
 }
 @keyframes loading{
   0%{-ms-transform: rotate(0deg);-webkit-transform: rotate(0deg);transform: rotate(0deg);}

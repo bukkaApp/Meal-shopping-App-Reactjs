@@ -16,7 +16,7 @@ class Restaurant extends Component{
     componentWillMount(){
         const { match:{params} }=this.props
         lib.chefResult(params.uid)
-        lib.isRestaurant()
+        lib.isRestaurant(this.props.location.pathname)
     }
     componentDidMount(){
         lib.previouspath(this.props.location.pathname)

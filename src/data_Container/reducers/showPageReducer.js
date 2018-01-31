@@ -12,7 +12,8 @@ export const initialstatepage={
 	showforgotpasswordpage:false,
 	showfirstpageloader:false,
 	prevpath:null,
-	isRestaurant:false
+	isRestaurant:false,
+	restaurantPath:null
 };
 
 const showPage=(state=initialstatepage,action)=>{
@@ -34,7 +35,8 @@ const showPage=(state=initialstatepage,action)=>{
 		case 'IS_RESTAURANT':{
 			return{
 				...state,
-				isRestaurant:!action.payload
+				isRestaurant:!action.payload.isRestaurant,
+				restaurantPath:action.payload.path
 			}
 		}
 		case 'DIF_CHEF_ERROR':{

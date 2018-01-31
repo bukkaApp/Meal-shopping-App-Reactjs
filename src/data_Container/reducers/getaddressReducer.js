@@ -2,6 +2,8 @@ const initialstate={
 			lng:"",
 			lat:"",
 			Location:"",
+			apartment:"",
+			deliverynote:"",
 			error:null,
 			Located:false,
 };
@@ -15,6 +17,18 @@ const getaddress=(state=initialstate,action)=>{
 						lat:action.payload.lat,
 						Location:action.payload.address,
 						Located:true,
+					}
+				}
+				case'APARTMENT':{
+					return{
+						...state,
+						apartment:action.payload
+					}
+				}
+				case'DELIVERY_NOTE':{
+					return{
+						...state,
+						deliverynote:action.payload
 					}
 				}
 				default:{return state}
