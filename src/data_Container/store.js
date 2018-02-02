@@ -5,8 +5,9 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import { loadState,saveState } from './localStorage'
 import throttle from 'lodash/throttle'
-import {initialstatepage} from './reducers/showPageReducer'
 import {initialstatesignup} from './reducers/signUpReducer'
+import {initialstatechefs} from './reducers/getChefReducer'
+import {initialstatepage} from './reducers/showPageReducer'
 
 
 const middleware=applyMiddleware(promise(),thunk,logger)
@@ -18,11 +19,22 @@ const store=(persistedState)?
 
 store.subscribe(throttle(()=>{
    saveState({
-                address:store.getState().address,
-                chef:store.getState().chef,
+                address:{
+                            ...store.getState().address,
+                            apartment:"",
+                            deliverynote:""
+                        },
+                chef:{
+                        ...initialstatechefs,
+                        currentCuisine:store.getState().chef.currentCuisine,
+                        first_search_completed:store.getState().chef.first_search_completed
+                    },
                 cart:store.getState().cart,
                 user:store.getState().user,
-                page:initialstatepage,
+                page:{
+                        ...initialstatepage,
+                        prevpath:store.getState().page.prevpath
+                    },
                 SignUp:initialstatesignup,
                 receipt:store.getState().receipt,
                 menuinview:store.getState().menuinview     })

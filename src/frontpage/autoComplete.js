@@ -16,6 +16,32 @@ class SimpleForm extends React.Component {
    
   }
 
+  restaurantHandleFormSubmit = (event) => {
+    event.preventDefault()
+    geocodeByAddress(this.state.address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => {lib.address(this.state.address,latLng)})
+      .catch(error => console.error('Error', error))
+
+  }
+
+  restaurantHandleEnter = (address) => {
+  this.setState({ address })
+  geocodeByAddress(address)
+    .then(results => getLatLng(results[0]))
+    .then(latLng => { lib.address(address,latLng);})
+    .catch(error => console.error('Error', error))
+}
+  
+
+restaurantHandleSelect = (address, placeId) => {
+ 	this.setState({ address, placeId })
+  geocodeByAddress(address)
+    .then(results => getLatLng(results[0]))
+    .then(latLng => {lib.address(address,latLng)})
+    .catch(error => console.error('Error', error))
+}
+
 
   handleFormSubmit = (event) => {
     event.preventDefault()
@@ -30,7 +56,7 @@ class SimpleForm extends React.Component {
   this.setState({ address })
   geocodeByAddress(address)
     .then(results => getLatLng(results[0]))
-    .then(latLng => { lib.address(address,latLng);lib.chefResult(latLng);lib.messageChef()})
+    .then(latLng => { lib.address(address,latLng);lib.chefResult(latLng);})
     .catch(error => console.error('Error', error))
 }
   
@@ -65,12 +91,17 @@ class SimpleForm extends React.Component {
     autocompleteContainer:'holder',
     googleLogoImage:'Glogo'
   }
+  const pp=this.props.page.prevpath
 
     return (
       
       <form onSubmit={this.handleFormSubmit} 
-            className="abc">
-        {(this.props.chef.currentCuisine)?
+            className={(this.props.page.isRestaurant)? "isop abc":"abc"}>
+        { (this.props.page.isRestaurant)?
+          null:
+          (this.props.chef.currentCuisine)?
+          (pp==="/")?
+          null:
           <div className="hn">
           <h5 id="cci">&#9662;{this.props.chef.currentCuisine}</h5>
           {
@@ -89,52 +120,94 @@ class SimpleForm extends React.Component {
           </div>:
           null
         }
-        {
+        { (this.props.page.isRestaurant)?
           (window.innerWidth<768)?
-          <Link className="lin" to="/j">    
-            <div className="bbd" onClick={()=>console.log(window.innerWidth)}>
-                <span className={(this.props.chef.fetching_chefAndCuisine)? "ll bb":"bb"}>
-                  {(!this.props.address.Located)?
-                    <FaMapMarker/>:
+          <Link className="bbdaa" to="/Search">    
+            <div className={(this.props.mobileroute)? this.props.mobileroute+" bbd":" bbd"} onClick={()=>console.log(window.innerWidth)}>
+                <span className="bb">
                     <FaMapMarker/>
-                  }
                 </span>
                 <PlacesAutocomplete inputProps={inputProps} 
                                     autocompleteItem={AutocompleteItem} 
                                     classNames={cssClasses} 
-                                    onEnterKeyDown={this.handleEnter} 
-                                    onSelect={this.handleSelect}  />
+                                    onEnterKeyDown={this.restaurantHandleEnter} 
+                                    onSelect={this.restaurantHandleSelect}  />
               </div>
             </Link>:
-          <div className="bbd">
-          <span className={(this.props.chef.fetching_chefAndCuisine)? "ll bb":"bb"}>
-            {(!this.props.address.Located)?
-              <FaMapMarker/>:
-              <FaMapMarker/>
-            }
-          </span>
-          <PlacesAutocomplete inputProps={inputProps} 
-                              autocompleteItem={AutocompleteItem} 
-                              classNames={cssClasses} 
-                              onEnterKeyDown={this.handleEnter} 
-                              onSelect={this.handleSelect}  />
-          </div>
+            <div className="bbd">
+            <span className="bb">
+                <FaMapMarker/>
+            </span>
+            <PlacesAutocomplete inputProps={inputProps} 
+                                autocompleteItem={AutocompleteItem} 
+                                classNames={cssClasses} 
+                                onEnterKeyDown={this.restaurantHandleEnter} 
+                                onSelect={this.restaurantHandleSelect}  />
+            </div>:
+            (window.innerWidth<768)?
+            <Link className="bbdaa" to="/Search">    
+              <div className={(this.props.mobileroute)? this.props.mobileroute+" bbd":" bbd"} onClick={()=>console.log(window.innerWidth)}>
+                  <span className={(this.props.chef.fetching_chefAndCuisine)? "ll bb":"bb"}>
+                    {(!this.props.address.Located)?
+                      <FaMapMarker/>:
+                      <FaMapMarker/>
+                    }
+                  </span>
+                  <PlacesAutocomplete inputProps={inputProps} 
+                                      autocompleteItem={AutocompleteItem} 
+                                      classNames={cssClasses} 
+                                      onEnterKeyDown={this.handleEnter} 
+                                      onSelect={this.handleSelect}  />
+                </div>
+              </Link>:
+            <div className="bbd">
+            <span className={(this.props.chef.fetching_chefAndCuisine)? "ll bb":"bb"}>
+              {(!this.props.address.Located)?
+                <FaMapMarker/>:
+                <FaMapMarker/>
+              }
+            </span>
+            <PlacesAutocomplete inputProps={inputProps} 
+                                autocompleteItem={AutocompleteItem} 
+                                classNames={cssClasses} 
+                                onEnterKeyDown={this.handleEnter} 
+                                onSelect={this.handleSelect}  />
+            </div>
         }
-        {(!this.props.chef.fetching_chefAndCuisine && !this.props.chef.first_search_completed)? 
+        { (this.props.page.isRestaurant)?
+          null:
+          (!this.props.chef.fetching_chefAndCuisine && !this.props.chef.first_search_completed)? 
+          (this.props.chef.currentCuisine===null)?
           <button type="submit" 
                   className="xp btn-red max-summit min-submit ">
             Submit
           </button>:
+          (pp==="/")?
+          <button type="submit" 
+                  className="xp btn-red max-summit min-submit ">
+            Submit
+          </button>:
+          null:
           null
         }
-        {(this.props.chef.fetching_chefAndCuisine && !this.props.chef.first_search_completed)?
+        { (this.props.page.isRestaurant)?
+          null:
+          (this.props.chef.fetching_chefAndCuisine && !this.props.chef.first_search_completed)?
+          (this.props.chef.currentCuisine===null)?
           <button type="submit" 
                   className="xp btn-red load ">
             <span className="loader ">
               <Faspinner/>
             </span>
-          </button>
-          :
+          </button>:
+          (pp==="/")?
+          <button type="submit" 
+                  className="xp btn-red load ">
+            <span className="loader ">
+              <Faspinner/>
+            </span>
+          </button>:
+          null:
           null
         }
         
@@ -144,4 +217,4 @@ class SimpleForm extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(SimpleForm);
+export default connect(mapStateToProps)(SimpleForm)

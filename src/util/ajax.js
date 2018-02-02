@@ -1,6 +1,3 @@
-
-import axios from 'axios'
-
 export default{
     loginendpoint:"https://chef.mybukka.com/api/v1/bukka/auth/custom/login",
     carddtlsendpoint:"https://chef.mybukka.com/api/v1/bukka/customer/card/",
@@ -13,7 +10,7 @@ export default{
     macdlogo:"https://www.mcdonalds.com/content/dam/usa/documents/mcdelivery/mcdelivery_new11.jpg",
     placeorderendpoint:"https://chef.mybukka.com/api/v1/bukka/transaction/incoming",
     applelogo:'https://res.cloudinary.com/www-mybukka-com/image/upload/v1508504845/c4c51cdd9a95bdb0c488ff0a013c865c_smq7g5.png',
-    googleplaylogo:'http://res.cloudinary.com/www-mybukka-com/image/upload/v1508342712/appstore_bkvsi2.png',
+    googleplaylogo:'https://res.cloudinary.com/www-mybukka-com/image/upload/v1508342712/appstore_bkvsi2.png',
     visa:"https://res.cloudinary.com/bukka/image/upload/v1500737722/app/visa.png",
     master:"https://res.cloudinary.com/bukka/image/upload/v1500737722/app/mastercard.png",
     verve:"https://res.cloudinary.com/bukka/image/upload/v1500737722/app/verve.png",
@@ -27,6 +24,7 @@ export default{
     SmallChops: 'https://res.cloudinary.com/www-mybukka-com/image/upload/t_media_lib_thumb/v1517495705/Productimage---Small---Chops_tr9bck.jpg',
     Grills: 'https://res.cloudinary.com/www-mybukka-com/image/upload/t_media_lib_thumb/v1517542986/andrew-itaga-145332_d8bamm.jpg',
     GMapApi:"https://maps.googleapis.com/maps/api/js?key=AIzaSyBjt71qZwbmnRSpiTNC9KELMVQqKT6tV_M=3.exp&libraries=geometry,drawing",
+    smsApi:'https://chef.mybukka.com/api/v1/bukka/sms'
 }
 
 export const  mapStateToProps=(state)=>(state)

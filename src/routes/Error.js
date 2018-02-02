@@ -7,7 +7,7 @@ import {mapStateToProps} from '../util/ajax'
 const Error_=(props)=>(
     (props.chef.error)?
     < Nochefavailable />:
-    < Redirect to="/" />
+    < Redirect to="/Cuisine" />
 )
 
 export default connect (mapStateToProps) (Error_)

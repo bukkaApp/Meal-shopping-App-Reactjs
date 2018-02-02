@@ -14,7 +14,7 @@ export default class basicinformation extends Component{
 					    <input type="file" accept="image/*" className="profile-photo-selector"/>
 					</div>
 				</div>
-				<div className="col-md-8 input-holder m-right">
+				<form className="col-md-8 input-holder m-right" autocomplete="on">
 					<input placeholder="First Name" type="text" id="FirstName"/>
 					<input placeholder="Last Name" type="text" id="LastName"/>
 					<input placeholder="Mobile Number" type="tel" id="MobileNumber"/>
@@ -24,7 +24,7 @@ export default class basicinformation extends Component{
 					<input placeholder="Enter New Password" type="password" id="newPassword"/>
 					<input placeholder="Confirm Password" type="password" id="ConfirmPassword"/>
 					<button id="change-password">Change Password</button>
-				</div>
+				</form>
 			</div>
 			)
 	}

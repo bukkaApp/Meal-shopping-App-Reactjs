@@ -10,6 +10,8 @@ import Footer from '../frontpage/Footer'
 import Receipt from './redirectToReceipt'
 import OptionLeaf from '../frontpage/OptionLeaf'
 import {mapStateToProps} from '../util/ajax'
+import Nochefavailable from '../frontpage/nochef'
+import OrderError from '../frontpage/orderError'
 
 
 const Checking =(props)=>{
@@ -24,11 +26,17 @@ const Checking =(props)=>{
 								bloc={{lat:props.address.lat,lng:props.address.lng}} /> 
 				<div id="checking-content-holder">
 				<CheckoutPage 	user={props.user}
-								address={props.address} /> 
+								address={props.address}
+								isRestaurant={props.page.isRestaurant} /> 
 				<CheckoutSlip />
 				</div>
 				<OptionLeaf/>											
 				<Footer/>
+				{
+					(props.page.showordererrorpage)?
+						<OrderError error={props.user.orderstatus.message}/>:
+						null
+				}
 				
 			</div>
 		)

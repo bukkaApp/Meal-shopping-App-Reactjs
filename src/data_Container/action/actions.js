@@ -25,9 +25,9 @@ export const updating_user_info=(uid)=>({
 })
 
 //fetch list of chefs
-export const fetch_chef=(latLng)=>({
+export const fetch_chef=(_)=>({
 	type:'GET_CHEFS',
-	payload:axios.get(ajx.chefendpoint+latLng.lat+"/"+latLng.lng)
+	payload:axios.get(ajx.chefendpoint+_)
 })
 
 //menu in view info
@@ -50,6 +50,11 @@ export const order=(_)=>({
 	type:'ORDER_STATUS',
 	payload:Promise.all(_)
 })
+//menupage timestamp
+export const prev_path=(_)=>({
+	type:'PREV_PATH',
+	payload:_
+})
 export const chef_Cuisine=(_)=>({
 	type:'GET_CHEF_AND_CUISINE',
 	payload:_
@@ -58,10 +63,26 @@ export const fetch_address=(add,latLng)=>({
 		type:'FETCH_ADDRESS',
 		payload:{address:add,lng:latLng.lng,lat:latLng.lat}
 })
+export const apartment_info=(_)=>({
+	type:'APARTMENT',
+	payload:_
+})
+export const order_error=(_)=>({
+	type:"ORDER_ERROR_PAGE",
+	payload:_
+})
+export const delivery_info=(_)=>({
+	type:'DELIVERY_NOTE',
+	payload:_
+})
 export const show_receipt=(receipt)=>({
 	type:'RECEIPT',
 	payload:receipt
 });
+export const is_restaurant=(_)=>({
+	type:'IS_RESTAURANT',
+	payload:_
+})
 export const get_chef=(chef)=>({
 	type:'GET_CHEFS_UPDATE',
 	payload:chef

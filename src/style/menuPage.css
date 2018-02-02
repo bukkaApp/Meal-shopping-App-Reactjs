@@ -215,3 +215,11 @@ h6.ttd{
 .sd:hover{
 	cursor: pointer;
 }
+.sd:focus{
+	outline-color: #9c1c26;
+}
+.sop:hover,
+.sop:focus{
+	background-color:#9c1c26;
+	outline-color:#9c1c26
+}

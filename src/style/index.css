@@ -9,6 +9,9 @@ body {
 .devi,.dev{
   position: relative;
 }
+.min-length{
+  min-height: 400px;
+}
 html,body{
   height:100%;
 }
