@@ -10,7 +10,6 @@ import Footer from '../frontpage/Footer'
 import Receipt from './redirectToReceipt'
 import OptionLeaf from '../frontpage/OptionLeaf'
 import {mapStateToProps} from '../util/ajax'
-import Nochefavailable from '../frontpage/nochef'
 import OrderError from '../frontpage/orderError'
 
 

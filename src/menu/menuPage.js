@@ -5,7 +5,6 @@ import MdMore from 'react-icons/lib/md/more'
 import lib from '../util/lib' 
 import ajx from '../util/ajax'
 import propTypes from 'prop-types'
-import SortIcon from 'react-icons/lib/fa/sort-amount-asc'
 
 class menuPage extends Component {
 	constructor(props){

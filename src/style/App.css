@@ -89,6 +89,7 @@ width: 230px;
   position: relative;
 }
 .btn-red{
+  outline: none;
   background-color: #9c1c26 !important;
   border:1px solid #9c1c26 !important;
   color:white;

@@ -480,7 +480,6 @@ export default{
         customerAddress = storage.getState().address.Location,
         chefImage = storage.getState().chef.yourChef.profile_photo,
         customerPhoneNumber = storage.getState().user.user.mobile,
-        chefPhoneNumber = storage.getState().chef.yourChef.phone_number,
         payment_option = "card",
         items=Object.keys(storage.getState().cart.cart);
         var coupon=(coupon_used)? 500:0;
