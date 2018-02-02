@@ -14,7 +14,7 @@ import PageBackground from '../frontpage/gmap'
 
 const HomePage=(props)=>(
     <div style={{position:'absolute'}}> 
-				<ScrollLogic 	chef_fetched={props.chef.fetched}
+				<ScrollLogic 	chef_fetched={props.chef.fetched_chefsInYourArea}
 								Located={props.address.Located}		 />
 				<div className="first-page-background">
 					<PageBackground one={true}/>

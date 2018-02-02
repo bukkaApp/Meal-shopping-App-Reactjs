@@ -12,7 +12,7 @@ import {mapStateToProps} from '../util/ajax'
 
 const MenuPageHolder=(props)=>(
     <div className="devi">
-				<ScrollLogic 	chef_fetched={props.chef.fetched}
+				<ScrollLogic 	chef_fetched={props.chef.fetched_chefsInYourArea}
 								Located={props.address.Located} />
 				<MenuPage chef={props.chef}/>
 				<CartPanel/>

@@ -96,13 +96,13 @@ const Footer =()=> {
                         <div className="col-sm-3"></div>
                     </div>
                     <div className="row footer4 m-row ">
-                        <div className="col-sm-4">
+                        <div className="col-sm-4 zzvd">
                         &copy; Copyright 2017 Warehouse Global Links
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-sm-4 zzvd">
                             <a >Privacy</a>
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-sm-4 zzvd">
                             <a >Terms</a>
                         </div>
                     </div>

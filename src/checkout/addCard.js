@@ -12,7 +12,7 @@ const addcard =(props)=>{
 					<p>Add Card</p>
 					<a onClick={()=>lib.toggleShowcard()}>X</a>
 				</div>
-				<div className="formField">
+				<form className="formField" autoComplete="off">
 					<div id="headingHolder">
 						<div id="imageHolder">
 							<img src={ajx.visa} alt="visa" />
@@ -24,7 +24,8 @@ const addcard =(props)=>{
 					<div id="cardNumberHolder">
 						<h4>Card number</h4>
 						<input 	id="cardNumber" 
-								placeholder="1234-5678-9999-9999"/>
+								placeholder="1234-5678-9999-9999"
+								autoComplete="off"/>
 					</div>
 					<div id="extrainfoHolder">
 						<div id="info">
@@ -69,7 +70,7 @@ const addcard =(props)=>{
 						</button>:
 						null
 					}
-				</div>
+				</form>
 			</div>
 		</div>
 		)

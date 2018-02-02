@@ -40,11 +40,13 @@ export default class signIn extends Component{
 						<p>Login</p>
 						<a onClick={()=>lib.toggleSignin()}>X</a>
 					</div>
-					<div className="formField">
+					<form className="formField" autoComplete="on">
 						<label className="la">Email</label>
 						<input  placeholder="name@example.com" 
 								id="SignInemail"
-								onChange={this.typing}/>
+								name="email"
+								onChange={this.typing}
+								autoComplete="on"/>
 						{
 							(this.state.u==="")?
 							<span className="ef">email field cannot be empty</span>:
@@ -54,7 +56,9 @@ export default class signIn extends Component{
 						<input 	placeholder="At least 4 characters" 
 								type="password" 
 								id="SignInPassword"
-								onChange={this.typing}/>
+								name="current-password"
+								onChange={this.typing}
+								autoComplete="on"/>
 						{
 							(this.state.p==="")?
 							<span className="ef sp">password field cannot be empty</span>:
@@ -95,7 +99,7 @@ export default class signIn extends Component{
 								Sign Up
 							</a>
 						</p>
-					</div>
+					</form>
 					{(this.props.user.error)?
 						(!this.props.user.error.response)?
 							<span className="ee">

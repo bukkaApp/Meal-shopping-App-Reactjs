@@ -12,10 +12,17 @@ class MobileSearch extends Component{
     render(){
         const pp=this.props.page.prevpath||"/"
     return (
-        (window.innerWidth>767)?
+        (window.innerWidth>783)?
         <Redirect to={pp} />:
         (this.props.chef.error)?
         <ErrorChef/>:
+        (this.props.page.isRestaurant)?
+        <div className="pipip">
+            <Link to={pp}>
+                <Faarrow className="pickle"/>
+            </Link>
+            <SearchBox mobileroute="picklu"/>
+        </div>:
         (this.props.chef.fetching_chefAndCuisine)?
         <Redirect to="/Cuisine" />:
         <div className="pipip">

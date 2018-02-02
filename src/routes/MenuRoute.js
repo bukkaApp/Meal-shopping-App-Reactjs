@@ -24,6 +24,8 @@ render(){
     (this.props.chef.error)?
     <ErrorChef/>:
     (this.props.chef.fetched)?
+    (this.props.page.isRestaurant)?
+    <Redirect to={this.props.page.restaurantPath}/>:
     <MenuPage/>:
     <Redirect to="/Cuisine"/>
 )

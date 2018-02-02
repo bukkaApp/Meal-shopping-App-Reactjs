@@ -11,9 +11,12 @@ class checkoutpagedecider extends Component {
 		lib.previouspath(this.props.location.pathname)
 	}
         render(){
+        const pp=this.props.page.prevpath||"/"
         return(
             (Object.keys(this.props.cart.cart).length)? 
+             (this.props.chef.fetched_chefsInYourArea)?   
                 <Checking/>:
+                <Redirect to={pp} />:
                 <Redirect to='/'/>
         )
         }

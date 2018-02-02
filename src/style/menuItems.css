@@ -113,11 +113,17 @@
 	.food-logo{
 		max-height: 100px;
 		width:132px
-	}
+	} 
 }
 .menu-appear {
+	/*transform: translate(100%);*/
 	opacity: 0.01
   }
+  
+  /*.menu-appear.menu-appear-active {
+	transform: translate(0%);
+	transition: transform 1000ms ease-in;
+  }*/
   
   .menu-appear.menu-appear-active {
 	opacity: 1;

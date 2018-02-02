@@ -7,9 +7,12 @@ import HeaderCheckout from '../frontpage/HeaderCheckout'
 import Footer from '../frontpage/Footer'
 import Receipt from '../frontpage/receipt'
 import {mapStateToProps} from '../util/ajax'
+import { Redirect } from "react-router-dom"
 
 const ReceiptRoute=(props)=>{
 return(
+    (!Object.keys(props.chef.yourChef).length)?
+    <Redirect to="/"/>:
     <div className="devi">
         <HeaderCheckout  />
         <PageBackground bloc={{lat:props.address.lat,lng:props.address.lng}}

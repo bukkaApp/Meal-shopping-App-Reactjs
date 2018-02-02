@@ -11,7 +11,10 @@ export const initialstatepage={
 	showdifcheferror:false,
 	showforgotpasswordpage:false,
 	showfirstpageloader:false,
-	prevpath:null
+	showordererrorpage:false,
+	prevpath:null,
+	isRestaurant:false,
+	restaurantPath:null
 };
 
 const showPage=(state=initialstatepage,action)=>{
@@ -28,6 +31,19 @@ const showPage=(state=initialstatepage,action)=>{
 			return{
 				...state,
 				prevpath:action.payload
+			}
+		}
+		case'ORDER_ERROR_PAGE':{
+			return{
+				...state,
+				showordererrorpage:!action.payload
+			}
+		}
+		case 'IS_RESTAURANT':{
+			return{
+				...state,
+				isRestaurant:!action.payload.isRestaurant,
+				restaurantPath:action.payload.path
 			}
 		}
 		case 'DIF_CHEF_ERROR':{

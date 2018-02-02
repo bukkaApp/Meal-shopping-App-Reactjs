@@ -29,10 +29,15 @@ import {	fetch_address,
             showforgotpassword,
             clear_receipt,
             showfirstpageloader,
-            prev_path            } from '../data_Container/action/actions'
+            prev_path,
+            is_restaurant,
+            apartment_info,
+            delivery_info,
+            order_error         } from '../data_Container/action/actions'
 import storage from '../data_Container/store'
 import axios from 'axios'
 import ajx from './ajax'
+import request from 'request'
 
 
 
@@ -72,12 +77,28 @@ export default{
         console.log(storage.getState().page.showforgotpasswordpage)
         this.noscroll()
     },
+    toggleshoworder_error(){
+        storage.dispatch(order_error(storage.getState().page.showordererrorpage))
+        this.noscroll()
+    },
     toggleShowReceipt:()=>storage.dispatch(show_receipt(storage.getState().page.showreceipt)),
 
     generateReceipt:(a)=>storage.dispatch(add_receipt(a)),
+    isRestaurant(_){
+        storage.dispatch(is_restaurant({
+                                isRestaurant:false,
+                                path:_
+                            }))
+    },
 
     previouspath(_){
         storage.dispatch(prev_path(_))
+    },
+    saveapartmentinfo(_){
+        storage.dispatch(apartment_info(_))
+    },
+    savedeliveryinfo(_){
+        storage.dispatch(delivery_info(_))
     },
     signin(email,password){
         storage.dispatch(identify_user(email,password))
@@ -170,7 +191,6 @@ export default{
         if(typeof result ==='string'){
             
             yourChef=storage.getState().chef.chefAndCuisine[`${result}`][0]
-            console.log("content of result is ",yourChef)
             cuisine=result
 
             /*.filter((chef)=>chef.role==="Super Chef")*/
@@ -181,10 +201,20 @@ export default{
         if(yourChef){
             /*var categ=Array.from(new Set(result.filter(
                 (chef)=>chef.role==="Super Chef")[0].menu.map(
-                    (menu)=>menu.category)))*/
-            var categorizedMenu={},
-            categ=Array.from(new Set(yourChef.menu.map((menu)=>
+                    (menu)=>menu.category)))*/      
+            var categorizedMenu={},categ
+            if(Array.isArray(yourChef.menu)){
+                    categ=Array.from(new Set(yourChef.menu.map((menu)=>
                                 menu.category)))
+                }else{
+                    let _=Object.keys(yourChef.menu)
+                    let to=_.map((o)=>yourChef.menu[`${o}`])
+                    yourChef={...yourChef,
+                              menu:to}
+                    categ=Array.from(new Set(yourChef.menu.map((menu)=>
+                              menu.category)))
+                }
+
             //var menuP=yourChef.menu.filter(items=>categ.indexOf(items.category)>-1).filter(item=>item.visibility===true)
             for(var i=0;i<categ.length;i++){
                 var menuPerCategory=[];
@@ -215,10 +245,18 @@ export default{
             }
         }
     },
-    chefResult(latLng){
+    chefResult(val){
+        let _
+        if(typeof val ==='string'){
+            _=val
+        }else{
+            _=val.lat+"/"+val.lng
+        }
         return(
-        storage.dispatch(fetch_chef(latLng))
-        .then(()=>this.chefCuisines(storage.getState().chef.chefsInYourArea))
+        storage.dispatch(fetch_chef(_))
+        .then(()=>(typeof val !=='string')?
+                this.chefCuisines(storage.getState().chef.chefsInYourArea):
+                this.updatechefbycuisine(storage.getState().chef.chefsInYourArea))
         .catch((e)=>console.log('Sorry! There was a problem',e))
         )
     },
@@ -346,6 +384,8 @@ export default{
         let token=storage.getState().user.user.token,
         chefUid=storage.getState().chef.yourChef.uid,
         transaction=storage.getState().user.transaction,
+        chefName = storage.getState().chef.yourChef.first_name + " " + storage.getState().chef.yourChef.last_name,
+        chefPhoneNumber = storage.getState().chef.yourChef.phone_number,
         p=transaction.map( (_)=>
                             {return   axios({ 
                                                 method: 'post',
@@ -355,8 +395,14 @@ export default{
                                                                             })
                                                                                 }  )
         storage.dispatch(order(p))
-        .then((res)=>{console.log(res);this.createReceipt();storage.dispatch(cleartransaction())})
-        .catch((err)=>console.log("please try again",err))
+        .then((res)=>{
+            console.log(res);
+            this.sendMessage(chefName,chefPhoneNumber)
+            this.createReceipt();
+            storage.dispatch(cleartransaction())})
+        .catch((err)=>{
+                    console.log("please try again",err);
+                    this.toggleshoworder_error()        })
       },
     timewillpass(){
         var k=Object.keys(storage.getState().cart.cart),
@@ -422,7 +468,7 @@ export default{
         _b.push(_v)
         storage.dispatch(transaction(_b))
     },
-    processtransact(){
+    async processtransact(){
         var chefUid = storage.getState().chef.yourChef.uid,
         customerUid = storage.getState().user.user.uid,
         customerName = storage.getState().user.user.first_name + " " + storage.getState().user.user.last_name,
@@ -466,15 +512,18 @@ export default{
                                 additionalInfo,
                                 charge_customer,
                                 change_amount
-                                                        }   ]
+                                                        }  ]
                 this.newtransact(transaction)
                                                                                         }   )
-        var deliveryCharge=[{   chefUid,
+        var adlo=storage.getState().address,
+        deliveryCharge=[{       chefUid,
                                 customerUid,
                                 originalAmt:storage.getState().chef.yourChef.delivery_charge,
                                 item:"Delivery fee",
-                                customerAddress,
-                                description:"Delivery fee",
+                                customerAddress:{lat:adlo.lat,
+                                                 lng:adlo.lng,
+                                                 address:adlo.Location},
+                                description:"",
                                 quantity:1,
                                 customerName,
                                 customerEmail,
@@ -485,7 +534,10 @@ export default{
                                 customerPhoneNumber,
                                 payment_option,
                                 coupon_used,
-                                additionalInfo:"",
+                                additionalInfo:{
+                                                 ApartmentInfo:adlo.apartment,
+                                                 DeliveryNote:adlo.deliverynote
+                                                },
                                 charge_customer:true,
                                 change_amount:storage.getState().chef.yourChef.delivery_charge       }]
         this.newtransact(deliveryCharge)
@@ -570,22 +622,23 @@ export default{
             _v.classList.add('zzk')
         }
     },
-    sendMessage(){
-        const url="http://api.africastalking.com/version1/messaging"
-        fetch(url,{
-            method:"POST",
-            headers:{
-                accept:"application/json",
-                apikey:"170de2d4b18892e18f8f14401f6c041f46e14d7d3b407444def26e2d4ee40165"
-            },
-            body:JSON.stringify({
-                username:"test505",
-                to:"2348144194590",
-                message:"hi! its me john"
-            })
-        })
-        .then((res)=>console.log(res.json()))
-        .catch((err)=>console.log("error",err))
+    sendMessage(name,number){
+        var message=`Hello ${name},You have a new order.Please visit https://chef.mybukka.com to accept order(s)` 
+        number="234"+number.substring(1,10)
+        number.trim()
+
+        var options = { method: 'POST',
+        url: ajx.smsApi,
+        headers: 
+        { 'Content-Type': 'application/x-www-form-urlencoded' },
+        form: { message, number } };
+
+        request(options, function (error, response, body) {
+        if (error) console.log(error);
+
+        console.log(body);
+        });
+           
     },
     async onRefresh(){
        /* const _=this

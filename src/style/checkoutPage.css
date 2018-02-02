@@ -7,6 +7,55 @@
 	margin-left: 50px;
 	max-height: 540px;
 }
+.vvsi{
+	margin-top: 20px;
+}
+.mert{
+	display:inline-block;
+	margin-left:10px;
+	font-size: 1.8em;
+}
+.mert:hover{
+	cursor: pointer;
+	color:#9c1c26;
+}
+.isop{
+	width:100%
+}
+.isop .form-controli{
+	font-size: 16px;
+    width: 100%;
+    min-width: 260px;
+    padding-left: 20px;
+}
+.isop .bbd{
+	justify-content: space-between;
+	height: 45px;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,.2);
+    margin: 15px 8px 0 9px;
+	align-items: center;
+	justify-content: stretch;
+	z-index: 1;
+	position: relative;
+	padding-left: 8px;
+	width: 100%;
+}
+.isop .ll{
+	border: none;
+    display: flex;
+    justify-content: center;
+	width: 40px;
+	color:black;
+
+}
+.isop .holder{
+	visibility:true;
+	opacity:1;
+	width:100%;
+	position: absolute ;
+	top:42px;
+}
 #addCard:hover{
 cursor: pointer;
 }
@@ -81,7 +130,8 @@ margin-bottom:10px;
 
 
 .inputs:focus{
-	border:1px solid #9c1c26;
+	outline:none;
+	/*border:1px solid #9c1c26;*/
 }
 .l-icon-small{
 	font-size: 0.7em;
@@ -105,5 +155,34 @@ margin-bottom:10px;
 	}
 	#d-info,.carddetails,.infoholder{
 		display: none;
+	}
+	.ishi{
+		display: none;
+	}
+	.isop .bbd{
+		border-radius: 0;
+		border-left: none;
+		border-right: none;
+		border-top: none;
+		margin: 0;
+		padding: 0;
+	}
+	.isop .form-controli{
+		font-size: 14px;
+	}
+	.isop .holder{
+		top:42px;
+		width:100%;
+	}
+	.carti{
+		max-width:100%
+	}
+	.generalDescription{
+		max-width:auto;
+	}
+}
+@media(max-width:414px){
+	.generalDescription{
+		max-width:200px
 	}
 }

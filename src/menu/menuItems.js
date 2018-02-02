@@ -24,8 +24,8 @@ const menuItems =(props)=>{
 		lib.addItem(menu)
 	}
 	return(
-			<div className="MenuList" id="many">
-				{(props.chef.fetched)? 
+			<div className="MenuList min-length" id="many">
+				{(Object.keys(props.chef.yourChef).length)? 
 					(props.chef.yourChef.menu.length)?
 					(props.chef.yourChef.visibility)?
 					props.chef.menuCategoriesKeys.map(
@@ -48,6 +48,7 @@ const menuItems =(props)=>{
 								<div 	className="col-lg-6 menuCol" 
 										key={identifier}
 										data-id={menu.category+identifier}>
+									
 									<div 	className="m-menuitem-holder"  
 											onClick={additem} 
 											id={menu.category+identifier}
@@ -105,6 +106,7 @@ const menuItems =(props)=>{
 											</button>
 										</div>
 									</div>
+									
 								</div>)
 							}
 							</div>

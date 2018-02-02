@@ -89,6 +89,7 @@ width: 230px;
   position: relative;
 }
 .btn-red{
+  outline: none;
   background-color: #9c1c26 !important;
   border:1px solid #9c1c26 !important;
   color:white;
@@ -199,6 +200,9 @@ width: 230px;
   padding-left: 10px;
   border: none;
   color: rgba(0,0,0,.9);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .form-controli:focus{
   border:none;
@@ -424,6 +428,16 @@ margin-left: 20px;
 .m-cart-not-signed-in:hover .m-cart-items,.m-cart-items:hover{
   display: inline-block;
 }
+.qa{
+  position:relative
+}
+.qw{
+  position: absolute;
+  top: -24px;
+  right: -15px;
+  color:#9c1c26 ;
+  cursor: pointer;
+}
 .ijk{
   padding: 10px 20px;
   position: fixed;
@@ -476,7 +490,7 @@ button:active,.shopping-cart:active {
 }
 .popups{
   overflow-y: hidden;
-  padding-right: 17px;
+  /*padding-right: 17px;*/
 }
 @keyframes loading{
   0%{-ms-transform: rotate(0deg);-webkit-transform: rotate(0deg);transform: rotate(0deg);}
@@ -621,7 +635,7 @@ display: -ms-flexbox;
     -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 }
 .zp{
-     top: 34px;
+     top: 37px;
 }
 .kp{
     top: 40px;
@@ -782,10 +796,11 @@ display: -ms-flexbox;
     margin:0;
     width: 160px;
   }
-  .form-controli,#PlacesAutocomplete__root,.ebb,.bbd,.bbdaa{
+  .form-controli,#PlacesAutocomplete__root,.ebb,.bbd,.bbdaa,.lin{
     width:100%;
   }
-  .bbd,.bbdaa{
+  
+  .bbd,.lin,.bbdaa{
     margin-right: 0;
   }
   .fdp{

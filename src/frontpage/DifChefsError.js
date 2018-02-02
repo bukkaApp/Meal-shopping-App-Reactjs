@@ -1,9 +1,20 @@
 import React from 'react'
 import '../style/addmenu.css'
 import '../style/App.css'
-import lib from '../util/lib' 
+import {connect} from 'react-redux'
+import lib from '../util/lib'
+import {mapStateToProps} from '../util/ajax' 
+import {Link} from 'react-router-dom'
 
-const DifChefsError=()=>(
+const DifChefsError=(props)=>{
+    let pp;
+    if(Object.keys(props.cart.cart).length){
+    pp="/restaurant/"+props.cart.cart[`${Object.keys(props.cart.cart)[0]}`].chef
+    console.log(pp)
+    }
+    
+    
+    return (
     <div id="bigmenu">
         <div id="addmenu" className="vbo"> 
             <div id="err">
@@ -15,13 +26,14 @@ const DifChefsError=()=>(
                     {" "}
                         to proceed with a new chef or
                     {" "}
-                    <a className="clear_c" onClick={()=>lib.toggleShowdifcheferror()}>
+                    <Link to={pp} className="clear_c" onClick={()=>lib.toggleShowdifcheferror()}>
                         Continue Shopping
-                    </a>
+                    </Link>
                 </h4>
                     
             </div>
         </div>
     </div>
 )
-export default DifChefsError
+}
+export default connect (mapStateToProps) (DifChefsError)

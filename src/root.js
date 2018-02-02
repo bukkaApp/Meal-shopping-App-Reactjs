@@ -13,6 +13,7 @@ import Testo from './testo'
 import MobileSearch from './routes/MobileSearch'
 import CuisineRoute from './routes/CuisineRoute'
 import MenuRoute from './routes/MenuRoute'
+import Restaurant from './routes/Restaurant'
 
 
 const Root = ({ store }) => (
@@ -28,6 +29,7 @@ const Root = ({ store }) => (
 		<Route exact path="/Search" component={MobileSearch}/>
 		<Route exact path="/Cuisine" component={CuisineRoute}/>
 		<Route exact path="/Cuisine/Menupage" component={MenuRoute}/>
+		<Route exact path="/restaurant/:uid" component={Restaurant}/>
 		<Route component={Testo} />
 		
 	</Switch>
