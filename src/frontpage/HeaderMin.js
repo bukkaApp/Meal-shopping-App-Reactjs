@@ -26,7 +26,7 @@ class HeaderMin extends Component{
 		const receiptpath=this.props.page.restaurantPath
 		return(
 			<div id="head" className="myheader header-min header-small ab">
-				{(this.props.isrestaurant)?
+				{(this.props.page.isRestaurant)?
 					<Link to={receiptpath}>
 					<img 	src={ajx.logo} 
 							id="logo-min" 
@@ -40,7 +40,7 @@ class HeaderMin extends Component{
 								alt="logo"/>
 					</Link>
 				}
-				{(this.props.isrestaurant)?
+				{(this.props.page.isRestaurant)?
 					null:
 					<div className="search-box search-box-min search-loc">
 						<SimpleForm chefResult={this.props.chefResult}/>

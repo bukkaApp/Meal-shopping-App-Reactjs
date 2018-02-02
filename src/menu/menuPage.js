@@ -26,6 +26,7 @@ class menuPage extends Component{
 		<div 	className="menuCont" 
 				style={mystyle} >
 			{(!this.props.isrestaurant)?
+				(Object.keys(this.props.chef.chefAndCuisine).length>1)?
 				<div className="zip ipr">
 					
 					{
@@ -41,6 +42,7 @@ class menuPage extends Component{
 					)
 					}
 				</div>:
+				null:
 				null
 			}
 			<img 	src={this.props.chef.yourChef.profile_photo} 
@@ -126,6 +128,7 @@ class menuPage extends Component{
 				<MdMore className="buttn" id="more"/>
 			</h1>
 			{(!this.props.isrestaurant)?
+			 (Object.keys(this.props.chef.chefAndCuisine).length>1)?
 				<div className="vt">
 					<h5 className="tt">MORE</h5>
 					<div className="yyv">
@@ -157,6 +160,7 @@ class menuPage extends Component{
 					}
 					</div>
 				</div>:
+				null:
 				null
 			}
 		</div>

@@ -42,7 +42,7 @@ class headerStories extends Component{
 								alt="logo"/>
 					</Link>
 				}
-					{(this.props.isrestaurant)?
+					{(this.props.page.isRestaurant)?
 						null:
 						<div className="search-box search-box-min search">
 							<SimpleForm chefResult={this.props.chefResult}/>
