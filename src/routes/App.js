@@ -7,6 +7,7 @@ import {mapStateToProps} from '../util/ajax'
 import lib from '../util/lib'
 import HomePage from '../frontpage/HomePage'
 import { Redirect } from "react-router-dom"
+import First from '../frontpage/FirstPagePreloader'
 
 class App extends Component{
 	componentWillMount(){

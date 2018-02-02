@@ -84,7 +84,6 @@ export default{
     toggleShowReceipt:()=>storage.dispatch(show_receipt(storage.getState().page.showreceipt)),
 
     generateReceipt:(a)=>storage.dispatch(add_receipt(a)),
-
     isRestaurant(_){
         storage.dispatch(is_restaurant({
                                 isRestaurant:false,

@@ -792,10 +792,11 @@ display: -ms-flexbox;
     margin:0;
     width: 160px;
   }
-  .form-controli,#PlacesAutocomplete__root,.ebb,.bbd,.bbdaa{
+  .form-controli,#PlacesAutocomplete__root,.ebb,.bbd,.bbdaa,.lin{
     width:100%;
   }
-  .bbd,.bbdaa{
+  
+  .bbd,.lin,.bbdaa{
     margin-right: 0;
   }
   .fdp{

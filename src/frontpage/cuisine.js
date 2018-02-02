@@ -4,15 +4,24 @@ import '../style/App.css'
 import {connect} from 'react-redux'
 import ajx,{mapStateToProps} from '../util/ajax'
 import lib from '../util/lib'
+import { CSSTransitionGroup } from 'react-transition-group'
+
 
 class Stores extends Component {
-
     render () {
         return (
                 <div className="zn">
-                <h1>{this.props.address.Location}</h1>
+                <h1>Select your cuisine</h1>
+                <CSSTransitionGroup
+							transitionName="cuisine"
+							transitionAppear={true}
+							transitionAppearTimeout={1000}
+							transitionEnter={false}
+							transitionLeave={false}>
                 <div className="row kt">
                     {(Object.keys(this.props.chef.chefAndCuisine))?
+                        (Object.keys(this.props.chef.chefAndCuisine).length===1)?
+                        lib.updatechefbycuisine(Object.keys(this.props.chef.chefAndCuisine)[0]):
                         Object.keys(this.props.chef.chefAndCuisine).map((cui,key)=>
                         <div    className="col-sm-4 m" 
                                 key={key}>
@@ -21,6 +30,8 @@ class Stores extends Component {
                                     alt="foodimage"
                                     onClick={()=>lib.updatechefbycuisine(cui)}/>
                             <h5>{cui}</h5>
+                            <h5>{this.props.chef.chefAndCuisine[cui].length} vendor(s) currently online</h5>
+                            <p className="desc"></p>
                             <p>20-60 Mins</p>
                         </div>):
                         null
@@ -36,6 +47,7 @@ class Stores extends Component {
                                 null
                     }
                 </div>
+                </CSSTransitionGroup>
                 </div>
         );
         

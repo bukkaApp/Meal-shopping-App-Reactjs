@@ -124,6 +124,15 @@ cursor: pointer;
 	.menuCont>.row{
 		width:60%
 	}
+	.blka {
+		width: 75px;
+		height: 75px;
+		border: 2px solid #f69323;
+		margin-top: -1px;
+	}
+	.ipr{
+		height: 100px !important;
+	}
 }
 @media(max-width:767px){
 	.menuCont>.row{
@@ -143,4 +152,66 @@ cursor: pointer;
 		font-size: 8px;
 		line-height: 2em;
 	}*/
+}
+
+.vt {
+    width: 300px;
+    position: absolute;
+    left: 50px;
+    top: 0;
+    bottom: 0;
+    padding: 100px 0 20px 0;
+    background-color: rgba(255,255,255,1);
+    color: rgba(0,0,0,0.7);
+}
+
+h6.tt{
+
+	margin-top: 20px;
+
+}
+.yyv {
+    overflow-y: auto;
+    height: 335px;
+    margin-left: -150px;
+}
+.lkt{
+	padding-top: 20px;
+}
+
+h6.ttd{
+
+	margin-left: 52px;
+}
+.t{
+	display: block;
+	margin-left: 230px;
+    margin-top: -65px;
+}
+.ttm{
+	margin-left: 40px;
+}
+.ttn{
+	margin-left: 52px;
+}
+.blk {
+	padding: 2px;
+}
+.m{
+	margin-top: 10px;
+}
+.sop{
+	border: none;
+}
+.sd{
+	margin-top: -27px;
+	margin-left: 96px;
+	font-size: 12px;
+	border-color: transparent;
+}
+.sd:active{
+	border: none;
+}
+.sd:hover{
+	cursor: pointer;
 }
