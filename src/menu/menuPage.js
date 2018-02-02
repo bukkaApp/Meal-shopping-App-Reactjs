@@ -87,8 +87,10 @@ class menuPage extends Component {
 	
 		<div 	className="menuCont" 
 				style={mystyle} >
-			{(!this.props.isrestaurant)?
+			{	(!this.props.isrestaurant)?
 				(Object.keys(this.props.chef.chefAndCuisine).length>1)?
+				(this.props.chef.chefAndCuisine[cui].length===1)?
+				null:
 				<div className="zip ipr">
 					
 					{

@@ -153,7 +153,6 @@ cursor: pointer;
 		line-height: 2em;
 	}*/
 }
-
 .vt {
     width: 300px;
     position: absolute;
@@ -189,7 +188,9 @@ h6.ttd{
     margin-top: -65px;
 }
 .ttm{
-	margin-left: 40px;
+	/*margin-left: 40px;*/
+	margin-left: 54px;
+	font-weight: bold;
 }
 .ttn{
 	margin-left: 52px;
