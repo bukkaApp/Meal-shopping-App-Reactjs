@@ -20,6 +20,7 @@ export default{
     Continental:'https://res.cloudinary.com/www-mybukka-com/image/upload/q_100/v1516410185/image1_kcf2c3.jpg',
     Vegetarian:'https://res.cloudinary.com/www-mybukka-com/image/upload/q_100/v1516410185/image2_q3lx7n.jpg',
     GMapApi:"https://maps.googleapis.com/maps/api/js?key=AIzaSyBjt71qZwbmnRSpiTNC9KELMVQqKT6tV_M=3.exp&libraries=geometry,drawing",
+    smsApi:'https://chef.mybukka.com/api/v1/bukka/sms'
 }
 
 export const  mapStateToProps=(state)=>(state)

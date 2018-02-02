@@ -14,6 +14,7 @@ import MobileSearch from './routes/MobileSearch'
 import CuisineRoute from './routes/CuisineRoute'
 import MenuRoute from './routes/MenuRoute'
 import Restaurant from './routes/Restaurant'
+import OrderError from './frontpage/orderError'
 
 
 const Root = ({ store }) => (

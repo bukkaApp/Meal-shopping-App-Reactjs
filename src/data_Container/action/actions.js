@@ -67,6 +67,10 @@ export const apartment_info=(_)=>({
 	type:'APARTMENT',
 	payload:_
 })
+export const order_error=(_)=>({
+	type:"ORDER_ERROR_PAGE",
+	payload:_
+})
 export const delivery_info=(_)=>({
 	type:'DELIVERY_NOTE',
 	payload:_

@@ -10,6 +10,8 @@ import Footer from '../frontpage/Footer'
 import Receipt from './redirectToReceipt'
 import OptionLeaf from '../frontpage/OptionLeaf'
 import {mapStateToProps} from '../util/ajax'
+import Nochefavailable from '../frontpage/nochef'
+import OrderError from '../frontpage/orderError'
 
 
 const Checking =(props)=>{
@@ -30,6 +32,11 @@ const Checking =(props)=>{
 				</div>
 				<OptionLeaf/>											
 				<Footer/>
+				{
+					(props.page.showordererrorpage)?
+						<OrderError error={props.user.orderstatus.message}/>:
+						null
+				}
 				
 			</div>
 		)

@@ -14,7 +14,6 @@ class App extends Component{
 			lib.onRefresh()
 			console.log(this.props)
 		}
-		lib.sendMessage()
 	}
 	componentDidMount(){
 		lib.previouspath(this.props.location.pathname)

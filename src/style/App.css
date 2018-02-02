@@ -427,6 +427,16 @@ margin-left: 20px;
 .m-cart-not-signed-in:hover .m-cart-items,.m-cart-items:hover{
   display: inline-block;
 }
+.qa{
+  position:relative
+}
+.qw{
+  position: absolute;
+  top: -24px;
+  right: -15px;
+  color:#9c1c26 ;
+  cursor: pointer;
+}
 .ijk{
   padding: 10px 20px;
   position: fixed;

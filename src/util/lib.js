@@ -32,10 +32,12 @@ import {	fetch_address,
             prev_path,
             is_restaurant,
             apartment_info,
-            delivery_info          } from '../data_Container/action/actions'
+            delivery_info,
+            order_error         } from '../data_Container/action/actions'
 import storage from '../data_Container/store'
 import axios from 'axios'
 import ajx from './ajax'
+import request from 'request'
 
 
 
@@ -73,6 +75,10 @@ export default{
         console.log(storage.getState().page.showforgotpasswordpage)
         storage.dispatch(showforgotpassword(storage.getState().page.showforgotpasswordpage))
         console.log(storage.getState().page.showforgotpasswordpage)
+        this.noscroll()
+    },
+    toggleshoworder_error(){
+        storage.dispatch(order_error(storage.getState().page.showordererrorpage))
         this.noscroll()
     },
     toggleShowReceipt:()=>storage.dispatch(show_receipt(storage.getState().page.showreceipt)),
@@ -379,6 +385,8 @@ export default{
         let token=storage.getState().user.user.token,
         chefUid=storage.getState().chef.yourChef.uid,
         transaction=storage.getState().user.transaction,
+        chefName = storage.getState().chef.yourChef.first_name + " " + storage.getState().chef.yourChef.last_name,
+        chefPhoneNumber = storage.getState().chef.yourChef.phone_number,
         p=transaction.map( (_)=>
                             {return   axios({ 
                                                 method: 'post',
@@ -388,8 +396,14 @@ export default{
                                                                             })
                                                                                 }  )
         storage.dispatch(order(p))
-        .then((res)=>{console.log(res);this.createReceipt();storage.dispatch(cleartransaction())})
-        .catch((err)=>console.log("please try again",err))
+        .then((res)=>{
+            console.log(res);
+            this.sendMessage(chefName,chefPhoneNumber)
+            this.createReceipt();
+            storage.dispatch(cleartransaction())})
+        .catch((err)=>{
+                    console.log("please try again",err);
+                    this.toggleshoworder_error()        })
       },
     timewillpass(){
         var k=Object.keys(storage.getState().cart.cart),
@@ -455,7 +469,7 @@ export default{
         _b.push(_v)
         storage.dispatch(transaction(_b))
     },
-    processtransact(){
+    async processtransact(){
         var chefUid = storage.getState().chef.yourChef.uid,
         customerUid = storage.getState().user.user.uid,
         customerName = storage.getState().user.user.first_name + " " + storage.getState().user.user.last_name,
@@ -467,6 +481,7 @@ export default{
         customerAddress = storage.getState().address.Location,
         chefImage = storage.getState().chef.yourChef.profile_photo,
         customerPhoneNumber = storage.getState().user.user.mobile,
+        chefPhoneNumber = storage.getState().chef.yourChef.phone_number,
         payment_option = "card",
         items=Object.keys(storage.getState().cart.cart);
         var coupon=(coupon_used)? 500:0;
@@ -499,7 +514,7 @@ export default{
                                 additionalInfo,
                                 charge_customer,
                                 change_amount
-                                                        }   ]
+                                                        }  ]
                 this.newtransact(transaction)
                                                                                         }   )
         var adlo=storage.getState().address,
@@ -609,25 +624,23 @@ export default{
             _v.classList.add('zzk')
         }
     },
-    sendMessage(){
-        const url="http://login.betasms.com/api/"
-        fetch(url,{
-            method:"POST",
-            headers:{
-                'Access-Control-Allow-Origin':'*',
-                accept:"application/json",
-                //apikey:"170de2d4b18892e18f8f14401f6c041f46e14d7d3b407444def26e2d4ee40165"
-            },
-            body:JSON.stringify({
-                username:'ibkadeniyi@gmail.com',
-                password:'chelseafc',
-                message:'test',
-                mobiles:'2348038165991',
-                sender:'john',
-            })
-        })
-        .then((res)=>console.log(res.json()))
-        .catch((err)=>console.log("error",err))
+    sendMessage(name,number){
+        var message=`Hello ${name},You have a new order.Please visit https://chef.mybukka.com to accept order(s)` 
+        number="234"+number.substring(1,10)
+        number.trim()
+
+        var options = { method: 'POST',
+        url: ajx.smsApi,
+        headers: 
+        { 'Content-Type': 'application/x-www-form-urlencoded' },
+        form: { message, number } };
+
+        request(options, function (error, response, body) {
+        if (error) console.log(error);
+
+        console.log(body);
+        });
+           
     },
     async onRefresh(){
        /* const _=this
