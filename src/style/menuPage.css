@@ -124,6 +124,15 @@ cursor: pointer;
 	.menuCont>.row{
 		width:60%
 	}
+	.blka {
+		width: 75px;
+		height: 75px;
+		border: 2px solid #f69323;
+		margin-top: -1px;
+	}
+	.ipr{
+		height: 100px !important;
+	}
 }
 @media(max-width:767px){
 	.menuCont>.row{
@@ -180,11 +189,29 @@ h6.ttd{
     margin-top: -65px;
 }
 .ttm{
-	margin-left: 54px;
+	margin-left: 40px;
 }
 .ttn{
 	margin-left: 52px;
 }
 .blk {
 	padding: 2px;
+}
+.m{
+	margin-top: 10px;
+}
+.sop{
+	border: none;
+}
+.sd{
+	margin-top: -27px;
+	margin-left: 96px;
+	font-size: 12px;
+	border-color: transparent;
+}
+.sd:active{
+	border: none;
+}
+.sd:hover{
+	cursor: pointer;
 }

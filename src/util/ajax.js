@@ -19,9 +19,13 @@ export default{
     verve:"https://res.cloudinary.com/bukka/image/upload/v1500737722/app/verve.png",
     order_history:"https://chef.mybukka.com/api/v1/bukka/customer/orders/",
     forgot_password:"https://mybukka.com/api/v1/bukka/forgotPassword",
-    African:'https://res.cloudinary.com/www-mybukka-com/image/upload/v1516410182/image_us5rnm.jpg',
-    Continental:'https://res.cloudinary.com/www-mybukka-com/image/upload/q_100/v1516410185/image1_kcf2c3.jpg',
-    Vegetarian:'https://res.cloudinary.com/www-mybukka-com/image/upload/q_100/v1516410185/image2_q3lx7n.jpg',
+    African:'https://res.cloudinary.com/www-mybukka-com/image/upload/t_media_lib_thumb/v1517495561/african_z3jqmb.jpg',
+    Continental:'https://res.cloudinary.com/www-mybukka-com/image/upload/v1517495615/continental_sr7ftd.jpg',
+    Vegetarian:'https://res.cloudinary.com/www-mybukka-com/image/upload/t_media_lib_thumb/v1517495643/healthy_dvijen.jpg',
+    'Home made': 'https://res.cloudinary.com/www-mybukka-com/image/upload/v1517495673/Homemade_ybpbma.jpg',
+    Chinese: 'https://res.cloudinary.com/www-mybukka-com/image/upload/t_media_lib_thumb/v1517495582/chinese_yzt2ur.jpg',
+    SmallChops: 'https://res.cloudinary.com/www-mybukka-com/image/upload/t_media_lib_thumb/v1517495705/Productimage---Small---Chops_tr9bck.jpg',
+    Grills: 'https://res.cloudinary.com/www-mybukka-com/image/upload/t_media_lib_thumb/v1517542986/andrew-itaga-145332_d8bamm.jpg',
     GMapApi:"https://maps.googleapis.com/maps/api/js?key=AIzaSyBjt71qZwbmnRSpiTNC9KELMVQqKT6tV_M=3.exp&libraries=geometry,drawing",
 }
 

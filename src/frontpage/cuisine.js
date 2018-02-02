@@ -8,11 +8,12 @@ import { CSSTransitionGroup } from 'react-transition-group'
 
 
 class Stores extends Component {
+    
  
     render () {
         return (
                 <div className="zn">
-                <h1>{this.props.address.Location}</h1>
+                <h1>Select your cuisine</h1>
                 <CSSTransitionGroup
 							transitionName="cuisine"
 							transitionAppear={true}
@@ -31,6 +32,8 @@ class Stores extends Component {
                                     alt="foodimage"
                                     onClick={()=>lib.updatechefbycuisine(cui)}/>
                             <h5>{cui}</h5>
+                            <h5>{this.props.chef.chefAndCuisine[cui].length} vendor(s) currently online</h5>
+                            <p className="desc"></p>
                             <p>20-60 Mins</p>
                         </div>):
                         null
