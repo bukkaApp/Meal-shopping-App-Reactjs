@@ -11,7 +11,7 @@ import { Redirect } from "react-router-dom"
 
 const ReceiptRoute=(props)=>{
 return(
-    (!props.chef.yourChef.fetched_chefsInYourArea)?
+    (!Object.keys(props.chef.yourChef).length)?
     <Redirect to="/"/>:
     <div className="devi">
         <HeaderCheckout  />
