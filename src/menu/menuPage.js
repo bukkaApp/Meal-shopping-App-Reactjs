@@ -13,7 +13,8 @@ class menuPage extends Component {
 			isSorted:false,
 			SortedChefs:null,
 			isRatingSorted:false,
-			RatingSortedChefs:null
+			RatingSortedChefs:null,
+			cuisine:null
 		}
 		this.rearrangedist=this.rearrangedist.bind(this)
 		this.rearrangerate=this.rearrangerate.bind(this)
@@ -32,7 +33,7 @@ class menuPage extends Component {
 
 		(!this.state.isSorted)?
 		this.setState((prevState,props)=>({
-			SortedChefs:props.chef.chefAndCuisine[`${props.chef.currentCuisine}`].sort((a,b)=>
+			SortedChefs:this.props.chef.chefAndCuisine[`${this.props.chef.currentCuisine}`].sort((a,b)=>
 			a.distance-b.distance)
 		})):
 		this.setState((prevState,props)=>({
@@ -42,17 +43,16 @@ class menuPage extends Component {
 		this.setState((prevState,props)=>({
 			isSorted:!this.state.isSorted,
 			isRatingSorted:false,
-			RatingSortedChefs:null
+			RatingSortedChefs:null,
+			cuisine:this.props.chef.currentCuisine
 		}))
-		console.log(this.state)
-		console.log(this.props.chef.chefAndCuisine[`${this.props.chef.currentCuisine}`])
 	}
 	rearrangerate(){
 		//await console.log(this.props.chef.chefAndCuisine[`${this.props.chef.currentCuisine}`])
 		
 		(!this.state.isRatingSorted)?
 		this.setState((prevState,props)=>({
-			RatingSortedChefs:props.chef.chefAndCuisine[`${props.chef.currentCuisine}`].sort((a,b)=>
+			RatingSortedChefs:this.props.chef.chefAndCuisine[`${this.props.chef.currentCuisine}`].sort((a,b)=>
 			b.rating_overall-a.rating_overall)
 		})):
 		this.setState((prevState,props)=>({
@@ -62,17 +62,26 @@ class menuPage extends Component {
 		this.setState((prevState,props)=>({
 			isRatingSorted:!this.state.isRatingSorted,
 			isSorted:false,
-			SortedChefs:null
+			SortedChefs:null,
+			cuisine:this.props.chef.currentCuisine
 		}))
-
-		console.log(this.state)
-		console.log(this.props.chef.chefAndCuisine[`${this.props.chef.currentCuisine}`])
 	}
 	componentWillReceiveProps(nextProps){
-		if(this.props!==nextProps){
+		/*if(this.props!==nextProps){
 			this.props=nextProps
+		}*/
+		if(this.state.isSorted||this.state.isRatingSorted){
+			if(this.state.cuisine!==nextProps.chef.currentCuisine)
+			this.setState((prevState,props)=>({
+				isSorted:false,
+				SortedChefs:null,
+				isRatingSorted:false,
+				RatingSortedChefs:null,
+				cuisine:null
+			}))
 		}
 	}
+	
 
 	render(){
 	const cui=this.props.chef.currentCuisine
@@ -200,7 +209,8 @@ class menuPage extends Component {
 
 					<div className="sd">
 							<select className="sd"
-									onChange={this.handleSelect}>
+									onChange={this.handleSelect}
+									>
 								<option className="sop" value="Sort">Sort by...</option>
 								<option className="sop" value="Distance" >Distance</option>
 								<option className="sop" value="Ratings" >Ratings</option>
