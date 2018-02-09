@@ -35,7 +35,7 @@ export default{
 export const cuisineDescription={
     African:"Eat delicious authentic African recipes from restaurants around you.",
     Continental: "Eat delicious authentic European recipes from restaurants around you",
-    Vegetarian: "Eat delicious healthy food like salad, quinoa and so much more from restaurants around you.",
+    Vegetarian: "Eat delicious healthy food like salad from restaurants around you.",
     'Home made': "Eat delicious authentic homemade food, from chefs who cook from home.",
     Chinese: "Eat delicious authentic Chinese recipes from restaurants around you.",
     Grills: "Eat delicious authentic grilled food from restaurants around you.",
