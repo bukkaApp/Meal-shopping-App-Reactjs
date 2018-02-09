@@ -153,7 +153,10 @@
     color:rgba(0,0,0,0.02);
     cursor:pointer;
 }
-
+.time{
+    margin-top: 15px;
+    color: #9c1c26;
+}
 @media(max-width:1025px){
     #addmenu{
         padding-bottom: 45%;
@@ -194,4 +197,17 @@
     .first{
         display: none !important;
     }
+}
+
+.share{
+    display: flex;
+    flex-direction: row;
+}
+.fb{
+    padding-right: 10px;
+
+}
+
+.twt{
+    padding-right: 10px;
 }

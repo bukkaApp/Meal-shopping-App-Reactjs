@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import '../style/cuisine.css'
 import '../style/App.css'
 import {connect} from 'react-redux'
-import ajx,{mapStateToProps} from '../util/ajax'
+import ajx,{mapStateToProps,cuisineDescription} from '../util/ajax'
 import lib from '../util/lib'
-import { CSSTransitionGroup } from 'react-transition-group'
+
 
 
 class Stores extends Component {
@@ -12,12 +12,7 @@ class Stores extends Component {
         return (
                 <div className="zn">
                 <h1>Select your cuisine</h1>
-                <CSSTransitionGroup
-							transitionName="cuisine"
-							transitionAppear={true}
-							transitionAppearTimeout={1000}
-							transitionEnter={false}
-							transitionLeave={false}>
+                
                 <div className="row kt">
                     {(Object.keys(this.props.chef.chefAndCuisine))?
                         (Object.keys(this.props.chef.chefAndCuisine).length===1)?
@@ -32,7 +27,7 @@ class Stores extends Component {
                             <h5>{cui}</h5>
                             <h5>{this.props.chef.chefAndCuisine[cui].length} vendor(s) currently online</h5>
                             <p className="desc"></p>
-                            <p>20-60 Mins</p>
+                            <p>{cuisineDescription[cui]||"Description not available"}</p>
                         </div>):
                         null
                     }
@@ -47,7 +42,7 @@ class Stores extends Component {
                                 null
                     }
                 </div>
-                </CSSTransitionGroup>
+               
                 </div>
         );
         

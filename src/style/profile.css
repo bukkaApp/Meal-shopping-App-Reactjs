@@ -28,10 +28,10 @@
 	background-color: #9c1c26;
 	color:white;
 }
-.l-right-padding{
+/*.l-right-padding{
 	padding-right:20%;
 	padding-left: 10%;
-}
+}*/
 
 .l-grey-background{
 	background-color: #e1e1e1;
@@ -136,11 +136,12 @@
 	padding-left:10%;
 }
 .m-equalwidth{
-	width:40%;
+	width:70%;
 	display: inline-block;
 }
+
 .m-header-info{
-	padding-left: 35%;
+	
 }
 .m-header-info>button{
 	display: block;
@@ -168,4 +169,49 @@
 }
 .m-content-holder h4{
 border-bottom: 1px solid #e1e1e1;
+}
+@media(max-width:745px){
+	#menuItem-three{
+		padding-top: 0px;
+	}
+}
+@media(max-width:732px){
+	#menuItem-four{
+		padding-top: 0px;
+	}
+}
+@media(max-width:543px){
+	#menuItem-two{
+		padding-top: 0px;
+	}
+	.l-menu{
+		padding-left: 2px;
+	}
+}
+@media(max-width:722px){
+	#FirstName, #LastName, #MobileNumber, #email, #ConfirmPassword, #newPassword{
+		width: 95%;
+	}
+}
+@media(max-width:545px){
+	.m-content-holder{
+		padding-left: 20px;
+	}
+}
+
+@media(max-width:414px){
+	#menuItem-two{
+		padding-left: 0px;
+	}
+	#menuItem-three{
+		padding-left: 0px;
+	}
+	#menuItem-four{
+		padding-left: 0px;
+	}
+}
+@media(max-width:410px){
+	.m-table-style{
+		margin-left: -23px;
+	}
 }

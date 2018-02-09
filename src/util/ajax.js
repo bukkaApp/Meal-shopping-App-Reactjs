@@ -16,15 +16,30 @@ export default{
     verve:"https://res.cloudinary.com/bukka/image/upload/v1500737722/app/verve.png",
     order_history:"https://chef.mybukka.com/api/v1/bukka/customer/orders/",
     forgot_password:"https://mybukka.com/api/v1/bukka/forgotPassword",
-    African:'https://res.cloudinary.com/www-mybukka-com/image/upload/t_media_lib_thumb/v1517495561/african_z3jqmb.jpg',
-    Continental:'https://res.cloudinary.com/www-mybukka-com/image/upload/v1517495615/continental_sr7ftd.jpg',
-    Vegetarian:'https://res.cloudinary.com/www-mybukka-com/image/upload/t_media_lib_thumb/v1517495643/healthy_dvijen.jpg',
-    'Home made': 'https://res.cloudinary.com/www-mybukka-com/image/upload/v1517495673/Homemade_ybpbma.jpg',
-    Chinese: 'https://res.cloudinary.com/www-mybukka-com/image/upload/t_media_lib_thumb/v1517495582/chinese_yzt2ur.jpg',
-    SmallChops: 'https://res.cloudinary.com/www-mybukka-com/image/upload/t_media_lib_thumb/v1517495705/Productimage---Small---Chops_tr9bck.jpg',
-    Grills: 'https://res.cloudinary.com/www-mybukka-com/image/upload/t_media_lib_thumb/v1517542986/andrew-itaga-145332_d8bamm.jpg',
+    African:'http://res.cloudinary.com/www-mybukka-com/image/upload/v1517495561/african_z3jqmb.jpg',
+    Continental:'http://res.cloudinary.com/www-mybukka-com/image/upload/v1517495615/continental_sr7ftd.jpg',
+    Vegetarian:'http://res.cloudinary.com/www-mybukka-com/image/upload/v1517495643/healthy_dvijen.jpg',
+    'Home made': 'http://res.cloudinary.com/www-mybukka-com/image/upload/v1517495673/Homemade_ybpbma.jpg',
+    Chinese: 'http://res.cloudinary.com/www-mybukka-com/image/upload/v1517495582/chinese_yzt2ur.jpg',
+    'Finger food': 'http://res.cloudinary.com/www-mybukka-com/image/upload/v1517495705/Productimage---Small---Chops_tr9bck.jpg',
+    Grills: 'http://res.cloudinary.com/www-mybukka-com/image/upload/v1517542876/andrew-itaga-145332_vstr4g.jpg',
+    'Fast food': 'http://res.cloudinary.com/www-mybukka-com/image/upload/v1517936047/niklas-rhose-14304_iuneus.jpg',
     GMapApi:"https://maps.googleapis.com/maps/api/js?key=AIzaSyBjt71qZwbmnRSpiTNC9KELMVQqKT6tV_M=3.exp&libraries=geometry,drawing",
-    smsApi:'https://chef.mybukka.com/api/v1/bukka/sms'
+    smsApi:'https://chef.mybukka.com/api/v1/bukka/sms',
+    edit_user: 'https://chef.mybukka.com/api/v1/bukka/customer/',
+    mobileimage: 'http://res.cloudinary.com/www-mybukka-com/image/upload/v1517827796/mobile_diagonal_dakom9.png',
+    newapplelogo: 'http://res.cloudinary.com/www-mybukka-com/image/upload/v1517827755/apple-logo_om689r.png',
+    newandroidlogo: 'http://res.cloudinary.com/www-mybukka-com/image/upload/v1517827768/android_k6jvri.png'
 }
 
+export const cuisineDescription={
+    African:"Eat delicious authentic African recipes from restaurants around you.",
+    Continental: "Eat delicious authentic European recipes from restaurants around you",
+    Vegetarian: "Eat delicious healthy food like salad, quinoa and so much more from restaurants around you.",
+    'Home made': "Eat delicious authentic homemade food, from chefs who cook from home.",
+    Chinese: "Eat delicious authentic Chinese recipes from restaurants around you.",
+    Grills: "Eat delicious authentic grilled food from restaurants around you.",
+    'Fast food': "Eat delicious food from fast food from restaurants around you.",
+    'Finger food': "Eat delicious finger food from restaurants around you."
+}
 export const  mapStateToProps=(state)=>(state)

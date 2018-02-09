@@ -22,7 +22,12 @@ const initialstate={
 		done:false,
 		fetching:false,
 		fetched:false
-	}
+	},
+	/*edit_user:{
+		error:null,
+		updating_user_update:false,
+		updated_user_update:false
+	}*/
 };
 
 const identifyUser=(state=initialstate,action)=>{
@@ -174,6 +179,26 @@ const identifyUser=(state=initialstate,action)=>{
 					error:null	}
 			
 		}
+
+		/*case 'EDIT_USER_INFO_PENDING':{
+			return{ ...state,
+					error: null,
+					updating_user_update:false,
+					updated_user_update:false}
+		}
+		case 'EDIT_USER_INFO_FUFILLED':{
+			return{ ...state,
+					error:null,
+					updating_user_update:false,
+					updated_user_update:action.payload}
+		}
+		case 'EDIT_USER_INFO_REJECTED':{
+			return{ ...state,
+					updating_user_update:false,
+					updated_user_update:false,
+					error:action.payload}
+		}*/
+
 		case 'SIGN_OUT':{
 			return{...initialstate}
 			

@@ -6,7 +6,17 @@ import Mdadd from 'react-icons/lib/md/add'
 import {connect} from 'react-redux'
 import lib from '../util/lib' 
 import {mapStateToProps} from '../util/ajax'
-
+import {
+    FacebookShareButton,
+    TwitterShareButton,
+  } from 'react-share'
+  import {
+    FacebookIcon,
+    TwitterIcon,
+  } from 'react-share'
+import googl from 'node-googl'
+  
+  
 class addmenu extends Component{
     constructor(props) {
 		super(props);
@@ -17,13 +27,53 @@ class addmenu extends Component{
             unitcost:parseInt(this.props.menuinview.menuinview.price,10),
             defaultQuantity:1,
             itemTotal:parseInt(this.props.menuinview.menuinview.price,10),
-            chefinstruction:''
+            chefinstruction:'',
+            _shortUrl:null,
+            _shortUrlfetched:false
 		}
         this.addToCart=this.addToCart.bind(this);
         this.increaseNumberOfItem=this.increaseNumberOfItem.bind(this);
         this.reduceNumberOfItem=this.reduceNumberOfItem.bind(this);
         this.addchefinstructions=this.addchefinstructions.bind(this)
+        this.shortURL=this.shortURL.bind(this)
     }
+    //shorten yourchef link 
+    shortURL(){
+        
+        
+       /* googl.setKey('AIzaSyC7pSI7-ZNYURV92F7WqZamiYobmijSpyQ')
+         
+        
+        googl.getKey();
+         console.log("fetching")
+       
+        googl.shorten('chef.mybukka.com')
+            .then(function (shortUrl) {
+                console.log("Done!",shortUrl);
+            })
+            .catch(function (err) {
+                console.error("ERROR OOO!",err.message);
+            });*/
+            let url='http://mybukka.com/restaurant/'+this.props.menuinview.menuinview.chefuid
+
+            this.setState(()=>({
+                _shortUrl:null,
+                _shortUrlfetched:false}))
+                
+            googl.shorten(url, 'AIzaSyC7pSI7-ZNYURV92F7WqZamiYobmijSpyQ', 
+            (err, shortenedUrl)=>{
+                if (err) {
+                    throw err;
+                }
+                
+                console.log('Shortened URL: ' + shortenedUrl);
+                this.setState(()=>({
+                    _shortUrl:shortenedUrl,
+                    _shortUrlfetched:true}))
+                    console.log(this.state)
+            });
+      }
+    
     //add chef instruction
         async addchefinstructions(e){
             e.stopPropagation()
@@ -118,6 +168,12 @@ class addmenu extends Component{
                 }
                 lib.addmenu()
         }
+
+        componentDidMount(){
+            console.log('you called')
+            this.shortURL()
+        }
+
         componentWillReceiveProps(nextProps){
             if(this.props!==nextProps){
                 this.props=nextProps
@@ -141,6 +197,30 @@ class addmenu extends Component{
                     <h5>
                         {this.props.menuinview.menuinview.desc}
                     </h5>
+                    <h5 className="time">Expected time of delivery is {this.props.menuinview.menuinview.hour} hour {this.props.menuinview.menuinview.min}  mins</h5>
+                    {(this.state._shortUrlfetched)?
+                            <div className="share">
+                            <FacebookShareButton
+                                url={this.state._shortUrl}
+                                quote={'You can find '+ this.props.menuinview.menuinview.menu + ' and many more meals on the the link below'}
+                                
+                                className="fb">
+                                    <FacebookIcon
+                                        size={32}
+                                        round />
+                            </FacebookShareButton>
+
+                            <TwitterShareButton
+                                url={this.state._shortUrl}
+                                title= {'You can find '+ this.props.menuinview.menuinview.menu + ' and many more meals on the the link below'}
+                                className="twt">
+                                <TwitterIcon
+                                size={32}
+                                round />
+                            </TwitterShareButton>
+                            </div>:
+                            null
+                }
                 </div>
                 <div id="instructions">
                     <h4>Special Instructions</h4>
@@ -179,3 +259,15 @@ class addmenu extends Component{
 }
 
 export default connect(mapStateToProps)(addmenu)
+
+/*<FacebookShareButton url={'http://localhost:3000/restaurant/'+this.props.menuinview.menuinview.chefuid}
+                            quote='To try this me. Click on the link'>
+                            <FacebookIcon className="fb" size={32} round={true} />
+                        </FacebookShareButton>
+                        
+                        
+                        <TwitterShareButton url={'http://localhost:3000/restaurant/'+this.props.menuinview.menuinview.chefuid}  
+                            title='Find this meal on the link below...'
+                            >
+                            <TwitterIcon className="twt" size={32} round={true} />
+                        </TwitterShareButton>*/
