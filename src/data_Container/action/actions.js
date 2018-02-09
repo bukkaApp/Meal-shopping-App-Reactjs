@@ -6,6 +6,11 @@ export const forgot_password=(_)=>({
 	type:"FORGOT_PASSWORD",
 	payload:axios.post(ajx.forgot_password,{_})
 })
+//update user info
+/*export const edit_user=(uid)=>({
+	type:"EDIT_USER_INFO",
+	payload:axios.post(ajx.edit_user+uid)
+})*/
 //sign in
 export const identify_user=(email,password)=>({
 	type:'IDENTIFYING_USER',

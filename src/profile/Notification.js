@@ -12,7 +12,7 @@ export default class notification extends Component{
 				<div className="col-md-8 m-content-holder">
 					<h4>Email Preferences</h4>
 					<h5 className="m-equalwidth">Subcribe to email Notifications</h5>
-					<div className="m-equalwidth">
+					<div className="m-equal">
 						<button>Yes Please</button>
 						<button>No thanks</button>
 					</div>

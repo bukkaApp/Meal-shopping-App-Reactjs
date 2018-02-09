@@ -30,9 +30,20 @@
     <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwMIvvsLFQGgOjjcYW2o3pi_tMlJpVpQc&libraries=places"></script>-->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjt71qZwbmnRSpiTNC9KELMVQqKT6tV_M&v=3.exp&libraries=geometry,drawing,places"></script>
     <title>My Bukka</title>
+    
   </head>
   <body>
-    <div id="board"></div>
+    <div id="board">
+      <!--<script>
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            $("#board").html("latitude: " + position.coords.latitude + "<br>longitude: " + position.coords.longitude);
+          });
+        }
+        </script>-->
+    </div>
+
+    
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -43,5 +54,30 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!-- Start of Async Drift Code    Bukka  -->
+    <script>
+        ! function() {
+          var t;
+          if (t = window.driftt = window.drift = window.driftt || [], !t.init) return t.invoked ? void(window.console && console.error && console.error("Drift snippet included twice.")) : (t.invoked = !0,
+            t.methods = ["identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on"],
+            t.factory = function(e) {
+              return function() {
+                var n;
+                return n = Array.prototype.slice.call(arguments), n.unshift(e), t.push(n), t;
+              };
+            }, t.methods.forEach(function(e) {
+              t[e] = t.factory(e);
+            }), t.load = function(t) {
+              var e, n, o, i;
+              e = 3e5, i = Math.ceil(new Date() / e) * e, o = document.createElement("script"),
+                o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + i + "/" + t + ".js",
+                n = document.getElementsByTagName("script")[0], n.parentNode.insertBefore(o, n);
+            });
+        }();
+        drift.SNIPPET_VERSION = '0.3.1';
+        drift.load('8vi98sautzyt');
+      
+  </script>
+  <!-- End of Async Drift Code -->
   </body>
 </html>

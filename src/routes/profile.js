@@ -29,7 +29,7 @@ import {mapStateToProps} from '../util/ajax'
 					onClick={(e)=>lib.showorderhistory(e)}>
 					Order History
 				</li>
-				<li className="l-menu-item" 
+				<li className="l-menu-item payment" 
 					data-key="menuItem-three" 
 					id="menuItem-three" 
 					onClick={(e)=>lib.showpaymentinfo(e)} >

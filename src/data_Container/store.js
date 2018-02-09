@@ -26,7 +26,7 @@ store.subscribe(throttle(()=>{
                         },
                 chef:{
                         ...initialstatechefs,
-                        currentCuisine:store.getState().chef.currentCuisine,
+                        //currentCuisine:store.getState().chef.currentCuisine,
                         first_search_completed:store.getState().chef.first_search_completed
                     },
                 cart:store.getState().cart,

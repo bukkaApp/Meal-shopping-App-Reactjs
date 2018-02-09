@@ -26,6 +26,7 @@ import {	fetch_address,
             showDifChefsError,
             delete_cart,
             forgot_password,
+            edit_user,
             showforgotpassword,
             clear_receipt,
             showfirstpageloader,
@@ -611,6 +612,23 @@ export default{
         storage.dispatch(forgot_password(_))
         .then(()=>this.toggleshowforgotpassword())
         .catch(e=>console.log(e))
+    },
+    edit_user(_){
+        _.preventDefault()
+        const url=ajx.edit_user+storage.getState().user.user.uid
+        console.log("starting!!")
+        fetch(url,{
+            method:'POST',
+            body:{
+                first_name:'john',
+                last_name:'john',
+                phonenumber:'08144194590',
+                address:"address",
+                email:'dummy@gmail.com'
+            }
+        })
+        .then((res)=>console.log(res.json()))
+        .catch((e)=>console.log(e))
     },
     forgotPasswordfromSignin(){
         this.toggleSignin()

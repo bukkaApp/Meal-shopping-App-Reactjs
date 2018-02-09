@@ -19,7 +19,8 @@ const menuItems =(props)=>{
 			price:e.currentTarget.dataset.price,
 			quantity:e.currentTarget.dataset.quantity,
 			visibility:e.currentTarget.dataset.visibility,
-			image:e.currentTarget.dataset.image
+			image:e.currentTarget.dataset.image,
+			chefuid:props.chef.yourChef.uid
 		}
 		lib.addItem(menu)
 	}

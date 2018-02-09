@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import '../style/profile.css';
+import lib from '../util/lib';
+import {mapStateToProps} from '../util/ajax';
+import {connect} from 'react-redux';
 
 export default class basicinformation extends Component{
 
@@ -14,12 +17,12 @@ export default class basicinformation extends Component{
 					    <input type="file" accept="image/*" className="profile-photo-selector"/>
 					</div>
 				</div>
-				<form className="col-md-8 input-holder m-right" autocomplete="on">
+				<form className="col-md-8 input-holder m-right" autoComplete="on">
 					<input placeholder="First Name" type="text" id="FirstName"/>
 					<input placeholder="Last Name" type="text" id="LastName"/>
 					<input placeholder="Mobile Number" type="tel" id="MobileNumber"/>
 					<input placeholder="Email" type="email" id="email"/>
-					<button id="update-profile">Update Profile</button>
+					<button id="update-profile" onClick={lib.edit_user}>Update Profile</button>
 					<input placeholder="Enter Current Password" type="password" id="oldPassword"/>
 					<input placeholder="Enter New Password" type="password" id="newPassword"/>
 					<input placeholder="Confirm Password" type="password" id="ConfirmPassword"/>

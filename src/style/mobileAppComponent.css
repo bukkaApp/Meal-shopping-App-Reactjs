@@ -110,3 +110,62 @@
 		top: -185px;
 	}
 }
+
+.phoneimage{
+	width: 75%;
+    margin-top: -200px;
+    margin-left: 195px;
+}
+.words > h3 {
+	font-size: 20px;
+    margin-top: -105px;
+    
+}
+.words > p {
+	font-size: 15px;
+    margin-top: 20px;
+	width: 600px;
+	margin-bottom: 30px;
+}
+.appleicon{
+	width: 35px;
+	height: 35px;
+	
+}
+.googleicon{
+	width: 35px;
+	height: 35px;
+	margin-left: 20px;
+}
+.statements{
+	margin-left: 120px;
+	margin-top: 30px;
+}
+
+@media(max-width:1048px){
+	
+}
+@media(max-width:1010px){
+	.statements{
+		margin-left: 20px;
+		margin-top: 50px;
+	}
+}
+
+@media(max-width:767px){
+	.app{
+		display: flex;
+    	justify-content: center;
+	}
+	.phoneimage{
+		display: none;
+	}
+	.words > h3{
+		text-align: center;
+	}
+	.words > p{
+		text-align: left;
+		width: 87%;
+		margin-left: 40px;
+	}
+}
