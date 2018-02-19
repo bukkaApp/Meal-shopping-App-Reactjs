@@ -1,10 +1,18 @@
 import axios from 'axios'
+import requestPromise from 'request-promise'
 import ajx from '../../util/ajax'
 
 //forgot Password
-export const forgot_password=(_)=>({
+export const forgot_password=(email)=>({
 	type:"FORGOT_PASSWORD",
-	payload:axios.post(ajx.forgot_password,{_})
+	payload:requestPromise({ 
+		method: 'POST',
+		url: ajx.forgot_password,
+		headers: { 'Content-Type': 'application/json' },
+		body: { email,
+				link:ajx.link },
+		json: true 
+	}) 
 })
 //update user info
 /*export const edit_user=(uid)=>({

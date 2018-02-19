@@ -21,12 +21,12 @@ import {	fetch_address,
             showorderhistory,
             shownotification,
             showbasicinformation,
+            edit_user,
             orderhistory,
             chef_Cuisine,
             showDifChefsError,
             delete_cart,
             forgot_password,
-            edit_user,
             showforgotpassword,
             clear_receipt,
             showfirstpageloader,
@@ -39,7 +39,7 @@ import storage from '../data_Container/store'
 import axios from 'axios'
 import ajx from './ajax'
 import request from 'request'
-
+import requestPromise from 'request-promise'
 
 
 export default{
@@ -73,9 +73,7 @@ export default{
         this.noscroll()
     },
     toggleshowforgotpassword(){
-        console.log(storage.getState().page.showforgotpasswordpage)
         storage.dispatch(showforgotpassword(storage.getState().page.showforgotpasswordpage))
-        console.log(storage.getState().page.showforgotpasswordpage)
         this.noscroll()
     },
     toggleshoworder_error(){
@@ -608,8 +606,8 @@ export default{
         storage.dispatch(delete_cart())
         this.toggleShowdifcheferror()
     },
-    forgotPassword(_){
-        storage.dispatch(forgot_password(_))
+    forgotPassword(email){
+        storage.dispatch(forgot_password(email))
         .then(()=>this.toggleshowforgotpassword())
         .catch(e=>console.log(e))
     },
@@ -627,12 +625,24 @@ export default{
                 email:'dummy@gmail.com'
             }
         })
-        .then((res)=>console.log(res.json()))
-        .catch((e)=>console.log(e))
+        .then((res)=>console.log("sucess!!",res.json()))
+        .catch((e)=>console.log("Error!",e))
     },
     forgotPasswordfromSignin(){
         this.toggleSignin()
         this.toggleshowforgotpassword()
+    },
+    changePassword(Password,code){
+        let options={ 
+            method: 'POST',
+            url: ajx.resetPassword,
+            headers: { 'Content-Type': 'application/json' },
+            body: { Password, code },
+            json: true 
+        }
+
+    return requestPromise(options)
+
     },
     logocheckout(){
         const _v=document.getElementById('logo-min')

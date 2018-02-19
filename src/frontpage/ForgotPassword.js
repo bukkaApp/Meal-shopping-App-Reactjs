@@ -6,9 +6,12 @@ import {mapStateToProps} from '../util/ajax'
 
 const ForgotPassword=(props)=>{
 
-var sendResetLink=()=>{
+var sendResetLink=(e)=>{
+    e.preventDefault()
     var _et=document.getElementById('emailt').value
+    if(_et!==null&&_et!==""){
     lib.forgotPassword(_et)
+    }
 }
 
     return(
@@ -23,16 +26,16 @@ var sendResetLink=()=>{
                     </label>
                     <input placeholder="yourname@email.com" id="emailt" name="email" autoComplete="on"/>
                     <button className="btn-red"
-                            onClick={()=>sendResetLink()} >
+                            onClick={(e)=>sendResetLink(e)} >
                         Send reset link
                     </button>
                     {(props.user.forgot_password.error)?
-                        (!props.user.forgot_password.error)?
+                        (!props.user.forgot_password.error.response)?
                             <span className="ee vja">
-                                {props.user.forgot_password.error.response}! Please try again
+                                {props.user.forgot_password.error.error.message}! Please check your network connection
                             </span>:
                             <span className="ee vja">
-                                {props.user.forgot_password.error.message}! Please try again
+                                {props.user.forgot_password.error.error.msg}
                             </span>:
                             null
                     }

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import '../style/profile.css';
 import lib from '../util/lib';
-import {mapStateToProps} from '../util/ajax';
-import {connect} from 'react-redux';
 
 export default class basicinformation extends Component{
 

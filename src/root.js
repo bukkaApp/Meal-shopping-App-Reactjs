@@ -14,6 +14,7 @@ import MobileSearch from './routes/MobileSearch'
 import CuisineRoute from './routes/CuisineRoute'
 import MenuRoute from './routes/MenuRoute'
 import Restaurant from './routes/Restaurant'
+import Fg from './routes/ChangePassword'
 
 
 const Root = ({ store }) => (
@@ -30,6 +31,7 @@ const Root = ({ store }) => (
 		<Route exact path="/Cuisine" component={CuisineRoute}/>
 		<Route exact path="/Cuisine/Menupage" component={MenuRoute}/>
 		<Route exact path="/restaurant/:uid" component={Restaurant}/>
+		<Route exact path="/forgotPassword/:key" component={Fg}/>
 		<Route component={Testo} />
 		
 	</Switch>

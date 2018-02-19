@@ -30,7 +30,15 @@ store.subscribe(throttle(()=>{
                         first_search_completed:store.getState().chef.first_search_completed
                     },
                 cart:store.getState().cart,
-                user:store.getState().user,
+                user:{  
+                        ...store.getState().user,
+                        forgot_password:{
+                            error:null,
+                            done:false,
+                            fetching:false,
+                            fetched:false
+                        }
+                    },
                 page:{
                         ...initialstatepage,
                         prevpath:store.getState().page.prevpath
