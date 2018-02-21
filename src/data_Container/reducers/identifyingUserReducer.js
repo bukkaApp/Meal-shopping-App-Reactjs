@@ -175,7 +175,7 @@ const identifyUser=(state=initialstate,action)=>{
 			return{	...state,
 					fetching_addcard:false,
 					fetched_addcard:true,
-					lastCardDigits:action.payload,
+					lastCardDigits:"",
 					error:null	}
 			
 		}

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "africaistalking": "^1.0.4",
+    "africaistalking": "^1.0.7",
     "axios": "^0.17.1",
     "es6-promise": "^4.1.1",
     "firebase": "^4.9.0",

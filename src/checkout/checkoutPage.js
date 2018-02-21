@@ -79,6 +79,7 @@ const checkoutPage =(props)=>{
 								<p id="card-number">
 									XXXX XXXX XXXX {props.user.lastCardDigits}
 								</p>
+								
 								<p 	className="mert"
 									onClick={()=>lib.toggleShowcard()}>
 									<MdEdit/>
