@@ -1,6 +1,6 @@
 const initialstate={
 	fetching:false,
-	fetched:false,
+	fetched:false, 
 	fetching_lastCardDigits:false,
 	fetched_lastCardDigits:false,
 	fetching_addcard:false,

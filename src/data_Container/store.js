@@ -24,7 +24,7 @@ store.subscribe(throttle(()=>{
                             apartment:"",
                             deliverynote:""
                         },
-                chef:{
+                chef:{ 
                         ...initialstatechefs,
                         //currentCuisine:store.getState().chef.currentCuisine,
                         first_search_completed:store.getState().chef.first_search_completed
@@ -37,7 +37,13 @@ store.subscribe(throttle(()=>{
                             done:false,
                             fetching:false,
                             fetched:false
-                        }
+                        },
+                        fetching:false,
+                        fetching_lastCardDigits:false,
+                        fetching_addcard:false,
+                        fetching_orderhistory:false,
+                        orderstatus_fetching:false,
+                        error:null
                     },
                 page:{
                         ...initialstatepage,
