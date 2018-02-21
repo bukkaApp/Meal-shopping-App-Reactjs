@@ -12,7 +12,6 @@ class App extends Component{
 	componentWillMount(){
 		if(!this.props.chef.fetching_chefAndCuisine){
 			lib.onRefresh()
-			console.log(this.props)
 		}
 	}
 	componentDidMount(){

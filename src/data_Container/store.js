@@ -2,7 +2,7 @@ import {applyMiddleware,createStore} from 'redux'
 import reducers from'./reducers/combinedreducers'
 import promise from 'redux-promise-middleware'
 import thunk from 'redux-thunk'
-import logger from 'redux-logger'
+//import logger from 'redux-logger'
 import { loadState,saveState } from './localStorage'
 import throttle from 'lodash/throttle'
 import {initialstatesignup} from './reducers/signUpReducer'
@@ -10,7 +10,7 @@ import {initialstatechefs} from './reducers/getChefReducer'
 import {initialstatepage} from './reducers/showPageReducer'
 
 
-const middleware=applyMiddleware(promise(),thunk,logger)
+const middleware=applyMiddleware(promise(),thunk)
 const persistedState=loadState()
 
 const store=(persistedState)?

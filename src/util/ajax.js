@@ -32,7 +32,9 @@ export default{
     newandroidlogo: 'https://res.cloudinary.com/www-mybukka-com/image/upload/v1517827768/android_k6jvri.png',
     link:'https://mybukka.com/forgotPassword',
     origin:'https://mybukka.com',
-    resetPassword:'https://chef.mybukka.com/api/v1/bukka/resetPassword'
+    resetPassword:'https://chef.mybukka.com/api/v1/bukka/resetPassword',
+    apikey:'ba369df4791b0c99a542792497805095c94cd4f1882b4bf5d2ef960e67bbccc5',
+    username:'myBukkanext'
 }
 
 export const cuisineDescription={

@@ -66,11 +66,9 @@ class addmenu extends Component{
                     throw err;
                 }
                 
-                console.log('Shortened URL: ' + shortenedUrl);
                 this.setState(()=>({
                     _shortUrl:shortenedUrl,
                     _shortUrlfetched:true}))
-                    console.log(this.state)
             });
       }
     
@@ -170,7 +168,6 @@ class addmenu extends Component{
         }
 
         componentDidMount(){
-            console.log('you called')
             this.shortURL()
         }
 

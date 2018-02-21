@@ -38,8 +38,8 @@ import {	fetch_address,
 import storage from '../data_Container/store'
 import axios from 'axios'
 import ajx from './ajax'
-import request from 'request'
 import requestPromise from 'request-promise'
+import africaistalking from 'africaistalking'
 
 
 export default{
@@ -104,7 +104,6 @@ export default{
 		.then(()=>storage.dispatch(updating_user_info(storage.getState().user.user.uid)))
 		.then(()=>{this.toggleSignin()})
         .catch((e)=>{
-            console.log('Sorry! There was a problem',e),
             (storage.getState().user.error.response.data.msg==="Paystack token does not exists")?
             this.toggleSignin():
             null
@@ -221,9 +220,9 @@ export default{
                     (items)=>{
                     if(items.category===categ[i]){
                     if(items.visibility){
-                        //menuPerCategory.push(items);
+                        menuPerCategory.push(items);
                     }
-                    menuPerCategory.push(items);
+                    //menuPerCategory.push(items);
                     }})
                 if(menuPerCategory.length>0){
                     categorizedMenu[`${categ[i]}`]=menuPerCategory;
@@ -395,7 +394,6 @@ export default{
                                                                                 }  )
         storage.dispatch(order(p))
         .then((res)=>{
-            console.log(res);
             this.sendMessage(chefName,chefPhoneNumber)
             this.createReceipt();
             storage.dispatch(cleartransaction())})
@@ -614,7 +612,6 @@ export default{
     edit_user(_){
         _.preventDefault()
         const url=ajx.edit_user+storage.getState().user.user.uid
-        console.log("starting!!")
         fetch(url,{
             method:'POST',
             body:{
@@ -651,11 +648,14 @@ export default{
         }
     },
     sendMessage(name,number){
-        var message=`Hello ${name},You have a new order.Please visit https://chef.mybukka.com to accept order(s)` 
-        number="234"+number.substring(1,10)
-        number.trim()
+        const message=`Hello ${name},You have a new order. Please visit https://chef.mybukka.com to accept order(s)` ,
+        to="234"+number.substring(1,11),
+        from='Bukka',
+        apikey=ajx.apikey,
+        username=ajx.username
+        to.trim()
 
-        var options = { method: 'POST',
+       /* var options = { method: 'POST',
         url: ajx.smsApi,
         headers: 
         { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -665,7 +665,9 @@ export default{
         if (error) console.log(error);
 
         console.log(body);
-        });
+        });*/
+        africaistalking(username, message, to, apikey,from)
+        .catch((err)=>console.log(err))
            
     },
     async onRefresh(){
@@ -698,7 +700,6 @@ export default{
             if(storage.getState().chef.currentCuisine){
                 const cui=storage.getState().chef.currentCuisine
                 const allcui=Object.keys(storage.getState().chef.chefAndCuisine)
-                console.log("you called",cui,allcui)
                 if(allcui.includes(cui)){
                     this.updatechefbycuisine(cui)
                 }

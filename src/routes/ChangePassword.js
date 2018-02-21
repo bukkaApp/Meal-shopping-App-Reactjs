@@ -4,6 +4,7 @@ import '../style/signIn.css'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {mapStateToProps} from '../util/ajax'
+import Faspinner from 'react-icons/lib/fa/spinner'
 
 class ChangePassword extends Component{
 constructor(props){
@@ -11,11 +12,15 @@ constructor(props){
     this.state={
         error:null,
         passwordChanged:false,
-        res:null
+        res:null,
+        fetching:false
     }
     this.changePassword=this.changePassword.bind(this)
 }
-
+ek(e){
+    e.preventDefault()
+    e.stopPropagation() 
+}
 changePassword(e){
     e.preventDefault()
     e.stopPropagation()
@@ -28,26 +33,32 @@ changePassword(e){
         _.setState((prevState,props)=>({
             error:{error:{message:"Password field cannot be empty!"}}
         }))
-        console.log(this.state)
     }else if(pa!==pb){
         _.setState((prevState,props)=>({
             error:{error:{message:"Passwords do not match!"}}
         }))
-        console.log(this.state)
     }else{
         const { match:{params} }=this.props,
         code=params.key,
         password=pa
 
-        lib.changePassword(pa,code)
+        this.setState(()=>({
+            fetching:true
+            }))
+
+        lib.changePassword(password,code)
         .then((res)=>this.setState(()=>({
             passwordChanged:true,
             error:null,
-            res
+            res,
+            fetching:false
             })))
         .catch((e)=>(
             this.setState(()=>
-            ({error:e})))
+            ({
+                error:e,
+                fetching:false
+            })))
         )     
     }
    
@@ -61,6 +72,14 @@ render(){
                     <input placeholder="Enter New Password" id="pa" type="password" name="password" autoComplete="on"/>
                     <input placeholder="Confirm New Password" id="pb" type="password" name="password" autoComplete="on"/>
                     {   (!this.state.passwordChanged)?
+                        (this.state.fetching)?
+                        <button className="btn-red order-btn load" 
+                                onClick={this.ek}>
+                            Saving changes...
+                            <span className="loader">
+                                    <Faspinner/>
+                            </span>
+                        </button>:
                         <button className="btn-red"
                                 onClick={this.changePassword} >
                             Reset Password
