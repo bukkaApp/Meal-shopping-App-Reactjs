@@ -43,7 +43,7 @@ store.subscribe(throttle(()=>{
                         fetching_addcard:false,
                         fetching_orderhistory:false,
                         orderstatus_fetching:false,
-                        error:null
+                        error:null 
                     },
                 page:{
                         ...initialstatepage,
