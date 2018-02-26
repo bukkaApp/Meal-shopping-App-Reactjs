@@ -56,7 +56,7 @@ class HeaderMin extends Component{
 								onClick={()=>lib.toggleSignUp()}>
 						Sign Up
 						</button> 
-						{(this.props.chef.fetched_chefsInYourArea)?
+						{(this.props.chef.fetched)?
 							<div>
 								<div>
 									<span className="s-cart">
@@ -94,7 +94,7 @@ class HeaderMin extends Component{
 								</a>
 							</div>
 						</div>
-						{(this.props.chef.fetched_chefsInYourArea)?
+						{(this.props.chef.fetched)?
 							<div>
 								<div>
 									<span className="s-cart lf">

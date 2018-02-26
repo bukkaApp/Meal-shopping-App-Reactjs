@@ -1,9 +1,9 @@
-const initialstate={
+export const initialstateCart={
 	cart:{},
 	total:0.00
 };
 
-const updateCart=(state=initialstate,action)=>{
+const updateCart=(state=initialstateCart,action)=>{
 	switch(action.type){
 		case'UPDATE_CART':{
 			return{
@@ -14,7 +14,7 @@ const updateCart=(state=initialstate,action)=>{
 														}
 		}
 		case'DELETE_CART':{
-			return{...initialstate}
+			return{...initialstateCart}
 		}
 		default:{
 			return{...state}

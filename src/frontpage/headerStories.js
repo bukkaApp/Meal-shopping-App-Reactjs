@@ -93,7 +93,7 @@ class headerStories extends Component{
 									</a>
 								</div>
 							</div>											
-							{(this.props.chef.fetched_chefsInYourArea)?
+							{(this.props.chef.fetched)?
 								<div>
 									<div>
 										<span className="s-cart lf">
@@ -116,7 +116,7 @@ class headerStories extends Component{
 					}
 					<div className="divider"></div>
 					<ul className="menuHolder">
-						{(this.props.chef.fetched_chefsInYourArea)? 
+						{(this.props.chef.fetched)? 
 							this.state.more.map(
 								(categ,key)=> 
 									(key<9)? 

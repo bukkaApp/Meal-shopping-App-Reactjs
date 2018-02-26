@@ -34,12 +34,14 @@ import {	fetch_address,
             is_restaurant,
             apartment_info,
             delivery_info,
-            order_error         } from '../data_Container/action/actions'
+            order_error,
+            update_chef_in_cart,       } from '../data_Container/action/actions'
 import storage from '../data_Container/store'
 import axios from 'axios'
 import ajx from './ajax'
 import requestPromise from 'request-promise'
 import africaistalking from 'africaistalking'
+import { request } from 'http';
 
 
 export default{
@@ -358,6 +360,19 @@ export default{
             (val,key)=>storage.getState().cart.cart[val].quantity).reduce(
                 (a,b)=>a+b,0)
     },
+    reauth(auth,email){
+        let options={
+            method:'POST',
+            url:ajx.reauth,
+            headers: ajx.paystack,
+            body:JSON.stringify({
+                "authorization_code":auth,
+                "email":email,
+                "amount":100
+            })
+        }
+        return requestPromise(options)
+    },
     addcard(cardNumber,ccv,expirationMonth,expirationYear){
 		var uid=storage.getState().user.user.uid;
 		var token=storage.getState().user.user.token;
@@ -371,12 +386,57 @@ export default{
                                                     ccv,
                                                     expirationMonth,
                                                     expirationYear  }
-                                        })))
-		.then(()=>this.signout())
-        .then(()=>(storage.getState().page.showaddCard)? 
+                                       })))
+        .then((res)=>res.value)
+        .then((resp)=>{
+            this.reauth(resp.data.data.authorization_code,resp.data.data.customer.email)
+            .then(_res => {
+                console.log(JSON.parse(_res))
+                let url=JSON.parse(_res).data.reauthorization_url
+                let win = window.open(url, '_blank')
+                if (win) {
+                    //Browser has allowed it to be opened
+                    win.focus();
+                } else {
+                    //Browser has blocked it
+                    alert('Please allow popups for this website');
+                }
+
+            })
+            .then(()=>(storage.getState().page.showaddCard)? 
                     this.toggleShowcard():
                     null)
-        .then(()=>this.toggleSignin())
+            .then(()=>console.log('done'))
+            .catch(e=>console.log(e))
+            return resp
+        })
+        .catch(e=>console.log(e))
+    },
+    checkBalance(amount){
+        axios.get(ajx.carddtlsendpoint+storage.getState().user.user.uid)
+        .then(res=>{
+            let cardAuthCode=res.data.data.cardAuthCode,
+                email=storage.getState().user.user.email
+
+                let options={
+                    method:'POST',
+                    url:ajx.checkBalance,
+                    headers: ajx.paystack,
+                    body:{
+                        "authorization_code":cardAuthCode,
+                        email,
+                        amount
+                    },
+                    json:true
+                }
+                requestPromise(options)
+                .then((res)=>{
+                    (res.message === "Authorization is valid for this amount" )?
+                    this.processtransact():
+                    alert(res.message)
+                })
+                .catch(e=>console.log(e))
+        })
     },
     placeorder() {
         let token=storage.getState().user.user.token,
@@ -566,7 +626,8 @@ export default{
 		}
 		document.getElementById(e.currentTarget.dataset.key).classList.add("l-select");
     },
-    newcard(){
+    newcard(e){
+        e.preventDefault()
 		var number=document.getElementById("cardNumber").value,
 		cvv=document.getElementById("CVVNumber").value,
 		expiry_month=document.getElementById("MonthNumber").value,

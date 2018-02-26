@@ -56,7 +56,7 @@ const addcard =(props)=>{
 					</div>
 					{(!props.user.fetching_addcard)?
 						<button className="btn-red" 
-								onClick={()=>lib.newcard()}>
+								onClick={(e)=>lib.newcard(e)}>
 							Add Card
 						</button>:
 						null

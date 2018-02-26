@@ -8,6 +8,7 @@ import throttle from 'lodash/throttle'
 import {initialstatesignup} from './reducers/signUpReducer'
 import {initialstatechefs} from './reducers/getChefReducer'
 import {initialstatepage} from './reducers/showPageReducer'
+import {initialstateCart} from './reducers/updateCartReducer'
 
 
 const middleware=applyMiddleware(promise(),thunk,logger)
@@ -29,7 +30,9 @@ store.subscribe(throttle(()=>{
                         //currentCuisine:store.getState().chef.currentCuisine,
                         first_search_completed:store.getState().chef.first_search_completed
                     },
-                cart:store.getState().cart,
+                cart:{
+                    ...initialstateCart
+                },
                 user:{  
                         ...store.getState().user,
                         forgot_password:{

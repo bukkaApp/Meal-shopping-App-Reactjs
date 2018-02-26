@@ -68,6 +68,12 @@ export const prev_path=(_)=>({
 	type:'PREV_PATH',
 	payload:_
 })
+//update chef in cart
+export const update_chef_in_cart=(_)=>({
+	type:'UPDATE_CHEF',
+	payload:_
+})
+
 export const chef_Cuisine=(_)=>({
 	type:'GET_CHEF_AND_CUISINE',
 	payload:_

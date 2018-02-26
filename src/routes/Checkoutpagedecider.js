@@ -18,8 +18,8 @@ class checkoutpagedecider extends Component {
                 <Checking/>:
                 <Redirect to={pp} />:
                 <Redirect to='/'/>
-        )
+                )
         }
 }
 
-export default connect(mapStateToProps)(checkoutpagedecider);
+export default connect(mapStateToProps)(checkoutpagedecider)
