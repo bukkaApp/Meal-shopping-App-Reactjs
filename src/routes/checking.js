@@ -11,6 +11,7 @@ import Receipt from './redirectToReceipt'
 import OptionLeaf from '../frontpage/OptionLeaf'
 import {mapStateToProps} from '../util/ajax'
 import OrderError from '../frontpage/orderError'
+import lib from '../util/lib'
 
 
 const Checking =(props)=>{
@@ -33,7 +34,14 @@ const Checking =(props)=>{
 				<Footer/>
 				{
 					(props.page.showordererrorpage)?
-						<OrderError error={props.user.orderstatus.message}/>:
+						<OrderError error={props.user.orderstatus.message}
+									evnt={()=>lib.toggleshoworder_error()}/>:
+						null
+				}
+				{
+					(props.user.transactionError.isError)?
+						<OrderError error={props.user.transactionError.error}
+									evnt={()=>lib.toggleTransactionError('')}/>:
 						null
 				}
 				

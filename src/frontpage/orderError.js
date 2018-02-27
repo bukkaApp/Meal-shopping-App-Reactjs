@@ -8,9 +8,9 @@ const orderError=(props)=>(
         <div id="addmenu" className="vbo"> 
             <div id="err">
                 <h4 className="qa">
-                    {props.error+"  Please try again"}
+                    {props.error}
                     <a className="qw"
-                        onClick={()=>lib.toggleshoworder_error()}>x</a>
+                        onClick={props.evnt}>x</a>
                 </h4>
             </div>
         </div>

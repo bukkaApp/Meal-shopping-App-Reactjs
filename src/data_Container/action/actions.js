@@ -1,6 +1,7 @@
 import axios from 'axios'
 import requestPromise from 'request-promise'
 import ajx from '../../util/ajax'
+import storage from '../store'
 
 //forgot Password
 export const forgot_password=(email)=>({
@@ -73,7 +74,22 @@ export const update_chef_in_cart=(_)=>({
 	type:'UPDATE_CHEF',
 	payload:_
 })
-
+//TIME_TO_REAUTHENTICATE
+export const time_to_reauthenticate=(_)=>({
+	type:'TIME_TO_REAUTHENTICATE',
+	payload:{
+		is_time_to_reauthenticate:storage.getState().user.time_to_reauthenticate.is_time_to_reauthenticate,
+		url:_
+	}
+})
+//TRANSACTION_ERROR
+export const transaction_error=(_)=>({
+	type:'TRANSACTION_ERROR',
+	payload:{
+		isError:storage.getState().user.transactionError.isError,
+		error:_
+	}
+})
 export const chef_Cuisine=(_)=>({
 	type:'GET_CHEF_AND_CUISINE',
 	payload:_

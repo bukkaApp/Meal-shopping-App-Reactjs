@@ -12,6 +12,18 @@
 	align-items: center;
 	overflow-y: scroll;
 }
+.a--btn{
+    display: block;
+    width: 100%;
+    height: 40px;
+    margin: 20px 0;
+    display: flex;
+    color: white !important;
+    justify-content: center;
+    align-items: center;
+    background-color: #9c1c26 !important;
+    border: 1px solid #9c1c26 !important;
+}
 .ee{
 	display: block;
     background-color: #9c1c26;

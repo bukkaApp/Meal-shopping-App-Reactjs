@@ -35,7 +35,9 @@ import {	fetch_address,
             apartment_info,
             delivery_info,
             order_error,
-            update_chef_in_cart,       } from '../data_Container/action/actions'
+            update_chef_in_cart, 
+            time_to_reauthenticate,
+            transaction_error      } from '../data_Container/action/actions'
 import storage from '../data_Container/store'
 import axios from 'axios'
 import ajx from './ajax'
@@ -391,26 +393,21 @@ export default{
         .then((resp)=>{
             this.reauth(resp.data.data.authorization_code,resp.data.data.customer.email)
             .then(_res => {
-                console.log(JSON.parse(_res))
                 let url=JSON.parse(_res).data.reauthorization_url
-                let win = window.open(url, '_blank')
-                if (win) {
-                    //Browser has allowed it to be opened
-                    win.focus();
-                } else {
-                    //Browser has blocked it
-                    alert('Please allow popups for this website');
-                }
-
+                storage.dispatch(time_to_reauthenticate(url))
             })
-            .then(()=>(storage.getState().page.showaddCard)? 
+            /*.then(()=>(storage.getState().page.showaddCard)? 
                     this.toggleShowcard():
-                    null)
+                    null)*/
             .then(()=>console.log('done'))
             .catch(e=>console.log(e))
             return resp
         })
         .catch(e=>console.log(e))
+    },
+    reauthorize(){
+        this.toggleShowcard()
+        storage.dispatch(time_to_reauthenticate(""))
     },
     checkBalance(amount){
         axios.get(ajx.carddtlsendpoint+storage.getState().user.user.uid)
@@ -435,8 +432,13 @@ export default{
                     this.processtransact():
                     alert(res.message)
                 })
-                .catch(e=>console.log(e))
+                .catch(e=>{
+                    storage.dispatch(transaction_error(e.error.message))
+                })
         })
+    },
+    toggleTransactionError(_){
+        storage.dispatch(transaction_error(_))
     },
     placeorder() {
         let token=storage.getState().user.user.token,

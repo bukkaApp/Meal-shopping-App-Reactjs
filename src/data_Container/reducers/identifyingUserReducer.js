@@ -23,6 +23,14 @@ const initialstate={
 		fetching:false,
 		fetched:false
 	},
+	time_to_reauthenticate:{
+		is_time_to_reauthenticate:false,
+		reauthentication_url:""
+	},
+	transactionError:{
+		isError:false,
+		error:""
+	}
 	/*edit_user:{
 		error:null,
 		updating_user_update:false,
@@ -46,6 +54,24 @@ const identifyUser=(state=initialstate,action)=>{
 					done:false,
 					fetching:true,
 					fetched:false
+				}
+			}
+		}
+		case 'TRANSACTION_ERROR':{
+			return{
+				...state,
+				transactionError:{
+					isError:!action.payload.isError,
+					error:action.payload.error
+				}
+			}
+		}
+		case 'TIME_TO_REAUTHENTICATE':{
+			return{
+				...state,
+				time_to_reauthenticate:{
+					is_time_to_reauthenticate:!action.payload.is_time_to_reauthenticate,
+					reauthentication_url:action.payload.url
 				}
 			}
 		}

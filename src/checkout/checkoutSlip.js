@@ -12,7 +12,8 @@ class checkoutSlip extends Component {
 	constructor(props){
 		super(props)
 		this.state={
-
+			checkingBalance:false,
+			error:false
 		}
 		this.placeorder=this.placeorder.bind(this)
 	}
@@ -37,16 +38,29 @@ class checkoutSlip extends Component {
 			alert("Please enter a delivery address")
 		}else{ 
 			//lib.processtransact()
+			this.setState((prevState,props)=>({
+				checkingBalance:true
+			}))
 			let total=parseInt(this.props.cart.total,10)
-
 			lib.checkBalance(total) 
+			console.log(this.state)
+			
 		}
 	}	
 	handledelivery=(e)=>{
 		e.persist()
 		lib.savedeliveryinfo(e.currentTarget.value)
 	}
-	
+	componentWillReceiveProps(nextProps){
+		let _=this
+		if(nextProps.user.transactionError.isError){
+			_.setState((prevState)=>({
+				checkingBalance:false
+			}))
+		}
+
+		
+	}
 	render() {
 	return(
 		<div id="checkoutSlip">
@@ -96,17 +110,27 @@ class checkoutSlip extends Component {
 							onChange={this.handledelivery} />
 				</div>
 			</div>
-			{(!this.props.user.orderstatus_fetching)?
+			{(!this.props.user.orderstatus_fetching && !this.state.checkingBalance)?
 				<button className="btn-red order-btn" 
 						onClick={this.placeorder}>
 					Place Order
 				</button>:
 				null
 			}
+			{(!this.props.user.orderstatus_fetching && this.state.checkingBalance)?
+				<button className="btn-red order-btn load" 
+						onClick={this.placeorder}>
+					Preparing...
+					<span className="loader">
+							<Faspinner/>
+					</span>
+				</button>:
+				null
+			}
 			{(this.props.user.orderstatus_fetching)?
 				<button className="btn-red order-btn load" 
 						onClick={this.placeorder}>
-					Contacting chef
+					Contacting chef...
 					<span className="loader">
 							<Faspinner/>
 					</span>
