@@ -33,13 +33,9 @@ export default{
     link:'https://mybukka.com/forgotPassword',
     origin:'https://mybukka.com',
     resetPassword:'https://chef.mybukka.com/api/v1/bukka/resetPassword',
-    apikey:'ba369df4791b0c99a542792497805095c94cd4f1882b4bf5d2ef960e67bbccc5',
-    username:'myBukkanext',
-    paystack: {
-        'Authorization': 'Bearer sk_live_c788ab63428164f9a605aec59a2a3e249c4080c1',
-        'Content-Type': 'application/json',
-        //'accept':'application/json'
-      },
+    apikey:'iamnottellingyou',
+    username:'iamnottellingyou',
+    paystack:'iamnottellingyou',
       checkBalance:'https://api.paystack.co/transaction/check_authorization',
       reauth:'https://api.paystack.co/transaction/request_reauthorization'
 }
