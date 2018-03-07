@@ -16,10 +16,17 @@ export const forgot_password=(email)=>({
 	}) 
 })
 //update user info
-/*export const edit_user=(uid)=>({
+export const edit_user=(_)=>({
 	type:"EDIT_USER_INFO",
-	payload:axios.post(ajx.edit_user+uid)
-})*/
+	payload:requestPromise(
+		{
+			method:'POST',
+			url:ajx.edit_user+storage.getState().user.user.uid,
+            body:{..._},
+            json:true
+        }
+	)
+})
 //sign in
 export const identify_user=(email,password)=>({
 	type:'IDENTIFYING_USER',

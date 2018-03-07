@@ -30,12 +30,12 @@ const initialstate={
 	transactionError:{
 		isError:false,
 		error:""
-	}
-	/*edit_user:{
+	},
+	edit_user:{
 		error:null,
-		updating_user_update:false,
-		updated_user_update:false
-	}*/
+		updating_user_info:false,
+		updated_user_info:false
+	}
 };
 
 const identifyUser=(state=initialstate,action)=>{
@@ -45,6 +45,43 @@ const identifyUser=(state=initialstate,action)=>{
 					fetching:true,
 					user_update:false	}
 			
+		}
+		case 'EDIT_USER_INFO_REJECTED':{
+			return{
+				...state,
+				edit_user:{
+					error: action.payload.error,
+					updating_user_info:false,
+					updated_user_info:false
+				}
+			}
+		}
+		case 'EDIT_USER_INFO_PENDING':{
+			return{
+				...state,
+				edit_user:{
+					error:null,
+					updating_user_info:true,
+					updated_user_info:false
+				}
+			}
+		}
+		case 'EDIT_USER_INFO_FULFILLED':{
+			return{
+				...state,
+				edit_user:{
+					error:null,
+					updating_user_info:false,
+					updated_user_info:true
+				},
+				user:{
+					...state.user,
+					email: action.payload.data.email,
+					first_name: action.payload.data.first_name,
+					last_name: action.payload.data.last_name,
+					mobile: action.payload.data.mobile
+				}
+			}
 		}
 		case'FORGOT_PASSWORD_PENDING':{
 			return{

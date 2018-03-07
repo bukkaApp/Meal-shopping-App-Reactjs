@@ -41,9 +41,8 @@ class checkoutSlip extends Component {
 			this.setState((prevState,props)=>({
 				checkingBalance:true
 			}))
-			let total=parseInt(this.props.cart.total,10)
-			lib.checkBalance(total) 
-			console.log(this.state)
+			let total=parseInt(this.props.cart.total,10)*100
+			lib.checkBalance(total)
 			
 		}
 	}	

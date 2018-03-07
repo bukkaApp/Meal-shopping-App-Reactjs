@@ -612,6 +612,7 @@ export default{
         this.highsel(e)
     },
     showbasicinformation(e){
+        e.preventDefault()
         storage.dispatch(showbasicinformation(storage.getState().page.showbasicinformation))
         this.highsel(e)
     },
@@ -620,6 +621,7 @@ export default{
         this.highsel(e)
     },
     highsel(e){
+        e.preventDefault()
         let menuItem=document.getElementsByClassName("l-menu-item")
 		for(var i=0;i<menuItem.length;i++){
 			if(menuItem[i].classList.contains('l-menu-item')){
@@ -672,21 +674,10 @@ export default{
         .then(()=>this.toggleshowforgotpassword())
         .catch(e=>console.log(e))
     },
-    edit_user(_){
-        _.preventDefault()
-        const url=ajx.edit_user+storage.getState().user.user.uid
-        fetch(url,{
-            method:'POST',
-            body:{
-                first_name:'john',
-                last_name:'john',
-                phonenumber:'08144194590',
-                address:"address",
-                email:'dummy@gmail.com'
-            }
-        })
-        .then((res)=>console.log("sucess!!",res.json()))
-        .catch((e)=>console.log("Error!",e))
+    edit_user(e,_){
+        e.preventDefault()
+       storage.dispatch(edit_user(_))
+        .catch((e)=>console.log("Whoops!!!",e))
     },
     forgotPasswordfromSignin(){
         this.toggleSignin()
@@ -709,6 +700,19 @@ export default{
         if(!_v.classList.contains('zzk')){
             _v.classList.add('zzk')
         }
+    },
+    alterPassword(e,_){
+        e.preventDefault()
+        let options={ 
+            method: 'POST',
+            url: 'https://chef.mybukka.com/api/v1/bukka/user/changePassword/'+storage.getState().user.user.uid,
+            headers: { 'Content-Type': 'application/json' },
+            body: { ..._ },
+            json: true 
+        }
+
+    return requestPromise(options)
+
     },
     sendMessage(name,number){
         const message=`Hello ${name},You have a new order. Please visit https://chef.mybukka.com to accept order(s)` ,

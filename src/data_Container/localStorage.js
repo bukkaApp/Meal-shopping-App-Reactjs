@@ -1,6 +1,6 @@
 export const loadState=()=>{
     try{
-        const serializedState=localStorage.getItem('myBukkaState')
+        const serializedState=localStorage.getItem('myBukkaApp')
         if(serializedState===undefined){
             return undefined
         }
@@ -14,7 +14,7 @@ export const loadState=()=>{
 export const saveState=(state)=>{
     try{
         const serializedState=JSON.stringify(state)
-        localStorage.setItem('myBukkaState',serializedState)
+        localStorage.setItem('myBukkaApp',serializedState)
     }catch(err){
         console.log("couldnt save state",err)
     }

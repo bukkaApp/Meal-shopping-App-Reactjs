@@ -8,7 +8,7 @@ const paymentinformation =(props)=>{
 	return(
 		<div className="signInPopup white-background m-position-fix">
 			<div className="AddcardPopupHolder m-pad">
-				<form className="formField" autocomplete="on">
+				<form className="formField" autoComplete="on">
 					<div id="headingHolder">
 						<h3>Card Information</h3>
 						<div id="imageHolder">

@@ -47,15 +47,15 @@ import {mapStateToProps} from '../util/ajax'
 			null
 		}
 		{(props.page.showbasicinformation)? 
-			<Basicinformation/>:
+			<Basicinformation user={props.user} />:
 			null
 		}
 		{(props.page.showorderhistory)? 
-			<Orderhistory user={props.user}/>:
+			<Orderhistory user={props.user} />:
 			null
 		}
 		{(props.page.shownotification)? 
-			<Notification/>:
+			<Notification user={props.user} />:
 			null
 		}
 		</div>
